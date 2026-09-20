@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Bell,
   BookOpen,
@@ -106,13 +106,23 @@ const courses = [
 ];
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const [authenticated, setAuthenticated] = useState(
+    () => localStorage.getItem("taqat-authenticated") === "true",
+  );
   const [active, setActive] = useState("overview");
-  const [role, setRole] = useState("طالب");
+  const [role, setRole] = useState(
+    () => localStorage.getItem("taqat-role") || "طالب",
+  );
   const [searchOpen, setSearchOpen] = useState(false);
   const [noticeOpen, setNoticeOpen] = useState(false);
   const [toast, setToast] = useState("");
   const currentNavItems = role === "طالب" ? navItems : roleNavItems[role];
+
+  useEffect(() => {
+    if (authenticated) localStorage.setItem("taqat-authenticated", "true");
+    else localStorage.removeItem("taqat-authenticated");
+    localStorage.setItem("taqat-role", role);
+  }, [authenticated, role]);
 
   const notify = (message) => {
     setToast(message);
@@ -120,7 +130,15 @@ function App() {
   };
 
   if (!authenticated)
-    return <AuthScreen onLogin={() => setAuthenticated(true)} />;
+    return (
+      <AuthScreen
+        onLogin={(nextRole = "طالب") => {
+          setRole(nextRole);
+          setActive("overview");
+          setAuthenticated(true);
+        }}
+      />
+    );
 
   return (
     <div className="app-shell">

@@ -36,6 +36,7 @@ export default function AuthScreen({ onLogin }) {
   const [consent, setConsent] = useState(false);
   const [files, setFiles] = useState({});
   const [profile, setProfile] = useState("");
+  const [loginRole, setLoginRole] = useState("طالب");
   const labels = flowLabels[role] || [];
   const isArabic = language === "ar";
   const goBack = () => {
@@ -69,6 +70,14 @@ export default function AuthScreen({ onLogin }) {
         );
   const submitLogin = (event) => {
     event.preventDefault();
+    const email = event.currentTarget.elements.email.value.trim().toLowerCase();
+    const demoRoles = {
+      "student@taqat.test": "طالب",
+      "parent@taqat.test": "ولي أمر",
+      "teacher@taqat.test": "معلم",
+      "admin@taqat.test": "إدارة",
+    };
+    setLoginRole(demoRoles[email] || "طالب");
     setScreen("2fa");
   };
   const context = {
@@ -89,6 +98,7 @@ export default function AuthScreen({ onLogin }) {
     showPassword,
     setShowPassword,
     submitLogin,
+    loginRole,
     onLogin,
   };
 
@@ -175,6 +185,7 @@ function renderScreen(context) {
     submitLogin,
     onLogin,
     profile,
+    loginRole,
   } = context;
   if (screen === "signin")
     return (
@@ -223,7 +234,19 @@ function renderScreen(context) {
         title="Verification successful"
         body="You will be routed to the dashboard matching the backend-approved profile and role."
         action="Finish preview"
-        onAction={onLogin}
+        onAction={() =>
+          onLogin(
+            profile === "Teacher"
+              ? "معلم"
+              : profile === "Parent"
+                ? "ولي أمر"
+                : role === "teacher"
+                  ? "معلم"
+                  : role === "parent"
+                    ? "ولي أمر"
+                    : loginRole,
+          )
+        }
       />
     );
   if (screen === "forgot")
@@ -339,10 +362,23 @@ function SignIn({
       <p className="auth-muted">
         Enter your account details to access your dashboard.
       </p>
+      <div className="demo-accounts">
+        <strong>Demo accounts</strong>
+        <span>student@taqat.test</span>
+        <span>parent@taqat.test</span>
+        <span>teacher@taqat.test</span>
+        <span>admin@taqat.test</span>
+        <small>Password: password • 2FA: 123456</small>
+      </div>
       <form onSubmit={onSubmit} className="auth-form">
         <label>
           Email or login
-          <input type="email" placeholder="name@example.com" required />
+          <input
+            name="email"
+            type="email"
+            placeholder="name@example.com"
+            required
+          />
         </label>
         <label>
           Password

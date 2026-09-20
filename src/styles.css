@@ -2227,6 +2227,27 @@ h1 span {
     text-align: right
 }
 
+.demo-accounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 8px;
+    background: #edf8f7;
+    border: 1px solid #cdebe7;
+    border-radius: 9px;
+    padding: 8px 10px;
+    margin: 0 0 14px;
+    color: #2f7873;
+    font-size: 8px
+}
+
+.demo-accounts strong,
+.demo-accounts small {
+    grid-column: 1 / -1
+}
+
+.demo-accounts strong { font-size: 9px; color: #17635f }
+.demo-accounts small { color: #738097; margin-top: 2px }
+
 @media(max-width:900px) {
     .sidebar {
         width: 210px
