@@ -13,7 +13,7 @@
       "loc": 1,
       "level": 3,
       "granularity": "low",
-      "heat": 0.203,
+      "heat": 0.202,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_vite_config_js",
       "community": 23,
@@ -32,7 +32,7 @@
       "heat": 0.012,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_app_jsx",
-      "community": 6,
+      "community": 11,
       "norm_label": "app.jsx"
     },
     {
@@ -40,15 +40,15 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "complexity": 1,
-      "loc": 1,
+      "loc": 8,
       "level": 3,
       "granularity": "low",
-      "heat": 0.006,
+      "heat": 0.01,
       "owner": "unowned",
       "id": "app_pages",
-      "community": 6,
+      "community": 11,
       "norm_label": "pages"
     },
     {
@@ -56,15 +56,15 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L19",
-      "complexity": 4,
-      "loc": 28,
+      "source_location": "L27",
+      "complexity": 5,
+      "loc": 31,
       "level": 1,
       "granularity": "low",
-      "heat": 0.039,
+      "heat": 0.04,
       "owner": "unowned",
       "id": "app_routed",
-      "community": 6,
+      "community": 11,
       "norm_label": "routed()"
     },
     {
@@ -72,15 +72,15 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L48",
+      "source_location": "L59",
       "complexity": 1,
       "loc": 10,
       "level": 3,
       "granularity": "low",
-      "heat": 0.012,
+      "heat": 0.011,
       "owner": "unowned",
       "id": "app_app",
-      "community": 6,
+      "community": 11,
       "norm_label": "app()"
     },
     {
@@ -93,7 +93,7 @@
       "loc": 1,
       "level": 3,
       "granularity": "low",
-      "heat": 0.003,
+      "heat": 0.002,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_main_jsx",
       "community": 24,
@@ -121,7 +121,7 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L8",
+      "source_location": "L25",
       "complexity": 1,
       "loc": 1,
       "level": 3,
@@ -138,7 +138,7 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L9",
+      "source_location": "L26",
       "complexity": 1,
       "loc": 1,
       "level": 3,
@@ -155,12 +155,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L10",
+      "source_location": "L27",
       "complexity": 1,
-      "loc": 1,
+      "loc": 14,
       "level": 3,
       "granularity": "low",
-      "heat": 0.006,
+      "heat": 0.013,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_grades",
@@ -172,12 +172,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L12",
+      "source_location": "L42",
       "complexity": 3,
       "loc": 6,
       "level": 3,
       "granularity": "low",
-      "heat": 0.013,
+      "heat": 0.012,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_pwrules",
@@ -189,7 +189,7 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L19",
+      "source_location": "L49",
       "complexity": 1,
       "loc": 1,
       "level": 3,
@@ -206,12 +206,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L22",
+      "source_location": "L52",
       "complexity": 1,
-      "loc": 62,
+      "loc": 203,
       "level": 3,
       "granularity": "low",
-      "heat": 0.047,
+      "heat": 0.127,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_flows",
@@ -223,12 +223,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L85",
-      "complexity": 20,
-      "loc": 40,
+      "source_location": "L256",
+      "complexity": 21,
+      "loc": 136,
       "level": 3,
       "granularity": "low",
-      "heat": 0.067,
+      "heat": 0.124,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_authscreen",
@@ -240,12 +240,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L126",
+      "source_location": "L393",
       "complexity": 1,
-      "loc": 11,
+      "loc": 23,
       "level": 3,
       "granularity": "low",
-      "heat": 0.012,
+      "heat": 0.019,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_passwordinput",
@@ -257,12 +257,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L148",
+      "source_location": "L430",
       "complexity": 7,
-      "loc": 43,
+      "loc": 92,
       "level": 3,
       "granularity": "low",
-      "heat": 0.045,
+      "heat": 0.071,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_signin",
@@ -274,12 +274,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L192",
+      "source_location": "L523",
       "complexity": 28,
-      "loc": 61,
+      "loc": 99,
       "level": 3,
       "granularity": "low",
-      "heat": 0.096,
+      "heat": 0.114,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_twofactor",
@@ -291,12 +291,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L254",
+      "source_location": "L623",
       "complexity": 1,
-      "loc": 13,
+      "loc": 27,
       "level": 3,
       "granularity": "low",
-      "heat": 0.014,
+      "heat": 0.021,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_forgot",
@@ -308,12 +308,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L268",
+      "source_location": "L651",
       "complexity": 5,
-      "loc": 15,
+      "loc": 34,
       "level": 3,
       "granularity": "low",
-      "heat": 0.022,
+      "heat": 0.033,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_reset",
@@ -325,12 +325,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L284",
+      "source_location": "L686",
       "complexity": 1,
-      "loc": 10,
+      "loc": 21,
       "level": 3,
       "granularity": "low",
-      "heat": 0.012,
+      "heat": 0.018,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_status",
@@ -342,12 +342,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L295",
+      "source_location": "L708",
       "complexity": 1,
-      "loc": 24,
+      "loc": 34,
       "level": 3,
       "granularity": "low",
-      "heat": 0.021,
+      "heat": 0.025,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_accounttype",
@@ -359,12 +359,12 @@
       "file_type": "code",
       "type": "FUNCTION",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L320",
+      "source_location": "L743",
       "complexity": 75,
-      "loc": 117,
+      "loc": 283,
       "level": 3,
       "granularity": "low",
-      "heat": 0.221,
+      "heat": 0.312,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "authscreen_wizard",
@@ -445,7 +445,7 @@
       "loc": 19,
       "level": 3,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.016,
       "owner": "unowned",
       "id": "curriculum_objectives",
       "community": 10,
@@ -477,7 +477,7 @@
       "loc": 200,
       "level": 3,
       "granularity": "low",
-      "heat": 0.139,
+      "heat": 0.125,
       "owner": "unowned",
       "id": "curriculum_lessons",
       "community": 10,
@@ -605,7 +605,7 @@
       "loc": 7,
       "level": 3,
       "granularity": "low",
-      "heat": 0.01,
+      "heat": 0.009,
       "owner": "unowned",
       "id": "curriculum_question_types",
       "community": 10,
@@ -624,7 +624,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_data_nav_js",
-      "community": 6,
+      "community": 11,
       "norm_label": "nav.js"
     },
     {
@@ -637,10 +637,10 @@
       "loc": 79,
       "level": 3,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.052,
       "owner": "unowned",
       "id": "nav_nav",
-      "community": 6,
+      "community": 11,
       "norm_label": "nav"
     },
     {
@@ -656,7 +656,7 @@
       "heat": 0.012,
       "owner": "unowned",
       "id": "nav_flatnav",
-      "community": 6,
+      "community": 11,
       "norm_label": "flatnav()"
     },
     {
@@ -667,12 +667,12 @@
       "source_location": "L89",
       "complexity": 2,
       "loc": 1,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
       "heat": 0.014,
       "owner": "unowned",
       "id": "nav_pagelabel",
-      "community": 6,
+      "community": 11,
       "norm_label": "pagelabel()"
     },
     {
@@ -688,7 +688,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "nav_icons",
-      "community": 6,
+      "community": 11,
       "norm_label": "icons"
     },
     {
@@ -733,7 +733,7 @@
       "loc": 12,
       "level": 3,
       "granularity": "low",
-      "heat": 0.013,
+      "heat": 0.012,
       "owner": "unowned",
       "id": "people_users",
       "community": 7,
@@ -781,7 +781,7 @@
       "loc": 19,
       "level": 3,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.016,
       "owner": "unowned",
       "id": "people_students",
       "community": 7,
@@ -941,7 +941,7 @@
       "loc": 9,
       "level": 3,
       "granularity": "low",
-      "heat": 0.011,
+      "heat": 0.01,
       "owner": "unowned",
       "id": "people_seedtimetable",
       "community": 7,
@@ -957,7 +957,7 @@
       "loc": 10,
       "level": 3,
       "granularity": "low",
-      "heat": 0.012,
+      "heat": 0.011,
       "owner": "unowned",
       "id": "people_seedschools",
       "community": 7,
@@ -1005,7 +1005,7 @@
       "loc": 16,
       "level": 3,
       "granularity": "low",
-      "heat": 0.016,
+      "heat": 0.015,
       "owner": "unowned",
       "id": "people_permissions",
       "community": 7,
@@ -1053,10 +1053,10 @@
       "loc": 1,
       "level": 1,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.027,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_data_questions_js",
-      "community": 2,
+      "community": 3,
       "norm_label": "questions.js"
     },
     {
@@ -1069,10 +1069,10 @@
       "loc": 3,
       "level": 1,
       "granularity": "low",
-      "heat": 0.023,
+      "heat": 0.022,
       "owner": "unowned",
       "id": "questions_base",
-      "community": 2,
+      "community": 3,
       "norm_label": "base()"
     },
     {
@@ -1088,7 +1088,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "questions_mcq",
-      "community": 2,
+      "community": 3,
       "norm_label": "mcq()"
     },
     {
@@ -1104,7 +1104,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "questions_tf",
-      "community": 2,
+      "community": 3,
       "norm_label": "tf()"
     },
     {
@@ -1120,7 +1120,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "questions_fill",
-      "community": 2,
+      "community": 3,
       "norm_label": "fill()"
     },
     {
@@ -1136,7 +1136,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "questions_match",
-      "community": 2,
+      "community": 3,
       "norm_label": "match()"
     },
     {
@@ -1152,7 +1152,7 @@
       "heat": 0.011,
       "owner": "unowned",
       "id": "questions_essay",
-      "community": 2,
+      "community": 3,
       "norm_label": "essay()"
     },
     {
@@ -1165,10 +1165,10 @@
       "loc": 60,
       "level": 3,
       "granularity": "low",
-      "heat": 0.045,
+      "heat": 0.041,
       "owner": "unowned",
       "id": "questions_seedquestions",
-      "community": 2,
+      "community": 3,
       "norm_label": "seedquestions"
     },
     {
@@ -1181,10 +1181,10 @@
       "loc": 4,
       "level": 3,
       "granularity": "low",
-      "heat": 0.008,
+      "heat": 0.007,
       "owner": "unowned",
       "id": "questions_seedblueprints",
-      "community": 2,
+      "community": 3,
       "norm_label": "seedblueprints"
     },
     {
@@ -1229,7 +1229,7 @@
       "loc": 4,
       "level": 2,
       "granularity": "low",
-      "heat": 0.013,
+      "heat": 0.012,
       "owner": "unowned",
       "id": "seed_ymd",
       "community": 6,
@@ -1248,7 +1248,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "seed_datekey",
-      "community": 4,
+      "community": 5,
       "norm_label": "datekey"
     },
     {
@@ -1261,7 +1261,7 @@
       "loc": 10,
       "level": 2,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.027,
       "owner": "unowned",
       "id": "seed_schooldaysback",
       "community": 6,
@@ -1277,7 +1277,7 @@
       "loc": 258,
       "level": 1,
       "granularity": "low",
-      "heat": 0.592,
+      "heat": 0.574,
       "owner": "unowned",
       "id": "seed_createseed",
       "community": 6,
@@ -1296,7 +1296,7 @@
       "heat": 0.084,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_i18n_index_jsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "index.jsx"
     },
     {
@@ -1312,7 +1312,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_lang_key",
-      "community": 2,
+      "community": 3,
       "norm_label": "lang_key"
     },
     {
@@ -1328,7 +1328,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_ar",
-      "community": 2,
+      "community": 3,
       "norm_label": "ar"
     },
     {
@@ -1344,7 +1344,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "index_readlang",
-      "community": 2,
+      "community": 3,
       "norm_label": "readlang()"
     },
     {
@@ -1360,7 +1360,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_current",
-      "community": 2,
+      "community": 3,
       "norm_label": "current"
     },
     {
@@ -1392,7 +1392,7 @@
       "heat": 0.007,
       "owner": "unowned",
       "id": "index_isen",
-      "community": 2,
+      "community": 3,
       "norm_label": "isen()"
     },
     {
@@ -1408,7 +1408,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_escapere",
-      "community": 2,
+      "community": 3,
       "norm_label": "escapere()"
     },
     {
@@ -1424,7 +1424,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_exact",
-      "community": 2,
+      "community": 3,
       "norm_label": "exact"
     },
     {
@@ -1440,7 +1440,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_templates",
-      "community": 2,
+      "community": 3,
       "norm_label": "templates"
     },
     {
@@ -1456,7 +1456,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_cap",
-      "community": 2,
+      "community": 3,
       "norm_label": "cap"
     },
     {
@@ -1469,10 +1469,10 @@
       "loc": 4,
       "level": 1,
       "granularity": "low",
-      "heat": 0.013,
+      "heat": 0.012,
       "owner": "unowned",
       "id": "index_register",
-      "community": 2,
+      "community": 3,
       "norm_label": "register()"
     },
     {
@@ -1488,7 +1488,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "index_splits",
-      "community": 2,
+      "community": 3,
       "norm_label": "splits"
     },
     {
@@ -1504,7 +1504,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_cache",
-      "community": 2,
+      "community": 3,
       "norm_label": "cache"
     },
     {
@@ -1517,10 +1517,10 @@
       "loc": 7,
       "level": 2,
       "granularity": "low",
-      "heat": 0.017,
+      "heat": 0.016,
       "owner": "unowned",
       "id": "index_fill",
-      "community": 2,
+      "community": 3,
       "norm_label": "fill()"
     },
     {
@@ -1533,10 +1533,10 @@
       "loc": 36,
       "level": 1,
       "granularity": "low",
-      "heat": 0.081,
+      "heat": 0.078,
       "owner": "unowned",
       "id": "index_lookup",
-      "community": 2,
+      "community": 3,
       "norm_label": "lookup()"
     },
     {
@@ -1552,7 +1552,7 @@
       "heat": 0.038,
       "owner": "unowned",
       "id": "index_translate",
-      "community": 2,
+      "community": 3,
       "norm_label": "translate()"
     },
     {
@@ -1568,7 +1568,7 @@
       "heat": 0.011,
       "owner": "unowned",
       "id": "index_t",
-      "community": 2,
+      "community": 3,
       "norm_label": "t()"
     },
     {
@@ -1584,7 +1584,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_attrs",
-      "community": 2,
+      "community": 3,
       "norm_label": "attrs"
     },
     {
@@ -1600,7 +1600,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_skip_tags",
-      "community": 2,
+      "community": 3,
       "norm_label": "skip_tags"
     },
     {
@@ -1616,7 +1616,7 @@
       "heat": 0.016,
       "owner": "unowned",
       "id": "index_skipped",
-      "community": 2,
+      "community": 3,
       "norm_label": "skipped()"
     },
     {
@@ -1629,10 +1629,10 @@
       "loc": 17,
       "level": 1,
       "granularity": "low",
-      "heat": 0.052,
+      "heat": 0.05,
       "owner": "unowned",
       "id": "index_translatenode",
-      "community": 2,
+      "community": 3,
       "norm_label": "translatenode()"
     },
     {
@@ -1648,7 +1648,7 @@
       "heat": 0.03,
       "owner": "unowned",
       "id": "index_walk",
-      "community": 2,
+      "community": 3,
       "norm_label": "walk()"
     },
     {
@@ -1661,10 +1661,10 @@
       "loc": 22,
       "level": 2,
       "granularity": "low",
-      "heat": 0.045,
+      "heat": 0.043,
       "owner": "unowned",
       "id": "index_starttranslator",
-      "community": 2,
+      "community": 3,
       "norm_label": "starttranslator()"
     },
     {
@@ -1680,7 +1680,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "index_ctx",
-      "community": 2,
+      "community": 3,
       "norm_label": "ctx"
     },
     {
@@ -1696,7 +1696,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "index_uselang",
-      "community": 12,
+      "community": 14,
       "norm_label": "uselang()"
     },
     {
@@ -1709,10 +1709,10 @@
       "loc": 26,
       "level": 3,
       "granularity": "low",
-      "heat": 0.032,
+      "heat": 0.03,
       "owner": "unowned",
       "id": "index_langprovider",
-      "community": 2,
+      "community": 3,
       "norm_label": "langprovider()"
     },
     {
@@ -1728,7 +1728,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_i18n_langtoggle_jsx",
-      "community": 12,
+      "community": 14,
       "norm_label": "langtoggle.jsx"
     },
     {
@@ -1741,10 +1741,10 @@
       "loc": 17,
       "level": 2,
       "granularity": "low",
-      "heat": 0.027,
+      "heat": 0.026,
       "owner": "unowned",
       "id": "langtoggle_langtoggle",
-      "community": 12,
+      "community": 14,
       "norm_label": "langtoggle()"
     },
     {
@@ -1757,10 +1757,10 @@
       "loc": 12,
       "level": 2,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "langtoggle_langsegmented",
-      "community": 12,
+      "community": 14,
       "norm_label": "langsegmented()"
     },
     {
@@ -1776,7 +1776,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_lib_assistant_js",
-      "community": 3,
+      "community": 4,
       "norm_label": "assistant.js"
     },
     {
@@ -1792,7 +1792,7 @@
       "heat": 0.007,
       "owner": "unowned",
       "id": "assistant_stop",
-      "community": 3,
+      "community": 4,
       "norm_label": "stop"
     },
     {
@@ -1805,10 +1805,10 @@
       "loc": 4,
       "level": 3,
       "granularity": "low",
-      "heat": 0.01,
+      "heat": 0.009,
       "owner": "unowned",
       "id": "assistant_stem",
-      "community": 3,
+      "community": 4,
       "norm_label": "stem()"
     },
     {
@@ -1825,7 +1825,7 @@
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "assistant_tokens",
-      "community": 3,
+      "community": 4,
       "norm_label": "tokens()"
     },
     {
@@ -1838,10 +1838,10 @@
       "loc": 23,
       "level": 2,
       "granularity": "low",
-      "heat": 0.043,
+      "heat": 0.042,
       "owner": "unowned",
       "id": "assistant_answerfromlesson",
-      "community": 3,
+      "community": 4,
       "norm_label": "answerfromlesson()"
     },
     {
@@ -1870,7 +1870,7 @@
       "loc": 13,
       "level": 3,
       "granularity": "low",
-      "heat": 0.017,
+      "heat": 0.016,
       "owner": "unowned",
       "id": "export_downloadcsv",
       "community": 15,
@@ -1902,7 +1902,7 @@
       "loc": 11,
       "level": 3,
       "granularity": "low",
-      "heat": 0.014,
+      "heat": 0.013,
       "owner": "unowned",
       "id": "export_downloadtext",
       "community": 15,
@@ -1969,7 +1969,7 @@
       "heat": 0.044,
       "owner": "unowned",
       "id": "format_fmtlongdate",
-      "community": 4,
+      "community": 5,
       "norm_label": "fmtlongdate()"
     },
     {
@@ -2033,7 +2033,7 @@
       "heat": 0.021,
       "owner": "unowned",
       "id": "format_min",
-      "community": 3,
+      "community": 4,
       "norm_label": "min"
     },
     {
@@ -2078,7 +2078,7 @@
       "loc": 16,
       "level": 1,
       "granularity": "low",
-      "heat": 0.061,
+      "heat": 0.06,
       "owner": "unowned",
       "id": "format_timeago",
       "community": 9,
@@ -2110,7 +2110,7 @@
       "loc": 9,
       "level": 1,
       "granularity": "low",
-      "heat": 0.043,
+      "heat": 0.042,
       "owner": "unowned",
       "id": "format_relativeday",
       "community": 9,
@@ -2209,7 +2209,7 @@
       "heat": 0.024,
       "owner": "unowned",
       "id": "format_levellabel",
-      "community": 13,
+      "community": 5,
       "norm_label": "levellabel()"
     },
     {
@@ -2225,7 +2225,7 @@
       "heat": 0.031,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_lib_grading_js",
-      "community": 3,
+      "community": 4,
       "norm_label": "grading.js"
     },
     {
@@ -2238,10 +2238,10 @@
       "loc": 21,
       "level": 2,
       "granularity": "low",
-      "heat": 0.044,
+      "heat": 0.043,
       "owner": "unowned",
       "id": "grading_gradequestion",
-      "community": 3,
+      "community": 4,
       "norm_label": "gradequestion()"
     },
     {
@@ -2254,10 +2254,10 @@
       "loc": 13,
       "level": 1,
       "granularity": "low",
-      "heat": 0.038,
+      "heat": 0.037,
       "owner": "unowned",
       "id": "grading_aigradeessay",
-      "community": 3,
+      "community": 4,
       "norm_label": "aigradeessay()"
     },
     {
@@ -2268,12 +2268,12 @@
       "source_location": "L42",
       "complexity": 6,
       "loc": 18,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
-      "heat": 0.029,
+      "heat": 0.028,
       "owner": "unowned",
       "id": "grading_scoreattempt",
-      "community": 13,
+      "community": 4,
       "norm_label": "scoreattempt()"
     },
     {
@@ -2289,7 +2289,7 @@
       "heat": 0.028,
       "owner": "unowned",
       "id": "grading_updatemastery",
-      "community": 3,
+      "community": 4,
       "norm_label": "updatemastery()"
     },
     {
@@ -2305,7 +2305,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "grading_gap_threshold",
-      "community": 3,
+      "community": 4,
       "norm_label": "gap_threshold"
     },
     {
@@ -2321,7 +2321,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "grading_close_threshold",
-      "community": 3,
+      "community": 4,
       "norm_label": "close_threshold"
     },
     {
@@ -2334,10 +2334,10 @@
       "loc": 35,
       "level": 2,
       "granularity": "low",
-      "heat": 0.076,
+      "heat": 0.074,
       "owner": "unowned",
       "id": "grading_buildunitexam",
-      "community": 3,
+      "community": 4,
       "norm_label": "buildunitexam()"
     },
     {
@@ -2353,7 +2353,7 @@
       "heat": 0.011,
       "owner": "unowned",
       "id": "grading_shuffleoptions",
-      "community": 3,
+      "community": 4,
       "norm_label": "shuffleoptions()"
     },
     {
@@ -2366,10 +2366,10 @@
       "loc": 24,
       "level": 1,
       "granularity": "low",
-      "heat": 0.035,
+      "heat": 0.034,
       "owner": "unowned",
       "id": "grading_generatefromlesson",
-      "community": 3,
+      "community": 4,
       "norm_label": "generatefromlesson()"
     },
     {
@@ -2385,7 +2385,7 @@
       "heat": 0.018,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_lib_rng_js",
-      "community": 3,
+      "community": 4,
       "norm_label": "rng.js"
     },
     {
@@ -2401,7 +2401,7 @@
       "heat": 0.039,
       "owner": "unowned",
       "id": "rng_seeded",
-      "community": 3,
+      "community": 4,
       "norm_label": "seeded()"
     },
     {
@@ -2414,10 +2414,10 @@
       "loc": 8,
       "level": 2,
       "granularity": "low",
-      "heat": 0.019,
+      "heat": 0.018,
       "owner": "unowned",
       "id": "rng_hash",
-      "community": 3,
+      "community": 4,
       "norm_label": "hash()"
     },
     {
@@ -2430,10 +2430,10 @@
       "loc": 9,
       "level": 1,
       "granularity": "low",
-      "heat": 0.03,
+      "heat": 0.029,
       "owner": "unowned",
       "id": "rng_shuffle",
-      "community": 3,
+      "community": 4,
       "norm_label": "shuffle()"
     },
     {
@@ -2449,7 +2449,7 @@
       "heat": 0.012,
       "owner": "unowned",
       "id": "rng_clamp",
-      "community": 3,
+      "community": 4,
       "norm_label": "clamp()"
     },
     {
@@ -2462,10 +2462,10 @@
       "loc": 10,
       "level": 1,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "rng_normalizear",
-      "community": 3,
+      "community": 4,
       "norm_label": "normalizear()"
     },
     {
@@ -2481,7 +2481,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_lib_router_js",
-      "community": 6,
+      "community": 11,
       "norm_label": "router.js"
     },
     {
@@ -2494,7 +2494,7 @@
       "loc": 5,
       "level": 1,
       "granularity": "low",
-      "heat": 0.021,
+      "heat": 0.02,
       "owner": "unowned",
       "id": "router_parse",
       "community": 6,
@@ -2510,11 +2510,220 @@
       "loc": 15,
       "level": 2,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "router_useroute",
-      "community": 6,
+      "community": 11,
       "norm_label": "useroute()"
+    },
+    {
+      "label": "Landing.jsx",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L1",
+      "complexity": 1,
+      "loc": 1,
+      "level": 0,
+      "granularity": "low",
+      "heat": 0.04,
+      "owner": "unowned",
+      "id": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "community": 12,
+      "norm_label": "landing.jsx"
+    },
+    {
+      "label": "TRUST_POINTS",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L30",
+      "complexity": 1,
+      "loc": 6,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.009,
+      "owner": "unowned",
+      "id": "landing_trust_points",
+      "community": 12,
+      "norm_label": "trust_points"
+    },
+    {
+      "label": "ROLE_ICONS",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L37",
+      "complexity": 1,
+      "loc": 8,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.01,
+      "owner": "unowned",
+      "id": "landing_role_icons",
+      "community": 12,
+      "norm_label": "role_icons"
+    },
+    {
+      "label": "ROLE_ORDER",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L46",
+      "complexity": 1,
+      "loc": 8,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.01,
+      "owner": "unowned",
+      "id": "landing_role_order",
+      "community": 12,
+      "norm_label": "role_order"
+    },
+    {
+      "label": "HOW_STEPS",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L55",
+      "complexity": 1,
+      "loc": 22,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.018,
+      "owner": "unowned",
+      "id": "landing_how_steps",
+      "community": 12,
+      "norm_label": "how_steps"
+    },
+    {
+      "label": "COMPARE_ROWS",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L78",
+      "complexity": 1,
+      "loc": 12,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.012,
+      "owner": "unowned",
+      "id": "landing_compare_rows",
+      "community": 12,
+      "norm_label": "compare_rows"
+    },
+    {
+      "label": "FEATURE_ENGINES",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L91",
+      "complexity": 1,
+      "loc": 94,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.061,
+      "owner": "unowned",
+      "id": "landing_feature_engines",
+      "community": 12,
+      "norm_label": "feature_engines"
+    },
+    {
+      "label": "ROADMAP",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L186",
+      "complexity": 1,
+      "loc": 27,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.021,
+      "owner": "unowned",
+      "id": "landing_roadmap",
+      "community": 12,
+      "norm_label": "roadmap"
+    },
+    {
+      "label": "PRICING",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L214",
+      "complexity": 1,
+      "loc": 34,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.025,
+      "owner": "unowned",
+      "id": "landing_pricing",
+      "community": 12,
+      "norm_label": "pricing"
+    },
+    {
+      "label": "DEMO_LABELS",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L249",
+      "complexity": 1,
+      "loc": 8,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.01,
+      "owner": "unowned",
+      "id": "landing_demo_labels",
+      "community": 12,
+      "norm_label": "demo_labels"
+    },
+    {
+      "label": "Landing()",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L258",
+      "complexity": 3,
+      "loc": 333,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.209,
+      "owner": "unowned",
+      "id": "landing_landing",
+      "community": 12,
+      "norm_label": "landing()"
+    },
+    {
+      "label": "SectionHead()",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L592",
+      "complexity": 2,
+      "loc": 9,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.012,
+      "owner": "unowned",
+      "id": "landing_sectionhead",
+      "community": 12,
+      "norm_label": "sectionhead()"
+    },
+    {
+      "label": "SecurityItem()",
+      "file_type": "code",
+      "type": "FUNCTION",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L602",
+      "complexity": 1,
+      "loc": 11,
+      "level": 3,
+      "granularity": "low",
+      "heat": 0.012,
+      "owner": "unowned",
+      "sensitivity": "HIGH",
+      "id": "landing_securityitem",
+      "community": 12,
+      "norm_label": "securityitem()"
     },
     {
       "label": "Attendance.jsx",
@@ -2529,7 +2738,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_attendance_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "attendance.jsx"
     },
     {
@@ -2542,10 +2751,10 @@
       "loc": 38,
       "level": 1,
       "granularity": "low",
-      "heat": 0.052,
+      "heat": 0.05,
       "owner": "unowned",
       "id": "attendance_parentattendance",
-      "community": 4,
+      "community": 5,
       "norm_label": "parentattendance()"
     },
     {
@@ -2561,7 +2770,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_child_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "child.jsx"
     },
     {
@@ -2574,10 +2783,10 @@
       "loc": 73,
       "level": 1,
       "granularity": "low",
-      "heat": 0.13,
+      "heat": 0.125,
       "owner": "unowned",
       "id": "child_childpage",
-      "community": 4,
+      "community": 5,
       "norm_label": "childpage()"
     },
     {
@@ -2593,7 +2802,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_home_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "home.jsx"
     },
     {
@@ -2606,10 +2815,10 @@
       "loc": 65,
       "level": 1,
       "granularity": "low",
-      "heat": 0.116,
+      "heat": 0.111,
       "owner": "unowned",
       "id": "home_parenthome",
-      "community": 4,
+      "community": 5,
       "norm_label": "parenthome()"
     },
     {
@@ -2638,7 +2847,7 @@
       "loc": 10,
       "level": 3,
       "granularity": "low",
-      "heat": 0.014,
+      "heat": 0.013,
       "owner": "unowned",
       "id": "index_parentpages",
       "community": 16,
@@ -2657,7 +2866,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_privacy_jsx",
-      "community": 14,
+      "community": 13,
       "norm_label": "privacy.jsx"
     },
     {
@@ -2670,10 +2879,10 @@
       "loc": 34,
       "level": 1,
       "granularity": "low",
-      "heat": 0.051,
+      "heat": 0.049,
       "owner": "unowned",
       "id": "privacy_privacypage",
-      "community": 14,
+      "community": 13,
       "norm_label": "privacypage()"
     },
     {
@@ -2689,7 +2898,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_reports_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "reports.jsx"
     },
     {
@@ -2702,10 +2911,10 @@
       "loc": 62,
       "level": 1,
       "granularity": "low",
-      "heat": 0.104,
+      "heat": 0.099,
       "owner": "unowned",
       "id": "reports_parentreports",
-      "community": 4,
+      "community": 5,
       "norm_label": "parentreports()"
     },
     {
@@ -2721,7 +2930,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_parent_shared_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "shared.jsx"
     },
     {
@@ -2737,7 +2946,7 @@
       "heat": 0.04,
       "owner": "unowned",
       "id": "shared_usechild",
-      "community": 4,
+      "community": 5,
       "norm_label": "usechild()"
     },
     {
@@ -2753,7 +2962,7 @@
       "heat": 0.02,
       "owner": "unowned",
       "id": "shared_childswitcher",
-      "community": 4,
+      "community": 5,
       "norm_label": "childswitcher()"
     },
     {
@@ -2769,7 +2978,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_school_attendance_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "attendance.jsx"
     },
     {
@@ -2782,10 +2991,10 @@
       "loc": 41,
       "level": 1,
       "granularity": "low",
-      "heat": 0.069,
+      "heat": 0.066,
       "owner": "unowned",
       "id": "attendance_schoolattendance",
-      "community": 4,
+      "community": 5,
       "norm_label": "schoolattendance()"
     },
     {
@@ -2801,7 +3010,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_school_home_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "home.jsx"
     },
     {
@@ -2814,10 +3023,10 @@
       "loc": 60,
       "level": 1,
       "granularity": "low",
-      "heat": 0.093,
+      "heat": 0.089,
       "owner": "unowned",
       "id": "home_schoolhome",
-      "community": 4,
+      "community": 5,
       "norm_label": "schoolhome()"
     },
     {
@@ -2846,7 +3055,7 @@
       "loc": 11,
       "level": 3,
       "granularity": "low",
-      "heat": 0.014,
+      "heat": 0.013,
       "owner": "unowned",
       "id": "index_schoolpages",
       "community": 17,
@@ -2878,7 +3087,7 @@
       "loc": 33,
       "level": 1,
       "granularity": "low",
-      "heat": 0.062,
+      "heat": 0.06,
       "owner": "unowned",
       "id": "licenses_licensespage",
       "community": 0,
@@ -2910,7 +3119,7 @@
       "loc": 58,
       "level": 1,
       "granularity": "low",
-      "heat": 0.088,
+      "heat": 0.084,
       "owner": "unowned",
       "id": "reports_schoolreports",
       "community": 0,
@@ -2974,7 +3183,7 @@
       "loc": 90,
       "level": 2,
       "granularity": "low",
-      "heat": 0.116,
+      "heat": 0.11,
       "owner": "unowned",
       "id": "structure_structurepage",
       "community": 0,
@@ -2990,7 +3199,7 @@
       "loc": 12,
       "level": 3,
       "granularity": "low",
-      "heat": 0.015,
+      "heat": 0.014,
       "owner": "unowned",
       "id": "structure_title",
       "community": 0,
@@ -3054,7 +3263,7 @@
       "loc": 57,
       "level": 2,
       "granularity": "low",
-      "heat": 0.098,
+      "heat": 0.094,
       "owner": "unowned",
       "id": "users_userspage",
       "community": 0,
@@ -3070,7 +3279,7 @@
       "loc": 26,
       "level": 3,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.026,
       "owner": "unowned",
       "id": "users_permmatrix",
       "community": 0,
@@ -3086,7 +3295,7 @@
       "loc": 18,
       "level": 2,
       "granularity": "low",
-      "heat": 0.027,
+      "heat": 0.026,
       "owner": "unowned",
       "id": "users_adduser",
       "community": 0,
@@ -3105,7 +3314,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_shared_messages_jsx",
-      "community": 14,
+      "community": 13,
       "norm_label": "messages.jsx"
     },
     {
@@ -3118,10 +3327,10 @@
       "loc": 14,
       "level": 2,
       "granularity": "low",
-      "heat": 0.039,
+      "heat": 0.038,
       "owner": "unowned",
       "id": "messages_recipientsfor",
-      "community": 14,
+      "community": 13,
       "norm_label": "recipientsfor()"
     },
     {
@@ -3134,10 +3343,10 @@
       "loc": 119,
       "level": 1,
       "granularity": "low",
-      "heat": 0.19,
+      "heat": 0.182,
       "owner": "unowned",
       "id": "messages_messages",
-      "community": 14,
+      "community": 13,
       "norm_label": "messages()"
     },
     {
@@ -3150,10 +3359,10 @@
       "loc": 1,
       "level": 1,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.027,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_student_assess_jsx",
-      "community": 13,
+      "community": 2,
       "norm_label": "assess.jsx"
     },
     {
@@ -3169,7 +3378,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "assess_letters",
-      "community": 13,
+      "community": 2,
       "norm_label": "letters"
     },
     {
@@ -3180,12 +3389,12 @@
       "source_location": "L12",
       "complexity": 5,
       "loc": 2,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
       "heat": 0.02,
       "owner": "unowned",
       "id": "assess_correcttext",
-      "community": 0,
+      "community": 2,
       "norm_label": "correcttext()"
     },
     {
@@ -3198,10 +3407,10 @@
       "loc": 7,
       "level": 3,
       "granularity": "low",
-      "heat": 0.036,
+      "heat": 0.035,
       "owner": "unowned",
       "id": "assess_answertext",
-      "community": 13,
+      "community": 2,
       "norm_label": "answertext()"
     },
     {
@@ -3214,10 +3423,10 @@
       "loc": 93,
       "level": 1,
       "granularity": "low",
-      "heat": 0.195,
+      "heat": 0.189,
       "owner": "unowned",
       "id": "assess_questionview",
-      "community": 5,
+      "community": 2,
       "norm_label": "questionview()"
     },
     {
@@ -3233,7 +3442,7 @@
       "heat": 0.012,
       "owner": "unowned",
       "id": "assess_fmtclock",
-      "community": 13,
+      "community": 2,
       "norm_label": "fmtclock()"
     },
     {
@@ -3244,12 +3453,12 @@
       "source_location": "L121",
       "complexity": 40,
       "loc": 71,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
-      "heat": 0.131,
+      "heat": 0.126,
       "owner": "unowned",
       "id": "assess_quizrunner",
-      "community": 13,
+      "community": 2,
       "norm_label": "quizrunner()"
     },
     {
@@ -3260,12 +3469,12 @@
       "source_location": "L194",
       "complexity": 5,
       "loc": 9,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
-      "heat": 0.022,
+      "heat": 0.021,
       "owner": "unowned",
       "id": "assess_buildattempt",
-      "community": 13,
+      "community": 4,
       "norm_label": "buildattempt()"
     },
     {
@@ -3276,12 +3485,12 @@
       "source_location": "L205",
       "complexity": 36,
       "loc": 87,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
-      "heat": 0.131,
+      "heat": 0.125,
       "owner": "unowned",
       "id": "assess_resultview",
-      "community": 13,
+      "community": 2,
       "norm_label": "resultview()"
     },
     {
@@ -3297,7 +3506,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_student_home_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "home.jsx"
     },
     {
@@ -3313,7 +3522,7 @@
       "heat": 0.007,
       "owner": "unowned",
       "id": "home_status",
-      "community": 4,
+      "community": 5,
       "norm_label": "status"
     },
     {
@@ -3326,10 +3535,10 @@
       "loc": 132,
       "level": 0,
       "granularity": "low",
-      "heat": 0.219,
+      "heat": 0.209,
       "owner": "unowned",
       "id": "home_studenthome",
-      "community": 4,
+      "community": 5,
       "norm_label": "studenthome()"
     },
     {
@@ -3358,7 +3567,7 @@
       "loc": 10,
       "level": 3,
       "granularity": "low",
-      "heat": 0.014,
+      "heat": 0.013,
       "owner": "unowned",
       "id": "index_studentpages",
       "community": 18,
@@ -3406,7 +3615,7 @@
       "loc": 64,
       "level": 1,
       "granularity": "low",
-      "heat": 0.101,
+      "heat": 0.097,
       "owner": "unowned",
       "id": "learn_path",
       "community": 1,
@@ -3422,7 +3631,7 @@
       "loc": 83,
       "level": 1,
       "granularity": "low",
-      "heat": 0.111,
+      "heat": 0.106,
       "owner": "unowned",
       "id": "learn_exampage",
       "community": 1,
@@ -3470,7 +3679,7 @@
       "loc": 56,
       "level": 1,
       "granularity": "low",
-      "heat": 0.096,
+      "heat": 0.092,
       "owner": "unowned",
       "id": "lesson_lessonpage",
       "community": 1,
@@ -3486,7 +3695,7 @@
       "loc": 41,
       "level": 2,
       "granularity": "low",
-      "heat": 0.06,
+      "heat": 0.057,
       "owner": "unowned",
       "id": "lesson_explaintab",
       "community": 0,
@@ -3502,7 +3711,7 @@
       "loc": 20,
       "level": 3,
       "granularity": "low",
-      "heat": 0.031,
+      "heat": 0.03,
       "owner": "unowned",
       "id": "lesson_mediaplayer",
       "community": 0,
@@ -3518,10 +3727,10 @@
       "loc": 33,
       "level": 1,
       "granularity": "low",
-      "heat": 0.042,
+      "heat": 0.04,
       "owner": "unowned",
       "id": "lesson_summarytab",
-      "community": 1,
+      "community": 0,
       "norm_label": "summarytab()"
     },
     {
@@ -3534,7 +3743,7 @@
       "loc": 53,
       "level": 2,
       "granularity": "low",
-      "heat": 0.067,
+      "heat": 0.063,
       "owner": "unowned",
       "id": "lesson_asktab",
       "community": 0,
@@ -3550,7 +3759,7 @@
       "loc": 29,
       "level": 1,
       "granularity": "low",
-      "heat": 0.044,
+      "heat": 0.042,
       "owner": "unowned",
       "id": "lesson_flashcards",
       "community": 0,
@@ -3566,7 +3775,7 @@
       "loc": 24,
       "level": 3,
       "granularity": "low",
-      "heat": 0.067,
+      "heat": 0.066,
       "owner": "unowned",
       "id": "lesson_mindmap",
       "community": 0,
@@ -3582,7 +3791,7 @@
       "loc": 9,
       "level": 3,
       "granularity": "low",
-      "heat": 0.013,
+      "heat": 0.012,
       "owner": "unowned",
       "id": "lesson_cardstab",
       "community": 0,
@@ -3598,7 +3807,7 @@
       "loc": 61,
       "level": 1,
       "granularity": "low",
-      "heat": 0.103,
+      "heat": 0.099,
       "owner": "unowned",
       "id": "lesson_quiztab",
       "community": 1,
@@ -3617,7 +3826,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_student_library_jsx",
-      "community": 1,
+      "community": 0,
       "norm_label": "library.jsx"
     },
     {
@@ -3630,10 +3839,10 @@
       "loc": 72,
       "level": 1,
       "granularity": "low",
-      "heat": 0.099,
+      "heat": 0.094,
       "owner": "unowned",
       "id": "library_librarypage",
-      "community": 1,
+      "community": 0,
       "norm_label": "librarypage()"
     },
     {
@@ -3662,7 +3871,7 @@
       "loc": 19,
       "level": 1,
       "granularity": "low",
-      "heat": 0.039,
+      "heat": 0.037,
       "owner": "unowned",
       "id": "progress_progresspage",
       "community": 0,
@@ -3678,10 +3887,10 @@
       "loc": 29,
       "level": 1,
       "granularity": "low",
-      "heat": 0.047,
+      "heat": 0.045,
       "owner": "unowned",
       "id": "progress_overview",
-      "community": 0,
+      "community": 5,
       "norm_label": "overview()"
     },
     {
@@ -3694,7 +3903,7 @@
       "loc": 41,
       "level": 1,
       "granularity": "low",
-      "heat": 0.067,
+      "heat": 0.064,
       "owner": "unowned",
       "id": "progress_masterymap",
       "community": 0,
@@ -3710,7 +3919,7 @@
       "loc": 68,
       "level": 2,
       "granularity": "low",
-      "heat": 0.112,
+      "heat": 0.108,
       "owner": "unowned",
       "id": "progress_plan",
       "community": 0,
@@ -3726,7 +3935,7 @@
       "loc": 9,
       "level": 1,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.017,
       "owner": "unowned",
       "id": "progress_step",
       "community": 0,
@@ -3742,7 +3951,7 @@
       "loc": 23,
       "level": 1,
       "granularity": "low",
-      "heat": 0.054,
+      "heat": 0.052,
       "owner": "unowned",
       "id": "progress_log",
       "community": 0,
@@ -3761,7 +3970,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_student_rewards_jsx",
-      "community": 1,
+      "community": 6,
       "norm_label": "rewards.jsx"
     },
     {
@@ -3777,7 +3986,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "rewards_icon",
-      "community": 1,
+      "community": 6,
       "norm_label": "icon"
     },
     {
@@ -3790,10 +3999,10 @@
       "loc": 65,
       "level": 1,
       "granularity": "low",
-      "heat": 0.106,
+      "heat": 0.101,
       "owner": "unowned",
       "id": "rewards_rewardspage",
-      "community": 1,
+      "community": 6,
       "norm_label": "rewardspage()"
     },
     {
@@ -3838,7 +4047,7 @@
       "loc": 57,
       "level": 1,
       "granularity": "low",
-      "heat": 0.091,
+      "heat": 0.087,
       "owner": "unowned",
       "id": "home_supervisorhome",
       "community": 0,
@@ -3934,7 +4143,7 @@
       "loc": 36,
       "level": 2,
       "granularity": "low",
-      "heat": 0.063,
+      "heat": 0.061,
       "owner": "unowned",
       "id": "kpis_kpispage",
       "community": 0,
@@ -3953,7 +4162,7 @@
       "heat": 0.012,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_supervisor_quality_jsx",
-      "community": 0,
+      "community": 2,
       "norm_label": "quality.jsx"
     },
     {
@@ -3969,7 +4178,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "quality_criteria",
-      "community": 0,
+      "community": 2,
       "norm_label": "criteria"
     },
     {
@@ -3980,12 +4189,12 @@
       "source_location": "L14",
       "complexity": 15,
       "loc": 38,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
-      "heat": 0.06,
+      "heat": 0.057,
       "owner": "unowned",
       "id": "quality_qualitypage",
-      "community": 0,
+      "community": 2,
       "norm_label": "qualitypage()"
     },
     {
@@ -3998,10 +4207,10 @@
       "loc": 25,
       "level": 1,
       "granularity": "low",
-      "heat": 0.039,
+      "heat": 0.037,
       "owner": "unowned",
       "id": "quality_reviewform",
-      "community": 0,
+      "community": 2,
       "norm_label": "reviewform()"
     },
     {
@@ -4046,7 +4255,7 @@
       "loc": 35,
       "level": 1,
       "granularity": "low",
-      "heat": 0.042,
+      "heat": 0.039,
       "owner": "unowned",
       "id": "reports_supervisorreports",
       "community": 0,
@@ -4094,7 +4303,7 @@
       "loc": 40,
       "level": 1,
       "granularity": "low",
-      "heat": 0.054,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "ai_aipage",
       "community": 0,
@@ -4126,7 +4335,7 @@
       "loc": 28,
       "level": 2,
       "granularity": "low",
-      "heat": 0.047,
+      "heat": 0.045,
       "owner": "unowned",
       "id": "audit_auditpage",
       "community": 0,
@@ -4158,7 +4367,7 @@
       "loc": 39,
       "level": 1,
       "granularity": "low",
-      "heat": 0.057,
+      "heat": 0.054,
       "owner": "unowned",
       "id": "billing_billingpage",
       "community": 0,
@@ -4190,7 +4399,7 @@
       "loc": 34,
       "level": 1,
       "granularity": "low",
-      "heat": 0.054,
+      "heat": 0.051,
       "owner": "unowned",
       "id": "home_systemhome",
       "community": 0,
@@ -4222,7 +4431,7 @@
       "loc": 12,
       "level": 3,
       "granularity": "low",
-      "heat": 0.015,
+      "heat": 0.014,
       "owner": "unowned",
       "id": "index_systempages",
       "community": 20,
@@ -4254,7 +4463,7 @@
       "loc": 35,
       "level": 2,
       "granularity": "low",
-      "heat": 0.04,
+      "heat": 0.038,
       "owner": "unowned",
       "id": "integrations_integrationspage",
       "community": 0,
@@ -4286,7 +4495,7 @@
       "loc": 10,
       "level": 2,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.017,
       "owner": "unowned",
       "id": "rbac_rbacpage",
       "community": 0,
@@ -4319,7 +4528,7 @@
       "loc": 10,
       "level": 3,
       "granularity": "low",
-      "heat": 0.012,
+      "heat": 0.011,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "security_checks",
@@ -4336,7 +4545,7 @@
       "loc": 28,
       "level": 2,
       "granularity": "low",
-      "heat": 0.031,
+      "heat": 0.029,
       "owner": "unowned",
       "sensitivity": "HIGH",
       "id": "security_securitypage",
@@ -4369,7 +4578,7 @@
       "loc": 27,
       "level": 2,
       "granularity": "low",
-      "heat": 0.04,
+      "heat": 0.039,
       "owner": "unowned",
       "id": "tenants_tenantspage",
       "community": 0,
@@ -4385,7 +4594,7 @@
       "loc": 17,
       "level": 2,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "tenants_newtenant",
       "community": 0,
@@ -4433,10 +4642,10 @@
       "loc": 58,
       "level": 1,
       "granularity": "low",
-      "heat": 0.088,
+      "heat": 0.084,
       "owner": "unowned",
       "id": "assignments_assignmentspage",
-      "community": 1,
+      "community": 0,
       "norm_label": "assignmentspage()"
     },
     {
@@ -4449,7 +4658,7 @@
       "loc": 20,
       "level": 2,
       "granularity": "low",
-      "heat": 0.038,
+      "heat": 0.036,
       "owner": "unowned",
       "id": "assignments_gradecell",
       "community": 0,
@@ -4465,7 +4674,7 @@
       "loc": 24,
       "level": 2,
       "granularity": "low",
-      "heat": 0.044,
+      "heat": 0.042,
       "owner": "unowned",
       "id": "assignments_newassignment",
       "community": 0,
@@ -4484,7 +4693,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_teacher_attendance_jsx",
-      "community": 4,
+      "community": 5,
       "norm_label": "attendance.jsx"
     },
     {
@@ -4500,7 +4709,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "attendance_att",
-      "community": 4,
+      "community": 5,
       "norm_label": "att"
     },
     {
@@ -4513,10 +4722,10 @@
       "loc": 55,
       "level": 1,
       "granularity": "low",
-      "heat": 0.085,
+      "heat": 0.081,
       "owner": "unowned",
       "id": "attendance_attendancepage",
-      "community": 4,
+      "community": 5,
       "norm_label": "attendancepage()"
     },
     {
@@ -4561,7 +4770,7 @@
       "loc": 57,
       "level": 1,
       "granularity": "low",
-      "heat": 0.127,
+      "heat": 0.123,
       "owner": "unowned",
       "id": "bank_bankpage",
       "community": 1,
@@ -4593,7 +4802,7 @@
       "loc": 51,
       "level": 1,
       "granularity": "low",
-      "heat": 0.067,
+      "heat": 0.064,
       "owner": "unowned",
       "id": "classes_classespage",
       "community": 0,
@@ -4609,7 +4818,7 @@
       "loc": 12,
       "level": 2,
       "granularity": "low",
-      "heat": 0.019,
+      "heat": 0.018,
       "owner": "unowned",
       "id": "classes_addstudent",
       "community": 0,
@@ -4625,7 +4834,7 @@
       "loc": 21,
       "level": 2,
       "granularity": "low",
-      "heat": 0.033,
+      "heat": 0.031,
       "owner": "unowned",
       "id": "classes_newclass",
       "community": 0,
@@ -4641,10 +4850,10 @@
       "loc": 28,
       "level": 1,
       "granularity": "low",
-      "heat": 0.057,
+      "heat": 0.055,
       "owner": "unowned",
       "id": "classes_studentsheet",
-      "community": 0,
+      "community": 5,
       "norm_label": "studentsheet()"
     },
     {
@@ -4689,7 +4898,7 @@
       "loc": 99,
       "level": 1,
       "granularity": "low",
-      "heat": 0.149,
+      "heat": 0.142,
       "owner": "unowned",
       "id": "curriculum_curriculumpage",
       "community": 1,
@@ -4705,7 +4914,7 @@
       "loc": 12,
       "level": 3,
       "granularity": "low",
-      "heat": 0.015,
+      "heat": 0.014,
       "owner": "unowned",
       "id": "curriculum_addtitle",
       "community": 1,
@@ -4724,7 +4933,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_teacher_grading_jsx",
-      "community": 11,
+      "community": 1,
       "norm_label": "grading.jsx"
     },
     {
@@ -4737,10 +4946,10 @@
       "loc": 84,
       "level": 1,
       "granularity": "low",
-      "heat": 0.115,
+      "heat": 0.109,
       "owner": "unowned",
       "id": "grading_gradingpage",
-      "community": 11,
+      "community": 1,
       "norm_label": "gradingpage()"
     },
     {
@@ -4756,7 +4965,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_teacher_home_jsx",
-      "community": 11,
+      "community": 1,
       "norm_label": "home.jsx"
     },
     {
@@ -4769,10 +4978,10 @@
       "loc": 67,
       "level": 1,
       "granularity": "low",
-      "heat": 0.127,
+      "heat": 0.122,
       "owner": "unowned",
       "id": "home_teacherhome",
-      "community": 11,
+      "community": 1,
       "norm_label": "teacherhome()"
     },
     {
@@ -4801,7 +5010,7 @@
       "loc": 14,
       "level": 3,
       "granularity": "low",
-      "heat": 0.016,
+      "heat": 0.015,
       "owner": "unowned",
       "id": "index_teacherpages",
       "community": 21,
@@ -4820,7 +5029,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_teacher_performance_jsx",
-      "community": 11,
+      "community": 1,
       "norm_label": "performance.jsx"
     },
     {
@@ -4833,10 +5042,10 @@
       "loc": 58,
       "level": 1,
       "granularity": "low",
-      "heat": 0.103,
+      "heat": 0.099,
       "owner": "unowned",
       "id": "performance_performancepage",
-      "community": 11,
+      "community": 1,
       "norm_label": "performancepage()"
     },
     {
@@ -4865,7 +5074,7 @@
       "loc": 69,
       "level": 3,
       "granularity": "low",
-      "heat": 0.127,
+      "heat": 0.122,
       "owner": "unowned",
       "id": "questioneditor_questioneditor",
       "community": 22,
@@ -4884,7 +5093,7 @@
       "heat": 0.018,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_roles_teacher_review_jsx",
-      "community": 11,
+      "community": 1,
       "norm_label": "review.jsx"
     },
     {
@@ -4897,10 +5106,10 @@
       "loc": 7,
       "level": 3,
       "granularity": "low",
-      "heat": 0.01,
+      "heat": 0.009,
       "owner": "unowned",
       "id": "review_kind",
-      "community": 11,
+      "community": 1,
       "norm_label": "kind"
     },
     {
@@ -4913,10 +5122,10 @@
       "loc": 44,
       "level": 1,
       "granularity": "low",
-      "heat": 0.072,
+      "heat": 0.069,
       "owner": "unowned",
       "id": "review_reviewpage",
-      "community": 11,
+      "community": 1,
       "norm_label": "reviewpage()"
     },
     {
@@ -4929,7 +5138,7 @@
       "loc": 74,
       "level": 1,
       "granularity": "low",
-      "heat": 0.135,
+      "heat": 0.13,
       "owner": "unowned",
       "id": "review_reviewmodal",
       "community": 1,
@@ -4945,10 +5154,10 @@
       "loc": 24,
       "level": 1,
       "granularity": "low",
-      "heat": 0.04,
+      "heat": 0.039,
       "owner": "unowned",
       "id": "review_generatemodal",
-      "community": 11,
+      "community": 1,
       "norm_label": "generatemodal()"
     },
     {
@@ -4961,10 +5170,10 @@
       "loc": 36,
       "level": 1,
       "granularity": "low",
-      "heat": 0.048,
+      "heat": 0.045,
       "owner": "unowned",
       "id": "review_blueprintmodal",
-      "community": 11,
+      "community": 1,
       "norm_label": "blueprintmodal()"
     },
     {
@@ -4980,7 +5189,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_shell_appshell_jsx",
-      "community": 5,
+      "community": 11,
       "norm_label": "appshell.jsx"
     },
     {
@@ -4993,10 +5202,10 @@
       "loc": 167,
       "level": 0,
       "granularity": "low",
-      "heat": 0.205,
+      "heat": 0.193,
       "owner": "unowned",
       "id": "appshell_appshell",
-      "community": 5,
+      "community": 11,
       "norm_label": "appshell()"
     },
     {
@@ -5009,10 +5218,10 @@
       "loc": 41,
       "level": 3,
       "granularity": "low",
-      "heat": 0.06,
+      "heat": 0.057,
       "owner": "unowned",
       "id": "appshell_commandpalette",
-      "community": 5,
+      "community": 11,
       "norm_label": "commandpalette()"
     },
     {
@@ -5089,7 +5298,7 @@
       "loc": 64,
       "level": 1,
       "granularity": "low",
-      "heat": 0.062,
+      "heat": 0.057,
       "owner": "unowned",
       "id": "settingsdialog_settingsdialog",
       "community": 6,
@@ -5167,12 +5376,12 @@
       "source_location": "L11",
       "complexity": 2,
       "loc": 2,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
       "heat": 0.011,
       "owner": "unowned",
       "id": "selectors_allstudents",
-      "community": 1,
+      "community": 6,
       "norm_label": "allstudents()"
     },
     {
@@ -5215,7 +5424,7 @@
       "source_location": "L15",
       "complexity": 2,
       "loc": 1,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
       "heat": 0.014,
       "owner": "unowned",
@@ -5252,7 +5461,7 @@
       "heat": 0.039,
       "owner": "unowned",
       "id": "selectors_studentof",
-      "community": 1,
+      "community": 6,
       "norm_label": "studentof()"
     },
     {
@@ -5313,10 +5522,10 @@
       "loc": 4,
       "level": 1,
       "granularity": "low",
-      "heat": 0.041,
+      "heat": 0.04,
       "owner": "unowned",
       "id": "selectors_username",
-      "community": 1,
+      "community": 6,
       "norm_label": "username()"
     },
     {
@@ -5409,7 +5618,7 @@
       "loc": 15,
       "level": 1,
       "granularity": "low",
-      "heat": 0.062,
+      "heat": 0.061,
       "owner": "unowned",
       "id": "selectors_unitprogress",
       "community": 1,
@@ -5425,10 +5634,10 @@
       "loc": 19,
       "level": 0,
       "granularity": "low",
-      "heat": 0.08,
+      "heat": 0.079,
       "owner": "unowned",
       "id": "selectors_snapshot",
-      "community": 4,
+      "community": 5,
       "norm_label": "snapshot()"
     },
     {
@@ -5457,10 +5666,10 @@
       "loc": 23,
       "level": 1,
       "granularity": "low",
-      "heat": 0.058,
+      "heat": 0.056,
       "owner": "unowned",
       "id": "selectors_recommendation",
-      "community": 4,
+      "community": 1,
       "norm_label": "recommendation()"
     },
     {
@@ -5489,7 +5698,7 @@
       "loc": 14,
       "level": 1,
       "granularity": "low",
-      "heat": 0.044,
+      "heat": 0.043,
       "owner": "unowned",
       "id": "selectors_weekplan",
       "community": 1,
@@ -5508,7 +5717,7 @@
       "heat": 0.027,
       "owner": "unowned",
       "id": "selectors_assignmentsforstudent",
-      "community": 4,
+      "community": 5,
       "norm_label": "assignmentsforstudent()"
     },
     {
@@ -5540,7 +5749,7 @@
       "heat": 0.038,
       "owner": "unowned",
       "id": "selectors_classstats",
-      "community": 4,
+      "community": 0,
       "norm_label": "classstats()"
     },
     {
@@ -5551,12 +5760,12 @@
       "source_location": "L153",
       "complexity": 6,
       "loc": 10,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "selectors_commongaps",
-      "community": 11,
+      "community": 1,
       "norm_label": "commongaps()"
     },
     {
@@ -5572,7 +5781,7 @@
       "heat": 0.032,
       "owner": "unowned",
       "id": "selectors_teachersubjects",
-      "community": 11,
+      "community": 1,
       "norm_label": "teachersubjects()"
     },
     {
@@ -5588,7 +5797,7 @@
       "heat": 0.022,
       "owner": "unowned",
       "id": "selectors_pendingreviews",
-      "community": 11,
+      "community": 1,
       "norm_label": "pendingreviews()"
     },
     {
@@ -5604,7 +5813,7 @@
       "heat": 0.035,
       "owner": "unowned",
       "id": "selectors_essayqueue",
-      "community": 11,
+      "community": 1,
       "norm_label": "essayqueue()"
     },
     {
@@ -5617,10 +5826,10 @@
       "loc": 7,
       "level": 1,
       "granularity": "low",
-      "heat": 0.046,
+      "heat": 0.045,
       "owner": "unowned",
       "id": "selectors_attendancerate",
-      "community": 4,
+      "community": 5,
       "norm_label": "attendancerate()"
     },
     {
@@ -5636,7 +5845,7 @@
       "heat": 0.014,
       "owner": "unowned",
       "id": "selectors_classattendanceon",
-      "community": 4,
+      "community": 5,
       "norm_label": "classattendanceon()"
     },
     {
@@ -5652,7 +5861,7 @@
       "heat": 0.038,
       "owner": "unowned",
       "id": "selectors_badgesof",
-      "community": 1,
+      "community": 6,
       "norm_label": "badgesof()"
     },
     {
@@ -5663,12 +5872,12 @@
       "source_location": "L224",
       "complexity": 6,
       "loc": 6,
-      "level": 2,
+      "level": 1,
       "granularity": "low",
       "heat": 0.021,
       "owner": "unowned",
       "id": "selectors_leaderboard",
-      "community": 1,
+      "community": 6,
       "norm_label": "leaderboard()"
     },
     {
@@ -5684,7 +5893,7 @@
       "heat": 0.017,
       "owner": "unowned",
       "id": "selectors_mynotifications",
-      "community": 5,
+      "community": 11,
       "norm_label": "mynotifications()"
     },
     {
@@ -5700,7 +5909,7 @@
       "heat": 0.018,
       "owner": "unowned",
       "id": "selectors_mythreads",
-      "community": 14,
+      "community": 13,
       "norm_label": "mythreads()"
     },
     {
@@ -5716,7 +5925,7 @@
       "heat": 0.027,
       "owner": "unowned",
       "id": "selectors_unreadthreads",
-      "community": 14,
+      "community": 13,
       "norm_label": "unreadthreads()"
     },
     {
@@ -5732,7 +5941,7 @@
       "heat": 0.041,
       "owner": "unowned",
       "id": "selectors_myannouncements",
-      "community": 14,
+      "community": 13,
       "norm_label": "myannouncements()"
     },
     {
@@ -5748,7 +5957,7 @@
       "heat": 0.027,
       "owner": "unowned",
       "id": "selectors_childrenof",
-      "community": 14,
+      "community": 13,
       "norm_label": "childrenof()"
     },
     {
@@ -5761,10 +5970,10 @@
       "loc": 16,
       "level": 1,
       "granularity": "low",
-      "heat": 0.054,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "selectors_smartalerts",
-      "community": 4,
+      "community": 5,
       "norm_label": "smartalerts()"
     },
     {
@@ -5780,7 +5989,7 @@
       "heat": 0.031,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_store_storeprovider_jsx",
-      "community": 1,
+      "community": 6,
       "norm_label": "storeprovider.jsx"
     },
     {
@@ -5796,7 +6005,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "storeprovider_key",
-      "community": 1,
+      "community": 6,
       "norm_label": "key"
     },
     {
@@ -5812,7 +6021,7 @@
       "heat": 0.015,
       "owner": "unowned",
       "id": "storeprovider_uid",
-      "community": 1,
+      "community": 6,
       "norm_label": "uid()"
     },
     {
@@ -5823,9 +6032,9 @@
       "source_location": "L10",
       "complexity": 6,
       "loc": 12,
-      "level": 1,
+      "level": 2,
       "granularity": "low",
-      "heat": 0.029,
+      "heat": 0.028,
       "owner": "unowned",
       "id": "storeprovider_load",
       "community": 6,
@@ -5844,7 +6053,7 @@
       "heat": 0.014,
       "owner": "unowned",
       "id": "storeprovider_note",
-      "community": 1,
+      "community": 6,
       "norm_label": "note()"
     },
     {
@@ -5860,7 +6069,7 @@
       "heat": 0.017,
       "owner": "unowned",
       "id": "storeprovider_audit",
-      "community": 1,
+      "community": 6,
       "norm_label": "audit()"
     },
     {
@@ -5873,10 +6082,10 @@
       "loc": 298,
       "level": 0,
       "granularity": "low",
-      "heat": 0.478,
+      "heat": 0.457,
       "owner": "unowned",
       "id": "storeprovider_reducer",
-      "community": 1,
+      "community": 6,
       "norm_label": "reducer()"
     },
     {
@@ -5892,7 +6101,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "storeprovider_ctx",
-      "community": 1,
+      "community": 6,
       "norm_label": "ctx"
     },
     {
@@ -5905,10 +6114,10 @@
       "loc": 17,
       "level": 3,
       "granularity": "low",
-      "heat": 0.024,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "storeprovider_storeprovider",
-      "community": 1,
+      "community": 6,
       "norm_label": "storeprovider()"
     },
     {
@@ -5921,7 +6130,7 @@
       "loc": 1,
       "level": 0,
       "granularity": "low",
-      "heat": 0.203,
+      "heat": 0.202,
       "owner": "unowned",
       "id": "storeprovider_usestore",
       "community": 0,
@@ -5940,7 +6149,7 @@
       "heat": 0.018,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_ui_brand_jsx",
-      "community": 12,
+      "community": 14,
       "norm_label": "brand.jsx"
     },
     {
@@ -5953,10 +6162,10 @@
       "loc": 24,
       "level": 3,
       "granularity": "low",
-      "heat": 0.021,
+      "heat": 0.019,
       "owner": "unowned",
       "id": "brand_logomark",
-      "community": 12,
+      "community": 14,
       "norm_label": "logomark()"
     },
     {
@@ -5969,10 +6178,10 @@
       "loc": 13,
       "level": 2,
       "granularity": "low",
-      "heat": 0.021,
+      "heat": 0.02,
       "owner": "unowned",
       "id": "brand_wordmark",
-      "community": 12,
+      "community": 14,
       "norm_label": "wordmark()"
     },
     {
@@ -5988,7 +6197,7 @@
       "heat": 0.006,
       "owner": "unowned",
       "id": "brand_toastctx",
-      "community": 12,
+      "community": 14,
       "norm_label": "toastctx"
     },
     {
@@ -6001,7 +6210,7 @@
       "loc": 1,
       "level": 0,
       "granularity": "low",
-      "heat": 0.153,
+      "heat": 0.152,
       "owner": "unowned",
       "id": "brand_usetoast",
       "community": 0,
@@ -6017,10 +6226,10 @@
       "loc": 21,
       "level": 3,
       "granularity": "low",
-      "heat": 0.025,
+      "heat": 0.023,
       "owner": "unowned",
       "id": "brand_toastprovider",
-      "community": 12,
+      "community": 14,
       "norm_label": "toastprovider()"
     },
     {
@@ -6033,10 +6242,10 @@
       "loc": 1,
       "level": 1,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.027,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_ui_charts_jsx",
-      "community": 3,
+      "community": 4,
       "norm_label": "charts.jsx"
     },
     {
@@ -6052,7 +6261,7 @@
       "heat": 0.016,
       "owner": "unowned",
       "id": "charts_masterytone",
-      "community": 3,
+      "community": 4,
       "norm_label": "masterytone()"
     },
     {
@@ -6065,10 +6274,10 @@
       "loc": 20,
       "level": 2,
       "granularity": "low",
-      "heat": 0.054,
+      "heat": 0.053,
       "owner": "unowned",
       "id": "charts_ring",
-      "community": 3,
+      "community": 4,
       "norm_label": "ring()"
     },
     {
@@ -6081,10 +6290,10 @@
       "loc": 15,
       "level": 3,
       "granularity": "low",
-      "heat": 0.026,
+      "heat": 0.025,
       "owner": "unowned",
       "id": "charts_bars",
-      "community": 3,
+      "community": 4,
       "norm_label": "bars()"
     },
     {
@@ -6097,10 +6306,10 @@
       "loc": 18,
       "level": 3,
       "granularity": "low",
-      "heat": 0.028,
+      "heat": 0.027,
       "owner": "unowned",
       "id": "charts_hbars",
-      "community": 3,
+      "community": 4,
       "norm_label": "hbars()"
     },
     {
@@ -6113,10 +6322,10 @@
       "loc": 43,
       "level": 3,
       "granularity": "low",
-      "heat": 0.099,
+      "heat": 0.096,
       "owner": "unowned",
       "id": "charts_linechart",
-      "community": 3,
+      "community": 4,
       "norm_label": "linechart()"
     },
     {
@@ -6129,10 +6338,10 @@
       "loc": 22,
       "level": 3,
       "granularity": "low",
-      "heat": 0.025,
+      "heat": 0.024,
       "owner": "unowned",
       "id": "charts_heatmap",
-      "community": 3,
+      "community": 4,
       "norm_label": "heatmap()"
     },
     {
@@ -6145,10 +6354,10 @@
       "loc": 9,
       "level": 3,
       "granularity": "low",
-      "heat": 0.011,
+      "heat": 0.01,
       "owner": "unowned",
       "id": "charts_legend",
-      "community": 3,
+      "community": 4,
       "norm_label": "legend()"
     },
     {
@@ -6161,10 +6370,10 @@
       "loc": 10,
       "level": 2,
       "granularity": "low",
-      "heat": 0.035,
+      "heat": 0.034,
       "owner": "unowned",
       "id": "charts_spark",
-      "community": 3,
+      "community": 4,
       "norm_label": "spark()"
     },
     {
@@ -6180,7 +6389,7 @@
       "heat": 0.074,
       "owner": "unowned",
       "id": "c_users_hp_desktop_taqat_school_src_ui_primitives_jsx",
-      "community": 5,
+      "community": 2,
       "norm_label": "primitives.jsx"
     },
     {
@@ -6196,7 +6405,7 @@
       "heat": 0.084,
       "owner": "unowned",
       "id": "primitives_cx",
-      "community": 5,
+      "community": 2,
       "norm_label": "cx()"
     },
     {
@@ -6212,7 +6421,7 @@
       "heat": 0.025,
       "owner": "unowned",
       "id": "primitives_btn",
-      "community": 5,
+      "community": 2,
       "norm_label": "btn()"
     },
     {
@@ -6225,10 +6434,10 @@
       "loc": 19,
       "level": 2,
       "granularity": "low",
-      "heat": 0.03,
+      "heat": 0.029,
       "owner": "unowned",
       "id": "primitives_page",
-      "community": 5,
+      "community": 2,
       "norm_label": "page()"
     },
     {
@@ -6241,10 +6450,10 @@
       "loc": 16,
       "level": 2,
       "granularity": "low",
-      "heat": 0.032,
+      "heat": 0.031,
       "owner": "unowned",
       "id": "primitives_card",
-      "community": 5,
+      "community": 2,
       "norm_label": "card()"
     },
     {
@@ -6257,10 +6466,10 @@
       "loc": 20,
       "level": 2,
       "granularity": "low",
-      "heat": 0.027,
+      "heat": 0.026,
       "owner": "unowned",
       "id": "primitives_stat",
-      "community": 5,
+      "community": 2,
       "norm_label": "stat()"
     },
     {
@@ -6273,10 +6482,10 @@
       "loc": 9,
       "level": 2,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.017,
       "owner": "unowned",
       "id": "primitives_badge",
-      "community": 5,
+      "community": 2,
       "norm_label": "badge()"
     },
     {
@@ -6289,10 +6498,10 @@
       "loc": 13,
       "level": 2,
       "granularity": "low",
-      "heat": 0.032,
+      "heat": 0.031,
       "owner": "unowned",
       "id": "primitives_tabs",
-      "community": 5,
+      "community": 2,
       "norm_label": "tabs()"
     },
     {
@@ -6305,10 +6514,10 @@
       "loc": 14,
       "level": 2,
       "granularity": "low",
-      "heat": 0.023,
+      "heat": 0.022,
       "owner": "unowned",
       "id": "primitives_segmented",
-      "community": 5,
+      "community": 2,
       "norm_label": "segmented()"
     },
     {
@@ -6321,10 +6530,10 @@
       "loc": 33,
       "level": 2,
       "granularity": "low",
-      "heat": 0.049,
+      "heat": 0.046,
       "owner": "unowned",
       "id": "primitives_modal",
-      "community": 5,
+      "community": 2,
       "norm_label": "modal()"
     },
     {
@@ -6340,7 +6549,7 @@
       "heat": 0.022,
       "owner": "unowned",
       "id": "primitives_field",
-      "community": 5,
+      "community": 2,
       "norm_label": "field()"
     },
     {
@@ -6356,7 +6565,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "primitives_input",
-      "community": 5,
+      "community": 2,
       "norm_label": "input()"
     },
     {
@@ -6372,7 +6581,7 @@
       "heat": 0.011,
       "owner": "unowned",
       "id": "primitives_select",
-      "community": 5,
+      "community": 2,
       "norm_label": "select()"
     },
     {
@@ -6388,7 +6597,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "primitives_textarea",
-      "community": 5,
+      "community": 2,
       "norm_label": "textarea()"
     },
     {
@@ -6401,10 +6610,10 @@
       "loc": 12,
       "level": 2,
       "granularity": "low",
-      "heat": 0.02,
+      "heat": 0.019,
       "owner": "unowned",
       "id": "primitives_toggle",
-      "community": 5,
+      "community": 2,
       "norm_label": "toggle()"
     },
     {
@@ -6417,10 +6626,10 @@
       "loc": 7,
       "level": 1,
       "granularity": "low",
-      "heat": 0.018,
+      "heat": 0.017,
       "owner": "unowned",
       "id": "primitives_progress",
-      "community": 5,
+      "community": 2,
       "norm_label": "progress()"
     },
     {
@@ -6433,10 +6642,10 @@
       "loc": 7,
       "level": 1,
       "granularity": "low",
-      "heat": 0.02,
+      "heat": 0.019,
       "owner": "unowned",
       "id": "primitives_avatar",
-      "community": 5,
+      "community": 2,
       "norm_label": "avatar()"
     },
     {
@@ -6449,10 +6658,10 @@
       "loc": 12,
       "level": 3,
       "granularity": "low",
-      "heat": 0.015,
+      "heat": 0.014,
       "owner": "unowned",
       "id": "primitives_empty",
-      "community": 5,
+      "community": 2,
       "norm_label": "empty()"
     },
     {
@@ -6465,10 +6674,10 @@
       "loc": 18,
       "level": 2,
       "granularity": "low",
-      "heat": 0.029,
+      "heat": 0.028,
       "owner": "unowned",
       "id": "primitives_listrow",
-      "community": 5,
+      "community": 2,
       "norm_label": "listrow()"
     },
     {
@@ -6481,10 +6690,10 @@
       "loc": 12,
       "level": 2,
       "granularity": "low",
-      "heat": 0.022,
+      "heat": 0.021,
       "owner": "unowned",
       "id": "primitives_notice",
-      "community": 5,
+      "community": 2,
       "norm_label": "notice()"
     },
     {
@@ -6497,10 +6706,10 @@
       "loc": 29,
       "level": 2,
       "granularity": "low",
-      "heat": 0.033,
+      "heat": 0.031,
       "owner": "unowned",
       "id": "primitives_datatable",
-      "community": 5,
+      "community": 2,
       "norm_label": "datatable()"
     },
     {
@@ -6516,7 +6725,7 @@
       "heat": 0.009,
       "owner": "unowned",
       "id": "primitives_grid",
-      "community": 5,
+      "community": 2,
       "norm_label": "grid()"
     },
     {
@@ -6532,7 +6741,7 @@
       "heat": 0.039,
       "owner": "unowned",
       "id": "primitives_split",
-      "community": 5,
+      "community": 2,
       "norm_label": "split()"
     },
     {
@@ -6545,10 +6754,10 @@
       "loc": 7,
       "level": 3,
       "granularity": "low",
-      "heat": 0.01,
+      "heat": 0.009,
       "owner": "unowned",
       "id": "primitives_searchbox",
-      "community": 5,
+      "community": 2,
       "norm_label": "searchbox()"
     }
   ],
@@ -6557,7 +6766,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_app_jsx",
       "_tgt": "app_pages",
@@ -6569,7 +6778,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L19",
+      "source_location": "L27",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_app_jsx",
       "_tgt": "app_routed",
@@ -6581,7 +6790,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\App.jsx",
-      "source_location": "L48",
+      "source_location": "L59",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_app_jsx",
       "_tgt": "app_app",
@@ -6629,7 +6838,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L8",
+      "source_location": "L25",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_demo_password",
@@ -6641,7 +6850,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L9",
+      "source_location": "L26",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_demo_code",
@@ -6653,7 +6862,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L10",
+      "source_location": "L27",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_grades",
@@ -6665,7 +6874,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L138",
+      "source_location": "L417",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_pwrules",
@@ -6677,7 +6886,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L19",
+      "source_location": "L49",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_emailok",
@@ -6689,7 +6898,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L22",
+      "source_location": "L52",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_flows",
@@ -6701,7 +6910,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L85",
+      "source_location": "L256",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_authscreen",
@@ -6713,7 +6922,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L126",
+      "source_location": "L393",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_passwordinput",
@@ -6725,7 +6934,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L148",
+      "source_location": "L430",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_signin",
@@ -6737,7 +6946,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L192",
+      "source_location": "L523",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_twofactor",
@@ -6749,7 +6958,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L254",
+      "source_location": "L623",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_forgot",
@@ -6761,7 +6970,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L268",
+      "source_location": "L651",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_reset",
@@ -6773,7 +6982,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L284",
+      "source_location": "L686",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_status",
@@ -6785,7 +6994,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L295",
+      "source_location": "L708",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_accounttype",
@@ -6797,7 +7006,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\auth\\AuthScreen.jsx",
-      "source_location": "L320",
+      "source_location": "L743",
       "weight": 1.0,
       "_src": "c_users_hp_desktop_taqat_school_src_auth_authscreen_jsx",
       "_tgt": "authscreen_wizard",
@@ -7040,8 +7249,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\shell\\AppShell.jsx",
       "source_location": "L110",
       "weight": 1.0,
-      "_src": "appshell_appshell",
-      "_tgt": "nav_pagelabel",
+      "_src": "nav_pagelabel",
+      "_tgt": "appshell_appshell",
       "source": "nav_pagelabel",
       "target": "appshell_appshell"
     },
@@ -7460,8 +7669,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\i18n\\index.jsx",
       "source_location": "L65",
       "weight": 1.0,
-      "_src": "index_lookup",
-      "_tgt": "questions_match",
+      "_src": "questions_match",
+      "_tgt": "index_lookup",
       "source": "questions_match",
       "target": "index_lookup"
     },
@@ -7472,8 +7681,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\i18n\\index.jsx",
       "source_location": "L99",
       "weight": 1.0,
-      "_src": "index_translate",
-      "_tgt": "questions_match",
+      "_src": "questions_match",
+      "_tgt": "index_translate",
       "source": "questions_match",
       "target": "index_translate"
     },
@@ -7556,8 +7765,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Attendance.jsx",
       "source_location": "L16",
       "weight": 1.0,
-      "_src": "attendance_schoolattendance",
-      "_tgt": "seed_datekey",
+      "_src": "seed_datekey",
+      "_tgt": "attendance_schoolattendance",
       "source": "seed_datekey",
       "target": "attendance_schoolattendance"
     },
@@ -7568,8 +7777,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Home.jsx",
       "source_location": "L18",
       "weight": 1.0,
-      "_src": "home_schoolhome",
-      "_tgt": "seed_datekey",
+      "_src": "seed_datekey",
+      "_tgt": "home_schoolhome",
       "source": "seed_datekey",
       "target": "home_schoolhome"
     },
@@ -7580,8 +7789,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\teacher\\Attendance.jsx",
       "source_location": "L19",
       "weight": 1.0,
-      "_src": "attendance_attendancepage",
-      "_tgt": "seed_datekey",
+      "_src": "seed_datekey",
+      "_tgt": "attendance_attendancepage",
       "source": "seed_datekey",
       "target": "attendance_attendancepage"
     },
@@ -7616,8 +7825,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L20",
       "weight": 1.0,
-      "_src": "storeprovider_load",
-      "_tgt": "seed_createseed",
+      "_src": "seed_createseed",
+      "_tgt": "storeprovider_load",
       "source": "seed_createseed",
       "target": "storeprovider_load"
     },
@@ -7628,8 +7837,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L40",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "seed_createseed",
+      "_src": "seed_createseed",
+      "_tgt": "storeprovider_reducer",
       "source": "seed_createseed",
       "target": "storeprovider_reducer"
     },
@@ -7952,8 +8161,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\lib\\format.js",
       "source_location": "L3",
       "weight": 1.0,
-      "_src": "format_loc",
-      "_tgt": "index_getlang",
+      "_src": "index_getlang",
+      "_tgt": "format_loc",
       "source": "index_getlang",
       "target": "format_loc"
     },
@@ -7964,8 +8173,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\lib\\format.js",
       "source_location": "L60",
       "weight": 1.0,
-      "_src": "format_initials",
-      "_tgt": "index_getlang",
+      "_src": "index_getlang",
+      "_tgt": "format_initials",
       "source": "index_getlang",
       "target": "format_initials"
     },
@@ -8060,8 +8269,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\lib\\format.js",
       "source_location": "L60",
       "weight": 1.0,
-      "_src": "format_initials",
-      "_tgt": "index_translate",
+      "_src": "index_translate",
+      "_tgt": "format_initials",
       "source": "index_translate",
       "target": "format_initials"
     },
@@ -8120,8 +8329,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\i18n\\LangToggle.jsx",
       "source_location": "L6",
       "weight": 1.0,
-      "_src": "langtoggle_langtoggle",
-      "_tgt": "index_uselang",
+      "_src": "index_uselang",
+      "_tgt": "langtoggle_langtoggle",
       "source": "index_uselang",
       "target": "langtoggle_langtoggle"
     },
@@ -8132,8 +8341,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\i18n\\LangToggle.jsx",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "langtoggle_langsegmented",
-      "_tgt": "index_uselang",
+      "_src": "index_uselang",
+      "_tgt": "langtoggle_langsegmented",
       "source": "index_uselang",
       "target": "langtoggle_langsegmented"
     },
@@ -8144,8 +8353,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\ui\\Brand.jsx",
       "source_location": "L32",
       "weight": 1.0,
-      "_src": "brand_wordmark",
-      "_tgt": "index_uselang",
+      "_src": "index_uselang",
+      "_tgt": "brand_wordmark",
       "source": "index_uselang",
       "target": "brand_wordmark"
     },
@@ -8588,8 +8797,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\parent\\Privacy.jsx",
       "source_location": "L21",
       "weight": 1.0,
-      "_src": "privacy_privacypage",
-      "_tgt": "format_fmtdate",
+      "_src": "format_fmtdate",
+      "_tgt": "privacy_privacypage",
       "source": "format_fmtdate",
       "target": "privacy_privacypage"
     },
@@ -8600,8 +8809,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Licenses.jsx",
       "source_location": "L26",
       "weight": 1.0,
-      "_src": "licenses_licensespage",
-      "_tgt": "format_fmtdate",
+      "_src": "format_fmtdate",
+      "_tgt": "licenses_licensespage",
       "source": "format_fmtdate",
       "target": "licenses_licensespage"
     },
@@ -8612,8 +8821,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\parent\\Home.jsx",
       "source_location": "L26",
       "weight": 1.0,
-      "_src": "home_parenthome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_parenthome",
       "source": "format_fmtlongdate",
       "target": "home_parenthome"
     },
@@ -8624,8 +8833,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\parent\\Reports.jsx",
       "source_location": "L42",
       "weight": 1.0,
-      "_src": "reports_parentreports",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "reports_parentreports",
       "source": "format_fmtlongdate",
       "target": "reports_parentreports"
     },
@@ -8636,8 +8845,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Attendance.jsx",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "attendance_schoolattendance",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "attendance_schoolattendance",
       "source": "format_fmtlongdate",
       "target": "attendance_schoolattendance"
     },
@@ -8648,8 +8857,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Home.jsx",
       "source_location": "L28",
       "weight": 1.0,
-      "_src": "home_schoolhome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_schoolhome",
       "source": "format_fmtlongdate",
       "target": "home_schoolhome"
     },
@@ -8660,8 +8869,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Reports.jsx",
       "source_location": "L43",
       "weight": 1.0,
-      "_src": "reports_schoolreports",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "reports_schoolreports",
       "source": "format_fmtlongdate",
       "target": "reports_schoolreports"
     },
@@ -8672,8 +8881,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Home.jsx",
       "source_location": "L48",
       "weight": 1.0,
-      "_src": "home_studenthome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_studenthome",
       "source": "format_fmtlongdate",
       "target": "home_studenthome"
     },
@@ -8684,8 +8893,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\supervisor\\Home.jsx",
       "source_location": "L23",
       "weight": 1.0,
-      "_src": "home_supervisorhome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_supervisorhome",
       "source": "format_fmtlongdate",
       "target": "home_supervisorhome"
     },
@@ -8696,8 +8905,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\supervisor\\Reports.jsx",
       "source_location": "L37",
       "weight": 1.0,
-      "_src": "reports_supervisorreports",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "reports_supervisorreports",
       "source": "format_fmtlongdate",
       "target": "reports_supervisorreports"
     },
@@ -8708,8 +8917,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\system\\Home.jsx",
       "source_location": "L19",
       "weight": 1.0,
-      "_src": "home_systemhome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_systemhome",
       "source": "format_fmtlongdate",
       "target": "home_systemhome"
     },
@@ -8720,8 +8929,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\teacher\\Attendance.jsx",
       "source_location": "L35",
       "weight": 1.0,
-      "_src": "attendance_attendancepage",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "attendance_attendancepage",
       "source": "format_fmtlongdate",
       "target": "attendance_attendancepage"
     },
@@ -8732,8 +8941,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\teacher\\Home.jsx",
       "source_location": "L29",
       "weight": 1.0,
-      "_src": "home_teacherhome",
-      "_tgt": "format_fmtlongdate",
+      "_src": "format_fmtlongdate",
+      "_tgt": "home_teacherhome",
       "source": "format_fmtlongdate",
       "target": "home_teacherhome"
     },
@@ -8744,8 +8953,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Home.jsx",
       "source_location": "L40",
       "weight": 1.0,
-      "_src": "home_schoolhome",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "home_schoolhome",
       "source": "format_fmtnum",
       "target": "home_schoolhome"
     },
@@ -8756,8 +8965,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\school\\Licenses.jsx",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "licenses_licensespage",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "licenses_licensespage",
       "source": "format_fmtnum",
       "target": "licenses_licensespage"
     },
@@ -8768,8 +8977,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\supervisor\\Home.jsx",
       "source_location": "L27",
       "weight": 1.0,
-      "_src": "home_supervisorhome",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "home_supervisorhome",
       "source": "format_fmtnum",
       "target": "home_supervisorhome"
     },
@@ -8780,8 +8989,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\system\\Ai.jsx",
       "source_location": "L25",
       "weight": 1.0,
-      "_src": "ai_aipage",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "ai_aipage",
       "source": "format_fmtnum",
       "target": "ai_aipage"
     },
@@ -8792,8 +9001,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\system\\Billing.jsx",
       "source_location": "L20",
       "weight": 1.0,
-      "_src": "billing_billingpage",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "billing_billingpage",
       "source": "format_fmtnum",
       "target": "billing_billingpage"
     },
@@ -8804,8 +9013,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\system\\Home.jsx",
       "source_location": "L28",
       "weight": 1.0,
-      "_src": "home_systemhome",
-      "_tgt": "format_fmtnum",
+      "_src": "format_fmtnum",
+      "_tgt": "home_systemhome",
       "source": "format_fmtnum",
       "target": "home_systemhome"
     },
@@ -8816,8 +9025,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\lib\\grading.js",
       "source_location": "L38",
       "weight": 1.0,
-      "_src": "grading_aigradeessay",
-      "_tgt": "format_min",
+      "_src": "format_min",
+      "_tgt": "grading_aigradeessay",
       "source": "format_min",
       "target": "grading_aigradeessay"
     },
@@ -8828,8 +9037,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\lib\\rng.js",
       "source_location": "L31",
       "weight": 1.0,
-      "_src": "rng_clamp",
-      "_tgt": "format_min",
+      "_src": "format_min",
+      "_tgt": "rng_clamp",
       "source": "format_min",
       "target": "rng_clamp"
     },
@@ -8840,8 +9049,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\ui\\Charts.jsx",
       "source_location": "L15",
       "weight": 1.0,
-      "_src": "charts_ring",
-      "_tgt": "format_min",
+      "_src": "format_min",
+      "_tgt": "charts_ring",
       "source": "format_min",
       "target": "charts_ring"
     },
@@ -8852,8 +9061,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\ui\\Charts.jsx",
       "source_location": "L140",
       "weight": 1.0,
-      "_src": "charts_spark",
-      "_tgt": "format_min",
+      "_src": "format_min",
+      "_tgt": "charts_spark",
       "source": "format_min",
       "target": "charts_spark"
     },
@@ -8864,8 +9073,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\ui\\Primitives.jsx",
       "source_location": "L184",
       "weight": 1.0,
-      "_src": "primitives_progress",
-      "_tgt": "format_min",
+      "_src": "format_min",
+      "_tgt": "primitives_progress",
       "source": "format_min",
       "target": "primitives_progress"
     },
@@ -8876,8 +9085,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Home.jsx",
       "source_location": "L65",
       "weight": 1.0,
-      "_src": "home_studenthome",
-      "_tgt": "format_timeago",
+      "_src": "format_timeago",
+      "_tgt": "home_studenthome",
       "source": "format_timeago",
       "target": "home_studenthome"
     },
@@ -8900,8 +9109,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Home.jsx",
       "source_location": "L140",
       "weight": 1.0,
-      "_src": "home_studenthome",
-      "_tgt": "format_relativeday",
+      "_src": "format_relativeday",
+      "_tgt": "home_studenthome",
       "source": "format_relativeday",
       "target": "home_studenthome"
     },
@@ -8912,8 +9121,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\ui\\Primitives.jsx",
       "source_location": "L192",
       "weight": 1.0,
-      "_src": "primitives_avatar",
-      "_tgt": "format_initials",
+      "_src": "format_initials",
+      "_tgt": "primitives_avatar",
       "source": "format_initials",
       "target": "primitives_avatar"
     },
@@ -8924,8 +9133,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\parent\\Child.jsx",
       "source_location": "L33",
       "weight": 1.0,
-      "_src": "child_childpage",
-      "_tgt": "format_levellabel",
+      "_src": "format_levellabel",
+      "_tgt": "child_childpage",
       "source": "format_levellabel",
       "target": "child_childpage"
     },
@@ -8936,8 +9145,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Assess.jsx",
       "source_location": "L218",
       "weight": 1.0,
-      "_src": "assess_resultview",
-      "_tgt": "format_levellabel",
+      "_src": "format_levellabel",
+      "_tgt": "assess_resultview",
       "source": "format_levellabel",
       "target": "assess_resultview"
     },
@@ -8948,8 +9157,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Progress.jsx",
       "source_location": "L43",
       "weight": 1.0,
-      "_src": "progress_overview",
-      "_tgt": "format_levellabel",
+      "_src": "format_levellabel",
+      "_tgt": "progress_overview",
       "source": "format_levellabel",
       "target": "progress_overview"
     },
@@ -8960,8 +9169,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\teacher\\Classes.jsx",
       "source_location": "L112",
       "weight": 1.0,
-      "_src": "classes_studentsheet",
-      "_tgt": "format_levellabel",
+      "_src": "format_levellabel",
+      "_tgt": "classes_studentsheet",
       "source": "format_levellabel",
       "target": "classes_studentsheet"
     },
@@ -9116,8 +9325,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\student\\Assess.jsx",
       "source_location": "L196",
       "weight": 1.0,
-      "_src": "assess_buildattempt",
-      "_tgt": "grading_scoreattempt",
+      "_src": "grading_scoreattempt",
+      "_tgt": "assess_buildattempt",
       "source": "grading_scoreattempt",
       "target": "assess_buildattempt"
     },
@@ -9164,8 +9373,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L154",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "grading_generatefromlesson",
+      "_src": "grading_generatefromlesson",
+      "_tgt": "storeprovider_reducer",
       "source": "grading_generatefromlesson",
       "target": "storeprovider_reducer"
     },
@@ -9296,8 +9505,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\shell\\SettingsDialog.jsx",
       "source_location": "L11",
       "weight": 1.0,
-      "_src": "settingsdialog_loadprefs",
-      "_tgt": "router_parse",
+      "_src": "router_parse",
+      "_tgt": "settingsdialog_loadprefs",
       "source": "router_parse",
       "target": "settingsdialog_loadprefs"
     },
@@ -9308,10 +9517,154 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L14",
       "weight": 1.0,
-      "_src": "storeprovider_load",
-      "_tgt": "router_parse",
+      "_src": "router_parse",
+      "_tgt": "storeprovider_load",
       "source": "router_parse",
       "target": "storeprovider_load"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_trust_points",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_trust_points",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_role_icons",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_role_icons",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_role_order",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_role_order",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L55",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_how_steps",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_how_steps",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_compare_rows",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_compare_rows",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_feature_engines",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_feature_engines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L186",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_roadmap",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_roadmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L214",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_pricing",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_pricing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L249",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_demo_labels",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_demo_labels",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L258",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_landing",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_landing",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L592",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_sectionhead",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_sectionhead",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\marketing\\Landing.jsx",
+      "source_location": "L602",
+      "weight": 1.0,
+      "_src": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "_tgt": "landing_securityitem",
+      "source": "c_users_hp_desktop_taqat_school_src_marketing_landing_jsx",
+      "target": "landing_securityitem",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -10304,8 +10657,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\roles\\supervisor\\Quality.jsx",
       "source_location": "L65",
       "weight": 1.0,
-      "_src": "quality_reviewform",
-      "_tgt": "assess_correcttext",
+      "_src": "assess_correcttext",
+      "_tgt": "quality_reviewform",
       "source": "assess_correcttext",
       "target": "quality_reviewform"
     },
@@ -13772,8 +14125,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L70",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_lessonof",
+      "_src": "selectors_lessonof",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_lessonof",
       "target": "storeprovider_reducer"
     },
@@ -13796,8 +14149,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L70",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_unitof",
+      "_src": "selectors_unitof",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_unitof",
       "target": "storeprovider_reducer"
     },
@@ -13808,8 +14161,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L70",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_objectiveof",
+      "_src": "selectors_objectiveof",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_objectiveof",
       "target": "storeprovider_reducer"
     },
@@ -13868,8 +14221,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L46",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_studentof",
+      "_src": "selectors_studentof",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_studentof",
       "target": "storeprovider_reducer"
     },
@@ -13892,8 +14245,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L154",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_lessonsinunit",
+      "_src": "selectors_lessonsinunit",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_lessonsinunit",
       "target": "storeprovider_reducer"
     },
@@ -13904,8 +14257,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L28",
       "weight": 1.0,
-      "_src": "storeprovider_audit",
-      "_tgt": "selectors_username",
+      "_src": "selectors_username",
+      "_tgt": "storeprovider_audit",
       "source": "selectors_username",
       "target": "storeprovider_audit"
     },
@@ -13916,8 +14269,8 @@
       "source_file": "C:\\Users\\hp\\Desktop\\taqat_school\\src\\store\\StoreProvider.jsx",
       "source_location": "L236",
       "weight": 1.0,
-      "_src": "storeprovider_reducer",
-      "_tgt": "selectors_username",
+      "_src": "selectors_username",
+      "_tgt": "storeprovider_reducer",
       "source": "selectors_username",
       "target": "storeprovider_reducer"
     },

@@ -1,18 +1,18 @@
 # Community 13
 
-> 9 nodes · cohesion 0.25
+> 9 nodes · cohesion 0.28
 
 ## Key Concepts
 
-- [Assess.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L1) (8 connections)
-- [levelLabel()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js#L68) (5 connections)
-- [QuizRunner()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L121) (3 connections)
-- [buildAttempt()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L194) (2 connections)
-- [fmtClock()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L118) (2 connections)
-- [ResultView()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L205) (2 connections)
-- [scoreAttempt()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L42) (2 connections)
-- [answerText()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L15) (1 connections)
-- [LETTERS](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L10) (1 connections)
+- [Messages()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L25) (8 connections)
+- [PrivacyPage()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx#L10) (5 connections)
+- [childrenOf()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L245) (4 connections)
+- [unreadThreads()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L236) (4 connections)
+- [recipientsFor()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L10) (3 connections)
+- [myThreads()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L234) (3 connections)
+- [Messages.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L1) (2 connections)
+- [myAnnouncements()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L241) (2 connections)
+- [Privacy.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx#L1) (1 connections)
 
 ## Relationships
 
@@ -20,14 +20,14 @@
 
 ## Source Files
 
-- [C:\Users\hp\Desktop\taqat_school\src\lib\format.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js)
-- [C:\Users\hp\Desktop\taqat_school\src\lib\grading.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\student\Assess.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Privacy.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\roles\shared\Messages.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\store\selectors.js](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js)
 
 ## Audit Trail
 
-- EXTRACTED: 18 (69%)
-- INFERRED: 8 (31%)
+- EXTRACTED: 14 (44%)
+- INFERRED: 18 (56%)
 - AMBIGUOUS: 0 (0%)
 
 ---

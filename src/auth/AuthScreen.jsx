@@ -21,6 +21,7 @@ import { Wordmark } from "../ui/Brand";
 import { Btn, Field, Input, Select, Notice, Badge } from "../ui/Primitives";
 import { DEMO_ACCOUNTS, ROLES } from "../data/people";
 import { LangToggle } from "../i18n/LangToggle";
+import { useStore } from "../store/StoreProvider";
 
 const DEMO_PASSWORD = "password";
 const DEMO_CODE = "123456";
@@ -54,13 +55,13 @@ const FLOWS = {
     title: "تسجيل طالب",
     steps: [
       {
-        title: "سياق المدرسة",
-        desc: "يُقبل التسجيل ضمن مدرسة معتمدة وبعلاقة وليّ أمر؛ ولا يُعتمد رقم مدرسة منفرد.",
+        title: "بيانات إضافية",
+        desc: "التسجيل الفردي متاح دون الانتماء لمدرسة؛ إن كان لديك رمز دعوة من مدرسة يمكنك إدخاله.",
         fields: [
           {
             k: "school",
-            label: "رمز المدرسة أو الدعوة",
-            req: true,
+            label: "رمز الدعوة (اختياري)",
+            req: false,
             ph: "مثال: AFAQ-2026",
           },
           {
@@ -107,7 +108,7 @@ const FLOWS = {
     ],
     done: {
       title: "وصل طلب التسجيل",
-      body: "أُنشئ ملف الطالب وهو بانتظار اعتماد المدرسة وموافقة وليّ الأمر قبل تفعيل الدخول.",
+      body: "أُنشئ ملف الطالب وهو بانتظار موافقة وليّ الأمر (واعتماد المدرسة إن وُجد رمز دعوة) قبل تفعيل الدخول.",
       tone: "success",
     },
   },
@@ -142,18 +143,6 @@ const FLOWS = {
         kids: true,
       },
       {
-        title: "المدرسة",
-        desc: "تُؤخذ المدرسة من سياق تسجيل معتمد ويُتحقَّق من الصف عليها.",
-        fields: [
-          {
-            k: "school",
-            label: "رمز المدرسة أو الدعوة",
-            req: true,
-            ph: "مثال: AFAQ-2026",
-          },
-        ],
-      },
-      {
         title: "المراجعة والموافقات",
         review: true,
         consents: [
@@ -167,7 +156,7 @@ const FLOWS = {
     ],
     done: {
       title: "أُنشئ حسابك بنجاح",
-      body: "أُنشئت علاقة وليّ الأمر بالطلاب ضمن سياق المدرسة المعتمد. يمكنك تسجيل الدخول الآن.",
+      body: "أُنشئت علاقة وليّ الأمر بالطلاب. يمكنك تسجيل الدخول الآن.",
       tone: "success",
     },
   },
@@ -254,6 +243,7 @@ const FLOWS = {
 };
 
 export default function AuthScreen({ onLogin, onBack }) {
+  const { dispatch } = useStore();
   const [screen, setScreen] = useState("signin");
   const [flow, setFlow] = useState(null);
   const [pending, setPending] = useState(null); // الحساب بانتظار 2FA
@@ -371,7 +361,12 @@ export default function AuthScreen({ onLogin, onBack }) {
             <Wizard
               flowId={flow}
               onBack={() => setScreen("type")}
-              onDone={() => setScreen("done")}
+              onDone={(vals) => {
+                if (flow === "teacher") {
+                  dispatch({ type: "addUser", user: { name: vals.name, email: vals.email, role: "teacher", status: "بانتظار الاعتماد" }, actor: "self-signup" });
+                }
+                setScreen("done");
+              }}
             />
           )}
           {screen === "done" && (
@@ -776,7 +771,7 @@ function Wizard({ flowId, onBack, onDone }) {
   };
   const next = () => {
     if (!validate()) return;
-    if (step === flow.steps.length - 1) onDone();
+    if (step === flow.steps.length - 1) onDone(vals);
     else setStep(step + 1);
   };
   const prev = () => (step === 0 ? onBack() : setStep(step - 1));

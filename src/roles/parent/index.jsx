@@ -5,13 +5,13 @@ import ParentReports from "./Reports";
 import PrivacyPage from "./Privacy";
 import Messages from "../shared/Messages";
 
-export default function ParentPages({ page, go }) {
+export default function ParentPages({ page, param, go }) {
   switch (page) {
     case "child": return <ChildPage go={go} />;
     case "attendance": return <ParentAttendance />;
     case "reports": return <ParentReports />;
     case "privacy": return <PrivacyPage />;
-    case "messages": return <Messages go={go} />;
+    case "messages": return <Messages param={param} go={go} />;
     default: return <ParentHome go={go} />;
   }
 }

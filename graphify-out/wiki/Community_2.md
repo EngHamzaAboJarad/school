@@ -1,35 +1,35 @@
 # Community 2
 
-> 34 nodes · cohesion 0.09
+> 36 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [index.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L1) (26 connections)
-- [questions.js](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L1) (8 connections)
-- [translate()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L97) (7 connections)
-- [base()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L4) (6 connections)
-- [lookup()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L59) (5 connections)
-- [translateNode()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L115) (4 connections)
-- [walk()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L133) (4 connections)
-- [match()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L10) (4 connections)
-- [skipped()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L113) (3 connections)
-- [startTranslator()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L144) (3 connections)
-- [fill()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L51) (2 connections)
-- [register()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L31) (2 connections)
-- [t()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L107) (2 connections)
-- [essay()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L11) (2 connections)
-- [fill()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L9) (2 connections)
-- [mcq()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L7) (2 connections)
-- [tf()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L8) (2 connections)
-- [AR](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L12) (1 connections)
-- [ATTRS](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L110) (1 connections)
-- [cache](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L49) (1 connections)
-- [CAP](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L30) (1 connections)
-- [Ctx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L168) (1 connections)
-- [current](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L21) (1 connections)
-- [escapeRe()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L25) (1 connections)
-- [exact](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L27) (1 connections)
-- *... and 9 more nodes in this community*
+- [cx()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L6) (26 connections)
+- [Primitives.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L1) (23 connections)
+- [Split()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L273) (11 connections)
+- [Assess.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L1) (8 connections)
+- [QuestionView()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L24) (4 connections)
+- [ReviewForm()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/supervisor/Quality.jsx#L53) (4 connections)
+- [correctText()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L12) (3 connections)
+- [QuizRunner()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L121) (3 connections)
+- [Quality.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/supervisor/Quality.jsx#L1) (3 connections)
+- [Avatar()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L189) (3 connections)
+- [Progress()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L181) (3 connections)
+- [fmtClock()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L118) (2 connections)
+- [ResultView()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L205) (2 connections)
+- [Badge()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L76) (2 connections)
+- [Btn()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L8) (2 connections)
+- [Card()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L38) (2 connections)
+- [DataTable()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L242) (2 connections)
+- [Field()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L149) (2 connections)
+- [Grid()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L272) (2 connections)
+- [Input()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L160) (2 connections)
+- [ListRow()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L210) (2 connections)
+- [Modal()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L115) (2 connections)
+- [Notice()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L229) (2 connections)
+- [Page()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L18) (2 connections)
+- [Segmented()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx#L100) (2 connections)
+- *... and 11 more nodes in this community*
 
 ## Relationships
 
@@ -37,13 +37,14 @@
 
 ## Source Files
 
-- [C:\Users\hp\Desktop\taqat_school\src\data\questions.js](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js)
-- [C:\Users\hp\Desktop\taqat_school\src\i18n\index.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\roles\student\Assess.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\roles\supervisor\Quality.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/supervisor/Quality.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\ui\Primitives.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Primitives.jsx)
 
 ## Audit Trail
 
-- EXTRACTED: 94 (93%)
-- INFERRED: 7 (7%)
+- EXTRACTED: 111 (82%)
+- INFERRED: 25 (18%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -1,20 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Bell, Check, ChevronDown, LogOut, Menu, Search, Settings, X, Repeat, ArrowLeft } from "lucide-react";
+import { Bell, Check, ChevronDown, LogOut, Menu, Search, Settings, X, ArrowLeft } from "lucide-react";
 import { NAV, flatNav, pageLabel } from "../data/nav";
-import { ROLES, DEMO_ACCOUNTS } from "../data/people";
+import { ROLES } from "../data/people";
 import { Wordmark } from "../ui/Brand";
 import { Avatar, cx } from "../ui/Primitives";
 import { useStore } from "../store/StoreProvider";
-import { myNotifications, unreadThreads, pendingReviews, essayQueue, allLessons, allStudents } from "../store/selectors";
+import { myNotifications, unreadThreads, pendingReviews, essayQueue, allLessons, allStudents, pendingEnrollmentsForTeacher, avatarOf } from "../store/selectors";
 import { timeAgo } from "../lib/format";
 import { normalizeAr } from "../lib/rng";
 import SettingsDialog from "./SettingsDialog";
 import { LangToggle } from "../i18n/LangToggle";
-import { useToast } from "../ui/Brand";
 
 export default function AppShell({ page, go, children }) {
   const { state, dispatch, user } = useStore();
-  const toast = useToast();
   const [drawer, setDrawer] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -29,8 +27,10 @@ export default function AppShell({ page, go, children }) {
     if (role === "teacher") {
       b.review = pendingReviews(state, user.id).filter((r) => r.status === "pending").length;
       b.grading = essayQueue(state, user.id).filter((e) => !e.essay.final).length;
+      b.enrollments = pendingEnrollmentsForTeacher(state, user.id).length;
     }
-    if (role === "school") b.users = state.directory.filter((d) => d.status === "بانتظار الاعتماد").length;
+    if (role === "school") b.users = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role !== "teacher").length;
+    if (role === "system") b.teacherRequests = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role === "teacher").length;
     return b;
   }, [state, user.id, role]);
 
@@ -48,14 +48,6 @@ export default function AppShell({ page, go, children }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  const switchRole = (r) => {
-    const acc = DEMO_ACCOUNTS.find((a) => a.role === r);
-    dispatch({ type: "login", userId: acc.userId, role: r });
-    setProfileOpen(false);
-    go("home");
-    toast(`عرض تجريبي: واجهة ${ROLES[r].long}`, "info");
-  };
 
   const openNotif = (n) => {
     dispatch({ type: "readNotif", id: n.id });
@@ -126,19 +118,26 @@ export default function AppShell({ page, go, children }) {
                 <div className="popover notif-pop">
                   <div className="pop-head">
                     <strong>الإشعارات</strong>
-                    <button className="btn-link small" onClick={() => dispatch({ type: "readAllNotifs", user })}>تعليم الكل كمقروء</button>
+                    <button className="btn-link small" disabled={unread === 0} onClick={() => dispatch({ type: "readAllNotifs", user })}>تعليم الكل كمقروء</button>
                   </div>
                   <div className="pop-list">
                     {notifs.length === 0 && <p className="muted pop-empty">لا توجد إشعارات.</p>}
                     {notifs.slice(0, 8).map((n) => (
-                      <button key={n.id} className={cx("notif", !n.read && "unread")} onClick={() => openNotif(n)}>
-                        <i className={`nt-${n.tone}`} />
-                        <div>
-                          <strong>{n.title}</strong>
-                          <span>{n.body}</span>
-                          <small>{timeAgo(n.at)}</small>
-                        </div>
-                      </button>
+                      <div key={n.id} className={cx("notif", !n.read && "unread")}>
+                        <button className="notif-open" onClick={() => openNotif(n)}>
+                          <i className={`nt-${n.tone}`} />
+                          <div>
+                            <strong>{n.title}</strong>
+                            <span>{n.body}</span>
+                            <small>{timeAgo(n.at)}</small>
+                          </div>
+                        </button>
+                        {!n.read && (
+                          <button className="notif-mark" aria-label="تعليم كمقروء" onClick={() => dispatch({ type: "readNotif", id: n.id })}>
+                            <Check size={14} />
+                          </button>
+                        )}
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -146,7 +145,7 @@ export default function AppShell({ page, go, children }) {
             </div>
             <div className="popwrap">
               <button className="profile" onClick={() => { setProfileOpen(!profileOpen); setNotifOpen(false); }} aria-expanded={profileOpen}>
-                <Avatar name={user.name} size={38} tone="gold" />
+                <Avatar name={user.name} src={avatarOf(state, user.id)} size={38} tone="gold" />
                 <div>
                   <strong>{user.name}</strong>
                   <small>{ROLES[role].long}</small>
@@ -157,12 +156,6 @@ export default function AppShell({ page, go, children }) {
                 <div className="popover profile-pop">
                   <div className="pop-head"><strong>{user.name}</strong><small className="muted">{user.email}</small></div>
                   <button className="pop-item" onClick={() => { setSettingsOpen(true); setProfileOpen(false); }}><Settings size={16} /> الإعدادات والأمان</button>
-                  <div className="pop-sep">تبديل الدور <em>(عرض تجريبي)</em></div>
-                  {Object.values(ROLES).map((r) => (
-                    <button key={r.id} className={cx("pop-item", r.id === role && "current")} onClick={() => switchRole(r.id)}>
-                      <Repeat size={15} /> {r.long} {r.id === role && <Check size={15} />}
-                    </button>
-                  ))}
                   <div className="pop-sep" />
                   <button className="pop-item danger" onClick={() => dispatch({ type: "logout" })}><LogOut size={16} /> تسجيل الخروج</button>
                 </div>

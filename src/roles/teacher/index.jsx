@@ -7,9 +7,11 @@ import GradingPage from "./Grading";
 import AssignmentsPage from "./Assignments";
 import PerformancePage from "./Performance";
 import AttendancePage from "./Attendance";
+import EnrollmentsPage from "./Enrollments";
+import FinancePage from "./Finance";
 import Messages from "../shared/Messages";
 
-export default function TeacherPages({ page, go }) {
+export default function TeacherPages({ page, param, go }) {
   switch (page) {
     case "classes": return <ClassesPage go={go} />;
     case "performance": return <PerformancePage />;
@@ -19,7 +21,9 @@ export default function TeacherPages({ page, go }) {
     case "grading": return <GradingPage />;
     case "assignments": return <AssignmentsPage />;
     case "attendance": return <AttendancePage />;
-    case "messages": return <Messages go={go} />;
+    case "enrollments": return <EnrollmentsPage />;
+    case "finance": return <FinancePage />;
+    case "messages": return <Messages param={param} go={go} />;
     default: return <TeacherHome go={go} />;
   }
 }

@@ -2,27 +2,27 @@
   "hotspots": [
     {
       "label": "createSeed()",
-      "risk": 0.592,
+      "risk": 0.574,
       "type": "FUNCTION"
     },
     {
       "label": "reducer()",
-      "risk": 0.478,
+      "risk": 0.457,
       "type": "FUNCTION"
     },
     {
       "label": "Wizard()",
-      "risk": 0.221,
+      "risk": 0.312,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "Landing()",
+      "risk": 0.209,
       "type": "FUNCTION"
     },
     {
       "label": "StudentHome()",
-      "risk": 0.219,
-      "type": "FUNCTION"
-    },
-    {
-      "label": "AppShell()",
-      "risk": 0.205,
+      "risk": 0.209,
       "type": "FUNCTION"
     }
   ],

@@ -1,35 +1,35 @@
 # Community 4
 
-> 30 nodes · cohesion 0.10
+> 32 nodes · cohesion 0.08
 
 ## Key Concepts
 
-- [fmtLongDate()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js#L8) (13 connections)
-- [StudentHome()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Home.jsx#L15) (12 connections)
-- [snapshot()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L60) (11 connections)
-- [ParentHome()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Home.jsx#L10) (10 connections)
-- [ParentReports()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Reports.jsx#L13) (8 connections)
-- [ChildPage()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Child.jsx#L12) (7 connections)
-- [recommendation()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L83) (7 connections)
-- [useChild()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/shared.jsx#L7) (7 connections)
-- [AttendancePage()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/teacher/Attendance.jsx#L13) (6 connections)
-- [assignmentsForStudent()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L129) (6 connections)
-- [attendanceRate()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L194) (6 connections)
-- [ParentAttendance()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Attendance.jsx#L12) (5 connections)
-- [SchoolAttendance()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/school/Attendance.jsx#L13) (5 connections)
-- [SchoolHome()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/school/Home.jsx#L9) (5 connections)
-- [smartAlerts()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L255) (5 connections)
-- [dateKey](file:///C:/Users/hp/Desktop/taqat_school/src/data/seed.js#L14) (4 connections)
-- [classStats()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L141) (4 connections)
-- [shared.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/shared.jsx#L1) (2 connections)
-- [Home.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Home.jsx#L1) (2 connections)
-- [Attendance.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/teacher/Attendance.jsx#L1) (2 connections)
-- [classAttendanceOn()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L202) (2 connections)
-- [ATT](file:///C:/Users/hp/Desktop/taqat_school/src/roles/teacher/Attendance.jsx#L10) (1 connections)
-- [Attendance.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Attendance.jsx#L1) (1 connections)
-- [Child.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Child.jsx#L1) (1 connections)
-- [Home.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Home.jsx#L1) (1 connections)
-- *... and 5 more nodes in this community*
+- [grading.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L1) (9 connections)
+- [Charts.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L1) (8 connections)
+- [MIN](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js#L18) (6 connections)
+- [rng.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L1) (5 connections)
+- [normalizeAr()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L34) (5 connections)
+- [tokens()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L11) (4 connections)
+- [assistant.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L1) (4 connections)
+- [aiGradeEssay()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L27) (4 connections)
+- [shuffle()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L21) (4 connections)
+- [answerFromLesson()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L13) (3 connections)
+- [Ring()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L5) (3 connections)
+- [clamp()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L31) (3 connections)
+- [seeded()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L2) (3 connections)
+- [buildAttempt()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx#L194) (2 connections)
+- [masteryTone()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L3) (2 connections)
+- [Spark()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L138) (2 connections)
+- [buildUnitExam()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L72) (2 connections)
+- [generateFromLesson()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L114) (2 connections)
+- [gradeQuestion()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L4) (2 connections)
+- [scoreAttempt()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L42) (2 connections)
+- [shuffleOptions()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L108) (2 connections)
+- [updateMastery()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L62) (2 connections)
+- [hash()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L12) (2 connections)
+- [stem()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L7) (1 connections)
+- [STOP](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L4) (1 connections)
+- *... and 7 more nodes in this community*
 
 ## Relationships
 
@@ -37,23 +37,17 @@
 
 ## Source Files
 
-- [C:\Users\hp\Desktop\taqat_school\src\data\seed.js](file:///C:/Users/hp/Desktop/taqat_school/src/data/seed.js)
+- [C:\Users\hp\Desktop\taqat_school\src\lib\assistant.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js)
 - [C:\Users\hp\Desktop\taqat_school\src\lib\format.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Attendance.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Attendance.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Child.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Child.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Home.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Home.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Reports.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Reports.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\shared.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/shared.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\school\Attendance.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/school/Attendance.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\school\Home.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/school/Home.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\student\Home.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Home.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\teacher\Attendance.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/teacher/Attendance.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\store\selectors.js](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js)
+- [C:\Users\hp\Desktop\taqat_school\src\lib\grading.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js)
+- [C:\Users\hp\Desktop\taqat_school\src\lib\rng.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js)
+- [C:\Users\hp\Desktop\taqat_school\src\roles\student\Assess.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/student/Assess.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\ui\Charts.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx)
 
 ## Audit Trail
 
-- EXTRACTED: 48 (35%)
-- INFERRED: 90 (65%)
+- EXTRACTED: 62 (69%)
+- INFERRED: 28 (31%)
 - AMBIGUOUS: 0 (0%)
 
 ---
