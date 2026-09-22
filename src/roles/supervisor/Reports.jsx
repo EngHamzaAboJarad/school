@@ -42,7 +42,7 @@ export default function SupervisorReports() {
         <Card title="التقارير المجدولة" kicker="تصلك تلقائيًّا">
           {state.reportSchedules.map((r) => <ListRow key={r.id} icon={CalendarClock} tone="gold" title={r.title} meta={`${r.frequency} • ${r.channel}`} end={<Btn size="sm" variant="danger" icon={Trash2} aria-label="حذف الجدولة" onClick={() => { dispatch({ type: "removeSchedule", id: r.id }); toast("حُذفت الجدولة", "warn"); }} />} />)}
           <div className="divider" />
-          <div className="row"><Select value={freq} onChange={(e) => setFreq(e.target.value)} aria-label="التكرار"><option>أسبوعيًّا</option><option>شهريًّا</option><option>فصليًّا</option></Select>
+          <div className="row"><Select value={freq} onChange={(e) => setFreq(e.target.value)} aria-label="التكرار"><option value="أسبوعيًّا">أسبوعيًّا</option><option value="شهريًّا">شهريًّا</option><option value="فصليًّا">فصليًّا</option></Select>
             <Btn variant="ghost" icon={Plus} onClick={() => { dispatch({ type: "addSchedule", schedule: { title, frequency: freq, channel: "التطبيق + البريد" } }); toast("أُضيفت الجدولة"); }}>جدولة «{title}»</Btn></div>
         </Card>
       </Split>

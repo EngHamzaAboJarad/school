@@ -41,7 +41,9 @@ export default function Messages() {
 
   useEffect(() => {
     if (current && tab === "inbox") dispatch({ type: "readThread", threadId: current.id, userId: user.id });
-    end.current?.scrollIntoView({ block: "nearest" });
+    // نمرّر صندوق الرسائل فقط — لا الصفحة كلها — حتى لا تقفز الصفحة للأسفل عند الفتح
+    const box = end.current?.parentElement;
+    if (box) box.scrollTop = box.scrollHeight;
   }, [current?.id, current?.msgs.length, tab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const send = () => {

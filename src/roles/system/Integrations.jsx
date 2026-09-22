@@ -35,7 +35,7 @@ export default function IntegrationsPage() {
           <div className="stack"><Notice tone="warn" title="انسخ المفتاح الآن">لن يظهر كاملًا مرة أخرى بعد إغلاق النافذة.</Notice><div className="row"><code className="key big num grow">{created}</code><Btn variant="ghost" icon={Copy} onClick={() => { navigator.clipboard?.writeText(created); toast("نُسخ المفتاح"); }}>نسخ</Btn></div></div>
         ) : (
           <div className="stack"><Field label="اسم التكامل"><Input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} autoFocus /></Field>
-            <Field label="النطاق"><Select value={f.scope} onChange={(e) => setF({ ...f, scope: e.target.value })}><option>قراءة التقارير</option><option>تصدير البيانات المجمّعة</option></Select></Field></div>
+            <Field label="النطاق"><Select value={f.scope} onChange={(e) => setF({ ...f, scope: e.target.value })}><option value="قراءة التقارير">قراءة التقارير</option><option value="تصدير البيانات المجمّعة">تصدير البيانات المجمّعة</option></Select></Field></div>
         )}
       </Modal>
     </Page>

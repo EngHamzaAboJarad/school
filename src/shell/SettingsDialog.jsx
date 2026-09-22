@@ -3,6 +3,7 @@ import { LockKeyhole, Smartphone, Monitor, RotateCcw } from "lucide-react";
 import { Modal, Btn, Toggle, Segmented, Notice, Badge } from "../ui/Primitives";
 import { useToast } from "../ui/Brand";
 import { useStore } from "../store/StoreProvider";
+import { LangSegmented } from "../i18n/LangToggle";
 
 const PREFS_KEY = "taqat-prefs";
 export const loadPrefs = () => {
@@ -51,7 +52,11 @@ export default function SettingsDialog({ onClose }) {
           </div>
           <Toggle label="تباين عالٍ" hint="ألوان أوضح ونصوص أغمق" checked={prefs.contrast} onChange={(v) => update({ contrast: v })} />
           <Toggle label="الحركات والانتقالات" hint="عطّلها لتقليل الحركة" checked={prefs.motion} onChange={(v) => update({ motion: v })} />
-          <Notice tone="gold">اللغة: العربية بالاتجاه من اليمين إلى اليسار. ستتوفر لغات إضافية لاحقًا ضمن التوطين.</Notice>
+          <div>
+            <span className="field-label">اللغة</span>
+            <div className="mt-sm"><LangSegmented /></div>
+            <p className="muted small mt-sm">تتحوّل الواجهة بالكامل، ويبقى محتوى الدروس والأسئلة بالعربية لأنه منهج عربي.</p>
+          </div>
         </div>
         <div className="stack-sm">
           <h4>الأمان والجلسات</h4>

@@ -43,8 +43,8 @@ function NewTenant({ onClose }) {
       <div className="stack">
         <Field label="اسم المدرسة / الجهة"><Input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} autoFocus /></Field>
         <div className="form-grid">
-          <Field label="النوع"><Select value={f.type} onChange={(e) => setF({ ...f, type: e.target.value })}><option>مدرسة (B2B)</option><option>جهة (B2G)</option></Select></Field>
-          <Field label="الباقة"><Select value={f.plan} onChange={(e) => setF({ ...f, plan: e.target.value })}><option>تجريبي</option><option>مدرسي</option><option>مؤسسي</option></Select></Field>
+          <Field label="النوع"><Select value={f.type} onChange={(e) => setF({ ...f, type: e.target.value })}><option value="مدرسة (B2B)">مدرسة (B2B)</option><option value="جهة (B2G)">جهة (B2G)</option></Select></Field>
+          <Field label="الباقة"><Select value={f.plan} onChange={(e) => setF({ ...f, plan: e.target.value })}><option value="تجريبي">تجريبي</option><option value="مدرسي">مدرسي</option><option value="مؤسسي">مؤسسي</option></Select></Field>
         </div>
         <Notice tone="info" icon={Database}>يُنشأ للمستأجر مخطّط بيانات وتشفير ومفاتيح مستقلة.</Notice>
       </div>

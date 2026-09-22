@@ -1,13 +1,15 @@
-const LOCALE = "ar-SA-u-ca-gregory-nu-latn";
+import { getLang, translate } from "../i18n";
+
+const loc = () => (getLang() === "en" ? "en-US" : "ar-SA-u-ca-gregory-nu-latn");
 
 export const fmtDate = (ts, opts = { day: "numeric", month: "long" }) =>
-  new Intl.DateTimeFormat(LOCALE, opts).format(ts);
+  new Intl.DateTimeFormat(loc(), opts).format(ts);
 
 export const fmtLongDate = (ts = Date.now()) =>
   fmtDate(ts, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
 
 export const fmtTime = (ts) =>
-  new Intl.DateTimeFormat(LOCALE, { hour: "numeric", minute: "2-digit" }).format(ts);
+  new Intl.DateTimeFormat(loc(), { hour: "numeric", minute: "2-digit" }).format(ts);
 
 export const fmtNum = (n) => new Intl.NumberFormat("en-US").format(n);
 
@@ -54,8 +56,10 @@ export const HOUR_MS = HOUR;
 export const MIN_MS = MIN;
 
 export const initials = (name = "") => {
-  const clean = name.replace(/^(أ\.|د\.|م\.)\s*/, "").trim();
-  return clean.charAt(0) || "؟";
+  // في الإنجليزية نأخذ أول حرف من الاسم المترجم
+  const shown = getLang() === "en" ? translate(name) : name;
+  const clean = shown.replace(/^(أ\.|د\.|م\.|Teacher |Dr\. |Eng\. )\s*/, "").trim();
+  return clean.charAt(0).toUpperCase() || "؟";
 };
 
 export const toneOf = (value) =>

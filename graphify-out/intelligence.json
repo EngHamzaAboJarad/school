@@ -1,0 +1,36 @@
+{
+  "hotspots": [
+    {
+      "label": "createSeed()",
+      "risk": 0.592,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "reducer()",
+      "risk": 0.478,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "Wizard()",
+      "risk": 0.221,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "StudentHome()",
+      "risk": 0.219,
+      "type": "FUNCTION"
+    },
+    {
+      "label": "AppShell()",
+      "risk": 0.205,
+      "type": "FUNCTION"
+    }
+  ],
+  "blast_radius": {
+    "useStore()": 64,
+    "useToast()": 48,
+    "cx()": 26,
+    "fmtLongDate()": 13,
+    "StudentHome()": 12
+  }
+}

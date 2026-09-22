@@ -33,7 +33,7 @@ export default function UsersPage() {
           <div className="bank-filters">
             <SearchBox value={q} onChange={setQ} placeholder="ابحث بالاسم أو البريد…" />
             <Select value={role} onChange={(e) => setRole(e.target.value)} aria-label="الدور"><option value="">كل الأدوار</option>{Object.values(ROLES).map((r) => <option key={r.id} value={r.id}>{r.long}</option>)}</Select>
-            <Select value={status} onChange={(e) => setStatus(e.target.value)} aria-label="الحالة"><option value="">كل الحالات</option>{Object.keys(STATUS_TONE).map((s) => <option key={s}>{s}</option>)}</Select>
+            <Select value={status} onChange={(e) => setStatus(e.target.value)} aria-label="الحالة"><option value="">كل الحالات</option>{Object.keys(STATUS_TONE).map((s) => <option key={s} value={s}>{s}</option>)}</Select>
           </div>
           <div className="pad">
             <DataTable rows={rows} empty="لا مستخدمين مطابقين" columns={[
@@ -106,7 +106,7 @@ function AddUser({ onClose }) {
         <Field label="البريد الإلكتروني" error={f.email && !ok ? "صيغة البريد غير صحيحة" : ""}><Input type="email" dir="ltr" value={f.email} onChange={(e) => setF({ ...f, email: e.target.value })} /></Field>
         <div className="form-grid">
           <Field label="الدور"><Select value={f.role} onChange={(e) => setF({ ...f, role: e.target.value })}>{ASSIGNABLE.map((r) => <option key={r} value={r}>{ROLES[r].long}</option>)}</Select></Field>
-          <Field label="الحالة"><Select value={f.status} onChange={(e) => setF({ ...f, status: e.target.value })}><option>نشط</option><option>بانتظار الاعتماد</option></Select></Field>
+          <Field label="الحالة"><Select value={f.status} onChange={(e) => setF({ ...f, status: e.target.value })}><option value="نشط">نشط</option><option value="بانتظار الاعتماد">بانتظار الاعتماد</option></Select></Field>
         </div>
       </div>
     </Modal>

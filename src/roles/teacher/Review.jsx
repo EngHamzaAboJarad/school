@@ -155,8 +155,8 @@ function GenerateModal({ onClose }) {
         <Notice tone="info" icon={Sparkles}>تُبنى الأسئلة من محتوى الدرس نفسه وتُربط بهدف تعلّمه، وتبقى مسودّة حتى تعتمدها.</Notice>
         <Field label="الدرس"><Select value={lessonId} onChange={(e) => setLessonId(e.target.value)}>{lessons.map((x) => <option key={x.id} value={x.id}>{subjectOf(unitOf(state, x.unitId)?.subjectId)?.name} — {x.title}</option>)}</Select></Field>
         <div className="form-grid">
-          <Field label="عدد الأسئلة"><Select value={count} onChange={(e) => setCount(e.target.value)}>{[2, 3, 4].map((n) => <option key={n}>{n}</option>)}</Select></Field>
-          <Field label="مستوى الصعوبة"><Select value={diff} onChange={(e) => setDiff(e.target.value)}>{DIFFICULTIES.map((d) => <option key={d}>{d}</option>)}</Select></Field>
+          <Field label="عدد الأسئلة"><Select value={count} onChange={(e) => setCount(e.target.value)}>{[2, 3, 4].map((n) => <option key={n} value={n}>{n}</option>)}</Select></Field>
+          <Field label="مستوى الصعوبة"><Select value={diff} onChange={(e) => setDiff(e.target.value)}>{DIFFICULTIES.map((d) => <option key={d} value={d}>{d}</option>)}</Select></Field>
         </div>
         {l && !l.cards.length && <Notice tone="warn">لا توجد مادة كافية في هذا الدرس للتوليد. أضف محتوى أولًا.</Notice>}
       </div>
@@ -195,7 +195,7 @@ function BlueprintModal({ onClose }) {
         <div className="form-grid">
           <Field label="عدد الأسئلة الموضوعية"><Input type="number" min="4" max="20" value={bp.count} onChange={(e) => setBp({ ...bp, count: Number(e.target.value) })} /></Field>
           <Field label="المدة (دقيقة)"><Input type="number" min="5" max="90" value={bp.durationMin} onChange={(e) => setBp({ ...bp, durationMin: Number(e.target.value) })} /></Field>
-          <Field label="حدّ المحاولات"><Select value={bp.attempts} onChange={(e) => setBp({ ...bp, attempts: Number(e.target.value) })}>{[1, 2, 3].map((n) => <option key={n}>{n}</option>)}</Select></Field>
+          <Field label="حدّ المحاولات"><Select value={bp.attempts} onChange={(e) => setBp({ ...bp, attempts: Number(e.target.value) })}>{[1, 2, 3].map((n) => <option key={n} value={n}>{n}</option>)}</Select></Field>
         </div>
       </div>
     </Modal>

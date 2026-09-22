@@ -91,7 +91,7 @@ export default function StructurePage() {
         <Modal open onClose={() => setCell(null)} title="تعديل الحصة" kicker={`${WEEKDAYS[cell.day]} — الحصة ${cell.period + 1} (${PERIODS[cell.period]})`}
           footer={<><Btn variant="ghost" onClick={() => setCell(null)}>إلغاء</Btn><Btn variant="primary" onClick={() => { dispatch({ type: "setTimetableCell", classId: clsId, day: cell.day, period: cell.period, subject: cell.subject, teacherId: cell.subject === "—" ? "" : cell.teacherId, actor: user.id }); toast("حُدِّث الجدول"); setCell(null); }}>حفظ</Btn></>}>
           <div className="stack">
-            <Field label="المادة"><Select value={cell.subject} onChange={(e) => setCell({ ...cell, subject: e.target.value })}>{SUBJECT_NAMES.map((n) => <option key={n}>{n}</option>)}</Select></Field>
+            <Field label="المادة"><Select value={cell.subject} onChange={(e) => setCell({ ...cell, subject: e.target.value })}>{SUBJECT_NAMES.map((n) => <option key={n} value={n}>{n}</option>)}</Select></Field>
             <Field label="المعلّم"><Select value={cell.teacherId} onChange={(e) => setCell({ ...cell, teacherId: e.target.value })}>{TEACHERS.map((t) => <option key={t} value={t}>{userName(state, t)}</option>)}</Select></Field>
           </div>
         </Modal>

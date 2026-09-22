@@ -87,7 +87,7 @@ function NewClass({ onClose, onCreated }) {
       <div className="stack">
         <Field label="اسم الفصل"><Input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} placeholder="الثالث المتوسط / ج" /></Field>
         <div className="form-grid">
-          <Field label="الصف"><Select value={f.grade} onChange={(e) => setF({ ...f, grade: e.target.value, subjects: [] })}>{grades.map((g) => <option key={g}>{g}</option>)}</Select></Field>
+          <Field label="الصف"><Select value={f.grade} onChange={(e) => setF({ ...f, grade: e.target.value, subjects: [] })}>{grades.map((g) => <option key={g} value={g}>{g}</option>)}</Select></Field>
           <Field label="القاعة"><Input value={f.room} onChange={(e) => setF({ ...f, room: e.target.value })} placeholder="قاعة 16" /></Field>
         </div>
         <div><span className="field-label">المواد المرتبطة</span><div className="chips mt-sm">{avail.map((s) => <button key={s.id} className={`chip ${f.subjects.includes(s.id) ? "active" : ""}`} onClick={() => toggle(s.id)}>{s.name}</button>)}</div></div>

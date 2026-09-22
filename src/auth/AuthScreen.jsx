@@ -3,6 +3,7 @@ import { ArrowRight, Check, Eye, EyeOff, FileUp, GraduationCap, Users, Presentat
 import { Wordmark } from "../ui/Brand";
 import { Btn, Field, Input, Select, Notice, Badge } from "../ui/Primitives";
 import { DEMO_ACCOUNTS, ROLES } from "../data/people";
+import { LangToggle } from "../i18n/LangToggle";
 
 const DEMO_PASSWORD = "password";
 const DEMO_CODE = "123456";
@@ -105,6 +106,7 @@ export default function AuthScreen({ onLogin }) {
         </div>
       </section>
       <section className="auth-panel">
+        <LangToggle className="auth-lang" />
         <div className="auth-card">
           {screen === "signin" && <SignIn onOk={(acc) => { setPending(acc); setScreen("2fa"); }} onForgot={() => setScreen("forgot")} onCreate={() => setScreen("type")} />}
           {screen === "2fa" && <TwoFactor account={pending} onBack={() => setScreen("signin")} onVerified={() => onLogin(pending)} />}
@@ -365,7 +367,7 @@ function Wizard({ flowId, onBack, onDone }) {
               {f.type === "select" ? (
                 <Select value={vals[f.k] || ""} onChange={(e) => set(f.k, e.target.value)}>
                   <option value="">اختر…</option>
-                  {f.options.map((o) => <option key={o}>{o}</option>)}
+                  {f.options.map((o) => <option key={o} value={o}>{o}</option>)}
                 </Select>
               ) : f.type === "password" ? (
                 <PasswordInput value={vals[f.k] || ""} onChange={(e) => set(f.k, e.target.value)} autoComplete="new-password" />
@@ -386,7 +388,7 @@ function Wizard({ flowId, onBack, onDone }) {
               <div className="form-grid">
                 <Field label="اسم الابن"><Input value={k.name} onChange={(e) => setKids(kids.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))} /></Field>
                 <Field label="اسم الدخول"><Input dir="ltr" value={k.login} placeholder="student.login" onChange={(e) => setKids(kids.map((x, j) => (j === i ? { ...x, login: e.target.value } : x)))} /></Field>
-                <Field label="الصف" className="span-2"><Select value={k.grade} onChange={(e) => setKids(kids.map((x, j) => (j === i ? { ...x, grade: e.target.value } : x)))}><option value="">اختر…</option>{GRADES.map((g) => <option key={g}>{g}</option>)}</Select></Field>
+                <Field label="الصف" className="span-2"><Select value={k.grade} onChange={(e) => setKids(kids.map((x, j) => (j === i ? { ...x, grade: e.target.value } : x)))}><option value="">اختر…</option>{GRADES.map((g) => <option key={g} value={g}>{g}</option>)}</Select></Field>
               </div>
             </div>
           ))}

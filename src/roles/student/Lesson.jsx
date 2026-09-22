@@ -185,7 +185,7 @@ function AskTab({ lesson }) {
     dispatch({ type: "askLog", studentId: user.id, lessonId: lesson.id, q: question, answered: r.answered });
     setThread((t) => [...t, { role: "me", text: question }, { role: "bot", ...r, question }]);
     setQ("");
-    setTimeout(() => end.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+    setTimeout(() => { const box = end.current?.parentElement; if (box) box.scrollTop = box.scrollHeight; }, 50);
   };
 
   return (

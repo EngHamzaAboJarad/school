@@ -64,7 +64,7 @@ export default function QuestionEditor({ q, objectives, onSave, onClose }) {
         )}
         <Field label="تفسير الإجابة (يظهر للطالب بعد التصحيح)"><Textarea value={d.why || ""} onChange={(e) => set({ why: e.target.value })} style={{ minHeight: 70 }} /></Field>
         <div className="form-grid">
-          <Field label="مستوى الصعوبة"><Select value={d.difficulty} onChange={(e) => set({ difficulty: e.target.value })}>{DIFFICULTIES.map((x) => <option key={x}>{x}</option>)}</Select></Field>
+          <Field label="مستوى الصعوبة"><Select value={d.difficulty} onChange={(e) => set({ difficulty: e.target.value })}>{DIFFICULTIES.map((x) => <option key={x} value={x}>{x}</option>)}</Select></Field>
           <Field label="هدف التعلّم"><Select value={d.objective} onChange={(e) => set({ objective: e.target.value })}>{objectives.map((o) => <option key={o.id} value={o.id}>{o.title}</option>)}</Select></Field>
         </div>
         <Notice tone="gold">يُوثَّق تعديلك في سجلّ التدقيق باسمك وتاريخه.</Notice>

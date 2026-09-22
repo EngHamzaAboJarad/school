@@ -22,7 +22,7 @@ export default function AuditPage() {
         <div className="bank-filters">
           <SearchBox value={q} onChange={setQ} placeholder="ابحث في الأحداث…" />
           <Select value={sev} onChange={(e) => setSev(e.target.value)} aria-label="الخطورة"><option value="">كل المستويات</option><option value="info">معلومة</option><option value="warn">حسّاس</option></Select>
-          <Select value={actor} onChange={(e) => setActor(e.target.value)} aria-label="الفاعل"><option value="">كل الفاعلين</option>{actors.map((a) => <option key={a}>{a}</option>)}</Select>
+          <Select value={actor} onChange={(e) => setActor(e.target.value)} aria-label="الفاعل"><option value="">كل الفاعلين</option>{actors.map((a) => <option key={a} value={a}>{a}</option>)}</Select>
         </div>
         <div className="pad"><DataTable dense rows={rows} empty="لا أحداث مطابقة" columns={[
           { key: "at", label: "الوقت", render: (a) => <span className="num muted small">{fmtDate(a.at, { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}</span> },

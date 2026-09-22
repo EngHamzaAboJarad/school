@@ -1,4 +1,5 @@
 import { useEffect, useId } from "react";
+import { createPortal } from "react-dom";
 import { X, Inbox } from "lucide-react";
 import { initials } from "../lib/format";
 
@@ -124,7 +125,8 @@ export function Modal({ open, onClose, title, kicker, children, footer, wide, dr
     };
   }, [open, onClose]);
   if (!open) return null;
-  return (
+  // يُرسم على <body> مباشرة كي لا يتقيّد بأي أب عليه transform/animation (كان يقصّ النافذة ويمنع السكرول)
+  return createPortal(
     <div className="overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className={cx("modal", wide && "wide", drawer && "drawer")} role="dialog" aria-modal="true" aria-labelledby={id}>
         <div className="modal-head">
@@ -139,7 +141,8 @@ export function Modal({ open, onClose, title, kicker, children, footer, wide, dr
         <div className="modal-body">{children}</div>
         {footer && <div className="modal-foot">{footer}</div>}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

@@ -9,6 +9,7 @@ import { myNotifications, unreadThreads, pendingReviews, essayQueue, allLessons,
 import { timeAgo } from "../lib/format";
 import { normalizeAr } from "../lib/rng";
 import SettingsDialog from "./SettingsDialog";
+import { LangToggle } from "../i18n/LangToggle";
 import { useToast } from "../ui/Brand";
 
 export default function AppShell({ page, go, children }) {
@@ -115,6 +116,7 @@ export default function AppShell({ page, go, children }) {
           </button>
           <div className="top-actions">
             <button className="icon-btn search-icon" onClick={() => setSearchOpen(true)} aria-label="بحث"><Search size={19} /></button>
+            <LangToggle />
             <div className="popwrap">
               <button className="icon-btn" onClick={() => { setNotifOpen(!notifOpen); setProfileOpen(false); }} aria-label={`الإشعارات (${unread} غير مقروء)`} aria-expanded={notifOpen}>
                 <Bell size={20} />

@@ -31,7 +31,7 @@ export default function AiPage() {
           <div className="stack">
             <div className="form-grid">
               <Field label="المزوّد"><Select value={d.provider} onChange={(e) => setD({ ...d, provider: e.target.value, model: MODELS[e.target.value][0] })}><option value="claude">عائلة Claude</option></Select></Field>
-              <Field label="النموذج"><Select value={d.model} onChange={(e) => setD({ ...d, model: e.target.value })}>{MODELS[d.provider].map((m) => <option key={m}>{m}</option>)}</Select></Field>
+              <Field label="النموذج"><Select value={d.model} onChange={(e) => setD({ ...d, model: e.target.value })}>{MODELS[d.provider].map((m) => <option key={m} value={m}>{m}</option>)}</Select></Field>
             </div>
             <Field label={`الحدّ الشهري للرموز: ${fmtNum(d.monthlyLimit)}`}><input type="range" className="range" min="100000" max="500000" step="10000" value={d.monthlyLimit} onChange={(e) => setD({ ...d, monthlyLimit: Number(e.target.value) })} /></Field>
             <Field label={`الحدّ الأقصى لكل مدرسة: ${fmtNum(d.perSchoolCap)}`}><input type="range" className="range" min="5000" max="80000" step="5000" value={d.perSchoolCap} onChange={(e) => setD({ ...d, perSchoolCap: Number(e.target.value) })} /></Field>

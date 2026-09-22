@@ -43,7 +43,7 @@ export default function SchoolReports() {
     <Page kicker="تقارير تجميعية" title="التقارير المؤسسية" desc={`أداء المدرسة على مستوى الصف والمادة — ${fmtLongDate()}`} icon={FileBarChart}
       actions={<><Btn variant="ghost" icon={Download} onClick={exportCsv}>تصدير Excel</Btn><Btn variant="primary" icon={Printer} onClick={printPage}>PDF / طباعة</Btn></>}>
       <div className="row spread no-print"><Segmented options={[{ id: "class", label: "حسب الفصل" }, { id: "subject", label: "حسب المادة" }]} value={by} onChange={setBy} />
-        <Select value={grade} onChange={(e) => setGrade(e.target.value)} aria-label="الصف" style={{ minWidth: 200 }}><option value="">كل الصفوف</option>{grades.map((g) => <option key={g}>{g}</option>)}</Select></div>
+        <Select value={grade} onChange={(e) => setGrade(e.target.value)} aria-label="الصف" style={{ minWidth: 200 }}><option value="">كل الصفوف</option>{grades.map((g) => <option key={g} value={g}>{g}</option>)}</Select></div>
       <div className="grid grid-4 mt">
         <Stat label="متوسط الإتقان" value={school.mastery} unit="%" icon={FileBarChart} />
         <Stat label="الحضور" value={school.attendance} unit="%" tone="blue" icon={FileBarChart} />

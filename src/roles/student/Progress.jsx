@@ -100,7 +100,7 @@ function MasteryMap({ snap }) {
           </Card>
         );
       })}
-      <div className="legend"><span><i style={{ background: "var(--em-500)" }} />الهدف المرجعي ({CLOSE_THRESHOLD}%)</span><span><i style={{ background: "var(--gold-500)" }} />متوسط الفصل</span></div>
+      <div className="legend"><span><i style={{ background: "var(--ok-500)" }} />الهدف المرجعي ({CLOSE_THRESHOLD}%)</span><span><i style={{ background: "var(--gold-500)" }} />متوسط الفصل</span></div>
     </div>
   );
 }

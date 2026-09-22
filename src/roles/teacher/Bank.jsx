@@ -42,7 +42,7 @@ export default function BankPage() {
           <SearchBox value={f.q} onChange={(q) => setF({ ...f, q })} placeholder="ابحث في نصوص الأسئلة…" />
           <Select value={f.lesson} onChange={(e) => setF({ ...f, lesson: e.target.value })} aria-label="الدرس"><option value="">كل الدروس</option>{lessons.map((l) => <option key={l.id} value={l.id}>{l.title}</option>)}</Select>
           <Select value={f.type} onChange={(e) => setF({ ...f, type: e.target.value })} aria-label="النوع"><option value="">كل الأنواع</option>{Object.entries(QUESTION_TYPES).map(([k, v]) => <option key={k} value={k}>{v}</option>)}</Select>
-          <Select value={f.diff} onChange={(e) => setF({ ...f, diff: e.target.value })} aria-label="الصعوبة"><option value="">كل المستويات</option>{DIFFICULTIES.map((d) => <option key={d}>{d}</option>)}</Select>
+          <Select value={f.diff} onChange={(e) => setF({ ...f, diff: e.target.value })} aria-label="الصعوبة"><option value="">كل المستويات</option>{DIFFICULTIES.map((d) => <option key={d} value={d}>{d}</option>)}</Select>
           <Select value={f.status} onChange={(e) => setF({ ...f, status: e.target.value })} aria-label="الحالة"><option value="">كل الحالات</option>{Object.entries(ST).map(([k, v]) => <option key={k} value={k}>{v[1]}</option>)}</Select>
         </div>
         <div className="pad">

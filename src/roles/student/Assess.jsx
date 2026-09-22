@@ -83,7 +83,7 @@ export function QuestionView({ q, value, onChange, result, disabled }) {
               <span className="match-arrow">←</span>
               <select className={cx("input select", result && state(value?.[i] === right))} disabled={locked} value={value?.[i] || ""} onChange={(e) => onChange({ ...(value || {}), [i]: e.target.value })} aria-label={`مطابقة ${left}`}>
                 <option value="">اختر…</option>
-                {rights.map((r) => <option key={r}>{r}</option>)}
+                {rights.map((r) => <option key={r} value={r}>{r}</option>)}
               </select>
             </div>
           ))}

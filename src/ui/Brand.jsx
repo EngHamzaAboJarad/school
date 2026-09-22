@@ -1,39 +1,42 @@
 import { createContext, useCallback, useContext, useState } from "react";
 import { Check, AlertTriangle, Info } from "lucide-react";
+import { useLang } from "../i18n";
 
-// شعار طاقات: نجمة ثمانية (مربّعان متداخلان) تحيط ببرقٍ يرمز للطاقة
+// شعار طاقات: حرف «ط» هندسي بخط وحيد السماكة — حلقة وساق وذيل — تعلو ساقه شرارة (الطاقة).
 export function LogoMark({ size = 40 }) {
   return (
     <svg viewBox="0 0 48 48" width={size} height={size} role="img" aria-label="شعار طاقات">
       <defs>
-        <linearGradient id="tq-gold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f1e2b8" />
-          <stop offset=".5" stopColor="#d8b45e" />
-          <stop offset="1" stopColor="#a9822f" />
+        <linearGradient id="tq-brass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f4ead0" />
+          <stop offset=".55" stopColor="#ddbe84" />
+          <stop offset="1" stopColor="#b4862e" />
         </linearGradient>
-        <linearGradient id="tq-em" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#125347" />
-          <stop offset="1" stopColor="#04201b" />
+        <linearGradient id="tq-navy" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#1e4180" />
+          <stop offset="1" stopColor="#0a1830" />
         </linearGradient>
       </defs>
-      <rect x="1" y="1" width="46" height="46" rx="14" fill="url(#tq-em)" />
-      <rect x="1.75" y="1.75" width="44.5" height="44.5" rx="13.25" fill="none" stroke="url(#tq-gold)" strokeWidth="1.5" />
-      <g fill="none" stroke="url(#tq-gold)" strokeWidth="1.2" opacity=".9">
-        <rect x="12" y="12" width="24" height="24" />
-        <rect x="12" y="12" width="24" height="24" transform="rotate(45 24 24)" />
+      <rect x="1" y="1" width="46" height="46" rx="14" fill="url(#tq-navy)" />
+      <rect x="1.75" y="1.75" width="44.5" height="44.5" rx="13.25" fill="none" stroke="url(#tq-brass)" strokeWidth="1.2" opacity=".85" />
+      <g fill="none" stroke="url(#tq-brass)" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round">
+        <ellipse cx="20.5" cy="28" rx="8.5" ry="5.5" />
+        <path d="M29 15.5V31c0 4.5-3 7-8 7H10.5" />
       </g>
-      <path d="M26.6 11.5 17 25.8h6.1l-1.9 10.7 9.8-14.6h-6.2z" fill="url(#tq-gold)" />
+      <path d="M29 3.8l1.9 4.2 4.2 1.9-4.2 1.9L29 16l-1.9-4.2-4.2-1.9L27.1 8z" fill="url(#tq-brass)" />
     </svg>
   );
 }
 
 export function Wordmark({ light, size = "md" }) {
+  const { lang } = useLang();
+  const en = lang === "en";
   return (
-    <div className={`wordmark wordmark-${size} ${light ? "light" : ""}`}>
+    <div className={`wordmark wordmark-${size} ${light ? "light" : ""}`} data-notr>
       <LogoMark size={size === "lg" ? 52 : 40} />
       <div>
-        <strong>طاقات</strong>
-        <span>TAQAT SCHOOL</span>
+        <strong>{en ? "Taqat" : "طاقات"}</strong>
+        <span>{en ? "SCHOOL" : "TAQAT SCHOOL"}</span>
       </div>
     </div>
   );
