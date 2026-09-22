@@ -1,28 +1,28 @@
-/* ==========================================================================
-   طاقات سكول — الهوية البصرية: زمرّد وذهب
+﻿/* ==========================================================================
+   طاقات سكول — الهوية البصرية: أزرق ردفي هادئ ونحاسي دافئ (الأخضر محجوز للنجاح فقط)
    ========================================================================== */
 :root {
-  /* Brand — academic navy (raised, calm, trustworthy) */
-  --nv-950: #0a1830;
-  --nv-900: #0f2547;
-  --nv-800: #163262;
-  --nv-700: #1e4180;
-  --nv-600: #2a55a0;
-  --nv-500: #3e6fbf;
-  --nv-400: #6e97d6;
-  --nv-300: #a4bde6;
-  --nv-200: #cbd9f0;
-  --nv-100: #e4ecf8;
-  --nv-50: #f1f5fb;
-  /* Accent — brass (muted, not glossy gold) */
-  --gold-700: #7c5b1a;
-  --gold-600: #9a7222;
-  --gold-500: #b4862e;
-  --gold-400: #c9a04c;
+  /* Brand - quiet slate blue (calm, unhurried, evokes focus and trust) */
+  --nv-950: #0e1b33;
+  --nv-900: #17273f;
+  --nv-800: #22364f;
+  --nv-700: #38465e;
+  --nv-600: #4a586e;
+  --nv-500: #63728a;
+  --nv-400: #8996a9;
+  --nv-300: #b0bac7;
+  --nv-200: #d3d9e0;
+  --nv-100: #ebeef2;
+  --nv-50: #f7f8fa;
+  /* Accent - warm ochre inspired by the reference palette (dark chocolate to pale tan) */
+  --gold-700: #5f4712;
+  --gold-600: #7c5b1a;
+  --gold-500: #a9822f;
+  --gold-400: #c29c47;
   --gold-300: #ddbe84;
-  --gold-200: #ebd8ae;
-  --gold-100: #f4ead0;
-  --gold-50: #faf5e7;
+  --gold-200: #ead8b3;
+  --gold-100: #f4ead2;
+  --gold-50: #faf5e8;
   /* Success / mastery green (kept separate from the brand colour) */
   --ok-700: #17694e;
   --ok-600: #1f8a64;
@@ -65,13 +65,13 @@
   --shadow-sm: 0 1px 2px rgba(14, 27, 51, 0.05), 0 1px 1px rgba(14, 27, 51, 0.03);
   --shadow-md: 0 10px 28px -12px rgba(14, 27, 51, 0.16);
   --shadow-lg: 0 30px 70px -24px rgba(10, 24, 48, 0.42);
-  --ring: 0 0 0 3px rgba(180, 134, 46, 0.35);
+  --ring: 0 0 0 3px rgba(169, 130, 47, 0.35);
   /* Type */
   --font-ui: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
   --font-display: "Amiri", "IBM Plex Sans Arabic", "Times New Roman", serif;
   /* Signature ornament: eight-pointed star lattice */
   --pattern-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23ddbe84' stroke-opacity='.2' stroke-width='1'%3E%3Crect x='21' y='21' width='42' height='42'/%3E%3Crect x='21' y='21' width='42' height='42' transform='rotate(45 42 42)'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
-  --pattern-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23b4862e' stroke-opacity='.13' stroke-width='1'%3E%3Crect x='21' y='21' width='42' height='42'/%3E%3Crect x='21' y='21' width='42' height='42' transform='rotate(45 42 42)'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23a9822f' stroke-opacity='.13' stroke-width='1'%3E%3Crect x='21' y='21' width='42' height='42'/%3E%3Crect x='21' y='21' width='42' height='42' transform='rotate(45 42 42)'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 *,
@@ -157,6 +157,7 @@ a {
   width: 10px;
   height: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--sand-200);
   border-radius: 10px;
@@ -186,6 +187,7 @@ a {
 }
 
 @media print {
+
   .sidebar,
   .topbar,
   .toast-host,
@@ -193,12 +195,15 @@ a {
   .page-actions {
     display: none !important;
   }
+
   .app {
     display: block !important;
   }
+
   body {
     background: #fff;
   }
+
   .card {
     box-shadow: none !important;
     break-inside: avoid;

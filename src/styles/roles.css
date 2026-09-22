@@ -1,4 +1,4 @@
-/* ───────── مشترك بين الأدوار ───────── */
+﻿/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ظ…ط´طھط±ظƒ ط¨ظٹظ† ط§ظ„ط£ط¯ظˆط§ط± â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .mb { margin-bottom: 14px; }
 .cell-bar { display: flex; align-items: center; gap: 10px; min-width: 140px; }
 .cell-bar .progress { flex: 1; }
@@ -14,7 +14,7 @@
 .key { direction: ltr; background: var(--sand-100); border: 1px solid var(--line); border-radius: 8px; padding: 2px 10px; font-size: 0.7812rem; color: var(--ink-2); }
 .key.big { padding: 12px 14px; font-size: 0.875rem; word-break: break-all; }
 
-/* ───────── المعلّم ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ظ…ط¹ظ„ظ‘ظ… â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .class-card { text-align: start; padding: 20px; border-radius: 20px; border: 1.5px solid var(--line); background: var(--paper); display: flex; flex-direction: column; gap: 12px; transition: 0.2s; box-shadow: var(--shadow-sm); }
 .class-card strong { display: block; font-family: var(--font-display); font-size: 1.3125rem; color: var(--nv-900); }
 .class-card span { color: var(--muted); font-size: 0.8438rem; }
@@ -77,7 +77,7 @@
 .attach input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .editor { border-radius: 0 0 12px 12px !important; min-height: 190px; font-size: 1rem; }
 
-/* ───────── وليّ الأمر ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ظˆظ„ظٹظ‘ ط§ظ„ط£ظ…ط± â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .child-switch { display: flex; gap: 12px; flex-wrap: wrap; }
 .child-tab { display: flex; gap: 12px; align-items: center; padding: 10px 18px 10px 22px; border-radius: 18px; border: 1.5px solid var(--line); background: var(--paper); text-align: start; transition: 0.2s; }
 .child-tab strong { display: block; }
@@ -98,7 +98,7 @@
 .report-sheet { border-top: 3px solid var(--gold-500); }
 .report-kpis .mini-stat b { font-size: 2rem; }
 
-/* ───────── الإدارة المدرسية ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط¥ط¯ط§ط±ط© ط§ظ„ظ…ط¯ط±ط³ظٹط© â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .cls-row { display: flex; align-items: center; gap: 14px; padding: 14px 4px; border-bottom: 1px solid var(--line-soft); flex-wrap: wrap; }
 .cls-row:last-child { border: 0; }
 .cls-row .row-main { flex: 1; min-width: 180px; }
@@ -123,7 +123,7 @@ button.perm-dot:hover { border-color: var(--gold-500); }
 .perm-dot.static { border-color: transparent; background: transparent; }
 .perm-dot.static.on { background: var(--nv-100); color: var(--nv-700); border-color: var(--nv-200); }
 
-/* ───────── الإشراف ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط¥ط´ط±ط§ظپ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .school-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 .school-card { text-align: start; padding: 20px; border-radius: 20px; border: 1px solid var(--line); background: var(--paper); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; gap: 6px; transition: 0.2s; position: relative; overflow: hidden; }
 .school-card::after { content: ""; position: absolute; inset-inline-end: -30px; bottom: -30px; width: 110px; height: 110px; background-image: var(--pattern-soft); }
@@ -134,7 +134,7 @@ button.perm-dot:hover { border-color: var(--gold-500); }
 .school-metrics b { font-family: var(--font-display); font-size: 1.3125rem; color: var(--nv-900); }
 .school-metrics small { color: var(--muted); font-size: 0.7188rem; }
 
-/* ───────── النظام ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ظ†ط¸ط§ظ… â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .plan-card { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
 .plan-card h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--nv-900); }
 .plan-price { font-family: var(--font-display); font-size: 1.375rem; color: var(--gold-700); }

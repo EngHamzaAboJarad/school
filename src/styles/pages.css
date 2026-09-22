@@ -1,4 +1,4 @@
-/* ───────── مشترك ───────── */
+﻿/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ظ…ط´طھط±ظƒ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .pad { padding: 8px 18px 18px; }
 .subj-tag { display: inline-flex; align-items: center; gap: 7px; padding: 4px 12px; border-radius: 999px; font-weight: 600; font-size: 0.7812rem; }
 .big-num { font-family: var(--font-display); font-size: 2.5rem; color: var(--nv-900); line-height: 1; }
@@ -6,7 +6,7 @@
 .mini-title { font-size: 0.875rem; color: var(--muted); margin-bottom: 10px; }
 .small-text { font-size: 1rem !important; }
 
-/* ───────── الرئيسية ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط±ط¦ظٹط³ظٹط© â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hero-next { margin-top: 18px; display: inline-flex; gap: 8px; align-items: center; font-size: 0.875rem; color: var(--gold-200); padding: 8px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(221, 190, 132, 0.25); flex-wrap: wrap; }
 .hero-next b { color: var(--ivory); }
 .streak { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 16px 18px; border-radius: 22px; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(221, 190, 132, 0.3); color: var(--gold-300); }
@@ -30,7 +30,7 @@
 .rec { display: flex; gap: 14px; align-items: flex-start; }
 .rec-icon { width: 44px; height: 44px; flex: none; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(160deg, var(--gold-300), var(--gold-500)); color: var(--nv-950); }
 
-/* ───────── المسار الدراسي ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ظ…ط³ط§ط± ط§ظ„ط¯ط±ط§ط³ظٹ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .unit-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding: 24px 26px 8px; }
 .unit-head h3 { font-family: var(--font-display); font-size: 1.625rem; color: var(--nv-900); margin: 6px 0 2px; }
 .unit-pct { width: 230px; display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
@@ -60,7 +60,7 @@ button.path-body:hover:not(:disabled) { border-color: var(--gold-400); transform
 .facts svg { color: var(--gold-600); }
 .facts span { flex: 1; color: var(--muted); }
 
-/* ───────── الدرس ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط¯ط±ط³ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .crumb-trail { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.8438rem; margin-bottom: 14px; flex-wrap: wrap; }
 .crumb-trail button { color: var(--nv-700); font-weight: 500; }
 .lesson-hero {
@@ -128,7 +128,7 @@ button.path-body:hover:not(:disabled) { border-color: var(--gold-400); transform
 .mm-center-text { font-size: 0.9375rem; fill: var(--gold-200); font-family: var(--font-display); font-weight: 700; }
 .deck h3 { font-family: var(--font-display); font-size: 1.375rem; margin: 10px 0 4px; }
 
-/* ───────── الاختبارات ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط§ط®طھط¨ط§ط±ط§طھ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .runner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
 .runner-top { display: flex; justify-content: space-between; gap: 14px; align-items: center; flex-wrap: wrap; }
 .runner-top h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--nv-900); }
@@ -188,7 +188,7 @@ select.wrong { border-color: var(--danger); background-color: var(--danger-bg); 
 .review-q:last-child { border: 0; padding-bottom: 0; }
 .review-q .qv-text { font-size: 1.25rem; }
 
-/* ───────── التقدّم والخطة ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„طھظ‚ط¯ظ‘ظ… ظˆط§ظ„ط®ط·ط© â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .mmap { display: flex; flex-direction: column; gap: 4px; }
 .mmap-row { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) auto; gap: 20px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line-soft); }
 .mmap-row:last-child { border: 0; }
@@ -212,7 +212,7 @@ select.wrong { border-color: var(--danger); background-color: var(--danger-bg); 
 .step.locked { opacity: 0.6; }
 .step.locked .step-node { background: var(--sand-200); color: var(--muted); }
 
-/* ───────── الإنجازات ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط¥ظ†ط¬ط§ط²ط§طھ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .level-card { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
 .level-num { font-family: var(--font-display); font-size: 4rem; line-height: 1; color: var(--gold-300); }
 .streak-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
@@ -234,7 +234,7 @@ select.wrong { border-color: var(--danger); background-color: var(--danger-bg); 
 .rank.r2 { background: linear-gradient(160deg, #e8ecec, #aab5b2); color: var(--nv-950); }
 .rank.r3 { background: linear-gradient(160deg, #e8c39f, #b3763f); color: #fff; }
 
-/* ───────── الرسائل ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط±ط³ط§ط¦ظ„ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .mail { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 18px; align-items: stretch; min-height: 520px; }
 .mail-list { align-self: start; }
 .mail-item { display: flex; gap: 14px; width: 100%; padding: 16px 18px; text-align: start; border-bottom: 1px solid var(--line-soft); position: relative; align-items: flex-start; }

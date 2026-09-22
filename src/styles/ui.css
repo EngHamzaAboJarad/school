@@ -1,4 +1,4 @@
-/* ───────── التخطيط العام ───────── */
+﻿/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„طھط®ط·ظٹط· ط§ظ„ط¹ط§ظ… â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .page {
   max-width: 1320px;
   margin: 0 auto;
@@ -62,7 +62,7 @@
 .small { font-size: 0.8125rem; }
 .grow { flex: 1; min-width: 0; }
 
-/* ───────── الأزرار ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط£ط²ط±ط§ط± â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -112,7 +112,7 @@
 }
 .icon-btn:hover { background: var(--sand-100); }
 
-/* ───────── البطاقات والإحصاءات ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط¨ط·ط§ظ‚ط§طھ ظˆط§ظ„ط¥ط­طµط§ط،ط§طھ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .card {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -163,7 +163,7 @@
 .stat-foot .up { color: var(--success); font-weight: 600; }
 .stat-foot .down { color: var(--danger); font-weight: 600; }
 
-/* ───────── الشارات والتبويبات ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط´ط§ط±ط§طھ ظˆط§ظ„طھط¨ظˆظٹط¨ط§طھ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .badge {
   display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; border-radius: 999px;
   font-size: 0.7812rem; font-weight: 600; white-space: nowrap; background: var(--sand-100); color: var(--ink-2);
@@ -190,7 +190,7 @@
 .segmented button { padding: 7px 16px; border-radius: 10px; font-weight: 500; color: var(--muted); font-size: 0.875rem; transition: 0.2s; }
 .segmented button.active { background: var(--paper); color: var(--nv-900); font-weight: 700; box-shadow: var(--shadow-sm); }
 
-/* ───────── النوافذ ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ظ†ظˆط§ظپط° â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .overlay {
   position: fixed; inset: 0; z-index: 80; background: rgba(8, 18, 38, 0.58); backdrop-filter: blur(5px);
   display: grid; place-items: center; padding: 18px; animation: fade 0.2s both;
@@ -210,7 +210,7 @@
 .modal-body { padding: 14px 26px 22px; overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
 .modal-foot { padding: 16px 26px 22px; display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid var(--line-soft); flex-wrap: wrap; }
 
-/* ───────── الحقول ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط­ظ‚ظˆظ„ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 .field-label { font-weight: 600; font-size: 0.8438rem; color: var(--ink-2); }
 .field-hint { color: var(--muted); font-size: 0.7812rem; }
@@ -245,7 +245,7 @@
 .toggle input:checked + i::after { transform: translateX(-20px); }
 .toggle input:focus-visible + i { box-shadow: var(--ring); }
 
-/* ───────── التقدّم والصور الرمزية ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„طھظ‚ط¯ظ‘ظ… ظˆط§ظ„طµظˆط± ط§ظ„ط±ظ…ط²ظٹط© â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .progress { height: 8px; border-radius: 8px; background: var(--sand-200); overflow: hidden; }
 .progress-lg { height: 12px; }
 .progress-sm { height: 5px; }
@@ -268,7 +268,7 @@
 .avatar-blue { background: var(--info-bg); color: var(--info); border-color: #cddcee; }
 .avatar-rose { background: var(--danger-bg); color: var(--danger); border-color: #efc7c0; }
 
-/* ───────── الصفوف والقوائم ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„طµظپظˆظپ ظˆط§ظ„ظ‚ظˆط§ط¦ظ… â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .list-row {
   display: flex; align-items: center; gap: 14px; padding: 14px 10px; border-bottom: 1px solid var(--line-soft);
   width: 100%; text-align: start; border-radius: 12px; transition: background 0.15s;
@@ -321,7 +321,7 @@
 .cell-user { display: flex; align-items: center; gap: 12px; }
 .cell-user small { display: block; color: var(--muted); font-size: 0.7812rem; }
 
-/* ───────── الهيرو ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ظ‡ظٹط±ظˆ â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .hero {
   position: relative; overflow: hidden; border-radius: var(--r-xl); padding: 34px 38px; color: var(--ivory);
   background: radial-gradient(120% 140% at 0% 0%, var(--nv-700) 0%, var(--nv-900) 55%, var(--nv-950) 100%);
@@ -347,7 +347,7 @@ button.chip:hover { border-color: var(--gold-400); }
 .divider { height: 1px; background: var(--line); margin: 18px 0; }
 .kbd { font-family: var(--font-ui); font-size: 0.6875rem; padding: 2px 7px; border: 1px solid var(--line); border-radius: 6px; background: var(--sand-100); color: var(--muted); }
 
-/* ───────── الرسوم البيانية ───────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€ ط§ظ„ط±ط³ظˆظ… ط§ظ„ط¨ظٹط§ظ†ظٹط© â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .ring { position: relative; flex: none; }
 .ring-track { stroke: rgba(14, 27, 51, 0.08); }
 .hero .ring-track, .card-dark .ring-track { stroke: rgba(255, 255, 255, 0.14); }
