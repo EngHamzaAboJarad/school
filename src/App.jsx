@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { StoreProvider, useStore } from "./store/StoreProvider";
 import { ToastProvider } from "./ui/Brand";
 import AuthScreen from "./auth/AuthScreen";
+import Landing from "./marketing/Landing";
 import AppShell from "./shell/AppShell";
 import { applyPrefs, loadPrefs } from "./shell/SettingsDialog";
 import { useRoute } from "./lib/router";
@@ -14,7 +15,14 @@ import SchoolPages from "./roles/school";
 import SupervisorPages from "./roles/supervisor";
 import SystemPages from "./roles/system";
 
-const PAGES = { student: StudentPages, parent: ParentPages, teacher: TeacherPages, school: SchoolPages, supervisor: SupervisorPages, system: SystemPages };
+const PAGES = {
+  student: StudentPages,
+  parent: ParentPages,
+  teacher: TeacherPages,
+  school: SchoolPages,
+  supervisor: SupervisorPages,
+  system: SystemPages,
+};
 
 function Routed() {
   const { dispatch, user } = useStore();
@@ -27,13 +35,16 @@ function Routed() {
   }, [user, page]);
 
   if (!user)
-    return (
+    return page === "login" ? (
       <AuthScreen
+        onBack={() => go("")}
         onLogin={(acc) => {
           window.location.hash = "#/home";
           dispatch({ type: "login", userId: acc.userId, role: acc.role });
         }}
       />
+    ) : (
+      <Landing onEnter={() => go("login")} />
     );
 
   const current = flatNav(user.role).some((i) => i.id === page) ? page : "home";
