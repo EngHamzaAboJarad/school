@@ -1,7 +1,7 @@
 import {
   Award, BarChart3, BookOpen, BookMarked, Building2, CalendarCheck, CalendarDays, CalendarRange, ClipboardCheck, CreditCard, FileBarChart, FileCheck2, FileText,
   GraduationCap, KeyRound, LayoutDashboard, Library, MessageCircle, PenLine, Plug, School, ScrollText, ShieldCheck, Sparkles, Target, TrendingUp,
-  Users, UserPlus, UserCheck, Wallet, Cpu, Database, Layers, Eye, Gauge, Bell,
+  Users, UserPlus, UserCheck, Wallet, Cpu, Database, Layers, Eye, Gauge, Bell, Inbox,
 } from "lucide-react";
 
 // لكل دور مجموعات تنقّل تطابق ملاحم الوثيقة (E4–E11).
@@ -79,6 +79,7 @@ export const NAV = {
       { id: "home", label: "نظرة عامة", icon: LayoutDashboard },
       { id: "tenants", label: "المستأجرون", icon: Building2 },
       { id: "teacherRequests", label: "طلبات المعلّمين", icon: UserCheck },
+      { id: "leads", label: "طلبات التواصل", icon: Inbox },
       { id: "rbac", label: "الصلاحيات (RBAC)", icon: KeyRound },
       { id: "billing", label: "الفوترة والاشتراكات", icon: CreditCard },
     ] },

@@ -242,10 +242,11 @@ const FLOWS = {
   },
 };
 
-export default function AuthScreen({ onLogin, onBack }) {
+export default function AuthScreen({ onLogin, onBack, initialFlow }) {
   const { dispatch } = useStore();
-  const [screen, setScreen] = useState("signin");
-  const [flow, setFlow] = useState(null);
+  const startFlow = FLOWS[initialFlow] ? initialFlow : null;
+  const [screen, setScreen] = useState(startFlow ? "wizard" : initialFlow === "signup" ? "type" : "signin");
+  const [flow, setFlow] = useState(startFlow);
   const [pending, setPending] = useState(null); // الحساب بانتظار 2FA
 
   return (

@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState, Fragment } from "react";
 import en from "./en.json";
+import enExtra from "./en.extra.json";
 
 // ──────────────────────────────────────────────────────────────────────────
 // الترجمة العربية ↔ الإنجليزية
@@ -32,7 +33,7 @@ function register(k, v) {
   if (k.includes("{}")) templates.push({ re: new RegExp(`^${k.split("{}").map(escapeRe).join(CAP)}$`), out: v, len: k.length });
   else exact.set(k, v);
 }
-for (const [k, v] of Object.entries(en)) {
+for (const [k, v] of Object.entries({ ...en, ...enExtra })) {
   register(k, v);
   // نسخة بلا الرصاصة «• » لأن التقسيم على « • » يفصلها عن النص
   if (k.startsWith("• ")) register(k.slice(2), v.replace(/^•\s*/, ""));

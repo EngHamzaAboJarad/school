@@ -27,6 +27,7 @@ const PAGES = {
 function Routed() {
   const { dispatch, user } = useStore();
   const { page, param, go } = useRoute("home");
+  const join = (flow) => go("login", flow);
 
   useEffect(() => {
     if (!user) return;
@@ -37,6 +38,7 @@ function Routed() {
   if (!user)
     return page === "login" ? (
       <AuthScreen
+        initialFlow={param}
         onBack={() => go("")}
         onLogin={(acc) => {
           window.location.hash = "#/home";
@@ -44,7 +46,7 @@ function Routed() {
         }}
       />
     ) : (
-      <Landing onEnter={() => go("login")} />
+      <Landing onEnter={() => go("login")} onJoin={join} />
     );
 
   const current = flatNav(user.role).some((i) => i.id === page) ? page : "home";

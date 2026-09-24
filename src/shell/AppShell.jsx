@@ -30,7 +30,10 @@ export default function AppShell({ page, go, children }) {
       b.enrollments = pendingEnrollmentsForTeacher(state, user.id).length;
     }
     if (role === "school") b.users = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role !== "teacher").length;
-    if (role === "system") b.teacherRequests = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role === "teacher").length;
+    if (role === "system") {
+      b.teacherRequests = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role === "teacher").length;
+      b.leads = (state.leads || []).filter((l) => l.status === "جديد").length;
+    }
     return b;
   }, [state, user.id, role]);
 

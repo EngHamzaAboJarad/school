@@ -7,6 +7,7 @@ import AuditPage from "./Audit";
 import SecurityPage from "./Security";
 import IntegrationsPage from "./Integrations";
 import TeacherRequestsPage from "./TeacherRequests";
+import LeadsPage from "./Leads";
 
 export default function SystemPages({ page, go }) {
   switch (page) {
@@ -18,6 +19,7 @@ export default function SystemPages({ page, go }) {
     case "security": return <SecurityPage />;
     case "integrations": return <IntegrationsPage />;
     case "teacherRequests": return <TeacherRequestsPage />;
+    case "leads": return <LeadsPage />;
     default: return <SystemHome go={go} />;
   }
 }

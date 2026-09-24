@@ -314,6 +314,10 @@ function reducer(s, a) {
       return { ...s, directory: [{ id: uid("usr"), joined: new Date().toISOString().slice(0, 10), ...a.user }, ...s.directory], audit: audit(s, a.actor, "إضافة مستخدم", `${a.user.name} — ${a.user.role}`) };
     case "updateUser":
       return { ...s, directory: s.directory.map((d) => (d.id === a.id ? { ...d, ...a.patch } : d)), notifications: s.notifications, audit: audit(s, a.actor, a.action, a.target, "warn") };
+    case "addLead":
+      return { ...s, leads: [{ id: uid("LD"), at: now, status: "جديد", ...a.lead }, ...(s.leads || [])], audit: audit(s, "زائر الصفحة الرئيسية", "طلب تواصل جديد", `${a.lead.name} — ${a.lead.kind}`) };
+    case "setLeadStatus":
+      return { ...s, leads: (s.leads || []).map((l) => (l.id === a.id ? { ...l, status: a.status } : l)), audit: audit(s, a.actor, "تحديث حالة طلب تواصل", `${a.target} — ${a.status}`) };
     case "togglePermission": {
       const cur = s.rbac[a.role] || [];
       const has = cur.includes(a.perm);
