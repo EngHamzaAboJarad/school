@@ -113,6 +113,10 @@
 .tt-cell small { color: var(--muted); font-size: 0.7188rem; }
 .tt-cell:hover { border-color: var(--gold-500); background: var(--gold-50); }
 .tt-cell.empty { background: var(--sand-100); border-style: dashed; border-color: var(--sand-200); color: var(--faint); }
+.tt-cell.readonly:hover { border-color: var(--nv-200); background: var(--nv-50); }
+.tt-cell.readonly.empty:hover { border-color: var(--sand-200); background: var(--sand-100); }
+.tt-today th { color: var(--gold-700); }
+.tt-today .tt-cell:not(.empty) { border-color: var(--gold-400); background: var(--gold-50); }
 .cur-unit { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
 .cur-unit:last-child { border: 0; }
 .cur-unit ol { margin: 8px 0 0; padding-inline-start: 22px; color: var(--ink-2); display: flex; flex-direction: column; gap: 4px; }

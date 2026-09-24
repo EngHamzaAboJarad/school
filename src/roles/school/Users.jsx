@@ -18,13 +18,13 @@ export default function UsersPage() {
   const [status, setStatus] = useState("");
   const [adding, setAdding] = useState(false);
   const rows = useMemo(() => state.directory.filter((d) => (!role || d.role === role) && (!status || d.status === status) && (!q || `${d.name} ${d.email}`.includes(q))), [state.directory, q, role, status]);
-  const pending = state.directory.filter((d) => d.status === "بانتظار الاعتماد").length;
+  const pending = state.directory.filter((d) => d.status === "بانتظار الاعتماد" && d.role !== "teacher").length;
 
   const setStatusOf = (d, s) => { dispatch({ type: "updateUser", id: d.id, patch: { status: s }, action: s === "نشط" ? "اعتماد/تفعيل حساب" : "إيقاف حساب", target: d.name, actor: user.id }); toast(`${d.name}: ${s}`, s === "موقوف" ? "warn" : "success"); };
   const setRoleOf = (d, r) => { dispatch({ type: "updateUser", id: d.id, patch: { role: r }, action: "تغيير دور مستخدم", target: `${d.name} ← ${ROLES[r].long}`, actor: user.id }); toast("عُدِّل الدور ووُثِّق في السجلّ"); };
 
   return (
-    <Page kicker="الحسابات والصلاحيات" title="المستخدمون والأدوار" desc="أنشئ الحسابات وأسند الأدوار والصلاحيات داخل المدرسة، واعتمد طلبات انضمام المعلّمين." icon={Users}
+    <Page kicker="الحسابات والصلاحيات" title="المستخدمون والأدوار" desc="أنشئ الحسابات وأسند الأدوار والصلاحيات داخل المدرسة. طلبات انضمام المعلّمين تُراجَع وتُعتمَد من مدير النظام." icon={Users}
       actions={<Btn variant="primary" icon={Plus} onClick={() => setAdding(true)}>إضافة مستخدم</Btn>}>
       <Tabs value={tab} onChange={setTab} tabs={[{ id: "users", label: "المستخدمون", icon: Users, count: pending }, { id: "perms", label: "صلاحيات الأدوار", icon: ShieldCheck }]} />
 
@@ -45,10 +45,11 @@ export default function UsersPage() {
               { key: "joined", label: "الانضمام", render: (d) => <span className="num muted">{d.joined}</span> },
               { key: "act", label: "", render: (d) => d.id === user.id ? null : (
                 <div className="row">
-                  {d.status === "بانتظار الاعتماد" && <Btn size="sm" variant="gold" icon={UserCheck} onClick={() => setStatusOf(d, "نشط")}>اعتماد</Btn>}
+                  {d.status === "بانتظار الاعتماد" && d.role === "teacher" && <Badge tone="info">بانتظار مدير النظام</Badge>}
+                  {d.status === "بانتظار الاعتماد" && d.role !== "teacher" && <Btn size="sm" variant="gold" icon={UserCheck} onClick={() => setStatusOf(d, "نشط")}>اعتماد</Btn>}
                   {d.status === "نشط" && <Btn size="sm" variant="ghost" icon={UserX} onClick={() => setStatusOf(d, "موقوف")}>إيقاف</Btn>}
                   {d.status === "موقوف" && <Btn size="sm" variant="ghost" icon={Check} onClick={() => setStatusOf(d, "نشط")}>تفعيل</Btn>}
-                  {d.status === "بانتظار الاعتماد" && <Btn size="sm" variant="danger" onClick={() => setStatusOf(d, "موقوف")}>رفض</Btn>}
+                  {d.status === "بانتظار الاعتماد" && d.role !== "teacher" && <Btn size="sm" variant="danger" onClick={() => setStatusOf(d, "موقوف")}>رفض</Btn>}
                 </div>) },
             ]} />
           </div>

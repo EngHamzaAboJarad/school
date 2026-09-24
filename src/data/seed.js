@@ -5,7 +5,7 @@ import { seeded, clamp } from "../lib/rng";
 import { aiGradeEssay } from "../lib/grading";
 import { DAY_MS, HOUR_MS, MIN_MS } from "../lib/format";
 
-export const STATE_VERSION = 4;
+export const STATE_VERSION = 6;
 
 const ymd = (ts) => {
   const d = new Date(ts);
@@ -179,6 +179,10 @@ export function createSeed(now = Date.now()) {
     { id: "T-5", subject: "كيف أستعد لامتحان الوحدة؟", participants: ["stu-lujain", "tch-khaled"], msgs: [
       { from: "stu-lujain", text: "أستاذ، هل يشمل امتحان الوحدة الدرس الرابع؟", at: now - 6 * HOUR_MS },
     ] },
+    { id: "T-6", subject: "استفسار سريع عن موعد الحصة", channel: "whatsapp", participants: ["par-noura", "tch-khaled"], msgs: [
+      { from: "par-noura", text: "مساء الخير أستاذ خالد، فيه تغيير على موعد حصة الغد؟", at: now - 10 * HOUR_MS },
+      { from: "tch-khaled", text: "مساء النور، لا يوجد تغيير، الموعد كالمعتاد.", at: now - 9 * HOUR_MS },
+    ] },
   ];
   const announcements = [
     { id: "N-1", from: "adm-school", title: "امتحانات نهاية الوحدة الأسبوع القادم", body: "تُفتح امتحانات الوحدات لطلاب المرحلة المتوسطة عبر المنصّة. يُرجى مراجعة الملخصات والخطط العلاجية قبل الدخول.", audience: "all", at: now - 1 * DAY_MS, readBy: ["tch-khaled"] },
@@ -230,7 +234,9 @@ export function createSeed(now = Date.now()) {
     history,
     attempts,
     points,
+    pointsLog: [],
     streaks,
+    avatars: {},
     saved: { "stu-sara": { summaries: ["L-M1", "L-M2"], cards: {} } },
     remedial: { "stu-sara": { "O-M2": { steps: { reexplain: false, practice: false, retest: false }, startedAt: now - 5 * DAY_MS, closedAt: null } }, "stu-layan": { "O-P3": { steps: { reexplain: true, practice: false, retest: false }, startedAt: now - 20 * HOUR_MS, closedAt: null } } },
     asked: [
@@ -246,6 +252,14 @@ export function createSeed(now = Date.now()) {
     threads,
     announcements,
     notifications,
+    enrollmentRequests: [],
+    teacherPayments: [
+      { id: "TP-1", teacherId: "tch-khaled", period: "أغسطس 2026", amount: 4200, status: "مدفوع", at: now - 25 * DAY_MS },
+      { id: "TP-2", teacherId: "tch-khaled", period: "سبتمبر 2026", amount: 4200, status: "مستحق", at: now - 2 * DAY_MS },
+      { id: "TP-3", teacherId: "tch-sarah", period: "سبتمبر 2026", amount: 3600, status: "مستحق", at: now - 2 * DAY_MS },
+      { id: "TP-4", teacherId: "tch-noura", period: "سبتمبر 2026", amount: 3600, status: "مستحق", at: now - 2 * DAY_MS },
+      { id: "TP-5", teacherId: "tch-huda", period: "أغسطس 2026", amount: 3900, status: "مدفوع", at: now - 25 * DAY_MS },
+    ],
     audit,
     directory: seedDirectory,
     consents: { "par-noura": { terms: true, dataUse: true, media: false, at: now - 3 * DAY_MS, channels: { app: true, email: true, sms: false, whatsapp: false }, weekly: true, monthly: true } },

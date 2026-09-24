@@ -1,18 +1,18 @@
 # Community 14
 
-> 9 nodes · cohesion 0.28
+> 9 nodes · cohesion 0.25
 
 ## Key Concepts
 
-- [Messages()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L25) (8 connections)
-- [PrivacyPage()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx#L10) (5 connections)
-- [childrenOf()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L245) (4 connections)
-- [unreadThreads()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L236) (4 connections)
-- [recipientsFor()](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L10) (3 connections)
-- [myThreads()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L234) (3 connections)
-- [Messages.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx#L1) (2 connections)
-- [myAnnouncements()](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js#L241) (2 connections)
-- [Privacy.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx#L1) (1 connections)
+- [Brand.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx#L1) (5 connections)
+- [useLang()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L169) (4 connections)
+- [Wordmark()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx#L31) (2 connections)
+- [LangToggle.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/LangToggle.jsx#L1) (2 connections)
+- [LangSegmented()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/LangToggle.jsx#L24) (2 connections)
+- [LangToggle()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/LangToggle.jsx#L5) (2 connections)
+- [LogoMark()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx#L6) (1 connections)
+- [ToastCtx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx#L46) (1 connections)
+- [ToastProvider()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx#L49) (1 connections)
 
 ## Relationships
 
@@ -20,14 +20,14 @@
 
 ## Source Files
 
-- [C:\Users\hp\Desktop\taqat_school\src\roles\parent\Privacy.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/parent/Privacy.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\roles\shared\Messages.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/roles/shared/Messages.jsx)
-- [C:\Users\hp\Desktop\taqat_school\src\store\selectors.js](file:///C:/Users/hp/Desktop/taqat_school/src/store/selectors.js)
+- [C:\Users\hp\Desktop\taqat_school\src\i18n\LangToggle.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/LangToggle.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\i18n\index.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\ui\Brand.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Brand.jsx)
 
 ## Audit Trail
 
-- EXTRACTED: 14 (44%)
-- INFERRED: 18 (56%)
+- EXTRACTED: 14 (70%)
+- INFERRED: 6 (30%)
 - AMBIGUOUS: 0 (0%)
 
 ---

@@ -241,6 +241,35 @@ export const unreadThreads = (s, userId) =>
 export const myAnnouncements = (s, user) =>
   s.announcements.filter((a) => a.audience === "all" || a.audience === `${user.role}s` || (a.audience === "parents" && user.role === "parent") || (a.audience === "teachers" && user.role === "teacher") || (a.audience === "students" && user.role === "student") || user.role === "school");
 
+// ── معلّمو الطالب حسب جدوله الأسبوعي (F5.3) ──
+export function teachersOfStudent(s, sid) {
+  const stu = studentOf(s, sid);
+  const cls = s.classes.find((c) => c.id === stu?.classId);
+  const table = s.timetable[stu?.classId] || s.timetable["c-3a"];
+  const map = new Map();
+  (table || []).forEach((day) => day.forEach(([subject, teacherId]) => {
+    if (!teacherId) return;
+    if (!map.has(teacherId)) map.set(teacherId, new Set());
+    map.get(teacherId).add(subject);
+  }));
+  if (cls?.teacherId && !map.has(cls.teacherId)) map.set(cls.teacherId, new Set());
+  return [...map.entries()].map(([id, subjects]) => ({
+    id, name: userName(s, id), subjects: [...subjects], homeroom: id === cls?.teacherId,
+  }));
+}
+
+// ── طلبات التسجيل الخاص لدى المعلّم (طالب ← وليّ أمر ← معلّم) ──
+export const enrollmentsOf = (s, studentId) => s.enrollmentRequests.filter((r) => r.studentId === studentId);
+export const enrollmentsForParent = (s, parentId) => s.enrollmentRequests.filter((r) => r.parentId === parentId).sort((a, b) => b.createdAt - a.createdAt);
+export const pendingEnrollmentsForTeacher = (s, teacherId) => s.enrollmentRequests.filter((r) => r.teacherId === teacherId && r.status === "pending_teacher").sort((a, b) => b.createdAt - a.createdAt);
+export const enrollmentFor = (s, studentId, teacherId, subject) =>
+  s.enrollmentRequests.find((r) => r.studentId === studentId && r.teacherId === teacherId && r.subject === subject && r.status !== "rejected");
+
+// ── سجلّ النقاط ومستحقّات المعلّمين ──
+export const pointsLogOf = (s, sid) => s.pointsLog.filter((p) => p.studentId === sid).sort((a, b) => b.at - a.at);
+export const teacherPaymentsFor = (s, teacherId) => s.teacherPayments.filter((p) => p.teacherId === teacherId).sort((a, b) => b.at - a.at);
+export const avatarOf = (s, userId) => s.avatars?.[userId];
+
 // ── الأبناء (F5.1) ──
 export function childrenOf(s, parentId) {
   const ids = users.find((u) => u.id === parentId)?.children || [];

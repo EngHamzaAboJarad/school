@@ -1,12 +1,12 @@
 # Graph Report - C:\Users\hp\Desktop\taqat_school  (2026-09-22)
 
 ## Corpus Check
-- 72 files · ~50,824 words
+- 73 files · ~105,496 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 408 nodes · 700 edges · 25 communities detected
-- Extraction: 60% EXTRACTED · 40% INFERRED · 0% AMBIGUOUS · INFERRED: 278 edges (avg confidence: 0.8)
+- 421 nodes · 712 edges · 25 communities detected
+- Extraction: 61% EXTRACTED · 39% INFERRED · 0% AMBIGUOUS · INFERRED: 278 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -51,51 +51,51 @@
 ## Surprising Connections (you probably didn't know these)
 - `register()` --calls--> `Split()`  [INFERRED]
   C:\Users\hp\Desktop\taqat_school\src\i18n\index.jsx → C:\Users\hp\Desktop\taqat_school\src\ui\Primitives.jsx
-- `reducer()` --calls--> `generateFromLesson()`  [INFERRED]
-  C:\Users\hp\Desktop\taqat_school\src\store\StoreProvider.jsx → C:\Users\hp\Desktop\taqat_school\src\lib\grading.js
+- `levelLabel()` --calls--> `ResultView()`  [INFERRED]
+  C:\Users\hp\Desktop\taqat_school\src\lib\format.js → C:\Users\hp\Desktop\taqat_school\src\roles\student\Assess.jsx
+- `generateFromLesson()` --calls--> `reducer()`  [INFERRED]
+  C:\Users\hp\Desktop\taqat_school\src\lib\grading.js → C:\Users\hp\Desktop\taqat_school\src\store\StoreProvider.jsx
 - `LearnPage()` --calls--> `Split()`  [INFERRED]
   C:\Users\hp\Desktop\taqat_school\src\roles\student\Learn.jsx → C:\Users\hp\Desktop\taqat_school\src\ui\Primitives.jsx
 - `Step()` --calls--> `cx()`  [INFERRED]
   C:\Users\hp\Desktop\taqat_school\src\roles\student\Progress.jsx → C:\Users\hp\Desktop\taqat_school\src\ui\Primitives.jsx
-- `Routed()` --calls--> `useStore()`  [INFERRED]
-  C:\Users\hp\Desktop\taqat_school\src\App.jsx → C:\Users\hp\Desktop\taqat_school\src\store\StoreProvider.jsx
 
 ## Communities
 
 ### Community 0 - "Community 0"
 
 Cohesion: 0.04
-Nodes (51): AiPage(), MODELS, correctText(), GradeCell(), NewAssignment(), STATUS, AuditPage(), BillingPage() (+43 more)
+Nodes (49): AiPage(), MODELS, AssignmentsPage(), GradeCell(), NewAssignment(), STATUS, AuditPage(), BillingPage() (+41 more)
 
 ### Community 1 - "Community 1"
 
-Cohesion: 0.07
-Nodes (44): AssignmentsPage(), BankPage(), ST, CurriculumPage(), STATUS, ExamPage(), LearnPage(), Path() (+36 more)
+Cohesion: 0.08
+Nodes (40): BankPage(), ST, CurriculumPage(), STATUS, GradingPage(), TeacherHome(), ExamPage(), LearnPage() (+32 more)
 
 ### Community 2 - "Community 2"
 
 Cohesion: 0.09
-Nodes (28): AR, ATTRS, cache, CAP, Ctx, current, exact, fill() (+20 more)
+Nodes (30): correctText(), fmtClock(), LETTERS, QuestionView(), QuizRunner(), ResultView(), Avatar(), Badge() (+22 more)
 
 ### Community 3 - "Community 3"
 
 Cohesion: 0.09
-Nodes (20): answerFromLesson(), STOP, tokens(), masteryTone(), Ring(), Spark(), MIN, aiGradeEssay() (+12 more)
+Nodes (28): AR, ATTRS, cache, CAP, Ctx, current, exact, fill() (+20 more)
 
 ### Community 4 - "Community 4"
 
-Cohesion: 0.1
-Nodes (20): ATT, AttendancePage(), ParentAttendance(), SchoolAttendance(), ChildPage(), fmtLongDate(), ParentHome(), SchoolHome() (+12 more)
+Cohesion: 0.08
+Nodes (22): buildAttempt(), answerFromLesson(), STOP, tokens(), masteryTone(), Ring(), Spark(), MIN (+14 more)
 
 ### Community 5 - "Community 5"
 
-Cohesion: 0.12
-Nodes (24): AppShell(), QuestionView(), Avatar(), Badge(), Btn(), Card(), cx(), DataTable() (+16 more)
+Cohesion: 0.1
+Nodes (21): ATT, AttendancePage(), ParentAttendance(), SchoolAttendance(), ChildPage(), StudentSheet(), fmtLongDate(), levelLabel() (+13 more)
 
 ### Community 6 - "Community 6"
 
 Cohesion: 0.1
-Nodes (16): PAGES, Routed(), flatNav(), ICONS, NAV, pageLabel(), parse(), useRoute() (+8 more)
+Nodes (22): ICON, RewardsPage(), parse(), createSeed(), schoolDaysBack(), STATE_VERSION, ymd(), allStudents() (+14 more)
 
 ### Community 7 - "Community 7"
 
@@ -119,23 +119,23 @@ Nodes (11): DIFFICULTIES, lessonById, lessons, objectiveById, objectives, QUESTI
 
 ### Community 11 - "Community 11"
 
-Cohesion: 0.16
-Nodes (11): GradingPage(), TeacherHome(), PerformancePage(), BlueprintModal(), GenerateModal(), KIND, ReviewPage(), commonGaps() (+3 more)
+Cohesion: 0.14
+Nodes (9): PAGES, Routed(), AppShell(), flatNav(), ICONS, NAV, pageLabel(), useRoute() (+1 more)
 
 ### Community 12 - "Community 12"
 
-Cohesion: 0.25
-Nodes (5): ToastCtx, Wordmark(), useLang(), LangSegmented(), LangToggle()
+Cohesion: 0.15
+Nodes (9): COMPARE_ROWS, DEMO_LABELS, FEATURE_ENGINES, HOW_STEPS, PRICING, ROADMAP, ROLE_ICONS, ROLE_ORDER (+1 more)
 
 ### Community 13 - "Community 13"
 
-Cohesion: 0.25
-Nodes (7): buildAttempt(), fmtClock(), LETTERS, QuizRunner(), ResultView(), levelLabel(), scoreAttempt()
+Cohesion: 0.28
+Nodes (7): Messages(), recipientsFor(), PrivacyPage(), childrenOf(), myAnnouncements(), myThreads(), unreadThreads()
 
 ### Community 14 - "Community 14"
 
-Cohesion: 0.28
-Nodes (7): Messages(), recipientsFor(), PrivacyPage(), childrenOf(), myAnnouncements(), myThreads(), unreadThreads()
+Cohesion: 0.25
+Nodes (5): ToastCtx, Wordmark(), useLang(), LangSegmented(), LangToggle()
 
 ### Community 15 - "Community 15"
 _Unable to determine domain due to missing code entities._
@@ -188,7 +188,7 @@ Cohesion: 1.0
 Nodes (0): 
 
 ## Knowledge Gaps
-- **85 isolated node(s):** `PAGES`, `DEMO_PASSWORD`, `DEMO_CODE`, `GRADES`, `pwRules` (+80 more)
+- **94 isolated node(s):** `PAGES`, `DEMO_PASSWORD`, `DEMO_CODE`, `GRADES`, `pwRules` (+89 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 16`** (2 nodes): `index.jsx`, `ParentPages()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.

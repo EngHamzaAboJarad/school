@@ -1,35 +1,35 @@
 # Community 3
 
-> 30 nodes · cohesion 0.09
+> 34 nodes · cohesion 0.09
 
 ## Key Concepts
 
-- [grading.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L1) (9 connections)
-- [Charts.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L1) (8 connections)
-- [MIN](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js#L18) (6 connections)
-- [rng.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L1) (5 connections)
-- [normalizeAr()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L34) (5 connections)
-- [tokens()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L11) (4 connections)
-- [assistant.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L1) (4 connections)
-- [aiGradeEssay()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L27) (4 connections)
-- [shuffle()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L21) (4 connections)
-- [answerFromLesson()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L13) (3 connections)
-- [Ring()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L5) (3 connections)
-- [clamp()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L31) (3 connections)
-- [seeded()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L2) (3 connections)
-- [masteryTone()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L3) (2 connections)
-- [Spark()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L138) (2 connections)
-- [buildUnitExam()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L72) (2 connections)
-- [generateFromLesson()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L114) (2 connections)
-- [gradeQuestion()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L4) (2 connections)
-- [shuffleOptions()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L108) (2 connections)
-- [updateMastery()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js#L62) (2 connections)
-- [hash()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js#L12) (2 connections)
-- [stem()](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L7) (1 connections)
-- [STOP](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js#L4) (1 connections)
-- [Bars()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L26) (1 connections)
-- [HBars()](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx#L42) (1 connections)
-- *... and 5 more nodes in this community*
+- [index.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L1) (26 connections)
+- [questions.js](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L1) (8 connections)
+- [translate()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L97) (7 connections)
+- [base()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L4) (6 connections)
+- [lookup()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L59) (5 connections)
+- [translateNode()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L115) (4 connections)
+- [walk()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L133) (4 connections)
+- [match()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L10) (4 connections)
+- [skipped()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L113) (3 connections)
+- [startTranslator()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L144) (3 connections)
+- [fill()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L51) (2 connections)
+- [register()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L31) (2 connections)
+- [t()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L107) (2 connections)
+- [essay()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L11) (2 connections)
+- [fill()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L9) (2 connections)
+- [mcq()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L7) (2 connections)
+- [tf()](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js#L8) (2 connections)
+- [AR](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L12) (1 connections)
+- [ATTRS](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L110) (1 connections)
+- [cache](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L49) (1 connections)
+- [CAP](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L30) (1 connections)
+- [Ctx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L168) (1 connections)
+- [current](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L21) (1 connections)
+- [escapeRe()](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L25) (1 connections)
+- [exact](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx#L27) (1 connections)
+- *... and 9 more nodes in this community*
 
 ## Relationships
 
@@ -37,16 +37,13 @@
 
 ## Source Files
 
-- [C:\Users\hp\Desktop\taqat_school\src\lib\assistant.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/assistant.js)
-- [C:\Users\hp\Desktop\taqat_school\src\lib\format.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/format.js)
-- [C:\Users\hp\Desktop\taqat_school\src\lib\grading.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/grading.js)
-- [C:\Users\hp\Desktop\taqat_school\src\lib\rng.js](file:///C:/Users/hp/Desktop/taqat_school/src/lib/rng.js)
-- [C:\Users\hp\Desktop\taqat_school\src\ui\Charts.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/ui/Charts.jsx)
+- [C:\Users\hp\Desktop\taqat_school\src\data\questions.js](file:///C:/Users/hp/Desktop/taqat_school/src/data/questions.js)
+- [C:\Users\hp\Desktop\taqat_school\src\i18n\index.jsx](file:///C:/Users/hp/Desktop/taqat_school/src/i18n/index.jsx)
 
 ## Audit Trail
 
-- EXTRACTED: 60 (70%)
-- INFERRED: 26 (30%)
+- EXTRACTED: 94 (93%)
+- INFERRED: 7 (7%)
 - AMBIGUOUS: 0 (0%)
 
 ---

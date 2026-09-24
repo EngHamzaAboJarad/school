@@ -1,28 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { Megaphone, MessageCircle, PenSquare, Send, Eye } from "lucide-react";
-import { Avatar, Btn, Badge, Card, Empty, Field, Input, Modal, Page, Select, Tabs, Textarea, cx } from "../../ui/Primitives";
+import { Avatar, Btn, Badge, Card, Empty, Field, Input, Modal, Page, Segmented, Select, Tabs, Textarea, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { childrenOf, myAnnouncements, myThreads, unreadThreads, userName, studentOf } from "../../store/selectors";
+import { childrenOf, myAnnouncements, myThreads, unreadThreads, userName, studentOf, teachersOfStudent } from "../../store/selectors";
 import { timeAgo } from "../../lib/format";
 
 // المراسلة والإعلانات (F5.3 / F9.2): رسائل مباشرة بين ولي الأمر والمعلّم/الإدارة، وإعلانات للفصل أو المدرسة مع تتبّع القراءة.
 function recipientsFor(state, user) {
   const opt = (id, note) => ({ id, name: userName(state, id), note });
   if (user.role === "student") {
-    const cls = state.classes.find((c) => c.id === studentOf(state, user.id)?.classId);
-    return [opt(cls?.teacherId, "معلّمي")];
+    return teachersOfStudent(state, user.id).map((t) => opt(t.id, t.homeroom ? "معلّم الفصل" : t.subjects.join("، ") || "معلّمي"));
   }
   if (user.role === "parent") {
-    const ts = [...new Set(childrenOf(state, user.id).map((c) => c.teacherId))];
-    return [...ts.map((t) => opt(t, "معلّم ابنك")), opt("adm-school", "إدارة المدرسة")];
+    const map = new Map();
+    childrenOf(state, user.id).forEach((c) => teachersOfStudent(state, c.id).forEach((t) => {
+      if (!map.has(t.id)) map.set(t.id, { childName: c.name.split(" ")[0], label: t.homeroom ? "معلّم الفصل" : t.subjects.join("، ") });
+    }));
+    return [...[...map.entries()].map(([id, v]) => opt(id, `معلّم ${v.childName} — ${v.label}`)), opt("adm-school", "إدارة المدرسة")];
   }
   if (user.role === "teacher") return [opt("par-noura", "وليّ أمر سارة وليان"), opt("adm-school", "إدارة المدرسة"), ...state.classes.filter((c) => c.teacherId === user.id).flatMap((c) => c.studentIds.slice(0, 3)).map((id) => opt(id, "طالب"))];
   if (user.role === "school") return [opt("tch-khaled", "معلّم"), opt("tch-sarah", "معلّم"), opt("par-noura", "وليّ أمر")];
   return [];
 }
 
-export default function Messages() {
+export default function Messages({ param }) {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
   const [tab, setTab] = useState("inbox");
@@ -32,12 +34,20 @@ export default function Messages() {
   const [draft, setDraft] = useState({ to: "", subject: "", text: "" });
   const [ann, setAnn] = useState(false);
   const [annDraft, setAnnDraft] = useState({ title: "", body: "", audience: "all" });
+  const [channelFilter, setChannelFilter] = useState("all");
   const end = useRef(null);
   const threads = myThreads(state, user.id);
-  const current = threads.find((t) => t.id === sel) || threads[0];
+  const visibleThreads = user.role === "teacher" ? threads.filter((t) => channelFilter === "all" || (t.channel || "app") === channelFilter) : threads;
+  const current = visibleThreads.find((t) => t.id === sel) || visibleThreads[0];
   const announcements = myAnnouncements(state, user);
   const canAnnounce = user.role === "teacher" || user.role === "school";
   const recipients = recipientsFor(state, user);
+
+  useEffect(() => {
+    if (!param?.startsWith("to/")) return;
+    const to = param.slice(3);
+    if (recipients.some((r) => r.id === to)) { setDraft((d) => ({ ...d, to })); setCompose(true); }
+  }, [param]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (current && tab === "inbox") dispatch({ type: "readThread", threadId: current.id, userId: user.id });
@@ -66,14 +76,20 @@ export default function Messages() {
         threads.length === 0 ? <Card><Empty icon={MessageCircle} title="لا رسائل بعد" desc="ابدأ محادثة جديدة مع معلّمك أو إدارة المدرسة." /></Card> : (
           <div className="mail">
             <Card flush className="mail-list">
-              {threads.map((t) => {
+              {user.role === "teacher" && (
+                <div className="pad" style={{ paddingBottom: 0 }}>
+                  <Segmented options={[{ id: "all", label: "الكل" }, { id: "app", label: "المنصّة" }, { id: "whatsapp", label: "واتساب" }]} value={channelFilter} onChange={setChannelFilter} />
+                </div>
+              )}
+              {visibleThreads.length === 0 && <div className="pad"><Empty icon={MessageCircle} title="لا رسائل بهذا التصنيف" /></div>}
+              {visibleThreads.map((t) => {
                 const last = t.msgs[t.msgs.length - 1];
                 const unread = last.from !== user.id && (t.readBy?.[user.id] || 0) < last.at;
                 return (
                   <button key={t.id} className={cx("mail-item", current?.id === t.id && "active", unread && "unread")} onClick={() => setSel(t.id)}>
                     <Avatar name={userName(state, other(t))} tone={last.from === user.id ? "gold" : undefined} />
                     <div>
-                      <div className="row spread"><strong>{userName(state, other(t))}</strong><small className="muted">{timeAgo(last.at)}</small></div>
+                      <div className="row spread"><span className="row" style={{ gap: 6 }}><strong>{userName(state, other(t))}</strong>{t.channel === "whatsapp" && <Badge tone="success">واتساب</Badge>}</span><small className="muted">{timeAgo(last.at)}</small></div>
                       <b className="mail-subject">{t.subject}</b>
                       <span className="mail-preview">{last.text}</span>
                     </div>

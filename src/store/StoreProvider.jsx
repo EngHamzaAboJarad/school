@@ -73,9 +73,12 @@ function reducer(s, a) {
         const teacher = s.classes.find((c) => c.id === stu?.classId)?.teacherId;
         if (teacher) notifications = note({ ...s, notifications }, teacher, `إجابة مقالية بانتظار التصحيح — ${stu.name}`, `امتحان «${label}»`, "grading", "warn");
       }
+      const earned = Math.round(20 + at.score / 2);
+      const reason = `${at.kind === "unit" ? "امتحان وحدة" : at.kind === "retest" ? "إعادة اختبار علاجي" : "اختبار درس"} «${label}»`;
       return {
         ...s, attempts: [...s.attempts, at], mastery, progress, remedial, notifications,
-        points: { ...s.points, [sid]: (s.points[sid] || 0) + Math.round(20 + at.score / 2) },
+        points: { ...s.points, [sid]: (s.points[sid] || 0) + earned },
+        pointsLog: [{ id: uid("PL"), studentId: sid, amount: earned, reason, at: now }, ...s.pointsLog],
         streaks: { ...s.streaks, [sid]: Math.max(s.streaks[sid] || 0, 1) },
       };
     }
@@ -233,7 +236,7 @@ function reducer(s, a) {
     }
     case "newThread": {
       const id = uid("T");
-      return { ...s, threads: [{ id, subject: a.subject, participants: [a.from, a.to], msgs: [{ from: a.from, text: a.text, at: now }], readBy: { [a.from]: now } }, ...s.threads], notifications: note(s, a.to, `رسالة جديدة من ${userName(s, a.from)}`, a.subject, "messages") };
+      return { ...s, threads: [{ id, subject: a.subject, channel: a.channel || "app", participants: [a.from, a.to], msgs: [{ from: a.from, text: a.text, at: now }], readBy: { [a.from]: now } }, ...s.threads], notifications: note(s, a.to, `رسالة جديدة من ${userName(s, a.from)}`, a.subject, "messages") };
     }
     case "readThread":
       return { ...s, threads: s.threads.map((t) => (t.id === a.threadId ? { ...t, readBy: { ...(t.readBy || {}), [a.userId]: now } } : t)) };
@@ -249,6 +252,60 @@ function reducer(s, a) {
       return { ...s, notifications: s.notifications.map((n) => (n.id === a.id ? { ...n, read: true } : n)) };
     case "readAllNotifs":
       return { ...s, notifications: s.notifications.map((n) => (n.to === a.user.id || n.to === `role:${a.user.role}` ? { ...n, read: true } : n)) };
+
+    // ───────── التسجيل الخاص لدى المعلّم (طالب ← وليّ أمر ← معلّم) ─────────
+    case "requestEnrollment": {
+      const stu = studentOf(s, a.studentId);
+      const req = { id: uid("ENR"), studentId: a.studentId, teacherId: a.teacherId, parentId: stu?.parentId || null, subject: a.subject, price: a.price, status: "pending_parent", createdAt: now };
+      const notifications = stu?.parentId
+        ? note(s, stu.parentId, "طلب تسجيل جديد بانتظار موافقتك", `${stu.name} يطلب التسجيل في «${a.subject}»`, "child", "info")
+        : s.notifications;
+      return { ...s, enrollmentRequests: [req, ...s.enrollmentRequests], notifications };
+    }
+    case "payEnrollment": {
+      const req = s.enrollmentRequests.find((r) => r.id === a.id);
+      if (!req || req.status !== "pending_parent") return s;
+      const notifications = note(s, req.teacherId, "طلب تسجيل جديد بانتظار موافقتك", `${userName(s, req.studentId)} — ${req.subject}`, "enrollments", "info");
+      return {
+        ...s,
+        enrollmentRequests: s.enrollmentRequests.map((r) => (r.id === a.id ? { ...r, status: "pending_teacher", paidAt: now } : r)),
+        notifications,
+        audit: audit(s, a.actor, "دفع رسوم تسجيل", `${req.subject} — ${userName(s, req.studentId)}`),
+      };
+    }
+    case "decideEnrollment": {
+      const req = s.enrollmentRequests.find((r) => r.id === a.id);
+      if (!req || req.status !== "pending_teacher") return s;
+      const status = a.approve ? "approved" : "rejected";
+      let notifications = note(s, req.studentId, a.approve ? "تم تفعيل تسجيلك لدى المعلّم" : "اعتذر المعلّم عن طلب التسجيل", req.subject, "teachers", a.approve ? "success" : "warn");
+      if (req.parentId) notifications = note({ ...s, notifications }, req.parentId, a.approve ? "تم تفعيل تسجيل ابنك" : "اعتذر المعلّم عن طلب التسجيل", `${userName(s, req.studentId)} — ${req.subject}`, "child", a.approve ? "success" : "warn");
+      return {
+        ...s,
+        enrollmentRequests: s.enrollmentRequests.map((r) => (r.id === a.id ? { ...r, status, decidedAt: now } : r)),
+        notifications,
+        audit: audit(s, a.actor, a.approve ? "قبول طلب تسجيل" : "رفض طلب تسجيل", `${req.subject} — ${userName(s, req.studentId)}`),
+      };
+    }
+    case "redeemReward": {
+      const bal = s.points[a.studentId] || 0;
+      if (bal < a.cost) return s;
+      return {
+        ...s,
+        points: { ...s.points, [a.studentId]: bal - a.cost },
+        pointsLog: [{ id: uid("PL"), studentId: a.studentId, amount: -a.cost, reason: `استبدال: ${a.title}`, at: now }, ...s.pointsLog],
+      };
+    }
+    case "setAvatar":
+      return { ...s, avatars: { ...s.avatars, [a.userId]: a.dataUrl } };
+    case "payTeacherFee": {
+      const pay = s.teacherPayments.find((p) => p.id === a.id);
+      if (!pay) return s;
+      return {
+        ...s,
+        teacherPayments: s.teacherPayments.map((p) => (p.id === a.id ? { ...p, status: "مدفوع", paidAt: now } : p)),
+        audit: audit(s, a.actor, "دفع رسوم معلّم", `${userName(s, pay.teacherId)} — ${pay.period}`),
+      };
+    }
 
     // ───────── الإدارة والنظام ─────────
     case "setConsent":

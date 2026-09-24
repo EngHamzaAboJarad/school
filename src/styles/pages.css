@@ -23,10 +23,12 @@
 .week-day.today span { color: var(--ivory); }
 .due-dot { position: absolute; top: 8px; inset-inline-start: 8px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--gold-500); color: var(--nv-950); font-size: 0.6875rem; font-weight: 700; font-style: normal; display: grid; place-items: center; }
 .periods { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-.period { padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; }
+.period { position: relative; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--paper); display: flex; flex-direction: column; }
 .period span { color: var(--gold-700); font-size: 0.7812rem; font-weight: 600; }
 .period b { font-size: 0.9375rem; }
 .period small { color: var(--muted); font-size: 0.75rem; }
+.period.live { border-color: var(--gold-500); background: var(--gold-50); box-shadow: var(--shadow-md); }
+.period .badge { position: absolute; top: 10px; inset-inline-end: 10px; }
 .rec { display: flex; gap: 14px; align-items: flex-start; }
 .rec-icon { width: 44px; height: 44px; flex: none; border-radius: 14px; display: grid; place-items: center; background: linear-gradient(160deg, var(--gold-300), var(--gold-500)); color: var(--nv-950); }
 

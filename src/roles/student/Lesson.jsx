@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from "react";
 import { BookOpen, Bot, ClipboardCheck, Download, Layers, Lightbulb, Play, Pause, RotateCw, Send, Sparkles, Star, Bookmark, BookmarkCheck, Printer, User, ChevronLeft, CircleHelp, ShieldCheck, Lock, Check } from "lucide-react";
-import { Btn, Badge, Card, Empty, Notice, Segmented, Tabs, Progress, Input, cx } from "../../ui/Primitives";
+import { Btn, Badge, Card, Empty, Notice, Segmented, Tabs, Progress, Input, Textarea, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { lessonOf, unitOf, subjectOf, isApproved, lessonQuizQuestions, lessonsInUnit, unitProgress, objectiveOf, allObjectives } from "../../store/selectors";
@@ -228,12 +228,14 @@ export function Flashcards({ lesson }) {
   const { state, dispatch, user } = useStore();
   const [i, setI] = useState(0);
   const [flip, setFlip] = useState(false);
+  const [guess, setGuess] = useState("");
   const cards = lesson.cards;
   const rated = state.saved[user.id]?.cards || {};
   const known = cards.filter((_, k) => rated[`${lesson.id}:${k}`] === "known").length;
   const rate = (level) => {
     dispatch({ type: "rateCard", sid: user.id, key: `${lesson.id}:${i}`, level });
     setFlip(false);
+    setGuess("");
     setI((i + 1) % cards.length);
   };
   if (!cards.length) return <Empty title="لا توجد بطاقات لهذا الدرس بعد" />;
@@ -242,9 +244,13 @@ export function Flashcards({ lesson }) {
   return (
     <div className="stack">
       <div className="row spread"><span className="small muted">البطاقة <b className="num">{i + 1}</b> من <b className="num">{cards.length}</b></span><Badge tone="emerald">أتقنت <span className="num">{known}</span> من <span className="num">{cards.length}</span></Badge></div>
+      {!flip && <Textarea value={guess} onChange={(e) => setGuess(e.target.value)} placeholder="اكتب إجابتك هنا أولًا، ثم اقلب البطاقة لمقارنتها بالإجابة الصحيحة (اختياري)…" aria-label="إجابتك" />}
       <button className={cx("flash", flip && "flipped", lvl)} onClick={() => setFlip(!flip)} aria-label="اقلب البطاقة">
         <span className="flash-face front"><small>سؤال</small><b>{c[0]}</b><em>اضغط لقلب البطاقة</em></span>
-        <span className="flash-face back"><small>الإجابة</small><b>{c[1]}</b></span>
+        <span className="flash-face back">
+          <small>الإجابة</small><b>{c[1]}</b>
+          {guess.trim() && <em>إجابتك: {guess}</em>}
+        </span>
       </button>
       <div className="row center-row">
         <Btn variant="danger" icon={RotateCw} onClick={() => rate("again")}>أحتاج مراجعة</Btn>

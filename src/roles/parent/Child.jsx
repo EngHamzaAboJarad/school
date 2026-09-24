@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { BarChart3, ClipboardCheck, GraduationCap, MessageCircle, Target, TrendingUp } from "lucide-react";
-import { Badge, Btn, Card, Empty, ListRow, Notice, Page, Progress, Split, Stat, Tabs } from "../../ui/Primitives";
+import { BarChart3, ClipboardCheck, GraduationCap, Mail, MessageCircle, Target, TrendingUp, Wallet } from "lucide-react";
+import { Avatar, Badge, Btn, Card, Empty, ListRow, Notice, Page, Progress, Split, Stat, Tabs } from "../../ui/Primitives";
 import { HBars, LineChart, Ring } from "../../ui/Charts";
+import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, allObjectives, userName, studentOf, classStats } from "../../store/selectors";
+import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, allObjectives, userName, studentOf, classStats, teachersOfStudent, enrollmentFor } from "../../store/selectors";
+import { users, SUBJECT_PRICES } from "../../data/people";
 import { fmtDate, levelLabel, timeAgo } from "../../lib/format";
 import { CLOSE_THRESHOLD, GAP_THRESHOLD } from "../../lib/grading";
 import { ChildSwitcher, useChild } from "./shared";
 
 // أداء الابن: تشخيص الفجوات (F3.1) وتتبّع الإتقان والتقدّم (F3.4) كما تنعكس في لوحة وليّ الأمر
 export default function ChildPage({ go }) {
-  const { state } = useStore();
+  const { state, dispatch, user } = useStore();
+  const toast = useToast();
   const { kids, child, select } = useChild();
   const [tab, setTab] = useState("overview");
   const snap = snapshot(state, child.id);
@@ -19,13 +22,20 @@ export default function ChildPage({ go }) {
   const attempts = state.attempts.filter((a) => a.studentId === child.id).sort((a, b) => b.at - a.at);
   const classAvg = cls ? classStats(state, cls).avg : null;
   const labels = snap.history.map((_, i) => (i === snap.history.length - 1 ? "الآن" : `-${snap.history.length - 1 - i}`));
+  const teachers = teachersOfStudent(state, child.id).map((t) => ({ ...t, email: state.directory.find((d) => d.id === t.id)?.email }));
+  const pendingPay = state.enrollmentRequests.filter((r) => r.studentId === child.id && r.status === "pending_parent").length;
+
+  const pay = (req) => {
+    dispatch({ type: "payEnrollment", id: req.id, actor: user.id });
+    toast("تم الدفع، بانتظار اعتماد المعلّم", "success");
+  };
 
   return (
     <Page kicker="متابعة الأداء" title="أداء الأبناء" desc="إتقان كل هدف، والفجوات مرتّبة بالأولوية، والخطة العلاجية وتقدّمها — ما يراه الطالب ومعلّمه نفسه." icon={GraduationCap}
-      actions={<Btn variant="primary" icon={MessageCircle} onClick={() => go("messages")}>راسل المعلّم</Btn>}>
+      actions={<Btn variant="primary" icon={MessageCircle} onClick={() => setTab("pay")}>راسل المعلّم</Btn>}>
       <ChildSwitcher kids={kids} child={child} onSelect={select} />
       <div className="mt" />
-      <Tabs value={tab} onChange={setTab} tabs={[{ id: "overview", label: "نظرة عامة", icon: BarChart3 }, { id: "gaps", label: "الفجوات والخطة", icon: Target, count: snap.gaps.length }, { id: "results", label: "النتائج", icon: ClipboardCheck }]} />
+      <Tabs value={tab} onChange={setTab} tabs={[{ id: "overview", label: "نظرة عامة", icon: BarChart3 }, { id: "gaps", label: "الفجوات والخطة", icon: Target, count: snap.gaps.length }, { id: "results", label: "النتائج", icon: ClipboardCheck }, { id: "pay", label: "المعلّمون والدفع", icon: Wallet, count: pendingPay }]} />
 
       {tab === "overview" && (
         <div className="stack">
@@ -78,6 +88,48 @@ export default function ChildPage({ go }) {
             );
           })}
         </Card>
+      )}
+
+      {tab === "pay" && (
+        <div className="stack">
+          <Notice tone="info" icon={Wallet}>راسل معلّمي {child.name.split(" ")[0]}، وإذا أرسل {child.name.split(" ")[0]} طلب تسجيل في مادة مدفوعة فستجد هنا زر إتمام الدفع.</Notice>
+          {teachers.length === 0 ? (
+            <Card><Empty icon={GraduationCap} title="لا معلّمون بعد" /></Card>
+          ) : (
+            <div className="grid grid-3">
+              {teachers.map((t) => (
+                <Card key={t.id} className="stack-sm">
+                  <div className="row">
+                    <Avatar name={t.name} size={44} tone="gold" />
+                    <div>
+                      <strong>{t.name}</strong>
+                      <small className="muted" style={{ display: "block" }}>{users.find((u) => u.id === t.id)?.title || (t.homeroom ? "معلّم الفصل" : "معلّم")}</small>
+                    </div>
+                  </div>
+                  {t.subjects.length > 0 && (
+                    <div className="stack-sm">
+                      {t.subjects.map((sub) => {
+                        const req = enrollmentFor(state, child.id, t.id, sub);
+                        return (
+                          <div key={sub} className="row spread">
+                            <Badge tone="info">{sub}</Badge>
+                            {!req && <small className="muted num">{SUBJECT_PRICES[sub] || "—"}</small>}
+                            {req?.status === "pending_parent" && <Btn size="sm" variant="gold" icon={Wallet} onClick={() => pay(req)}>ادفع {req.price}</Btn>}
+                            {req?.status === "pending_teacher" && <Badge tone="info" dot>بانتظار المعلّم</Badge>}
+                            {req?.status === "approved" && <Badge tone="success" dot>مُفعَّل</Badge>}
+                          </div>
+                        );
+                      })}
+                      {t.homeroom && <Badge tone="gold">معلّم الفصل</Badge>}
+                    </div>
+                  )}
+                  {t.email && <small className="muted num" dir="ltr" style={{ textAlign: "right" }}><Mail size={12} style={{ verticalAlign: "-2px" }} /> {t.email}</small>}
+                  <Btn size="sm" variant="primary" icon={MessageCircle} className="btn-block" onClick={() => go("messages", `to/${t.id}`)}>راسل المعلّم</Btn>
+                </Card>
+              ))}
+            </div>
+          )}
+        </div>
       )}
     </Page>
   );

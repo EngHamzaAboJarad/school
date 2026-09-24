@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { LockKeyhole, Smartphone, Monitor, RotateCcw } from "lucide-react";
-import { Modal, Btn, Toggle, Segmented, Notice, Badge } from "../ui/Primitives";
+import { useRef, useState } from "react";
+import { ImagePlus, LockKeyhole, Smartphone, Monitor, RotateCcw, Trash2 } from "lucide-react";
+import { Modal, Btn, Toggle, Segmented, Notice, Badge, Avatar } from "../ui/Primitives";
 import { useToast } from "../ui/Brand";
 import { useStore } from "../store/StoreProvider";
+import { avatarOf } from "../store/selectors";
 import { LangSegmented } from "../i18n/LangToggle";
 
 const PREFS_KEY = "taqat-prefs";
@@ -22,14 +23,16 @@ export function applyPrefs(p) {
 
 // الإعدادات: الإتاحة (F12.3)، الأمان والجلسات (F11.2)، إعادة ضبط بيانات العرض.
 export default function SettingsDialog({ onClose }) {
-  const { dispatch } = useStore();
+  const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const fileRef = useRef(null);
   const [prefs, setPrefs] = useState(loadPrefs);
   const [sessions, setSessions] = useState([
     { id: 1, device: "هذا الجهاز — Chrome على Windows", place: "الرياض", current: true },
     { id: 2, device: "iPhone 15 — تطبيق طاقات", place: "الرياض", current: false },
   ]);
   const [twofa, setTwofa] = useState(true);
+  const avatar = avatarOf(state, user.id);
 
   const update = (patch) => {
     const next = { ...prefs, ...patch };
@@ -38,9 +41,31 @@ export default function SettingsDialog({ onClose }) {
     try { localStorage.setItem(PREFS_KEY, JSON.stringify(next)); } catch { /* ignore */ }
   };
 
+  const onPickPhoto = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) return toast("الحد الأقصى لحجم الصورة 2 ميجابايت", "warn");
+    const reader = new FileReader();
+    reader.onload = () => { dispatch({ type: "setAvatar", userId: user.id, dataUrl: reader.result }); toast("حُدِّثت صورتك الشخصية", "success"); };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <Modal open onClose={onClose} title="الإعدادات" kicker="الحساب والأمان" wide
       footer={<Btn variant="primary" onClick={onClose}>تم</Btn>}>
+      <div className="row">
+        <Avatar name={user.name} src={avatar} size={64} tone="gold" />
+        <div className="stack-sm">
+          <div className="row">
+            <Btn size="sm" variant="ghost" icon={ImagePlus} onClick={() => fileRef.current?.click()}>{avatar ? "تغيير الصورة" : "أضف صورة"}</Btn>
+            {avatar && <Btn size="sm" variant="ghost" icon={Trash2} onClick={() => { dispatch({ type: "setAvatar", userId: user.id, dataUrl: null }); toast("أُزيلت الصورة"); }}>إزالة</Btn>}
+          </div>
+          <small className="muted small">JPG أو PNG، حتى 2 ميجابايت.</small>
+        </div>
+        <input ref={fileRef} type="file" accept="image/png,image/jpeg" hidden onChange={onPickPhoto} />
+      </div>
+      <div className="divider" />
       <div className="grid grid-2">
         <div className="stack-sm">
           <h4>الإتاحة وسهولة القراءة</h4>

@@ -270,7 +270,7 @@ html[data-motion="off"] * {
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 46;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -437,9 +437,8 @@ html[data-motion="off"] * {
 
 .notif {
   display: flex;
-  gap: 12px;
+  gap: 4px;
   width: 100%;
-  text-align: start;
   padding: 11px 10px;
   border-radius: 12px;
   align-items: flex-start;
@@ -453,7 +452,16 @@ html[data-motion="off"] * {
   background: var(--gold-50);
 }
 
-.notif>i {
+.notif-open {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  gap: 12px;
+  text-align: start;
+  align-items: flex-start;
+}
+
+.notif-open>i {
   width: 9px;
   height: 9px;
   border-radius: 50%;
@@ -462,20 +470,36 @@ html[data-motion="off"] * {
   background: var(--sand-200);
 }
 
-.notif.unread>i.nt-info {
+.notif.unread .notif-open>i.nt-info {
   background: var(--info);
 }
 
-.notif.unread>i.nt-success {
+.notif.unread .notif-open>i.nt-success {
   background: var(--success);
 }
 
-.notif.unread>i.nt-warn {
+.notif.unread .notif-open>i.nt-warn {
   background: var(--gold-500);
 }
 
-.notif.unread>i.nt-danger {
+.notif.unread .notif-open>i.nt-danger {
   background: var(--danger);
+}
+
+.notif-mark {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: 2px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+.notif-mark:hover {
+  background: var(--sand-200);
+  color: var(--ink-2);
 }
 
 .notif strong {

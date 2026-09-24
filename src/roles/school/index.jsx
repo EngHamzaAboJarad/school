@@ -4,6 +4,7 @@ import StructurePage from "./Structure";
 import SchoolAttendance from "./Attendance";
 import SchoolReports from "./Reports";
 import LicensesPage from "./Licenses";
+import SchoolFinancePage from "./Finance";
 import Messages from "../shared/Messages";
 
 export default function SchoolPages({ page, go }) {
@@ -13,6 +14,7 @@ export default function SchoolPages({ page, go }) {
     case "attendance": return <SchoolAttendance />;
     case "reports": return <SchoolReports />;
     case "licenses": return <LicensesPage />;
+    case "finance": return <SchoolFinancePage />;
     case "messages": return <Messages go={go} />;
     default: return <SchoolHome go={go} />;
   }

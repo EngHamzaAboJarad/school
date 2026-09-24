@@ -186,10 +186,10 @@ export function Progress({ value, tone = "emerald", size, label }) {
   );
 }
 
-export function Avatar({ name, size = 38, tone }) {
+export function Avatar({ name, size = 38, tone, src }) {
   return (
     <span className={cx("avatar", tone && `avatar-${tone}`)} style={{ width: size, height: size, fontSize: size * 0.42 }} aria-hidden="true">
-      {initials(name)}
+      {src ? <img src={src} alt="" style={{ width: "100%", height: "100%", borderRadius: "inherit", objectFit: "cover" }} /> : initials(name)}
     </span>
   );
 }

@@ -1,7 +1,7 @@
 import {
-  Award, BarChart3, BookOpen, BookMarked, Building2, CalendarCheck, CalendarRange, ClipboardCheck, CreditCard, FileBarChart, FileCheck2, FileText,
+  Award, BarChart3, BookOpen, BookMarked, Building2, CalendarCheck, CalendarDays, CalendarRange, ClipboardCheck, CreditCard, FileBarChart, FileCheck2, FileText,
   GraduationCap, KeyRound, LayoutDashboard, Library, MessageCircle, PenLine, Plug, School, ScrollText, ShieldCheck, Sparkles, Target, TrendingUp,
-  Users, Cpu, Database, Layers, Eye, Gauge, Bell,
+  Users, UserPlus, UserCheck, Wallet, Cpu, Database, Layers, Eye, Gauge, Bell,
 } from "lucide-react";
 
 // لكل دور مجموعات تنقّل تطابق ملاحم الوثيقة (E4–E11).
@@ -13,8 +13,10 @@ export const NAV = {
       { id: "progress", label: "تقدّمي وخطتي", icon: TrendingUp },
     ] },
     { group: "أدواتي", items: [
+      { id: "schedule", label: "الجدول الأسبوعي", icon: CalendarDays },
       { id: "library", label: "مكتبتي", icon: Library },
       { id: "rewards", label: "إنجازاتي", icon: Award },
+      { id: "teachers", label: "معلّمويّ", icon: Users },
       { id: "messages", label: "الرسائل", icon: MessageCircle },
     ] },
   ],
@@ -45,6 +47,8 @@ export const NAV = {
     { group: "الصف", items: [
       { id: "assignments", label: "الواجبات والمهام", icon: ClipboardCheck },
       { id: "attendance", label: "الحضور", icon: CalendarCheck },
+      { id: "enrollments", label: "طلبات التسجيل", icon: UserPlus },
+      { id: "finance", label: "الأمور المالية", icon: Wallet },
       { id: "messages", label: "الرسائل", icon: MessageCircle },
     ] },
   ],
@@ -58,6 +62,7 @@ export const NAV = {
     { group: "المؤسسة", items: [
       { id: "reports", label: "التقارير المؤسسية", icon: FileBarChart },
       { id: "licenses", label: "الاشتراك والتراخيص", icon: KeyRound },
+      { id: "finance", label: "رسوم المعلّمين", icon: Wallet },
       { id: "messages", label: "الإعلانات والرسائل", icon: MessageCircle },
     ] },
   ],
@@ -73,6 +78,7 @@ export const NAV = {
     { group: "المنصّة", items: [
       { id: "home", label: "نظرة عامة", icon: LayoutDashboard },
       { id: "tenants", label: "المستأجرون", icon: Building2 },
+      { id: "teacherRequests", label: "طلبات المعلّمين", icon: UserCheck },
       { id: "rbac", label: "الصلاحيات (RBAC)", icon: KeyRound },
       { id: "billing", label: "الفوترة والاشتراكات", icon: CreditCard },
     ] },
