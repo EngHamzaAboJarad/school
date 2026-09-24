@@ -1,612 +1,238 @@
+import { useEffect, useState } from "react";
 import {
-  Sparkles,
-  BrainCircuit,
-  BookOpenCheck,
-  ClipboardCheck,
-  LineChart,
-  ShieldCheck,
-  Users,
-  GraduationCap,
-  Building2,
-  Landmark,
-  Cpu,
-  Check,
-  ChevronLeft,
-  Bell,
-  Smartphone,
-  KeyRound,
-  Lock,
-  FileClock,
-  Award,
-  Quote,
-  Map,
+  Sparkles, BrainCircuit, BookOpenCheck, ClipboardCheck, LineChart,
+  ShieldCheck, Users, GraduationCap, Cpu, Check, ChevronLeft,
+  Bell, Smartphone, Lock, Award, Play, ArrowUpLeft, BookOpen,
+  Calculator, Languages, FlaskConical, Atom, BarChart3, CalendarDays,
+  MessageCircle, Zap, Target, WandSparkles
 } from "lucide-react";
 import { Wordmark, LogoMark } from "../ui/Brand";
 import { LangToggle } from "../i18n/LangToggle";
-import { ROLES, DEMO_ACCOUNTS } from "../data/people";
+import { useLang } from "../i18n/index.jsx";
 
-// ───── بيانات المحتوى (من FEATURE-COVERAGE.md ووثيقة Taqat-School-Competitive-Feature-Doc) ─────
-
-const TRUST_POINTS = [
-  "٦ أدوار متكاملة بلوحات مستقلة",
-  "٥ أنواع أسئلة وتصحيح فوري",
-  "تشخيص فجوات وخطة علاجية آلية",
-  "عربية RTL كاملة وهوية أكاديمية",
-];
-
-const ROLE_ICONS = {
-  student: GraduationCap,
-  parent: Users,
-  teacher: Award,
-  school: Building2,
-  supervisor: Landmark,
-  system: Cpu,
+const stageSubjects = {
+  secondary: [
+    { icon: Calculator, label: "الرياضيات" },
+    { icon: Languages, label: "اللغة العربية" },
+    { icon: BookOpen, label: "اللغة الإنجليزية" },
+    { icon: Atom, label: "الفيزياء" },
+    { icon: FlaskConical, label: "الكيمياء" },
+  ],
+  middle: [
+    { icon: Calculator, label: "الرياضيات" },
+    { icon: Languages, label: "اللغة العربية" },
+    { icon: BookOpen, label: "اللغة الإنجليزية" },
+    { icon: FlaskConical, label: "العلوم" },
+    { icon: Cpu, label: "المهارات الرقمية" },
+  ],
+  primary: [
+    { icon: Calculator, label: "الرياضيات" },
+    { icon: Languages, label: "لغتي" },
+    { icon: BookOpen, label: "اللغة الإنجليزية" },
+    { icon: FlaskConical, label: "العلوم" },
+    { icon: BookOpenCheck, label: "الدراسات الإسلامية" },
+  ],
 };
 
-const ROLE_ORDER = [
-  "student",
-  "parent",
-  "teacher",
-  "school",
-  "supervisor",
-  "system",
+const stages = [
+  { id: "secondary", label: "المرحلة الثانوية" },
+  { id: "middle", label: "المرحلة المتوسطة" },
+  { id: "primary", label: "المرحلة الابتدائية" },
 ];
 
-const HOW_STEPS = [
-  {
-    icon: BrainCircuit,
-    title: "شرح تفاعلي بالذكاء الاصطناعي",
-    desc: "شرح مبسّط لمحتوى الدرس بثلاثة مستويات، مع أمثلة إضافية عند الطلب.",
-  },
-  {
-    icon: BookOpenCheck,
-    title: "تلخيص ذكي",
-    desc: "نقاط رئيسية ومصطلحات لكل درس ووحدة، جاهزة للمراجعة السريعة والحفظ.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "اختبار بعد كل درس",
-    desc: "كويز مولَّد من محتوى الدرس ومرتبط بأهداف التعلّم، بعد اعتماد المعلّم.",
-  },
-  {
-    icon: LineChart,
-    title: "امتحان وحدة وتشخيص فجوات",
-    desc: "امتحان موزون على دروس الوحدة، ثم تشخيص للفجوات وخطة علاجية حتى الإتقان.",
-  },
+const journey = [
+  { icon: BrainCircuit, n: "01", title: "افهم الدرس", desc: "شرح ذكي يتكيّف مع مستوى الطالب ويبسّط الفكرة خطوة بخطوة." },
+  { icon: BookOpenCheck, n: "02", title: "راجع بسرعة", desc: "ملخّص واضح لأهم الأفكار والمصطلحات قبل الانتقال للتطبيق." },
+  { icon: ClipboardCheck, n: "03", title: "اختبر نفسك", desc: "أسئلة بعد الدرس مع تصحيح فوري وتغذية راجعة تساعد على الفهم." },
+  { icon: Target, n: "04", title: "عالج نقاط الضعف", desc: "تحليل للأداء وخطة تعلّم تركّز على المهارات التي تحتاج تحسينًا." },
 ];
 
-const COMPARE_ROWS = [
-  "شرح المناهج تفاعليًّا بالذكاء الاصطناعي",
-  "تلخيص الدروس والوحدات آليًّا",
-  "اختبار (كويز) تلقائي بعد كل درس",
-  "امتحان لكل وحدة مولَّد من تحليل الدروس",
-  "تصحيح آلي وتغذية راجعة فورية",
-  "تشخيص الفجوات وخطط علاجية",
-  "لوحة متابعة لوليّ الأمر",
-  "إدارة مدرسية/مؤسسية كاملة",
-  "إشراف تربوي (إدارة تعليمية/وزارة)",
-  "الإتاحة ٢٤/٧ دون حجز حصّة",
+const roles = [
+  { icon: GraduationCap, title: "الطالب", desc: "دروس، اختبارات، تقدّم وإنجازات في تجربة واحدة سهلة." },
+  { icon: Users, title: "وليّ الأمر", desc: "متابعة واضحة لمستوى الأبناء والتقدّم والتنبيهات المهمة." },
+  { icon: Award, title: "المعلّم", desc: "متابعة الطلاب واعتماد المحتوى والتقييمات من لوحة عملية." },
+  { icon: Cpu, title: "مدير النظام", desc: "إدارة المستخدمين والصلاحيات والإعدادات من مكان واحد." },
 ];
 
-const FEATURE_ENGINES = [
-  {
-    icon: BrainCircuit,
-    tag: "E1",
-    title: "محرّك المحتوى والمناهج",
-    points: [
-      "هيكلة منهج: مرحلة ← صف ← مادة ← وحدة ← درس",
-      "شرح تفاعلي بثلاثة مستويات",
-      "تلخيص نقطي ومصطلحات لكل درس ووحدة",
-      "مساعد ذكي مقيَّد بسياق الدرس",
-      "بطاقات مراجعة وخرائط ذهنية",
-    ],
-  },
-  {
-    icon: ClipboardCheck,
-    tag: "E2",
-    title: "محرّك التقييم بالذكاء الاصطناعي",
-    points: [
-      "توليد كويز بعد كل درس وامتحان لكل وحدة",
-      "خمسة أنواع أسئلة موسومة بالهدف والصعوبة",
-      "تصحيح فوري وتفسير لكل سؤال",
-      "تصحيح المقالي بمعايير (Rubric) مع تدخّل المعلّم",
-      "بنك أسئلة قابل لإعادة الاستخدام",
-    ],
-  },
-  {
-    icon: LineChart,
-    tag: "E3",
-    title: "التعلّم الشخصي والتحليلات",
-    points: [
-      "تشخيص فجوات دقيق لكل هدف تعلّم",
-      "خطط علاجية (شرح ← تمارين ← إعادة اختبار)",
-      "توصية «ما التالي؟» بحسب الأداء",
-      "تتبّع إتقان وتقدّم عبر الزمن",
-      "تلعيب: نقاط وشارات وسلاسل",
-    ],
-  },
-  {
-    icon: Users,
-    tag: "E4–E6",
-    title: "لوحات الطالب ووليّ الأمر والمعلّم",
-    points: [
-      "رئيسية وتقويم دراسي يومي للطالب",
-      "متابعة أبناء متعدّدين من حساب واحد",
-      "تقارير دورية وتنبيهات فورية لوليّ الأمر",
-      "اعتماد المعلّم لكل محتوى واختبار مولَّد",
-      "متابعة أداء الفصل والتصحيح اليدوي",
-    ],
-  },
-  {
-    icon: Building2,
-    tag: "E7–E8",
-    title: "الإدارة المدرسية والإشراف التربوي",
-    points: [
-      "مستخدمون وأدوار وصفوف وجداول",
-      "حضور وغياب مرتبط بتنبيه وليّ الأمر",
-      "تقارير مؤسسية قابلة للتصدير",
-      "لوحة إشراف متعددة المدارس",
-      "مؤشّرات أداء تجميعية ورقابة جودة",
-    ],
-  },
-  {
-    icon: Bell,
-    tag: "E9",
-    title: "التواصل والإشعارات",
-    points: [
-      "إشعارات متعددة القنوات داخل التطبيق",
-      "مراسلة وإعلانات بتتبّع القراءة",
-      "تنبيهات ذكية عند تدنّي الأداء",
-    ],
-  },
-  {
-    icon: ShieldCheck,
-    tag: "E10–E11",
-    title: "النظام والأمان والامتثال",
-    points: [
-      "تعدّد مستأجرين وصلاحيات RBAC دقيقة",
-      "مصادقة بخطوتين وإدارة جلسات آمنة",
-      "سجلّ تدقيق لكل إجراء حسّاس",
-      "حماية بيانات القُصّر (PDPL) وموافقات صريحة",
-    ],
-  },
-  {
-    icon: Smartphone,
-    tag: "E12–E13",
-    title: "الجوّال والتوطين والتكاملات",
-    points: [
-      "تصميم متجاوب كامل وعربية RTL أصيلة",
-      "إتاحة: حجم خط وتباين وتقليل حركة",
-      "واجهات API وتصدير CSV/PDF",
-      "بوّابات دفع محلية (مدى / Apple Pay / STC Pay)",
-    ],
-  },
+const benefits = [
+  { icon: WandSparkles, title: "تعليم شخصي بالذكاء الاصطناعي", desc: "تجربة تتفاعل مع مستوى الطالب بدل تقديم نفس المسار للجميع." },
+  { icon: BarChart3, title: "تقدّم واضح وقابل للقياس", desc: "مؤشرات مرئية تساعد الطالب ووليّ الأمر على فهم التقدّم بسرعة." },
+  { icon: CalendarDays, title: "كل شيء في مكان واحد", desc: "الدروس والاختبارات والمهام والتنبيهات ضمن لوحة موحّدة." },
+  { icon: Bell, title: "تنبيهات في الوقت المناسب", desc: "تذكير بالمهام والمواعيد والتغيّرات المهمة دون تشتيت." },
+  { icon: MessageCircle, title: "تواصل أسهل", desc: "حلقة وصل أوضح بين الطالب ووليّ الأمر والمعلّم." },
+  { icon: ShieldCheck, title: "خصوصية وأمان", desc: "صلاحيات منفصلة لكل دور وتصميم يضع حماية البيانات في الأساس." },
 ];
-
-const ROADMAP = [
-  {
-    phase: "المرحلة ٠",
-    title: "التأسيس",
-    desc: "البنية التقنية، الهوية، الأدوار والصلاحيات (RBAC)، المصادقة، ودعم RTL.",
-  },
-  {
-    phase: "المرحلة ١",
-    title: "MVP — منتج أفراد",
-    desc: "شرح + تلخيص + كويز بعد الدرس + لوحات أساسية. منتج B2C قابل للإطلاق.",
-  },
-  {
-    phase: "المرحلة ٢",
-    title: "الباقة المدرسية",
-    desc: "امتحان الوحدة، تشخيص وخطط علاجية، إدارة مدرسية كاملة، تواصل وإشعارات.",
-  },
-  {
-    phase: "المرحلة ٣",
-    title: "الإشراف والتوسّع",
-    desc: "لوحة الإشراف التربوي، تعدّد المستأجرين، الفوترة والدفع، التكاملات.",
-  },
-  {
-    phase: "المرحلة ٤",
-    title: "النضج الإقليمي",
-    desc: "جوّال متقدّم، تلعيب أعمق، اختبارات تكيّفية، وتوسّع خليجي.",
-  },
-];
-
-const PRICING = [
-  {
-    icon: GraduationCap,
-    tag: "B2C",
-    title: "اشتراك أفراد",
-    price: "٢٩–٤٩",
-    unit: "ريال / شهر",
-    desc: "خطط شهرية وسنوية للطالب ووليّ الأمر، مع خطة مجانية محدودة.",
-  },
-  {
-    icon: Users,
-    tag: "B2C",
-    title: "الباقة العائلية",
-    price: "٦٩",
-    unit: "ريال / شهر",
-    desc: "متابعة عدّة أبناء من اشتراك واحد بخصم عائلي.",
-  },
-  {
-    icon: Building2,
-    tag: "B2B",
-    title: "ترخيص مدرسي",
-    price: "لكل مقعد",
-    unit: "/ سنويًّا",
-    desc: "ترخيص لكل مقعد مع لوحات إدارة ومعلّم كاملة.",
-  },
-  {
-    icon: Landmark,
-    tag: "B2G",
-    title: "ترخيص مؤسسي / حكومي",
-    price: "عرض",
-    unit: "مخصّص",
-    desc: "لإدارات التعليم والإشراف على مستوى المنطقة أو الوزارة.",
-  },
-];
-
-const DEMO_LABELS = {
-  student: "طالب",
-  parent: "وليّ أمر",
-  teacher: "معلّم",
-  school: "إدارة المدرسة",
-  supervisor: "إشراف تربوي",
-  system: "مدير النظام",
-};
 
 export default function Landing({ onEnter }) {
+  const { lang } = useLang();
+  const [activeStage, setActiveStage] = useState("secondary");
+  const subjects = stageSubjects[activeStage];
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".ld-reveal").forEach((el) => observer.observe(el));
+
+    const art = document.querySelector(".ld-hero-visual");
+    const move = (e) => {
+      if (!art) return;
+      const r = art.getBoundingClientRect();
+      art.style.setProperty("--rx", `${((e.clientY-r.top)/r.height-.5)*-5}deg`);
+      art.style.setProperty("--ry", `${((e.clientX-r.left)/r.width-.5)*7}deg`);
+    };
+    const reset = () => { if (art) { art.style.setProperty("--rx", "0deg"); art.style.setProperty("--ry", "0deg"); } };
+    art?.addEventListener("pointermove", move);
+    art?.addEventListener("pointerleave", reset);
+    return () => { observer.disconnect(); art?.removeEventListener("pointermove", move); art?.removeEventListener("pointerleave", reset); };
+  }, []);
+
   return (
-    <div className="landing" dir="rtl">
+    <div className="landing" dir={lang === "en" ? "ltr" : "rtl"}>
       <header className="ld-nav">
         <div className="ld-nav-inner">
           <Wordmark size="sm" />
-          <nav className="ld-nav-links">
-            <a href="#ld-how">كيف تعمل</a>
-            <a href="#ld-roles">الأدوار</a>
-            <a href="#ld-features">المميزات</a>
-            <a href="#ld-compare">لماذا نحن</a>
-            <a href="#ld-pricing">الأسعار</a>
+          <nav className="ld-nav-links" aria-label="التنقل الرئيسي">
+            <a href="#experience">التجربة</a>
+            <a href="#journey">كيف تعمل</a>
+            <a href="#roles">لمن المنصة؟</a>
+            <a href="#features">المميزات</a>
           </nav>
           <div className="ld-nav-actions">
             <LangToggle />
-            <button className="btn btn-primary" onClick={onEnter}>
-              تسجيل الدخول
-            </button>
+            <button className="ld-login" onClick={onEnter}>تسجيل الدخول <ArrowUpLeft size={16}/></button>
           </div>
         </div>
       </header>
 
       <main>
-        {/* Hero */}
         <section className="ld-hero">
-          <div className="ld-hero-inner">
-            <span className="ld-kicker">
-              <Sparkles size={14} /> منصّة تعليمية عربية مبنيّة على الذكاء
-              الاصطناعي — للسوق السعودي والخليجي
-            </span>
-            <h1>
-              مدرستك الذكية التي <em>تشرح</em> وتُلخّص
-              <br />
-              وتختبر بعد كل درس
-            </h1>
-            <p className="ld-hero-sub">
-              طاقات سكول تحوّل كل درس إلى رحلة تعلّم كاملة: شرح تفاعلي، تلخيص
-              ذكي، اختبار فوري بعد الدرس، وامتحان لكل وحدة — ثم تشخيص دقيق
-              للفجوات وخطة تفوّق شخصية، وتُدار بالبيانات عبر ستة أدوار من الطالب
-              حتى الإشراف التربوي والوزارة.
-            </p>
-            <div className="ld-hero-cta">
-              <button className="btn btn-primary btn-lg" onClick={onEnter}>
-                جرّب الحسابات التجريبية
-                <ChevronLeft size={18} />
+          <div className="ld-hero-copy">
+            <div className="ld-eyebrow"><span className="ld-pulse"/> تعلّم أذكى، خطوة بخطوة</div>
+            <h1>كل درس يتحوّل إلى<br/><span>رحلة تعلّم ذكية.</span></h1>
+            <p>طاقات سكول تجمع الشرح والتلخيص والاختبارات وتحليل التقدّم في تجربة عربية حديثة تساعد الطالب على الفهم، لا الحفظ فقط.</p>
+            <div className="ld-hero-actions">
+              <button className="ld-btn ld-btn-primary" onClick={onEnter}>ابدأ تجربتك <ChevronLeft size={18}/></button>
+              <a className="ld-btn ld-btn-soft" href="#journey"><Play size={17} fill="currentColor"/> اكتشف كيف تعمل</a>
+            </div>
+            <div className="ld-proof-row">
+              <span><Check size={15}/> تجربة عربية RTL</span>
+              <span><Check size={15}/> تعمل على كل الأجهزة</span>
+              <span><Check size={15}/> متاحة ٢٤/٧</span>
+            </div>
+          </div>
+
+          <div className="ld-hero-visual" aria-hidden="true">
+            <div className="ld-ambient ld-ambient-a"/><div className="ld-ambient ld-ambient-b"/>
+            <div className="ld-app-shell">
+              <div className="ld-app-top"><div className="ld-app-brand"><LogoMark size={28}/><b>لوحة الطالب</b></div><div className="ld-avatar">س</div></div>
+              <div className="ld-app-content">
+                <div className="ld-app-greeting"><div><small>مرحبًا 👋</small><h3>نكمل رحلتنا اليوم؟</h3></div><span className="ld-streak"><Zap size={14}/> ٧ أيام</span></div>
+                <div className="ld-app-stats">
+                  <div><small>نسبة الإتقان</small><strong>٨٧٪</strong><i><em style={{width:"87%"}}/></i></div>
+                  <div><small>دروس مكتملة</small><strong>١٢</strong><span>هذا الشهر</span></div>
+                  <div><small>اختبارات</small><strong>٩</strong><span>مكتملة</span></div>
+                </div>
+                <div className="ld-next-card">
+                  <div className="ld-next-icon"><Calculator size={22}/></div>
+                  <div><small>تابع من حيث توقفت</small><b>الرياضيات • المعادلات الخطية</b><span>الدرس ٤ من ٦</span></div>
+                  <button><ChevronLeft size={17}/></button>
+                </div>
+                <div className="ld-app-bottom">
+                  <div><span>تقدّم الأسبوع</span><b>ممتاز، استمر!</b></div>
+                  <div className="ld-bars"><i/><i/><i/><i/><i/><i/><i/></div>
+                </div>
+              </div>
+            </div>
+            <div className="ld-float ld-float-ai"><span><BrainCircuit size={18}/></span><div><b>المساعد الذكي</b><small>جاهز لشرح الفكرة</small></div></div>
+            <div className="ld-float ld-float-win"><span><Award size={18}/></span><div><b>إنجاز جديد</b><small>أكملت الوحدة بنجاح</small></div></div>
+          </div>
+        </section>
+
+        <section className="ld-signal ld-reveal">
+          <div><strong>٤</strong><span>أدوار مترابطة</span></div><i/>
+          <div><strong>٢٤/٧</strong><span>تعلّم في أي وقت</span></div><i/>
+          <div><strong>AI</strong><span>شرح وتقييم ذكي</span></div><i/>
+          <div><strong>RTL</strong><span>تجربة عربية أصيلة</span></div>
+        </section>
+
+        <section id="experience" className="ld-section ld-reveal">
+          <div className="ld-section-head ld-head-center">
+            <span>تجربة مصممة للطالب</span>
+            <h2>ابدأ من مرحلتك، ووصل للمعلومة أسرع</h2>
+            <p>واجهة واضحة تنظّم المحتوى حسب المرحلة والمادة، وتبقي الخطوة التالية أمام الطالب دائمًا.</p>
+          </div>
+          <div className="ld-stage-switch" role="tablist" aria-label="اختر المرحلة الدراسية">
+            {stages.map((stage) => (
+              <button
+                key={stage.id}
+                type="button"
+                role="tab"
+                aria-selected={activeStage === stage.id}
+                className={activeStage === stage.id ? "active" : ""}
+                onClick={() => setActiveStage(stage.id)}
+              >
+                {stage.label}
               </button>
-              <a href="#ld-how" className="btn btn-ghost btn-lg">
-                شاهد كيف تعمل المنصّة
-              </a>
-            </div>
-            <ul className="ld-trust">
-              {TRUST_POINTS.map((t) => (
-                <li key={t}>
-                  <Check size={16} /> {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="ld-hero-art" aria-hidden="true">
-            <div className="ld-hero-glow" />
-            <LogoMark size={120} />
-          </div>
-        </section>
-
-        {/* Problem / Solution */}
-        <section className="ld-section ld-problem">
-          <div className="ld-grid-2">
-            <div className="ld-card ld-card-muted">
-              <span className="ld-card-kicker">المشكلة</span>
-              <h3>المنافسون يبيعون ساعات معلّم</h3>
-              <p>
-                منصّات مثل «معلمي» و«تدريس أون لاين» تعمل بنموذج سوق حصص خصوصية:
-                مكلفة، محكومة بعدد ساعات المعلمين، بلا متابعة مستمرة ولا تقييم
-                آلي ذكي ولا منظومة مؤسسية للمدارس والجهات.
-              </p>
-            </div>
-            <div className="ld-card ld-card-brand">
-              <span className="ld-card-kicker">الحلّ</span>
-              <h3>منتج رقمي ذكي يعمل ٢٤/٧</h3>
-              <p>
-                شرح وتلخيص وتقييم آلي لكل درس ووحدة بتكلفة حدّية منخفضة وقابلية
-                توسّع عالية، مع لوحات لكل دور تحوّل البيانات إلى قرار تربوي —
-                تعليم شخصي عالي الجودة في متناول كل طالب.
-              </p>
-            </div>
-          </div>
-          <blockquote className="ld-quote">
-            <Quote size={22} />
-            المنافس يبيع ساعات معلّم؛ نحن نبني مدرسة رقمية ذكية تعلّم وتقيّم
-            وتُدار بالبيانات.
-          </blockquote>
-        </section>
-
-        {/* How it works */}
-        <section id="ld-how" className="ld-section">
-          <SectionHead
-            kicker="رحلة الدرس"
-            title="من الشرح إلى الإتقان في أربع خطوات"
-            desc="التدفّق التعليمي الذي يميّز طاقات سكول عن أي سوق حصص خصوصية."
-          />
-          <div className="ld-steps">
-            {HOW_STEPS.map((s, i) => (
-              <div className="ld-step" key={s.title}>
-                <span className="ld-step-num">{i + 1}</span>
-                <s.icon size={22} />
-                <h4>{s.title}</h4>
-                <p>{s.desc}</p>
-              </div>
             ))}
           </div>
-        </section>
-
-        {/* Roles */}
-        <section id="ld-roles" className="ld-section ld-alt">
-          <SectionHead
-            kicker="القسم ٥ — الأدوار"
-            title="ستّة أدوار، لكل منها لوحته الخاصة"
-            desc="منظومة أدوار متكاملة تخدم الطالب ووليّ الأمر والمعلّم والإدارة والإشراف التربوي ومدير النظام."
-          />
-          <div className="ld-roles-grid">
-            {ROLE_ORDER.map((id) => {
-              const r = ROLES[id];
-              const Icon = ROLE_ICONS[id];
-              return (
-                <div className="ld-role-card" key={id}>
-                  <span className="ld-role-icon">
-                    <Icon size={20} />
-                  </span>
-                  <h4>{r.long}</h4>
-                  <p>{r.desc}</p>
-                </div>
-              );
-            })}
+          <div className="ld-subjects" key={activeStage}>
+            {subjects.map(({icon:Icon,label}, i)=><div className="ld-subject ld-subject-enter" key={label} style={{"--delay":`${i*65}ms`}}><span><Icon size={22}/></span><b>{label}</b><small>شرح • مراجعة • اختبار</small><ChevronLeft size={16}/></div>)}
           </div>
         </section>
 
-        {/* Feature engines */}
-        <section id="ld-features" className="ld-section">
-          <SectionHead
-            kicker="القسم ٦ — الميزات"
-            title="محرّكات المنصّة الأساسية"
-            desc="ملاحم الميزات (Epics) من E1 إلى E13، جاهزة كخارطة مايلستون."
-          />
-          <div className="ld-engine-grid">
-            {FEATURE_ENGINES.map((e) => (
-              <div className="ld-engine-card" key={e.title}>
-                <div className="ld-engine-head">
-                  <span className="ld-engine-icon">
-                    <e.icon size={20} />
-                  </span>
-                  <span className="ld-tag">{e.tag}</span>
-                </div>
-                <h4>{e.title}</h4>
-                <ul>
-                  {e.points.map((p) => (
-                    <li key={p}>
-                      <Check size={14} /> {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        <section id="journey" className="ld-section ld-journey ld-reveal">
+          <div className="ld-section-head">
+            <span>من الفهم إلى الإتقان</span>
+            <h2>مسار واحد واضح.<br/>بدون تشتّت.</h2>
+            <p>بدل التنقل بين مصادر متعددة، يعيش الطالب دورة التعلّم كاملة داخل طاقات سكول.</p>
+          </div>
+          <div className="ld-journey-grid">
+            {journey.map(({icon:Icon,n,title,desc})=><article className="ld-journey-card" key={n}><div className="ld-journey-top"><span>{n}</span><Icon size={24}/></div><h3>{title}</h3><p>{desc}</p></article>)}
           </div>
         </section>
 
-        {/* Competitive comparison */}
-        <section id="ld-compare" className="ld-section ld-alt">
-          <SectionHead
-            kicker="لماذا طاقات سكول"
-            title="مدرسة رقمية ذكية، لا سوق حصص"
-            desc="مقارنة مباشرة مع نموذج «الحصة الخصوصية» السائد في السوق."
-          />
-          <div className="ld-compare-table-wrap">
-            <table className="ld-compare-table">
-              <thead>
-                <tr>
-                  <th>القدرة / الميزة</th>
-                  <th className="brand">طاقات سكول</th>
-                  <th>منصّات الحصص الخصوصية</th>
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE_ROWS.map((row) => (
-                  <tr key={row}>
-                    <td>{row}</td>
-                    <td className="brand">
-                      <Check size={16} />
-                    </td>
-                    <td className="muted">—</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <section className="ld-ai-showcase ld-reveal">
+          <div className="ld-ai-copy"><span className="ld-kicker"><Sparkles size={15}/> ذكاء اصطناعي داخل رحلة التعلّم</span><h2>لا يكتفي بإخبار الطالب أنه أخطأ.</h2><p>يشرح الفكرة، يساعد على المراجعة، ثم يستخدم نتائج التقييم لإظهار ما يحتاج الطالب إلى تحسينه بعد ذلك.</p><ul><li><Check size={17}/> شرح مبسّط مرتبط بالدرس</li><li><Check size={17}/> تغذية راجعة بعد الاختبار</li><li><Check size={17}/> رؤية أوضح لنقاط القوة والاحتياج</li></ul></div>
+          <div className="ld-ai-demo">
+            <div className="ld-chat-head"><span><BrainCircuit size={19}/></span><div><b>مساعد طاقات الذكي</b><small><i/> متاح الآن</small></div></div>
+            <div className="ld-chat-bubble user">ما الفرق بين المحيط والمساحة؟</div>
+            <div className="ld-chat-bubble ai"><Sparkles size={15}/><p><b>فكّر فيها بهذه الطريقة:</b><br/>المحيط يقيس طول الحدود حول الشكل، بينما المساحة تقيس الجزء الموجود داخله.</p></div>
+            <div className="ld-chat-actions"><span>شرح أبسط</span><span>أعطني مثالًا</span><span>اختبرني</span></div>
           </div>
         </section>
 
-        {/* Security */}
-        <section className="ld-section">
-          <SectionHead
-            kicker="الثقة أولًا"
-            title="الأمان والخصوصية والامتثال"
-            desc="حماية بيانات القُصّر والامتثال شرط أساسي للثقة والتوسّع المؤسسي."
-          />
-          <div className="ld-security-grid">
-            <SecurityItem
-              icon={KeyRound}
-              title="مصادقة بخطوتين"
-              desc="تسجيل دخول آمن مع تحقّق 2FA وحدّ خمس محاولات."
-            />
-            <SecurityItem
-              icon={Lock}
-              title="RBAC دقيق"
-              desc="صلاحيات مقيّدة لكل وظيفة بحسب دور المستخدم."
-            />
-            <SecurityItem
-              icon={ShieldCheck}
-              title="حماية بيانات القُصّر"
-              desc="امتثال لنظام حماية البيانات، ولا استخدام لبيانات الطلاب في تدريب النماذج."
-            />
-            <SecurityItem
-              icon={FileClock}
-              title="سجلّ تدقيق كامل"
-              desc="كل إجراء حسّاس يُسجَّل تلقائيًّا ويُتاح للمراجعة."
-            />
-          </div>
+        <section id="roles" className="ld-section ld-reveal">
+          <div className="ld-section-head ld-head-center"><span>منظومة واحدة</span><h2>أربعة أدوار، تجربة مترابطة</h2><p>كل مستخدم يرى ما يحتاجه فقط، مع تجربة مخصصة لطبيعة دوره.</p></div>
+          <div className="ld-role-grid">{roles.map(({icon:Icon,title,desc},i)=><article className={`ld-role-card role-${i+1}`} key={title}><span><Icon size={23}/></span><h3>{title}</h3><p>{desc}</p><div>واجهة مخصصة <ChevronLeft size={15}/></div></article>)}</div>
         </section>
 
-        {/* Roadmap */}
-        <section className="ld-section ld-alt">
-          <SectionHead
-            kicker="القسم ٧"
-            title="خارطة الطريق"
-            desc="مراحل واضحة تتحوّل مباشرة إلى مايلستون قابلة للإطلاق."
-          />
-          <div className="ld-roadmap">
-            {ROADMAP.map((r) => (
-              <div className="ld-roadmap-item" key={r.phase}>
-                <span className="ld-roadmap-dot">
-                  <Map size={14} />
-                </span>
-                <div>
-                  <span className="ld-roadmap-phase">{r.phase}</span>
-                  <h4>{r.title}</h4>
-                  <p>{r.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <section id="features" className="ld-section ld-features ld-reveal">
+          <div className="ld-section-head"><span>مصممة لتبقى بسيطة</span><h2>قوة المنصة تظهر في التفاصيل.</h2><p>أدوات متكاملة، لكن الواجهة تبقى واضحة وسهلة الاستخدام.</p></div>
+          <div className="ld-benefit-grid">{benefits.map(({icon:Icon,title,desc},i)=><article className={i===0?"featured":""} key={title}><span><Icon size={22}/></span><h3>{title}</h3><p>{desc}</p>{i===0 && <div className="ld-feature-orbit"><Sparkles size={28}/></div>}</article>)}</div>
         </section>
 
-        {/* Pricing */}
-        <section id="ld-pricing" className="ld-section">
-          <SectionHead
-            kicker="القسم ٩"
-            title="نموذج العمل والتسعير"
-            desc="منتج رقمي قابل للتوسّع بتكلفة حدّية منخفضة — أرقام إرشادية مبدئية."
-          />
-          <div className="ld-pricing-grid">
-            {PRICING.map((p) => (
-              <div className="ld-price-card" key={p.title}>
-                <span className="ld-tag">{p.tag}</span>
-                <span className="ld-price-icon">
-                  <p.icon size={22} />
-                </span>
-                <h4>{p.title}</h4>
-                <div className="ld-price-value">
-                  {p.price} <small>{p.unit}</small>
-                </div>
-                <p>{p.desc}</p>
-              </div>
-            ))}
-          </div>
+        <section className="ld-trust-section ld-reveal">
+          <div className="ld-trust-icon"><Lock size={28}/></div>
+          <div><span>الثقة جزء من التصميم</span><h2>بيئة تعليمية تحترم الخصوصية.</h2><p>صلاحيات منفصلة لكل دور، إدارة جلسات، وسجل للإجراءات الحساسة ضمن تجربة مبنية لتكون آمنة وقابلة للإدارة.</p></div>
+          <div className="ld-trust-checks"><span><Check size={16}/> صلاحيات حسب الدور</span><span><Check size={16}/> إدارة جلسات آمنة</span><span><Check size={16}/> حماية بيانات المستخدم</span></div>
         </section>
 
-        {/* Demo accounts */}
-        <section className="ld-section ld-alt">
-          <SectionHead
-            kicker="جرّبها الآن"
-            title="ستّة حسابات تجريبية جاهزة"
-            desc="كلمة المرور password ورمز التحقق 123456 — بنطاق taqat.test"
-          />
-          <div className="ld-demo-grid">
-            {DEMO_ACCOUNTS.map((a) => {
-              const Icon = ROLE_ICONS[a.role] || GraduationCap;
-              return (
-                <div className="ld-demo-card" key={a.email}>
-                  <span className="ld-role-icon">
-                    <Icon size={18} />
-                  </span>
-                  <b>{DEMO_LABELS[a.role]}</b>
-                  <code dir="ltr">{a.email}</code>
-                </div>
-              );
-            })}
-          </div>
-          <div className="ld-demo-cta">
-            <button className="btn btn-primary btn-lg" onClick={onEnter}>
-              تسجيل الدخول بحساب تجريبي
-              <ChevronLeft size={18} />
-            </button>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="ld-cta">
-          <Sparkles size={22} />
-          <h2>مدرستك الذكية التي تشرح، وتلخّص، وتختبر بعد كل درس</h2>
-          <p>
-            ثم تبني لكل طالب خطة تفوّق — وتُدار ببيانات تصل إلى الإدارة المدرسية
-            والإشراف التربوي.
-          </p>
-          <button className="btn btn-primary btn-lg" onClick={onEnter}>
-            ابدأ الآن
-            <ChevronLeft size={18} />
-          </button>
+        <section className="ld-final ld-reveal">
+          <div className="ld-final-glow"/><LogoMark size={42}/><span>جاهز تشوف طاقات سكول من الداخل؟</span><h2>التعليم أذكى عندما تكون<br/>كل خطوة واضحة.</h2><p>ادخل إلى المنصة واستكشف تجربة التعلّم ولوحات المستخدمين.</p><button className="ld-btn ld-btn-light" onClick={onEnter}>استكشف المنصة <ChevronLeft size={18}/></button>
         </section>
       </main>
 
-      <footer className="ld-footer">
-        <Wordmark size="sm" />
-        <p>
-          طاقات سكول — منصّة تعليمية ذكية عربية. الإصدار 1.0 • أغسطس 2026. إعداد
-          فريق طاقات.
-        </p>
-        <div className="ld-footer-links">
-          <a href="#ld-features">المميزات</a>
-          <a href="#ld-roles">الأدوار</a>
-          <a href="#ld-pricing">الأسعار</a>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-function SectionHead({ kicker, title, desc }) {
-  return (
-    <div className="ld-section-head">
-      <span className="ld-kicker">{kicker}</span>
-      <h2>{title}</h2>
-      {desc && <p>{desc}</p>}
-    </div>
-  );
-}
-
-function SecurityItem({ icon: Icon, title, desc }) {
-  return (
-    <div className="ld-security-item">
-      <span className="ld-role-icon">
-        <Icon size={20} />
-      </span>
-      <h4>{title}</h4>
-      <p>{desc}</p>
+      <footer className="ld-footer"><Wordmark size="sm"/><p>منصة تعليمية عربية لتجربة تعلّم أكثر وضوحًا وذكاءً.</p><div><a href="#experience">التجربة</a><a href="#features">المميزات</a><button onClick={onEnter}>تسجيل الدخول</button></div></footer>
     </div>
   );
 }
