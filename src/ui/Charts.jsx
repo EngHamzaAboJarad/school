@@ -1,4 +1,5 @@
 import { cx } from "./Primitives";
+import { CountUp } from "./motion";
 
 export const masteryTone = (v) => (v == null ? "none" : v >= 85 ? "great" : v >= 70 ? "good" : v >= 55 ? "mid" : "low");
 
@@ -13,10 +14,11 @@ export function Ring({ value, size = 96, stroke = 9, label, sub, tone }) {
         <circle
           cx={size / 2} cy={size / 2} r={r} className={`ring-fill ring-${t}`} strokeWidth={stroke} fill="none" strokeLinecap="round"
           strokeDasharray={c} strokeDashoffset={c * (1 - Math.max(0, Math.min(100, value)) / 100)} transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          style={{ "--c": c }}
         />
       </svg>
       <div className="ring-center">
-        <b className="num">{Math.round(value)}<small>%</small></b>
+        <b className="num"><CountUp value={Math.round(value)} duration={1100} /><small>%</small></b>
         {sub && <span>{sub}</span>}
       </div>
     </div>
@@ -28,7 +30,7 @@ export function Bars({ data, height = 150, max = 100, unit = "" }) {
     <div className="bars" style={{ height }} role="img" aria-label="رسم أعمدة">
       {data.map((d, i) => (
         <div className="bar-col" key={i}>
-          <span className="bar-val num">{d.value == null ? "—" : `${d.value}${unit}`}</span>
+          <span className="bar-val num">{d.value == null ? "—" : <CountUp value={`${d.value}${unit}`} />}</span>
           <div className="bar-track">
             <i className={cx("bar", `bar-${d.tone || masteryTone(d.value)}`, d.active && "active")} style={{ height: `${Math.max(3, ((d.value || 0) / max) * 100)}%` }} />
           </div>
@@ -46,7 +48,7 @@ export function HBars({ data, max = 100, unit = "%" }) {
         <div className="hbar" key={i}>
           <div className="hbar-head">
             <span>{d.label}</span>
-            <b className="num">{d.value == null ? "—" : `${d.value}${unit}`}</b>
+            <b className="num">{d.value == null ? "—" : <CountUp value={`${d.value}${unit}`} />}</b>
           </div>
           <div className="hbar-track">
             <i className={`bar-${d.tone || masteryTone(d.value)}`} style={{ width: `${((d.value || 0) / max) * 100}%` }} />
@@ -90,11 +92,12 @@ export function LineChart({ values, labels, height = 170, min = 40, max = 100, t
           <text x={W - pad.r} y={y(target) - 5} className="lc-tick" textAnchor="end">الهدف {target}%</text>
         </g>
       )}
-      <path d={area} fill="url(#lc-fill)" />
-      <path d={line} className="lc-line" fill="none" />
+      <path d={area} fill="url(#lc-fill)" className="lc-area" />
+      <path d={line} className="lc-line" fill="none" pathLength={1} />
       {pts.map((p, i) => (
         <g key={i}>
-          <circle cx={p[0]} cy={p[1]} r={i === pts.length - 1 ? 5 : 3.5} className={i === pts.length - 1 ? "lc-dot last" : "lc-dot"} />
+          {i === pts.length - 1 && <circle cx={p[0]} cy={p[1]} r={5} className="lc-ping" />}
+          <circle cx={p[0]} cy={p[1]} r={i === pts.length - 1 ? 5 : 3.5} className={i === pts.length - 1 ? "lc-dot last" : "lc-dot"} style={{ "--k": i }} />
           {labels?.[i] && <text x={p[0]} y={H - 6} className="lc-tick" textAnchor="middle">{labels[i]}</text>}
         </g>
       ))}
@@ -141,7 +144,7 @@ export function Spark({ values, tone = "gold" }) {
   const pts = values.map((v, i) => `${(i / (values.length - 1)) * W},${H - 3 - ((v - min) / (max - min || 1)) * (H - 6)}`).join(" ");
   return (
     <svg className={`spark spark-${tone}`} viewBox={`0 0 ${W} ${H}`} width={W} height={H} aria-hidden="true">
-      <polyline points={pts} fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points={pts} fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength={1} />
     </svg>
   );
 }

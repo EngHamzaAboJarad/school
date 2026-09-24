@@ -6,6 +6,7 @@ import { shuffle } from "../../lib/rng";
 import { QUESTION_TYPES } from "../../data/curriculum";
 import { scoreAttempt, aiGradeEssay } from "../../lib/grading";
 import { levelLabel } from "../../lib/format";
+import { celebrate } from "../../ui/motion";
 
 const LETTERS = ["أ", "ب", "ج", "د", "هـ"];
 
@@ -211,6 +212,12 @@ export function ResultView({ attempt, questions, title, objectives, onRetry, onR
   const answeredQs = questions.filter((q) => q.type !== "essay" && attempt.items[q.id]);
   const tone = attempt.score >= 85 ? "success" : attempt.score >= 70 ? "info" : "warn";
   const message = attempt.score >= 85 ? "أداء ممتاز! أتقنت هذا الجزء." : attempt.score >= 70 ? "أداء جيد — راجع الأخطاء لترفع إتقانك." : "لا بأس — خطة علاجية قصيرة ستساعدك على التقدّم.";
+
+  useEffect(() => {
+    if (attempt.score < 85) return undefined;
+    const t = window.setTimeout(() => celebrate(), 500);
+    return () => window.clearTimeout(t);
+  }, [attempt.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="result stack">

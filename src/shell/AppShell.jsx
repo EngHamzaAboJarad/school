@@ -18,6 +18,7 @@ export default function AppShell({ page, go, children }) {
   const [profileOpen, setProfileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const role = user.role;
   const groups = NAV[role];
 
@@ -41,6 +42,28 @@ export default function AppShell({ page, go, children }) {
   const unread = notifs.filter((n) => !n.read).length;
 
   useEffect(() => setDrawer(false), [page]);
+  // ظلّ الشريط العلوي وخط تقدّم التمرير أسفله
+  useEffect(() => {
+    const root = document.documentElement;
+    let raf = 0;
+    const update = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const max = root.scrollHeight - root.clientHeight;
+        root.style.setProperty("--scroll", max > 0 ? String(Math.min(1, window.scrollY / max)) : "0");
+        setScrolled(window.scrollY > 6);
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      root.style.removeProperty("--scroll");
+    };
+  }, [page]);
   useEffect(() => {
     const onKey = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
@@ -97,7 +120,7 @@ export default function AppShell({ page, go, children }) {
       {drawer && <div className="scrim" onClick={() => setDrawer(false)} />}
 
       <div className="main">
-        <header className="topbar">
+        <header className={cx("topbar", scrolled && "scrolled")}>
           <button className="icon-btn menu-btn" onClick={() => setDrawer(true)} aria-label="فتح القائمة"><Menu size={21} /></button>
           <div className="crumbs">
             <span>{ROLES[role].long}</span>

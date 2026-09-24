@@ -9,6 +9,7 @@ import "./styles/auth.css";
 import "./styles/pages.css";
 import "./styles/roles.css";
 import "./styles/landing.css";
+import "./styles/motion.css";
 
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>

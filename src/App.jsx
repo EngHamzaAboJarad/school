@@ -6,6 +6,7 @@ import Landing from "./marketing/Landing";
 import AppShell from "./shell/AppShell";
 import { applyPrefs, loadPrefs } from "./shell/SettingsDialog";
 import { useRoute } from "./lib/router";
+import { initMotion } from "./ui/motion";
 import { flatNav, pageLabel } from "./data/nav";
 import { ROLES } from "./data/people";
 import StudentPages from "./roles/student";
@@ -60,6 +61,7 @@ function Routed() {
 
 export default function App() {
   useEffect(() => applyPrefs(loadPrefs()), []);
+  useEffect(() => initMotion(), []);
   return (
     <StoreProvider>
       <ToastProvider>

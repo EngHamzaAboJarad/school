@@ -534,16 +534,6 @@ html:has(.landing) {
   color: var(--nv-700);
 }
 
-.ld-tag {
-  padding: 2px 9px;
-  border: 1px solid var(--gold-200);
-  border-radius: 999px;
-  background: var(--gold-50);
-  color: var(--gold-700);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
 .ld-pain,
 .ld-role-card,
 .ld-engine-card,
@@ -1050,22 +1040,56 @@ html:has(.landing) {
 }
 
 .ld-cost-track {
-  height: 14px;
+  height: 16px;
   border-radius: 10px;
   background: var(--sand-100);
   overflow: hidden;
 }
 
+/* الشريط يبدأ من طرف الخط؛ اللون الفاتح حتى أعلى سعر، والداكن حتى أدنى سعر */
 .ld-cost-track i {
   display: block;
-  min-width: 12px;
+  min-width: 28px;
   height: 100%;
   border-radius: 10px;
-  background: var(--nv-300);
+  background: var(--nv-200);
+  overflow: hidden;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s;
+}
+
+html[dir="rtl"] .ld-cost-track i {
+  transform-origin: right center;
+}
+
+.ld-cost-track i b {
+  display: block;
+  height: 100%;
+  background: var(--nv-400);
 }
 
 .ld-cost-track i.brand {
-  background: linear-gradient(90deg, var(--gold-300), var(--gold-500));
+  background: var(--gold-300);
+}
+
+.ld-cost-track i.brand b {
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-600));
+}
+
+.ld-cost-row+.ld-cost-row .ld-cost-track i {
+  transition-delay: 0.55s;
+}
+
+.landing [data-rv].in .ld-cost-track i {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ld-cost-track i {
+    transform: none;
+    transition: none;
+  }
 }
 
 .ld-cost small {

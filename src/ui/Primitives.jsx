@@ -2,6 +2,7 @@ import { useEffect, useId } from "react";
 import { createPortal } from "react-dom";
 import { X, Inbox } from "lucide-react";
 import { initials } from "../lib/format";
+import { CountUp } from "./motion";
 
 export const cx = (...a) => a.filter(Boolean).join(" ");
 
@@ -64,7 +65,7 @@ export function Stat({ label, value, unit, foot, icon: Icon, tone = "emerald", r
         )}
       </div>
       <div className="stat-value num">
-        {value}
+        <CountUp value={value} />
         {unit && <small>{unit}</small>}
       </div>
       {foot && <div className="stat-foot">{foot}</div>}

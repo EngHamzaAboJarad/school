@@ -224,7 +224,6 @@ export const ABOUT = {
 export const PRICING = [
   {
     icon: GraduationCap,
-    tag: "B2C",
     title: "اشتراك أفراد",
     price: "٢٩–٤٩",
     unit: "ريال / شهر",
@@ -235,7 +234,6 @@ export const PRICING = [
   },
   {
     icon: Users,
-    tag: "B2C",
     title: "الباقة العائلية",
     price: "٦٩",
     unit: "ريال / شهر",
@@ -245,7 +243,6 @@ export const PRICING = [
   },
   {
     icon: Building2,
-    tag: "B2B",
     title: "ترخيص مدرسي",
     price: "لكل مقعد",
     unit: "/ سنويًّا",
@@ -255,7 +252,6 @@ export const PRICING = [
   },
   {
     icon: Landmark,
-    tag: "B2G",
     title: "ترخيص مؤسسي / حكومي",
     price: "عرض",
     unit: "مخصّص",

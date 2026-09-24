@@ -25,6 +25,7 @@ import { useLang } from "../i18n";
 import { ROLES, DEMO_ACCOUNTS } from "../data/people";
 import TryQuiz from "./TryQuiz";
 import ContactSection from "./ContactSection";
+import { CountUp } from "../ui/motion";
 import {
   ABOUT,
   COMPARE_ROWS,
@@ -221,7 +222,9 @@ export default function Landing({ onEnter, onJoin }) {
           <div className="ld-wrap ld-stats-grid">
             {STATS.map(([n, label]) => (
               <div key={label}>
-                <b>{n}</b>
+                <b>
+                  <CountUp value={n} duration={1400} />
+                </b>
                 <span>{label}</span>
               </div>
             ))}
@@ -389,13 +392,9 @@ export default function Landing({ onEnter, onJoin }) {
                     <b className={it.brand ? "brand" : ""}>{it.text}</b>
                   </div>
                   <div className="ld-cost-track" aria-hidden="true">
-                    <i
-                      className={it.brand ? "brand" : ""}
-                      style={{
-                        marginInlineStart: `${(it.range[0] / COST_BARS.max) * 100}%`,
-                        width: `${((it.range[1] - it.range[0]) / COST_BARS.max) * 100}%`,
-                      }}
-                    />
+                    <i className={it.brand ? "brand" : ""} style={{ width: `${(it.range[1] / COST_BARS.max) * 100}%` }}>
+                      <b style={{ width: `${(it.range[0] / it.range[1]) * 100}%` }} />
+                    </i>
                   </div>
                 </div>
               ))}
@@ -479,7 +478,6 @@ export default function Landing({ onEnter, onJoin }) {
               {PRICING.map((p) => (
                 <div className={`ld-price-card ${p.featured ? "featured" : ""}`} key={p.title}>
                   {p.featured && <span className="ld-ribbon">خطة مجانية متاحة</span>}
-                  <span className="ld-tag">{p.tag}</span>
                   <span className="ld-price-icon">
                     <p.icon size={22} />
                   </span>
