@@ -7,6 +7,11 @@ html:has(.landing) {
   scroll-behavior: smooth;
 }
 
+/* حجم الخط الذي يختاره المستخدم من الإعدادات خاص بالمنصّة الداخلية؛ الصفحة الرئيسية تبقى بالحجم العادي */
+html[data-textsize]:has(.landing) {
+  font-size: 112.5%;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:has(.landing) {
     scroll-behavior: auto;
