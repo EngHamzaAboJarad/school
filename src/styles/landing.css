@@ -145,7 +145,12 @@ html:has(.landing) {
 .ld-hero-inner h1 em {
   font-style: normal;
   color: var(--gold-600);
-  background: linear-gradient(transparent 66%, var(--gold-100) 66%);
+  /* تحديد بلون فاتح خلف الكلمة: يرتبط بخط الكتابة لا بارتفاع صندوق الخط */
+  text-decoration: underline;
+  text-decoration-color: var(--gold-200);
+  text-decoration-thickness: 0.34em;
+  text-decoration-skip-ink: none;
+  text-underline-offset: -0.14em;
 }
 
 .ld-hero-sub {
