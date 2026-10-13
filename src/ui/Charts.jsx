@@ -25,12 +25,16 @@ export function Ring({ value, size = 96, stroke = 9, label, sub, tone }) {
   );
 }
 
-export function Bars({ data, height = 150, max = 100, unit = "" }) {
+// valueLabels: "all" (افتراضي) أو "last" لعرض قيمة آخر عمود فقط؛ بقية القيم في تلميح المرور (title) ووصف القارئ.
+export function Bars({ data, height = 150, max = 100, unit = "", valueLabels = "all", label }) {
+  const summary = label || data.map((d) => `${d.label}: ${d.value == null ? "—" : `${d.value}${unit}`}`).join(" • ");
   return (
-    <div className="bars" style={{ height }} role="img" aria-label="رسم أعمدة">
+    <div className="bars" style={{ height }} role="img" aria-label={summary}>
       {data.map((d, i) => (
-        <div className="bar-col" key={i}>
-          <span className="bar-val num">{d.value == null ? "—" : <CountUp value={`${d.value}${unit}`} />}</span>
+        <div className="bar-col" key={i} title={d.title || `${d.label}: ${d.value == null ? "—" : `${d.value}${unit}`}`}>
+          <span className="bar-val num" aria-hidden={valueLabels === "last" && i !== data.length - 1 ? true : undefined} style={valueLabels === "last" && i !== data.length - 1 ? { visibility: "hidden" } : undefined}>
+            {d.value == null ? "—" : <CountUp value={`${d.value}${unit}`} />}
+          </span>
           <div className="bar-track">
             <i className={cx("bar", `bar-${d.tone || masteryTone(d.value)}`, d.active && "active")} style={{ height: `${Math.max(3, ((d.value || 0) / max) * 100)}%` }} />
           </div>

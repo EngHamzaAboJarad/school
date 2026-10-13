@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { StoreProvider, useStore } from "./store/StoreProvider";
 import { ToastProvider } from "./ui/Brand";
+import { ConfirmProvider } from "./ui/Confirm";
 import AuthScreen from "./auth/AuthScreen";
 import Landing from "./marketing/Landing";
 import AppShell from "./shell/AppShell";
@@ -15,6 +16,9 @@ import TeacherPages from "./roles/teacher";
 import SchoolPages from "./roles/school";
 import SupervisorPages from "./roles/supervisor";
 import SystemPages from "./roles/system";
+
+// معرض المكوّنات: وضع التطوير فقط (يُحذف من نسخة الإنتاج)
+const UiKit = import.meta.env.DEV ? lazy(() => import("./dev/UiKit")) : null;
 
 const PAGES = {
   student: StudentPages,
@@ -35,6 +39,8 @@ function Routed() {
     const label = pageLabel(user.role, page);
     document.title = `${label ? `${label} — ` : ""}${ROLES[user.role].long} | طاقات سكول`;
   }, [user, page]);
+
+  if (UiKit && page === "ui-kit") return <Suspense fallback={null}><UiKit /></Suspense>;
 
   if (!user)
     return page === "login" ? (
@@ -65,7 +71,9 @@ export default function App() {
   return (
     <StoreProvider>
       <ToastProvider>
-        <Routed />
+        <ConfirmProvider>
+          <Routed />
+        </ConfirmProvider>
       </ToastProvider>
     </StoreProvider>
   );

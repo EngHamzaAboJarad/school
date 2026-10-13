@@ -4,6 +4,9 @@ const isBrowser = typeof window !== "undefined";
 const AR_DIGITS = "٠١٢٣٤٥٦٧٨٩";
 
 // يحترم إعداد «الحركات والانتقالات» في الإعدادات وتفضيل النظام لتقليل الحركة
+// داخل التطبيق (بعد تسجيل الدخول) تُطبَّق سياسة حركة وظيفية فقط: لا عدّ تصاعدي ولا تموّج ولا إضاءة
+export const inApp = () => isBrowser && document.body.classList.contains("in-app");
+
 export const motionOff = () => {
   if (!isBrowser) return true;
   if (document.documentElement.dataset.motion === "off") return true;
@@ -34,11 +37,11 @@ function format(n, p) {
 
 // عدّ تصاعدي سلس: يبدأ من الصفر عند الظهور، ثم ينتقل من القيمة الحالية إلى القيمة الجديدة عند تغيّرها
 export function useCountUp(target, { duration = 900, enabled = true } = {}) {
-  const skip = !enabled || motionOff();
+  const skip = !enabled || motionOff() || inApp();
   const [val, setVal] = useState(skip ? target : 0);
   const from = useRef(skip ? target : 0);
   useEffect(() => {
-    if (!enabled || motionOff()) {
+    if (!enabled || motionOff() || inApp()) {
       from.current = target;
       setVal(target);
       return undefined;
@@ -94,7 +97,7 @@ export function initMotion() {
   if (!isBrowser) return () => {};
 
   const onDown = (e) => {
-    if (motionOff() || e.button > 0) return;
+    if (motionOff() || inApp() || e.button > 0) return;
     const host = e.target.closest?.(RIPPLE_HOSTS);
     if (!host || host.disabled || host.getAttribute("aria-disabled") === "true") return;
     let layer = host.querySelector(":scope > .rpl-layer");
@@ -116,7 +119,7 @@ export function initMotion() {
 
   let raf = 0;
   const onMove = (e) => {
-    if (e.pointerType === "touch") return;
+    if (e.pointerType === "touch" || inApp()) return;
     const el = e.target.closest?.(SPOTLIGHT);
     if (!el) return;
     const { clientX, clientY } = e;

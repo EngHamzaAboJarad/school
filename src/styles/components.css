@@ -1,0 +1,1852 @@
+/* ==========================================================================
+   App component layer (redesign)
+   Every rule is wrapped in :where(.in-app) — same specificity as the legacy
+   ui.css rule it replaces, loaded after it. Page-specific rules (pages.css,
+   roles.css) stay more specific and keep working. Landing/auth are untouched.
+   ========================================================================== */
+
+/* ───────── Page layout ───────── */
+:where(.in-app) .page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-8) var(--sp-12);
+}
+
+:where(.in-app) .page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  padding: 0;
+  margin-bottom: var(--sp-6);
+  border: 0;
+}
+
+:where(.in-app) .page-head::after {
+  display: none;
+}
+
+:where(.in-app) .page-head-copy {
+  min-width: 0;
+  flex: 1 1 360px;
+}
+
+:where(.in-app) .page-head h1 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--c-text);
+  margin-top: 2px;
+}
+
+:where(.in-app) .page-head p {
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  max-width: 72ch;
+  margin-top: var(--sp-1);
+}
+
+:where(.in-app) .page-actions {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+:where(.in-app) h1,
+:where(.in-app) h2 {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--c-text-muted);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-xs);
+  letter-spacing: 0;
+}
+
+:where(.in-app) .kicker.small {
+  display: block;
+  font-size: var(--fs-2xs);
+  margin-bottom: 2px;
+}
+
+:where(.in-app) .grid {
+  gap: var(--sp-4);
+}
+
+:where(.in-app) .split,
+:where(.in-app) .stack {
+  gap: var(--sp-4);
+}
+
+:where(.in-app) .mt {
+  margin-top: var(--sp-4);
+}
+
+:where(.in-app) .mt-sm {
+  margin-top: var(--sp-2);
+}
+
+:where(.in-app) .muted {
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .small {
+  font-size: var(--fs-sm);
+}
+
+/* ───────── Buttons ───────── */
+:where(.in-app) .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: var(--control-h);
+  padding: 0 var(--sp-4);
+  border-radius: var(--rad-md);
+  border: 1px solid transparent;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  box-shadow: none;
+  transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .btn:disabled {
+  opacity: 0.5;
+}
+
+:where(.in-app) .btn-sm {
+  height: var(--control-h-sm);
+  padding: 0 var(--sp-3);
+  font-size: var(--fs-xs);
+  border-radius: var(--rad-sm);
+  gap: 6px;
+}
+
+:where(.in-app) .btn-lg {
+  height: var(--touch);
+  padding: 0 var(--sp-5);
+  font-size: var(--fs-md);
+}
+
+:where(.in-app) .btn-icon {
+  width: var(--control-h);
+  padding: 0;
+}
+
+:where(.in-app) .btn-sm.btn-icon {
+  width: var(--control-h-sm);
+}
+
+:where(.in-app) .btn-primary {
+  background: var(--c-brand-800);
+  border-color: var(--c-brand-800);
+  color: #fff;
+}
+
+:where(.in-app) .btn-primary:hover:not(:disabled) {
+  background: var(--c-brand-950);
+  border-color: var(--c-brand-950);
+}
+
+:where(.in-app) .btn-gold {
+  background: var(--c-accent-300);
+  border-color: #c9a564;
+  color: var(--c-brand-950);
+  filter: none;
+}
+
+:where(.in-app) .btn-gold:hover:not(:disabled) {
+  background: #d5b373;
+  filter: none;
+}
+
+:where(.in-app) .btn-soft {
+  background: var(--c-surface-hover);
+  border-color: var(--c-border);
+  color: var(--c-text);
+}
+
+:where(.in-app) .btn-soft:hover:not(:disabled) {
+  background: var(--c-viz-track);
+}
+
+:where(.in-app) .btn-ghost {
+  background: var(--c-surface);
+  border-color: var(--c-border-strong);
+  color: var(--c-text-2);
+}
+
+:where(.in-app) .btn-ghost:hover:not(:disabled) {
+  background: var(--c-surface-hover);
+  border-color: var(--c-text-faint);
+  color: var(--c-text);
+}
+
+:where(.in-app) .btn-danger {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .btn-danger:hover:not(:disabled) {
+  background: #f6dad5;
+}
+
+:where(.in-app) .btn-danger-solid {
+  background: var(--c-danger);
+  border-color: var(--c-danger);
+  color: #fff;
+}
+
+:where(.in-app) .btn-danger-solid:hover:not(:disabled) {
+  background: #872a20;
+}
+
+:where(.in-app) .btn-link {
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-info);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+:where(.in-app) .btn-light {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #fff;
+}
+
+:where(.in-app) .btn-light:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+:where(.in-app) .icon-btn {
+  position: relative;
+  width: var(--control-h);
+  height: var(--control-h);
+  border-radius: var(--rad-md);
+  display: grid;
+  place-items: center;
+  color: var(--c-text-2);
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .icon-btn:hover {
+  background: var(--c-surface-hover);
+}
+
+@media (pointer: coarse) {
+
+  :where(.in-app) .btn,
+  :where(.in-app) .icon-btn {
+    min-height: var(--touch);
+  }
+
+  :where(.in-app) .icon-btn,
+  :where(.in-app) .btn-icon {
+    min-width: var(--touch);
+  }
+}
+
+/* Focus — visible everywhere, never removed */
+:where(.in-app) :focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+/* ───────── Cards ───────── */
+:where(.in-app) .card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--el-1);
+  background-image: none;
+}
+
+:where(.in-app) .card.flush {
+  padding: 0;
+  overflow: hidden;
+}
+
+:where(.in-app) .card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+:where(.in-app) .card-head h3 {
+  font-size: 0.9375rem;
+  font-weight: var(--fw-semibold);
+  color: var(--c-text);
+  line-height: var(--lh-tight);
+}
+
+:where(.in-app) .card.flush .card-head {
+  padding: var(--sp-4) var(--sp-5) 0;
+}
+
+:where(.in-app) .card-dark {
+  background: var(--c-brand-900);
+  border-color: var(--c-brand-950);
+  color: var(--c-text-on-dark);
+}
+
+:where(.in-app) .card-dark::before,
+:where(.in-app) .hero::before,
+:where(.in-app) .hero::after,
+:where(.in-app) .stat::after {
+  display: none;
+}
+
+:where(.in-app) .card-dark h3 {
+  color: #fff;
+}
+
+:where(.in-app) .card-dark .kicker {
+  color: var(--c-text-on-dark-muted);
+}
+
+:where(.in-app) .card-gold {
+  background: var(--c-accent-50);
+  border-color: var(--c-accent-100);
+}
+
+:where(.in-app) .pad {
+  padding: var(--sp-4) var(--sp-5);
+}
+
+/* Section header used inside cards and between page sections */
+:where(.in-app) .section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+  min-width: 0;
+}
+
+:where(.in-app) .section-head h2,
+:where(.in-app) .section-head h3 {
+  font-size: 0.9375rem;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-tight);
+  color: var(--c-text);
+}
+
+:where(.in-app) .section-head p {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  margin-top: 2px;
+}
+
+:where(.in-app) .section-head .row {
+  flex-wrap: nowrap;
+}
+
+/* ───────── Metric cards (legacy .stat + new .metric) ───────── */
+:where(.in-app) .stat,
+:where(.in-app) .metric {
+  position: relative;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--el-1);
+  min-width: 0;
+  overflow: visible;
+}
+
+:where(.in-app) .stat-top,
+:where(.in-app) .metric-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .stat-label,
+:where(.in-app) .metric-label {
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+:where(.in-app) .stat-icon,
+:where(.in-app) .metric-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--rad-md);
+  display: grid;
+  place-items: center;
+  background: var(--c-brand-50);
+  color: var(--c-brand-700);
+}
+
+:where(.in-app) .stat-gold .stat-icon {
+  background: var(--c-accent-50);
+  color: var(--c-accent-700);
+}
+
+:where(.in-app) .stat-blue .stat-icon {
+  background: var(--c-info-bg);
+  color: var(--c-info);
+}
+
+:where(.in-app) .stat-rose .stat-icon {
+  background: var(--c-danger-bg);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .stat-success .stat-icon {
+  background: var(--c-success-bg);
+  color: var(--c-success);
+}
+
+:where(.in-app) .stat-value,
+:where(.in-app) .metric-value {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-2xl);
+  line-height: 1.15;
+  color: var(--c-text);
+  margin-top: var(--sp-2);
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-1);
+  font-variant-numeric: normal;
+}
+
+:where(.in-app) .stat-value small,
+:where(.in-app) .metric-value small {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .stat-foot,
+:where(.in-app) .metric-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+  margin-top: var(--sp-1);
+}
+
+:where(.in-app) .metric-value.is-empty {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-medium);
+  color: var(--c-text-muted);
+  min-height: 31px;
+  align-items: center;
+}
+
+:where(.in-app) .metric-delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .metric-delta.good {
+  color: var(--c-success);
+}
+
+:where(.in-app) .metric-delta.bad {
+  color: var(--c-danger);
+}
+
+:where(.in-app) .metric-delta.flat {
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .metric-meter {
+  margin-top: var(--sp-3);
+}
+
+:where(.in-app) a.metric,
+:where(.in-app) button.metric {
+  display: block;
+  width: 100%;
+  text-align: start;
+  transition: border-color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) button.metric:hover {
+  border-color: var(--c-border-strong);
+}
+
+:where(.in-app) .metric.tone-warn-edge {
+  border-color: var(--c-warn-border);
+}
+
+:where(.in-app) .metric.tone-danger-edge {
+  border-color: var(--c-danger-border);
+}
+
+/* ───────── Badges & status ───────── */
+:where(.in-app) .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 var(--sp-2);
+  border-radius: var(--rad-sm);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface-2);
+  color: var(--c-text-2);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+:where(.in-app) .badge i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+:where(.in-app) .badge svg {
+  flex: none;
+}
+
+:where(.in-app) .badge-success {
+  background: var(--c-success-bg);
+  border-color: var(--c-success-border);
+  color: var(--c-success);
+}
+
+:where(.in-app) .badge-warn {
+  background: var(--c-warn-bg);
+  border-color: var(--c-warn-border);
+  color: var(--c-warn);
+}
+
+:where(.in-app) .badge-danger {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .badge-info {
+  background: var(--c-info-bg);
+  border-color: var(--c-info-border);
+  color: var(--c-info);
+}
+
+:where(.in-app) .badge-gold {
+  background: var(--c-accent-50);
+  border-color: var(--c-accent-100);
+  color: var(--c-accent-700);
+}
+
+:where(.in-app) .badge-emerald {
+  background: var(--c-brand-50);
+  border-color: var(--c-brand-100);
+  color: var(--c-brand-700);
+}
+
+:where(.in-app) .badge-dark {
+  background: var(--c-brand-800);
+  border-color: var(--c-brand-800);
+  color: #fff;
+}
+
+:where(.in-app) .badge-neutral {
+  background: var(--c-surface-2);
+}
+
+/* ───────── Tabs, segmented, chips, filter bar ───────── */
+:where(.in-app) .tabs {
+  display: flex;
+  gap: var(--sp-1);
+  border-bottom: 1px solid var(--c-border);
+  margin-bottom: var(--sp-5);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+:where(.in-app) .tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: var(--touch);
+  padding: 0 var(--sp-3);
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  border-radius: var(--rad-sm) var(--rad-sm) 0 0;
+}
+
+:where(.in-app) .tab:hover {
+  color: var(--c-text);
+}
+
+:where(.in-app) .tab.active {
+  color: var(--c-text);
+  font-weight: var(--fw-semibold);
+  border-bottom-color: var(--c-brand-800);
+}
+
+:where(.in-app) .tab-count {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--rad-full);
+  display: inline-grid;
+  place-items: center;
+  background: var(--c-surface-hover);
+  color: var(--c-text-2);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+}
+
+:where(.in-app) .tab.active .tab-count {
+  background: var(--c-brand-800);
+  color: #fff;
+}
+
+:where(.in-app) .segmented {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--rad-md);
+  background: var(--c-surface-hover);
+  border: 1px solid var(--c-border);
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+:where(.in-app) .segmented button {
+  height: 32px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--rad-sm);
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+:where(.in-app) .segmented button.active {
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-weight: var(--fw-semibold);
+  box-shadow: var(--el-1);
+}
+
+:where(.in-app) .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--rad-sm);
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-text-2);
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) button.chip:hover {
+  border-color: var(--c-border-strong);
+}
+
+:where(.in-app) .chip.active {
+  background: var(--c-brand-800);
+  border-color: var(--c-brand-800);
+  color: #fff;
+}
+
+:where(.in-app) .filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+:where(.in-app) .filter-bar>.grow {
+  flex: 1 1 220px;
+}
+
+/* ───────── Overlays: modal, drawer, confirm ───────── */
+:where(.in-app) .overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--sp-4);
+  background: rgba(14, 27, 51, 0.5);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+:where(.in-app) .modal {
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-lg);
+  box-shadow: var(--el-3);
+}
+
+:where(.in-app) .modal.wide {
+  width: min(900px, 100%);
+}
+
+:where(.in-app) .modal.sm {
+  width: min(440px, 100%);
+}
+
+:where(.in-app) .modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6) var(--sp-2);
+  flex: none;
+}
+
+:where(.in-app) .modal-head h3 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--c-text);
+  line-height: var(--lh-tight);
+}
+
+:where(.in-app) .modal-head .icon-btn {
+  margin: -6px;
+}
+
+:where(.in-app) .modal-body {
+  padding: var(--sp-3) var(--sp-6) var(--sp-5);
+  overflow-y: auto;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+
+:where(.in-app) .modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-6);
+  border-top: 1px solid var(--c-divider);
+  background: var(--c-surface-2);
+  border-radius: 0 0 var(--rad-lg) var(--rad-lg);
+  flex: none;
+}
+
+/* Drawer = side sheet on the inline-end edge */
+:where(.in-app) .overlay:has(> .modal.drawer) {
+  place-items: stretch end;
+  padding: 0;
+}
+
+:where(.in-app) .modal.drawer {
+  width: min(480px, 100%);
+  height: 100dvh;
+  max-height: none;
+  border-radius: 0;
+  border-width: 0;
+  border-inline-start-width: 1px;
+}
+
+:where(.in-app) .modal.drawer .modal-foot {
+  border-radius: 0;
+  margin-top: auto;
+}
+
+/* Confirmation dialog */
+:where(.in-app) .confirm-body {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+}
+
+:where(.in-app) .confirm-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--rad-md);
+  display: grid;
+  place-items: center;
+  background: var(--c-danger-bg);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .confirm-icon.tone-warn {
+  background: var(--c-warn-bg);
+  color: var(--c-warn);
+}
+
+:where(.in-app) .confirm-icon.tone-info {
+  background: var(--c-info-bg);
+  color: var(--c-info);
+}
+
+:where(.in-app) .confirm-body p {
+  color: var(--c-text-2);
+  font-size: var(--fs-sm);
+}
+
+/* ───────── Dropdown menu ───────── */
+:where(.in-app) .menu-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+:where(.in-app) .menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  inset-inline-end: 0;
+  z-index: var(--z-popover);
+  min-width: 200px;
+  padding: var(--sp-1);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-md);
+  box-shadow: var(--el-2);
+}
+
+:where(.in-app) .menu.up {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
+:where(.in-app) .menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  min-height: 36px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--rad-sm);
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+  text-align: start;
+  white-space: nowrap;
+}
+
+:where(.in-app) .menu-item:hover,
+:where(.in-app) .menu-item:focus-visible {
+  background: var(--c-surface-hover);
+  color: var(--c-text);
+  box-shadow: none;
+}
+
+:where(.in-app) .menu-item.danger {
+  color: var(--c-danger);
+}
+
+:where(.in-app) .menu-item:disabled {
+  opacity: 0.5;
+}
+
+:where(.in-app) .menu-sep {
+  height: 1px;
+  margin: var(--sp-1) 0;
+  background: var(--c-divider);
+}
+
+/* ───────── Form controls ───────── */
+:where(.in-app) .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+:where(.in-app) .field-label {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+  color: var(--c-text-2);
+}
+
+:where(.in-app) .field-hint {
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .field-error {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c-danger);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+}
+
+:where(.in-app) .form-grid {
+  gap: var(--sp-4);
+}
+
+:where(.in-app) .input {
+  width: 100%;
+  height: var(--control-h);
+  padding: 0 var(--sp-3);
+  border: 1px solid #b9b6aa;
+  border-radius: var(--rad-md);
+  background: var(--c-surface);
+  color: var(--c-text);
+  font-size: var(--fs-md);
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .input::placeholder {
+  color: var(--c-text-faint);
+}
+
+:where(.in-app) .input:hover:not(:disabled) {
+  border-color: var(--c-text-faint);
+}
+
+:where(.in-app) .input:focus {
+  outline: none;
+  border-color: var(--c-brand-800);
+  box-shadow: 0 0 0 3px rgba(56, 70, 94, 0.18);
+}
+
+:where(.in-app) .input[aria-invalid="true"] {
+  border-color: var(--c-danger);
+}
+
+:where(.in-app) .input:disabled {
+  background: var(--c-surface-hover);
+  color: var(--c-text-muted);
+  cursor: not-allowed;
+}
+
+:where(.in-app) .textarea {
+  height: auto;
+  min-height: 112px;
+  padding: var(--sp-2) var(--sp-3);
+  line-height: 1.7;
+  resize: vertical;
+}
+
+:where(.in-app) .select {
+  padding-inline-end: 34px;
+  background-position: left 12px center;
+}
+
+html[dir="ltr"] :where(.in-app) .select {
+  background-position: right 12px center;
+}
+
+@media (pointer: coarse) {
+  :where(.in-app) .input:not(.textarea) {
+    height: var(--touch);
+  }
+}
+
+:where(.in-app) .searchbox {
+  position: relative;
+  min-width: 220px;
+}
+
+:where(.in-app) .searchbox>svg {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 12px;
+  transform: translateY(-50%);
+  color: var(--c-text-muted);
+  pointer-events: none;
+}
+
+:where(.in-app) .searchbox>svg+.input {
+  padding-inline-start: 36px;
+}
+
+:where(.in-app) .toggle i {
+  background: #c7c4b9;
+}
+
+:where(.in-app) .toggle input:checked+i {
+  background: var(--c-brand-800);
+}
+
+/* ───────── Progress / meters ───────── */
+:where(.in-app) .progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--c-viz-track);
+  overflow: hidden;
+}
+
+:where(.in-app) .progress-lg {
+  height: 10px;
+  border-radius: 5px;
+}
+
+:where(.in-app) .progress-sm {
+  height: 4px;
+}
+
+:where(.in-app) .progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transition: width var(--dur-2) var(--ease);
+}
+
+:where(.in-app) .fill-emerald,
+:where(.in-app) .fill-great {
+  background: var(--c-success-mark);
+}
+
+:where(.in-app) .fill-good {
+  background: #5cc29c;
+}
+
+:where(.in-app) .fill-gold,
+:where(.in-app) .fill-mid,
+:where(.in-app) .fill-warn {
+  background: var(--c-warn-mark);
+}
+
+:where(.in-app) .fill-low,
+:where(.in-app) .fill-danger {
+  background: var(--c-danger-mark);
+}
+
+:where(.in-app) .fill-blue {
+  background: var(--c-info-mark);
+}
+
+:where(.in-app) .fill-brand {
+  background: var(--c-viz-1);
+}
+
+/* ───────── Avatars, list rows, tones ───────── */
+:where(.in-app) .avatar {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-semibold);
+  background: var(--c-brand-50);
+  color: var(--c-brand-800);
+  border: 1px solid var(--c-brand-100);
+}
+
+:where(.in-app) .avatar-gold {
+  background: var(--c-accent-50);
+  color: var(--c-accent-700);
+  border-color: var(--c-accent-100);
+}
+
+:where(.in-app) .list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-2);
+  border-bottom: 1px solid var(--c-divider);
+  border-radius: 0;
+  text-align: start;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .list-row:last-child {
+  border-bottom: 0;
+}
+
+:where(.in-app) .list-row.clickable {
+  border-radius: var(--rad-md);
+}
+
+:where(.in-app) .list-row.clickable:hover {
+  background: var(--c-surface-hover);
+}
+
+:where(.in-app) .row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--rad-md);
+}
+
+:where(.in-app) .row-main strong {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+}
+
+:where(.in-app) .row-main>span {
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .row-end {
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .tone-emerald {
+  background: var(--c-brand-50);
+  color: var(--c-brand-700);
+}
+
+:where(.in-app) .tone-success {
+  background: var(--c-success-bg);
+  color: var(--c-success);
+}
+
+:where(.in-app) .tone-gold {
+  background: var(--c-accent-50);
+  color: var(--c-accent-700);
+}
+
+:where(.in-app) .tone-blue,
+:where(.in-app) .tone-info {
+  background: var(--c-info-bg);
+  color: var(--c-info);
+}
+
+:where(.in-app) .tone-rose,
+:where(.in-app) .tone-danger {
+  background: var(--c-danger-bg);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .tone-warn {
+  background: var(--c-warn-bg);
+  color: var(--c-warn);
+}
+
+:where(.in-app) .tone-neutral {
+  background: var(--c-surface-hover);
+  color: var(--c-text-2);
+}
+
+/* ───────── Notices, empty, error, skeleton ───────── */
+:where(.in-app) .notice {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--rad-md);
+  border: 1px solid;
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .notice p {
+  color: inherit;
+  opacity: 1;
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .notice-info {
+  background: var(--c-info-bg);
+  border-color: var(--c-info-border);
+  color: var(--c-info);
+}
+
+:where(.in-app) .notice-warn {
+  background: var(--c-warn-bg);
+  border-color: var(--c-warn-border);
+  color: var(--c-warn);
+}
+
+:where(.in-app) .notice-success {
+  background: var(--c-success-bg);
+  border-color: var(--c-success-border);
+  color: var(--c-success);
+}
+
+:where(.in-app) .notice-danger {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .notice-gold {
+  background: var(--c-accent-50);
+  border-color: var(--c-accent-100);
+  color: var(--c-accent-700);
+}
+
+:where(.in-app) .empty {
+  padding: var(--sp-8) var(--sp-4);
+  gap: var(--sp-2);
+  color: var(--c-text-muted);
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .empty.compact {
+  padding: var(--sp-5) var(--sp-3);
+}
+
+:where(.in-app) .empty-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--rad-md);
+  background: var(--c-surface-hover);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .empty-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+:where(.in-app) .empty strong {
+  color: var(--c-text);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .error-state .empty-icon {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .skeleton {
+  display: block;
+  border-radius: var(--rad-sm);
+  background: var(--c-viz-track);
+  animation: sk-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes sk-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* ───────── Tables + pagination ───────── */
+:where(.in-app) .table-wrap {
+  overflow-x: auto;
+  border-radius: 0;
+}
+
+:where(.in-app) .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .table th {
+  background: var(--c-surface-2);
+  color: var(--c-text-muted);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-xs);
+  padding: var(--sp-2) var(--sp-4);
+  height: 40px;
+  text-align: start;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--c-border);
+  border-radius: 0 !important;
+}
+
+:where(.in-app) .table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--c-divider);
+  vertical-align: middle;
+}
+
+:where(.in-app) .table.dense td {
+  padding: var(--sp-2) var(--sp-4);
+}
+
+:where(.in-app) .table tbody tr:hover td {
+  background: var(--c-surface-2);
+}
+
+:where(.in-app) .table tr.clickable:hover td {
+  background: var(--c-surface-hover);
+}
+
+:where(.in-app) .table .num,
+:where(.in-app) .table td.is-num {
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.in-app) .cell-user {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+:where(.in-app) .cell-user small {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid var(--c-divider);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .pagination .row {
+  gap: var(--sp-1);
+}
+
+:where(.in-app) .pagination [aria-current="page"] {
+  background: var(--c-brand-800);
+  border-color: var(--c-brand-800);
+  color: #fff;
+}
+
+/* Mobile: tables become stacked cards (labels come from data-label) */
+@media (max-width: 640px) {
+  :where(.in-app) .table.cards-sm thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  :where(.in-app) .table.cards-sm,
+  :where(.in-app) .table.cards-sm tbody,
+  :where(.in-app) .table.cards-sm tr,
+  :where(.in-app) .table.cards-sm td {
+    display: block;
+    width: 100%;
+  }
+
+  :where(.in-app) .table.cards-sm tr {
+    padding: var(--sp-3) var(--sp-4);
+    border-bottom: 1px solid var(--c-divider);
+  }
+
+  :where(.in-app) .table.cards-sm tr:last-child {
+    border-bottom: 0;
+  }
+
+  :where(.in-app) .table.cards-sm td,
+  :where(.in-app) .table.dense.cards-sm td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+    padding: 3px 0;
+    border: 0;
+    text-align: start !important;
+    min-height: 32px;
+  }
+
+  :where(.in-app) .table.cards-sm td::before {
+    content: attr(data-label);
+    flex: none;
+    color: var(--c-text-muted);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+  }
+
+  :where(.in-app) .table.cards-sm td[data-label=""]::before {
+    display: none;
+  }
+
+  :where(.in-app) .table.cards-sm td[data-label=""] {
+    justify-content: flex-start;
+  }
+
+  :where(.in-app) .table.cards-sm td.is-primary {
+    padding-bottom: var(--sp-2);
+  }
+
+  :where(.in-app) .table.cards-sm tbody tr:hover td {
+    background: none;
+  }
+}
+
+/* ───────── Legacy hero (role homes) — flat brand panel ───────── */
+:where(.in-app) .hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--rad-lg);
+  padding: var(--sp-6);
+  margin-bottom: var(--sp-4);
+  background: var(--c-brand-900);
+  border: 1px solid var(--c-brand-950);
+  box-shadow: none;
+  color: var(--c-text-on-dark);
+  gap: var(--sp-6);
+}
+
+:where(.in-app) .hero h2 {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: #fff;
+  margin: var(--sp-2) 0;
+}
+
+:where(.in-app) .hero h2 em {
+  color: var(--c-accent-300);
+}
+
+:where(.in-app) .hero p {
+  color: var(--c-text-on-dark-muted);
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .hero .kicker {
+  color: var(--c-accent-300);
+}
+
+:where(.in-app) .hero-actions {
+  margin-top: var(--sp-4);
+  gap: var(--sp-2);
+}
+
+/* ───────── Charts ───────── */
+:where(.in-app) .ring-center b {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .ring-gold {
+  stroke: var(--c-accent-500);
+}
+
+:where(.in-app) .bars {
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .bar-track {
+  max-width: 24px;
+  background: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--c-border-strong);
+}
+
+:where(.in-app) .bar {
+  border-radius: 4px 4px 0 0;
+}
+
+:where(.in-app) .bar-val {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-2);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .bar-label {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .bar-great,
+:where(.in-app) .bar-emerald {
+  background: var(--c-success-mark);
+}
+
+:where(.in-app) .bar-good {
+  background: #5cc29c;
+}
+
+:where(.in-app) .bar-mid,
+:where(.in-app) .bar-gold {
+  background: var(--c-warn-mark);
+}
+
+:where(.in-app) .bar-low {
+  background: var(--c-danger-mark);
+}
+
+:where(.in-app) .bar-blue {
+  background: var(--c-info-mark);
+}
+
+:where(.in-app) .bar-brand {
+  background: var(--c-viz-1);
+}
+
+:where(.in-app) .bar-none {
+  background: var(--c-viz-track);
+}
+
+:where(.in-app) .hbars {
+  gap: var(--sp-3);
+}
+
+:where(.in-app) .hbar-head {
+  font-size: var(--fs-sm);
+  margin-bottom: 4px;
+}
+
+:where(.in-app) .hbar-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--c-viz-track);
+}
+
+:where(.in-app) .hbar-track i {
+  border-radius: 4px;
+}
+
+:where(.in-app) .lc-line {
+  stroke-width: 2px;
+}
+
+:where(.in-app) .lc-grid {
+  stroke-dasharray: none;
+  stroke: var(--c-divider);
+}
+
+:where(.in-app) .hm-cell {
+  border-radius: var(--rad-sm);
+}
+
+/* ───────── Toasts ───────── */
+body.in-app .toast-host {
+  bottom: var(--sp-6);
+  inset-inline-start: var(--sp-6);
+  z-index: var(--z-toast);
+  gap: var(--sp-2);
+}
+
+body.in-app .toast {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 44px;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--rad-md);
+  background: var(--c-brand-950);
+  border: 0;
+  color: #fff;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  box-shadow: var(--el-3);
+  max-width: min(420px, calc(100vw - 32px));
+}
+
+body.in-app .toast::after {
+  display: none;
+}
+
+body.in-app .toast svg {
+  color: #7fd3b2;
+}
+
+body.in-app .toast-warn svg {
+  color: #f0c36a;
+}
+
+body.in-app .toast-info svg {
+  color: #9cc0e8;
+}
+
+body.in-app .toast-danger svg {
+  color: #f2a297;
+}
+
+/* ───────── Responsive ───────── */
+@media (max-width: 1280px) {
+  :where(.in-app) .page {
+    padding-inline: var(--sp-6);
+  }
+}
+
+@media (max-width: 1200px) {
+  :where(.in-app) .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .page {
+    padding: var(--sp-4) var(--sp-4) var(--sp-8);
+  }
+
+  :where(.in-app) .page-head {
+    margin-bottom: var(--sp-4);
+    align-items: stretch;
+  }
+
+  :where(.in-app) .page-head h1 {
+    font-size: 1.125rem;
+  }
+
+  :where(.in-app) .page-actions {
+    width: 100%;
+  }
+
+  :where(.in-app) .page-actions>.btn {
+    flex: 1 1 auto;
+  }
+
+  :where(.in-app) .card {
+    padding: var(--sp-4);
+  }
+
+  :where(.in-app) .card.flush .card-head {
+    padding: var(--sp-4) var(--sp-4) 0;
+  }
+
+  :where(.in-app) .pad {
+    padding: var(--sp-3) var(--sp-4);
+  }
+
+  :where(.in-app) .hero {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  :where(.in-app) .stat-value,
+  :where(.in-app) .metric-value {
+    font-size: 1.25rem;
+  }
+
+  :where(.in-app) .modal-head,
+  :where(.in-app) .modal-body,
+  :where(.in-app) .modal-foot {
+    padding-inline: var(--sp-4);
+  }
+
+  :where(.in-app) .overlay:not(:has(> .modal.drawer)) {
+    place-items: end stretch;
+    padding: 0;
+  }
+
+  :where(.in-app) .overlay:not(:has(> .modal.drawer)) > .modal {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: var(--rad-lg) var(--rad-lg) 0 0;
+  }
+
+  :where(.in-app) .modal-foot {
+    border-radius: 0;
+  }
+
+  :where(.in-app) .modal-foot>.btn {
+    flex: 1 1 auto;
+  }
+
+  :where(.in-app) .searchbox {
+    min-width: 0;
+    width: 100%;
+  }
+
+  body.in-app .toast-host {
+    inset-inline: var(--sp-4);
+    bottom: calc(var(--bottomnav-h) + var(--sp-3) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ==========================================================================
+   App motion policy — functional, short, no loops.
+   Overrides the decorative layer in motion.css inside the app only.
+   ========================================================================== */
+body.in-app *,
+body.in-app *::before,
+body.in-app *::after {
+  animation: none !important;
+}
+
+body.in-app .skeleton {
+  animation: sk-pulse 1.4s ease-in-out infinite !important;
+}
+
+body.in-app .overlay {
+  animation: app-fade var(--dur-2) var(--ease) both !important;
+}
+
+body.in-app .modal {
+  animation: app-rise var(--dur-2) var(--ease) both !important;
+}
+
+body.in-app .popover,
+body.in-app .menu {
+  animation: app-fade var(--dur-1) var(--ease) both !important;
+}
+
+body.in-app .toast {
+  animation: app-rise var(--dur-2) var(--ease) both !important;
+}
+
+body.in-app .shell-content>.page {
+  animation: app-fade var(--dur-2) var(--ease) both !important;
+}
+
+body.in-app .confetti i {
+  animation: m-confetti var(--d) cubic-bezier(0.15, 0.7, 0.3, 1) forwards !important;
+}
+
+@keyframes app-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes app-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Neutralise hover lifts, tilts, glints and spotlights from motion.css */
+body.in-app .stat:hover,
+body.in-app .card:hover,
+body.in-app .card:not(.card-dark):not(.card-gold):hover {
+  transform: none;
+  background-image: none;
+  box-shadow: var(--el-1);
+}
+
+body.in-app .stat:hover {
+  border-color: var(--c-border);
+}
+
+body.in-app .stat:hover .stat-icon,
+body.in-app .list-row.clickable:hover .row-icon,
+body.in-app .list-row.clickable:hover .avatar,
+body.in-app .nav-item:hover svg,
+body.in-app .icon-btn:hover svg,
+body.in-app button.chip:hover,
+body.in-app .opt:hover:not(:disabled),
+body.in-app .btn:hover:not(:disabled):not(.btn-link),
+body.in-app .btn:hover:not(:disabled) svg:last-child:not(:first-child),
+body.in-app .hm-cell:hover {
+  transform: none;
+}
+
+body.in-app .hm-cell:hover {
+  box-shadow: 0 0 0 2px var(--c-surface), 0 0 0 3px var(--c-text-2);
+}
+
+body.in-app .btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+body.in-app .btn-primary::after,
+body.in-app .btn-gold::after,
+body.in-app .rpl-layer,
+body.in-app .progress i::after,
+body.in-app .badge-card.earned .badge-medal::after {
+  display: none;
+}
+
+body.in-app .palette-item:hover,
+body.in-app .pop-item:hover {
+  padding-inline-start: var(--sp-4);
+}
+
+body.in-app .palette-item:hover {
+  padding-inline-start: var(--sp-3);
+}
+
+body.in-app .btn-primary,
+body.in-app .btn-gold {
+  overflow: visible;
+}
+
+body.in-app .stat,
+body.in-app .card,
+body.in-app .list-row,
+body.in-app .avatar,
+body.in-app .row-icon {
+  transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+
+/* Reduced motion (system) or Settings › motion off: no animation at all */
+@media (prefers-reduced-motion: reduce) {
+
+  html body.in-app .skeleton,
+  html body.in-app .overlay,
+  html body.in-app .modal,
+  html body.in-app .popover,
+  html body.in-app .menu,
+  html body.in-app .toast,
+  html body.in-app .shell-content>.page {
+    animation: none !important;
+  }
+
+  html body.in-app * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html[data-motion="off"] body.in-app .skeleton,
+html[data-motion="off"] body.in-app .overlay,
+html[data-motion="off"] body.in-app .modal,
+html[data-motion="off"] body.in-app .popover,
+html[data-motion="off"] body.in-app .menu,
+html[data-motion="off"] body.in-app .toast,
+html[data-motion="off"] body.in-app .shell-content>.page,
+html[data-motion="off"] body.in-app .confetti i {
+  animation: none !important;
+}
+
+html[dir="ltr"] :where(.in-app) .pagination .lucide-chevron-right {
+  transform: scaleX(-1);
+}
+
+:where(.in-app) .modal:focus,
+:where(.in-app) .modal:focus-visible {
+  outline: none;
+  box-shadow: var(--el-3);
+}
+
+/* clickable metric cards are <button>s: keep content top-aligned like the static ones */
+:where(.in-app) button.metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+}
+
+/* List rows on small screens: the trailing slot (badges/buttons) wraps under the text instead of squeezing it */
+@media (max-width: 640px) {
+  :where(.in-app) .list-row:has(> .row-end) {
+    flex-wrap: wrap;
+    row-gap: var(--sp-2);
+  }
+
+  :where(.in-app) .list-row:has(> .row-end) > .row-main {
+    flex-basis: calc(100% - 52px);
+  }
+
+  :where(.in-app) .list-row > .row-end {
+    flex-wrap: wrap;
+    width: 100%;
+    padding-inline-start: 48px;
+  }
+
+  :where(.in-app) .list-row:has(> .avatar) > .row-end {
+    padding-inline-start: 52px;
+  }
+}
+
+/* no frosted-glass backdrops in the app (motion.css adds a blur to .overlay) */
+body.in-app .overlay {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

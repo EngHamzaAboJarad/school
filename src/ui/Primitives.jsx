@@ -1,6 +1,6 @@
-import { useEffect, useId } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Inbox } from "lucide-react";
+import { X, Inbox, AlertOctagon, ChevronLeft, ChevronRight, Search, ArrowUp, ArrowDown, Minus, CheckCircle2, AlertTriangle, Info, Clock3 } from "lucide-react";
 import { initials } from "../lib/format";
 import { CountUp } from "./motion";
 
@@ -113,23 +113,37 @@ export function Segmented({ options, value, onChange, className }) {
   );
 }
 
-export function Modal({ open, onClose, title, kicker, children, footer, wide, drawer }) {
+export function Modal({ open, onClose, title, kicker, children, footer, wide, drawer, size }) {
   const id = useId();
+  const box = useRef(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === "Escape" && onClose();
+    const prev = document.activeElement;
+    // التركيز داخل النافذة عند فتحها (ما لم يأخذه حقل بـ autoFocus) وحصر Tab داخلها
+    if (box.current && !box.current.contains(document.activeElement)) box.current.focus();
+    const onKey = (e) => {
+      if (e.key === "Escape") return closeRef.current();
+      if (e.key !== "Tab" || !box.current) return;
+      const f = [...box.current.querySelectorAll(FOCUSABLE)].filter((el) => !el.disabled && el.offsetParent !== null);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      if (prev && typeof prev.focus === "function" && document.contains(prev)) prev.focus();
     };
-  }, [open, onClose]);
+  }, [open]);
   if (!open) return null;
   // يُرسم على <body> مباشرة كي لا يتقيّد بأي أب عليه transform/animation (كان يقصّ النافذة ويمنع السكرول)
   return createPortal(
     <div className="overlay" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
-      <div className={cx("modal", wide && "wide", drawer && "drawer")} role="dialog" aria-modal="true" aria-labelledby={id}>
+      <div ref={box} tabIndex={-1} className={cx("modal", wide && "wide", drawer && "drawer", size)} role="dialog" aria-modal="true" aria-labelledby={id}>
         <div className="modal-head">
           <div>
             {kicker && <span className="kicker small">{kicker}</span>}
@@ -195,9 +209,9 @@ export function Avatar({ name, size = 38, tone, src }) {
   );
 }
 
-export function Empty({ icon: Icon = Inbox, title, desc, action }) {
+export function Empty({ icon: Icon = Inbox, title, desc, action, compact }) {
   return (
-    <div className="empty">
+    <div className={cx("empty", compact && "compact")}>
       <span className="empty-icon">
         <Icon size={24} />
       </span>
@@ -240,43 +254,213 @@ export function Notice({ tone = "info", title, children, icon: Icon, action }) {
   );
 }
 
-export function DataTable({ columns, rows, onRowClick, empty = "لا توجد بيانات", dense }) {
-  if (!rows.length) return <Empty title={empty} />;
+// جدول بيانات: على الجوال (≤640px) تتحوّل الصفوف إلى بطاقات بعناوين الأعمدة (mobile="cards")،
+// وpageSize يفعّل ترقيم الصفحات. العمود ذو primary يتصدّر البطاقة.
+export function DataTable({ columns, rows, onRowClick, empty = "لا توجد بيانات", dense, mobile = "cards", pageSize, caption }) {
+  const pg = usePagination(rows, pageSize || rows.length || 1);
+  if (!rows.length) return typeof empty === "string" ? <Empty compact title={empty} /> : empty;
+  const shown = pageSize ? pg.items : rows;
   return (
-    <div className="table-wrap">
-      <table className={cx("table", dense && "dense")}>
-        <thead>
-          <tr>
-            {columns.map((c) => (
-              <th key={c.key} style={{ width: c.width, textAlign: c.align }}>
-                {c.label}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r, i) => (
-            <tr key={r.id ?? i} className={onRowClick ? "clickable" : ""} onClick={onRowClick ? () => onRowClick(r) : undefined}>
+    <>
+      <div className="table-wrap">
+        <table className={cx("table", dense && "dense", mobile === "cards" && "cards-sm")}>
+          {caption && <caption className="sr-only">{caption}</caption>}
+          <thead>
+            <tr>
               {columns.map((c) => (
-                <td key={c.key} style={{ textAlign: c.align }}>
-                  {c.render ? c.render(r) : r[c.key]}
-                </td>
+                <th key={c.key} scope="col" style={{ width: c.width, textAlign: c.align }}>
+                  {c.label || <span className="sr-only">{c.srLabel || "إجراءات"}</span>}
+                </th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {shown.map((r, i) => (
+              <tr key={r.id ?? i} className={onRowClick ? "clickable" : ""} onClick={onRowClick ? () => onRowClick(r) : undefined}>
+                {columns.map((c) => (
+                  <td key={c.key} data-label={c.primary ? "" : c.label || ""} className={cx(c.primary && "is-primary", c.num && "is-num")} style={{ textAlign: c.align }}>
+                    {c.render ? c.render(r) : r[c.key]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {pageSize && rows.length > pageSize && <Pagination {...pg} />}
+    </>
+  );
+}
+
+// ───── ترقيم الصفحات ─────
+export function usePagination(rows, pageSize = 10) {
+  const [page, setPage] = useState(1);
+  const pages = Math.max(1, Math.ceil(rows.length / pageSize));
+  const cur = Math.min(page, pages);
+  const items = useMemo(() => rows.slice((cur - 1) * pageSize, cur * pageSize), [rows, cur, pageSize]);
+  return { page: cur, pages, setPage, items, total: rows.length, from: rows.length ? (cur - 1) * pageSize + 1 : 0, to: Math.min(cur * pageSize, rows.length) };
+}
+
+export function Pagination({ page, pages, setPage, total, from, to }) {
+  if (pages <= 1) return null;
+  const nums = pages <= 7 ? Array.from({ length: pages }, (_, i) => i + 1) : [...new Set([1, page - 1, page, page + 1, pages].filter((n) => n >= 1 && n <= pages))];
+  return (
+    <nav className="pagination" aria-label="ترقيم الصفحات">
+      <span>
+        <span className="num">{from}–{to}</span> من <span className="num">{total}</span>
+      </span>
+      <div className="row">
+        <Btn size="sm" variant="ghost" icon={ChevronRight} disabled={page === 1} onClick={() => setPage(page - 1)} aria-label="الصفحة السابقة" />
+        {nums.map((n, i) => (
+          <span key={n} className="row" style={{ gap: 4 }}>
+            {i > 0 && n - nums[i - 1] > 1 && <span aria-hidden="true">…</span>}
+            <Btn size="sm" variant="ghost" className="btn-icon" aria-current={n === page ? "page" : undefined} onClick={() => setPage(n)}>
+              <span className="num">{n}</span>
+            </Btn>
+          </span>
+        ))}
+        <Btn size="sm" variant="ghost" icon={ChevronLeft} disabled={page === pages} onClick={() => setPage(page + 1)} aria-label="الصفحة التالية" />
+      </div>
+    </nav>
   );
 }
 
 export const Grid = ({ cols = 4, children, className }) => <div className={cx("grid", `grid-${cols}`, className)}>{children}</div>;
 export const Split = ({ children, className, wide }) => <div className={cx("split", wide && "split-wide", className)}>{children}</div>;
 
-export function SearchBox({ value, onChange, placeholder = "بحث…" }) {
+export function SearchBox({ value, onChange, placeholder = "بحث…", className }) {
   return (
-    <div className="searchbox">
-      <input className="input" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} aria-label={placeholder} />
+    <div className={cx("searchbox", className)} role="search">
+      <Search size={16} aria-hidden="true" />
+      <input className="input" type="search" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} aria-label={placeholder} />
     </div>
   );
 }
+
+// ───── مكوّنات نظام التصميم الجديدة ─────
+
+// رأس قسم مضغوط داخل البطاقات أو بين أقسام الصفحة
+export function SectionHeader({ title, desc, action, as: H = "h2", id }) {
+  return (
+    <div className="section-head">
+      <div style={{ minWidth: 0 }}>
+        <H id={id}>{title}</H>
+        {desc && <p>{desc}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+// بطاقة مؤشّر: القيمة تأتي من البيانات فقط؛ value=null يعرض حالة «لا بيانات» بدل رقم مختلَق.
+// delta: { value, label, good: "up"|"down" } — الاتجاه يُكتب نصًّا ورمزًا لا لونًا فقط.
+export function MetricCard({ label, value, unit, foot, icon: Icon, delta, meter, tone, emptyText = "لا بيانات بعد", onClick, loading }) {
+  const Tag = onClick ? "button" : "div";
+  const edge = tone === "warn" ? "tone-warn-edge" : tone === "danger" ? "tone-danger-edge" : "";
+  let d = null;
+  if (delta && delta.value != null) {
+    const dir = delta.value > 0 ? "up" : delta.value < 0 ? "down" : "flat";
+    const cls = dir === "flat" ? "flat" : dir === (delta.good || "up") ? "good" : "bad";
+    const DIcon = dir === "up" ? ArrowUp : dir === "down" ? ArrowDown : Minus;
+    d = (
+      <span className={cx("metric-delta", cls)}>
+        <DIcon size={13} aria-hidden="true" />
+        <span className="num">{dir === "flat" ? "0" : `${Math.abs(delta.value)}${delta.unit ?? ""}`}</span>
+        <span className="sr-only">{dir === "up" ? "ارتفاع" : dir === "down" ? "انخفاض" : "دون تغيير"}</span>
+      </span>
+    );
+  }
+  return (
+    <Tag className={cx("metric", edge)} onClick={onClick} type={onClick ? "button" : undefined}>
+      <div className="metric-top">
+        <span className="metric-label">{label}</span>
+        {Icon && <span className={cx("metric-icon", tone && `tone-${tone}`)}><Icon size={17} aria-hidden="true" /></span>}
+      </div>
+      {loading ? (
+        <Skeleton style={{ height: 28, width: "55%", marginTop: 10 }} />
+      ) : value == null ? (
+        <div className="metric-value is-empty">{emptyText}</div>
+      ) : (
+        <div className="metric-value">
+          {unit === "%" ? (
+            <span className="num">{value}<small>%</small></span>
+          ) : (
+            <>
+              <span className="num">{value}</span>
+              {unit && <small>{unit}</small>}
+            </>
+          )}
+        </div>
+      )}
+      {(d || foot) && <div className="metric-foot">{d}{d && delta.label && <span>{delta.label}</span>}{foot && <span>{foot}</span>}</div>}
+      {meter != null && <div className="metric-meter"><Progress value={meter.value} tone={meter.tone || "brand"} size="sm" label={meter.label || label} /></div>}
+    </Tag>
+  );
+}
+
+// شارة حالة: لون + أيقونة + نص دائمًا (لا يعتمد على اللون وحده)
+const STATUS_ICON = { success: CheckCircle2, warn: Clock3, danger: AlertTriangle, info: Info, neutral: null, gold: null };
+export function StatusBadge({ tone = "neutral", children, icon }) {
+  const I = icon === undefined ? STATUS_ICON[tone] : icon;
+  return <Badge tone={tone} icon={I || undefined}>{children}</Badge>;
+}
+
+export function Skeleton({ style, className, lines }) {
+  if (lines) return <div className="stack-sm" aria-hidden="true">{Array.from({ length: lines }, (_, i) => <span key={i} className="skeleton" style={{ height: 12, width: `${90 - i * 12}%` }} />)}</div>;
+  return <span className={cx("skeleton", className)} style={style} aria-hidden="true" />;
+}
+
+export function ErrorState({ title = "تعذّر تحميل البيانات", desc = "حدث خطأ غير متوقّع. حاول مرة أخرى.", onRetry }) {
+  return (
+    <div className="empty error-state" role="alert">
+      <span className="empty-icon"><AlertOctagon size={20} /></span>
+      <strong>{title}</strong>
+      {desc && <p>{desc}</p>}
+      {onRetry && <Btn size="sm" variant="ghost" onClick={onRetry}>إعادة المحاولة</Btn>}
+    </div>
+  );
+}
+
+// قائمة منسدلة: زر يفتح قائمة إجراءات؛ تُغلق بـ Esc أو بالنقر خارجها، وتُدار بالأسهم.
+export function Menu({ label, icon: Icon, items, variant = "ghost", size = "sm", align, children }) {
+  const [open, setOpen] = useState(false);
+  const wrap = useRef(null);
+  const listRef = useRef(null);
+  const menuId = useId();
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e) => !wrap.current?.contains(e.target) && setOpen(false);
+    const onKey = (e) => {
+      if (e.key === "Escape") { setOpen(false); wrap.current?.querySelector("button")?.focus(); }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const list = [...(listRef.current?.querySelectorAll(".menu-item:not(:disabled)") || [])];
+        const i = list.indexOf(document.activeElement);
+        list[(i + (e.key === "ArrowDown" ? 1 : -1) + list.length) % list.length]?.focus();
+      }
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    listRef.current?.querySelector(".menu-item")?.focus();
+    return () => { document.removeEventListener("mousedown", onDoc); document.removeEventListener("keydown", onKey); };
+  }, [open]);
+  return (
+    <div className="menu-wrap" ref={wrap}>
+      <Btn variant={variant} size={size} icon={Icon} aria-haspopup="menu" aria-expanded={open} aria-controls={menuId} aria-label={children ? undefined : label} onClick={() => setOpen((o) => !o)}>
+        {children}
+      </Btn>
+      {open && (
+        <div className={cx("menu", align === "up" && "up")} role="menu" id={menuId} ref={listRef}>
+          {items.filter(Boolean).map((it, i) => it === "sep" ? <div key={i} className="menu-sep" role="separator" /> : (
+            <button key={it.label} role="menuitem" className={cx("menu-item", it.danger && "danger")} disabled={it.disabled} onClick={() => { setOpen(false); it.onClick(); }}>
+              {it.icon && <it.icon size={16} aria-hidden="true" />}
+              {it.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const FOCUSABLE = 'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])';

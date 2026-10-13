@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { Check, AlertTriangle, Info } from "lucide-react";
+import { Check, AlertTriangle, AlertOctagon, Info } from "lucide-react";
 import { useLang } from "../i18n";
 
 // شعار طاقات: حرف «ط» هندسي بخط وحيد السماكة — حلقة وساق وذيل — تعلو ساقه شرارة (الطاقة).
@@ -56,10 +56,10 @@ export function ToastProvider({ children }) {
   return (
     <ToastCtx.Provider value={toast}>
       {children}
-      <div className="toast-host" aria-live="polite">
+      <div className="toast-host" aria-live="polite" role="status">
         {items.map((t) => (
           <div key={t.id} className={`toast toast-${t.tone}`}>
-            {t.tone === "success" ? <Check size={17} /> : t.tone === "warn" ? <AlertTriangle size={17} /> : <Info size={17} />}
+            {t.tone === "success" ? <Check size={17} aria-hidden="true" /> : t.tone === "warn" ? <AlertTriangle size={17} aria-hidden="true" /> : t.tone === "danger" ? <AlertOctagon size={17} aria-hidden="true" /> : <Info size={17} aria-hidden="true" />}
             {t.message}
           </div>
         ))}

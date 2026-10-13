@@ -1,0 +1,263 @@
+/* ==========================================================================
+   Admin (school administration) screens — redesign
+   ========================================================================== */
+
+/* ───────── Overview ───────── */
+:where(.in-app) .ov-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+:where(.in-app) .ov-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+:where(.in-app) .ov-actions {
+  grid-column: span 7;
+}
+
+:where(.in-app) .ov-attendance {
+  grid-column: span 5;
+}
+
+:where(.in-app) .ov-classes {
+  grid-column: span 8;
+}
+
+:where(.in-app) .ov-activity {
+  grid-column: span 4;
+}
+
+/* Needs-action list */
+:where(.in-app) .ov-action-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.in-app) .ov-action {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-divider);
+}
+
+:where(.in-app) .ov-action:first-child {
+  padding-top: 0;
+}
+
+:where(.in-app) .ov-action:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+:where(.in-app) .ov-action .row-icon {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+:where(.in-app) .ov-action-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .ov-action-copy strong {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--c-text);
+}
+
+:where(.in-app) .ov-action-copy span {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+:where(.in-app) .ov-action.is-info strong {
+  font-weight: var(--fw-medium);
+  color: var(--c-text-2);
+}
+
+:where(.in-app) .ov-action>.btn,
+:where(.in-app) .ov-action>.badge {
+  flex: none;
+}
+
+/* Attendance chart */
+:where(.in-app) .bar-brand-soft {
+  background: #8996a9;
+}
+
+:where(.in-app) .ov-chart-note {
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--c-divider);
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+/* Classes table */
+:where(.in-app) .ov-cls-name strong {
+  display: block;
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .ov-cls-name small {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .ov-meter {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .ov-meter .progress {
+  width: 96px;
+  flex: none;
+}
+
+:where(.in-app) .ov-meter span {
+  min-width: 38px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+}
+
+/* Activity timeline */
+:where(.in-app) .ov-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.in-app) .ov-timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-3);
+}
+
+:where(.in-app) .ov-timeline li:last-child {
+  padding-bottom: 0;
+}
+
+:where(.in-app) .ov-timeline li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  bottom: -2px;
+  inset-inline-start: 4px;
+  width: 2px;
+  background: var(--c-divider);
+}
+
+:where(.in-app) .ov-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--c-surface);
+  border: 2px solid var(--c-brand-700);
+}
+
+:where(.in-app) .ov-timeline li.is-warn .ov-dot {
+  border-color: var(--c-warn-mark);
+  background: var(--c-warn-bg);
+}
+
+:where(.in-app) .ov-timeline strong {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .ov-timeline span {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--c-text-2);
+}
+
+:where(.in-app) .ov-timeline small {
+  display: block;
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+@media (max-width: 1180px) {
+  :where(.in-app) .ov-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  :where(.in-app) .ov-actions,
+  :where(.in-app) .ov-attendance,
+  :where(.in-app) .ov-classes,
+  :where(.in-app) .ov-activity {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1180px) {
+  :where(.in-app) .ov-actions {
+    grid-column: span 7;
+  }
+
+  :where(.in-app) .ov-attendance {
+    grid-column: span 5;
+  }
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .ov-metrics {
+    gap: var(--sp-2);
+  }
+
+  :where(.in-app) .ov-metrics .metric {
+    padding: var(--sp-3);
+  }
+
+  :where(.in-app) .ov-metrics .metric-icon {
+    display: none;
+  }
+
+  :where(.in-app) .ov-metrics .metric-label {
+    font-size: var(--fs-xs);
+  }
+
+  :where(.in-app) .ov-meter .progress {
+    width: 72px;
+  }
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .ov-action {
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr);
+    align-items: start;
+    column-gap: var(--sp-3);
+    row-gap: var(--sp-2);
+  }
+
+  :where(.in-app) .ov-action>.btn,
+  :where(.in-app) .ov-action>.badge {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
