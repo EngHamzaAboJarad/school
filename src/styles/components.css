@@ -33,7 +33,7 @@
 }
 
 :where(.in-app) .page-head h1 {
-  font-family: var(--ff-ui);
+  font-family: var(--ff-head);
   font-size: var(--fs-xl);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-tight);
@@ -56,7 +56,7 @@
 
 :where(.in-app) h1,
 :where(.in-app) h2 {
-  font-family: var(--ff-ui);
+  font-family: var(--ff-head);
   font-weight: var(--fw-semibold);
 }
 
@@ -289,6 +289,7 @@
 }
 
 :where(.in-app) .card-head h3 {
+  font-family: var(--ff-head);
   font-size: 0.9375rem;
   font-weight: var(--fw-semibold);
   color: var(--c-text);
@@ -341,6 +342,7 @@
 
 :where(.in-app) .section-head h2,
 :where(.in-app) .section-head h3 {
+  font-family: var(--ff-head);
   font-size: 0.9375rem;
   font-weight: var(--fw-semibold);
   line-height: var(--lh-tight);
@@ -607,7 +609,7 @@
 :where(.in-app) .tab.active {
   color: var(--c-text);
   font-weight: var(--fw-semibold);
-  border-bottom-color: var(--c-brand-800);
+  border-bottom-color: var(--c-clay-500);
 }
 
 :where(.in-app) .tab-count {
@@ -735,7 +737,7 @@
 }
 
 :where(.in-app) .modal-head h3 {
-  font-family: var(--ff-ui);
+  font-family: var(--ff-head);
   font-size: var(--fs-lg);
   font-weight: var(--fw-semibold);
   color: var(--c-text);

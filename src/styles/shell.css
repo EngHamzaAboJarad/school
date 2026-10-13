@@ -330,15 +330,21 @@ html[data-motion="off"] * {
   color: #fff;
 }
 
+/* the active item is a doorway: a lime-wash block cut into the indigo */
 .sb-item.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--c-bg);
+  color: var(--c-text);
   font-weight: var(--fw-semibold);
 }
 
 .sb-item.active svg {
   opacity: 1;
-  color: var(--c-accent-300);
+  color: var(--c-clay-600);
+}
+
+.sb-item.active .sb-count {
+  background: var(--c-door-900);
+  color: var(--c-ochre-300);
 }
 
 .sb-item.active::before {
@@ -349,7 +355,7 @@ html[data-motion="off"] * {
   bottom: 8px;
   width: 3px;
   border-radius: 0 3px 3px 0;
-  background: var(--c-accent-300);
+  background: var(--c-ochre-300);
 }
 
 html[dir="rtl"] .sb-item.active::before {
@@ -451,7 +457,7 @@ html[dir="ltr"] .sb-collapse svg {
   align-items: center;
   gap: var(--sp-3);
   padding: 0 var(--sp-6);
-  background: var(--c-surface);
+  background: var(--c-bg);
   border-bottom: 1px solid var(--c-border);
 }
 
@@ -526,7 +532,7 @@ html[dir="ltr"] .sb-collapse svg {
   padding: 0 var(--sp-3);
   border: 1px solid var(--c-border);
   border-radius: var(--rad-md);
-  background: var(--c-surface-2);
+  background: var(--c-surface);
   color: var(--c-text-muted);
   font-size: var(--fs-sm);
   transition: border-color var(--dur-1) var(--ease);

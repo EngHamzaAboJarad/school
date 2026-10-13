@@ -100,7 +100,7 @@
 
 /* Attendance chart */
 :where(.in-app) .bar-brand-soft {
-  background: #8996a9;
+  background: #9aa4bc;
 }
 
 :where(.in-app) .ov-chart-note {
@@ -260,4 +260,28 @@
     grid-column: 2;
     justify-self: start;
   }
+}
+
+/* Najdi world: fact line sits in the header block; subject paints and mastery vents in the classes table */
+:where(.in-app) .page-head + .fact-line {
+  margin-top: calc(-1 * var(--sp-2));
+  margin-bottom: var(--sp-6);
+}
+
+:where(.in-app) .ov-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+}
+
+:where(.in-app) .ov-mastery {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+:where(.in-app) .ov-mastery .num {
+  min-width: 38px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
 }

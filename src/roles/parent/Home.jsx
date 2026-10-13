@@ -1,12 +1,16 @@
-import { AlertTriangle, BarChart3, Bell, CalendarCheck, CheckCircle2, ChevronLeft, ClipboardCheck, GraduationCap, MessageCircle, Target } from "lucide-react";
-import { Badge, Btn, Card, Empty, ListRow, Notice, Page, Split, Stat } from "../../ui/Primitives";
-import { Ring, HBars } from "../../ui/Charts";
+import { AlertTriangle, BarChart3, CalendarCheck, CheckCircle2, ClipboardCheck, FileBarChart, Info, MessageCircle } from "lucide-react";
+import { Badge, Btn, Card, Empty, Page, SectionHeader } from "../../ui/Primitives";
+import { FactLine, Seal, SubjectMark, VentLegend, VentRow } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, attendanceRate, smartAlerts, assignmentsForStudent, assignmentStatus, subjectOf, userName, unreadThreads, lessonOf, unitOf } from "../../store/selectors";
+import { assignmentStatus, assignmentsForStudent, attendanceRate, lessonOf, smartAlerts, snapshot, unitOf, unreadThreads } from "../../store/selectors";
+import { GAP_THRESHOLD } from "../../lib/grading";
 import { fmtLongDate, relativeDay, timeAgo } from "../../lib/format";
 import { ChildSwitcher, useChild } from "./shared";
+import { MASTERY_KEY, SubjectMasteryWall, attendanceVents, schoolDays, subjectMastery } from "../shared/walls";
 
-// الرئيسية: متابعة الأبناء المتعدّدين والتنبيهات الذكية (F5.1 / F9.3)
+const ALERT_ICON = { danger: AlertTriangle, warn: AlertTriangle, info: Info };
+
+// رئيسية وليّ الأمر: الابن أولًا (اختيار واضح بحالته)، ثم ما يحتاج انتباهك، ثم الحضور والإتقان والنتائج — من البيانات الفعلية فقط.
 export default function ParentHome({ go }) {
   const { state, user } = useStore();
   const { kids, child, select } = useChild();
@@ -16,59 +20,124 @@ export default function ParentHome({ go }) {
   const tasks = assignmentsForStudent(state, child.id);
   const open = tasks.filter((a) => ["pending", "missing"].includes(assignmentStatus(a, child.id)));
   const attempts = state.attempts.filter((a) => a.studentId === child.id).sort((a, b) => b.at - a.at);
-  const subs = Object.entries(snap.subjectAvg);
-  const first = user.name.split(" ")[0];
+  const unread = unreadThreads(state, user.id);
+  const name = child.name.split(" ")[0];
+  const days = schoolDays(10);
+  const attRow = attendanceVents(state, child.id, days);
+  const mastery = subjectMastery(state, child.id);
+
+  const resultTitle = (a) => (a.kind === "lesson" ? lessonOf(state, a.refId)?.title : a.kind === "unit" ? unitOf(state, a.refId)?.title : "إعادة اختبار علاجي");
+  const essayState = (a) => {
+    const es = Object.values(a.essays || {});
+    if (!es.length) return null;
+    return es.every((e) => e.final) ? "approved" : "pending";
+  };
 
   return (
-    <Page>
-      <section className="hero">
-        <div>
-          <span className="kicker"><GraduationCap size={14} /> {fmtLongDate()}</span>
-          <h2>أهلًا {first}، <em>هذه صورة أبنائك اليوم</em></h2>
-          <p>{alerts.length ? `لديك ${alerts.length} تنبيهات ذكية بشأن ${child.name.split(" ")[0]} تستحق الانتباه.` : `أداء ${child.name.split(" ")[0]} مستقر ولا تنبيهات حاليًّا.`}</p>
-          <div className="hero-actions">
-            <Btn variant="gold" size="lg" icon={BarChart3} onClick={() => go("child")}>تفاصيل أداء {child.name.split(" ")[0]}</Btn>
-            <Btn variant="light" icon={MessageCircle} onClick={() => go("messages")}>تواصل مع المعلّم {unreadThreads(state, user.id) > 0 && `(${unreadThreads(state, user.id)})`}</Btn>
-          </div>
-        </div>
-        <div className="hero-side"><Ring value={snap.avg} size={150} stroke={12} tone="gold" label="متوسط الإتقان" sub={child.name.split(" ")[0]} /></div>
-      </section>
-
+    <Page
+      title={`أهلًا ${user.name.split(" ")[0]}`}
+      desc={`${fmtLongDate()} • ${kids.length} ${kids.length === 1 ? "ابن" : "أبناء"} في المنصّة`}
+      actions={
+        <>
+          <Btn variant="ghost" icon={MessageCircle} onClick={() => go("messages")}>تواصل مع المعلّم{unread ? ` (${unread})` : ""}</Btn>
+          <Btn variant="primary" icon={FileBarChart} onClick={() => go("reports")}>تقرير {name}</Btn>
+        </>
+      }
+    >
       <ChildSwitcher kids={kids} child={child} onSelect={select} />
 
-      <div className="grid grid-4 mt">
-        <Stat label="متوسط الإتقان" value={snap.avg} unit="%" icon={Target} foot={`${snap.mastered} أهداف متقنة`} />
-        <Stat label="الحضور (٢٠ يومًا)" value={att.rate} unit="%" icon={CalendarCheck} tone="blue" foot={`${att.absent} غياب • ${att.late} تأخر`} />
-        <Stat label="مهام مفتوحة" value={open.length} icon={ClipboardCheck} tone="gold" foot={`من ${tasks.length} مهام`} />
-        <Stat label="تنبيهات ذكية" value={alerts.length} icon={Bell} tone="rose" foot="أداء • مواعيد • حضور" />
-      </div>
+      <FactLine
+        items={[
+          { label: `إتقان ${name}`, value: snap.entries.length ? `${snap.avg}%` : null, note: `${snap.mastered} أهداف متقَنة`, tone: snap.entries.length && snap.avg < GAP_THRESHOLD ? "warn" : undefined, onClick: () => go("child") },
+          { label: "الحضور (20 يومًا)", value: att.days ? `${att.rate}%` : null, note: att.days ? `${att.absent} غياب • ${att.late} تأخّر` : "لا سجلات", tone: att.absent >= 2 ? "warn" : undefined, onClick: () => go("attendance") },
+          { label: "مهام مفتوحة", value: open.length, note: `من ${tasks.length} مهام`, tone: open.some((a) => assignmentStatus(a, child.id) === "missing") ? "danger" : undefined },
+          { label: "تنبيهات", value: alerts.length, note: "أداء • مواعيد • حضور", tone: alerts.length ? "warn" : undefined },
+        ]}
+      />
 
-      <Split className="mt">
-        <div className="stack">
-          <Card title="تنبيهات تحتاج انتباهك" kicker="تنبيهات ذكية">
-            {alerts.length === 0 && <Notice tone="success" icon={CheckCircle2}>لا تنبيهات — كل شيء على ما يرام.</Notice>}
-            {alerts.map((a) => <ListRow key={a.id} icon={AlertTriangle} tone={a.tone === "danger" ? "danger" : a.tone === "info" ? "info" : "warn"} title={a.title} meta={a.body} end={<Btn size="sm" variant="ghost" onClick={() => go("child")}>التفاصيل</Btn>} />)}
+      <div className="home-grid" style={{ marginTop: "var(--sp-6)" }}>
+        <div className="span-7 home-col">
+          <Card aria-labelledby="p-alerts">
+            <SectionHeader id="p-alerts" title={`ما يحتاج انتباهك بشأن ${name}`} desc="تنبيهات محسوبة من نتائجه ومهامه وحضوره" />
+            {alerts.length === 0 ? (
+              <Empty compact icon={CheckCircle2} title="لا تنبيهات" desc={`أداء ${name} مستقر حاليًّا.`} />
+            ) : (
+              <ul className="hl">
+                {alerts.map((a) => {
+                  const I = ALERT_ICON[a.tone] || AlertTriangle;
+                  return (
+                    <li key={a.id}>
+                      <span className={`row-icon tone-${a.tone === "danger" ? "danger" : a.tone === "info" ? "info" : "warn"}`} aria-hidden="true"><I size={17} /></span>
+                      <div className="hl-main">
+                        <strong>{a.title}</strong>
+                        <span>{a.body}</span>
+                      </div>
+                      <div className="hl-end"><Btn size="sm" variant="ghost" onClick={() => go("child")}>التفاصيل</Btn></div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </Card>
-          <Card title="آخر نتائج الاختبارات" kicker={child.name}>
-            {attempts.length === 0 && <Empty title="لا نتائج بعد" />}
-            {attempts.slice(0, 4).map((a) => (
-              <ListRow key={a.id} icon={ClipboardCheck} tone={a.score >= 70 ? "success" : "warn"}
-                title={a.kind === "lesson" ? lessonOf(state, a.refId)?.title : a.kind === "unit" ? unitOf(state, a.refId)?.title : "إعادة اختبار علاجي"}
-                meta={`${a.kind === "unit" ? "امتحان وحدة" : a.kind === "retest" ? "علاجي" : "اختبار درس"} • ${timeAgo(a.at)}`} end={<b className="num">{a.score}%</b>} />
-            ))}
+
+          <Card aria-labelledby="p-results">
+            <SectionHeader id="p-results" title="آخر النتائج" desc="درجات المقالي لا تُعتبر نهائية قبل اعتماد المعلّم" action={<Btn size="sm" variant="ghost" icon={BarChart3} onClick={() => go("child")}>أداء {name}</Btn>} />
+            {attempts.length === 0 ? (
+              <Empty compact icon={ClipboardCheck} title="لا نتائج بعد" desc="ستظهر هنا نتائج الاختبارات فور أدائها." />
+            ) : (
+              <ul className="hl">
+                {attempts.slice(0, 5).map((a) => {
+                  const es = essayState(a);
+                  return (
+                    <li key={a.id} className="no-icon">
+                      <div className="hl-main">
+                        <strong>{resultTitle(a)}</strong>
+                        <span>{`${a.kind === "unit" ? "امتحان وحدة" : a.kind === "retest" ? "علاجي" : "اختبار درس"} • ${timeAgo(a.at)}`}</span>
+                      </div>
+                      <div className="hl-end">
+                        {es && <Seal approved={es === "approved"} compact />}
+                        <span className="hl-num" style={{ color: a.score >= GAP_THRESHOLD ? "var(--c-success)" : "var(--c-warn)" }}>{a.score}%</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </Card>
         </div>
-        <div className="stack">
-          <Card title="الإتقان حسب المادة" kicker={child.grade}>
-            <HBars data={subs.map(([id, v]) => ({ label: subjectOf(id)?.name, value: v }))} />
-            {subs.length === 0 && <Empty title="لا بيانات بعد" />}
+
+        <div className="span-5 home-col">
+          <Card aria-labelledby="p-att">
+            <SectionHeader id="p-att" title="حضور آخر 10 أيام دراسية" action={<Btn size="sm" variant="ghost" icon={CalendarCheck} onClick={() => go("attendance")}>السجلّ</Btn>} />
+            <VentRow size={18} items={attRow} label={`حضور ${name} في آخر 10 أيام دراسية`} />
+            <VentLegend items={[{ state: "on", label: "حاضر" }, { state: "partial", label: "متأخّر" }, { state: "off", label: "بعذر" }, { state: "alert", label: "غائب" }, { state: "empty", label: "لم يُسجَّل" }]} />
           </Card>
-          <Card title="المهام القادمة" kicker="الواجبات">
-            {open.length === 0 && <p className="muted">لا مهام مفتوحة.</p>}
-            {open.map((a) => <ListRow key={a.id} icon={ClipboardCheck} tone={subjectOf(a.subjectId)?.tone} title={a.title} meta={`${subjectOf(a.subjectId)?.name} • ${relativeDay(a.due)}`} end={<Badge tone={a.due < Date.now() ? "danger" : "warn"}>{a.due < Date.now() ? "متأخر" : "مطلوب"}</Badge>} />)}
+
+          <Card aria-labelledby="p-mastery">
+            <SectionHeader id="p-mastery" title="الإتقان حسب المادة" desc={MASTERY_KEY} />
+            {mastery.length ? <SubjectMasteryWall rows={mastery} /> : <Empty compact title="لا بيانات بعد" />}
+          </Card>
+
+          <Card aria-labelledby="p-tasks">
+            <SectionHeader id="p-tasks" title="المهام القادمة" desc={open.length ? `${open.length} مفتوحة` : "لا مهام مفتوحة"} />
+            {open.length === 0 ? (
+              <Empty compact icon={CheckCircle2} title="لا مهام مفتوحة" />
+            ) : (
+              <ul className="hl">
+                {open.map((a) => (
+                  <li key={a.id} className="no-icon">
+                    <div className="hl-main">
+                      <strong>{a.title}</strong>
+                      <span><SubjectMark subject={a.subjectId} /> • {relativeDay(a.due)}</span>
+                    </div>
+                    <div className="hl-end"><Badge tone={a.due < Date.now() ? "danger" : "warn"}>{a.due < Date.now() ? "متأخّر" : "مطلوب"}</Badge></div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </Card>
         </div>
-      </Split>
+      </div>
     </Page>
   );
 }

@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { Award, CalendarDays, CheckCircle2, ChevronLeft, Clock3, Flame, Sparkles, Target, ClipboardCheck, Zap, PlayCircle, Send } from "lucide-react";
-import { Btn, Badge, Card, Empty, ListRow, Modal, Page, Stat, Split, Textarea, Field, Notice, cx } from "../../ui/Primitives";
-import { Ring } from "../../ui/Charts";
+import { CheckCircle2, ClipboardCheck, Clock3, PlayCircle, Send, Target, TrendingUp } from "lucide-react";
+import { Badge, Btn, Card, Empty, Field, Modal, Notice, Page, SectionHeader, Textarea } from "../../ui/Primitives";
+import { FactLine, Seal, SubjectMark, VentRow } from "../../ui/World";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, recommendation, weekPlan, assignmentsForStudent, assignmentStatus, subjectOf, lessonOf, unitOf, userName } from "../../store/selectors";
-import { fmtLongDate, relativeDay, timeAgo } from "../../lib/format";
+import { assignmentStatus, assignmentsForStudent, lessonOf, recommendation, snapshot, studentOf, subjectOf, unitOf, userName, weekPlan } from "../../store/selectors";
+import { MASTERY_KEY, SubjectMasteryWall, schoolDays, subjectMastery } from "../shared/walls";
+import { dateKey } from "../../data/seed";
+import { GAP_THRESHOLD } from "../../lib/grading";
+import { fmtDate, fmtLongDate, relativeDay, timeAgo } from "../../lib/format";
 
 const STATUS = {
   pending: ["warn", "مطلوب"], submitted: ["info", "سُلِّم"], late: ["danger", "سُلِّم متأخرًا"], graded: ["success", "صُحّح"], missing: ["danger", "لم يُسلَّم"],
 };
 
-// الرئيسية والتقويم الدراسي (F4.1): الدروس القادمة والاختبارات والمهام والتنبيهات، وانتقال واضح للخطوة التالية.
+// رئيسية الطالب: «ما الذي أفعله الآن؟» أولًا — الباب إلى الخطوة التالية، ثم يوم الدراسة والمهام، ثم الإتقان والنتائج.
 export default function StudentHome({ go }) {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
@@ -20,12 +23,26 @@ export default function StudentHome({ go }) {
   const snap = snapshot(state, user.id);
   const rec = recommendation(state, user.id);
   const week = weekPlan(state, user.id);
-  const today = week.find((d) => d.today) || week[0];
+  const today = week.find((d) => d.today);
   const tasks = assignmentsForStudent(state, user.id);
   const open = tasks.filter((a) => ["pending", "missing"].includes(assignmentStatus(a, user.id)));
   const attempts = state.attempts.filter((a) => a.studentId === user.id).sort((a, b) => b.at - a.at);
   const first = user.name.split(" ")[0];
-  const prev = snap.history.length > 1 ? snap.history[snap.history.length - 2] : snap.avg;
+  const stu = studentOf(state, user.id);
+  const cls = state.classes.find((c) => c.id === (stu?.classId || user.classId));
+
+  const bySubject = subjectMastery(state, user.id);
+
+  // نشاطي: يوم فيه اختبار أو درس منجز = كوّة ممتلئة
+  const activeDays = new Set([
+    ...attempts.map((a) => dateKey(a.at)),
+    ...Object.values(state.progress[user.id] || {}).filter((p) => p.done && p.at).map((p) => dateKey(p.at)),
+  ]);
+  const days = schoolDays(10);
+  const activity = days.map((t) => ({
+    state: activeDays.has(dateKey(t)) ? "on" : "off",
+    title: `${fmtDate(t, { weekday: "long", day: "numeric", month: "long" })}: ${activeDays.has(dateKey(t)) ? "تعلّمت" : "لا نشاط"}`,
+  }));
 
   const go2 = () => {
     if (rec.type === "remedial") go("progress", "plan");
@@ -33,6 +50,7 @@ export default function StudentHome({ go }) {
     else if (rec.type === "exam") go("learn", `exam/${rec.unit.id}`);
     else go("learn");
   };
+  const cta = rec.type === "remedial" ? "ابدأ المراجعة" : rec.type === "exam" ? "ابدأ الامتحان" : rec.type === "lesson" ? "تابع الدرس" : "مساري الدراسي";
 
   const submit = () => {
     dispatch({ type: "submitAssignment", assignmentId: task.id, studentId: user.id, text });
@@ -41,99 +59,149 @@ export default function StudentHome({ go }) {
     setText("");
   };
 
+  const resultTitle = (a) => (a.kind === "lesson" ? lessonOf(state, a.refId)?.title : a.kind === "unit" ? unitOf(state, a.refId)?.title : "إعادة اختبار علاجي");
+  const essayState = (a) => {
+    const es = Object.values(a.essays || {});
+    if (!es.length) return null;
+    return es.every((e) => e.final) ? "approved" : "pending";
+  };
+
   return (
-    <Page className="student-home">
-      <section className="hero">
+    <Page title={`مرحبًا ${first}`} desc={`${fmtLongDate()} • ${cls?.name || user.grade || ""}`}>
+      <section className="door" aria-labelledby="s-next">
         <div>
-          <span className="kicker"><CalendarDays size={14} /> {fmtLongDate()}</span>
-          <h2>مرحبًا {first}، <em>{rec.type === "remedial" ? "خطوة صغيرة اليوم تصنع فرقًا" : "لنكمل رحلتك اليوم"}</em></h2>
+          <span className="door-label">{rec.type === "remedial" ? "خطوتك التالية • مراجعة علاجية" : rec.type === "exam" ? "خطوتك التالية • امتحان وحدة" : "خطوتك التالية"}</span>
+          <h2 id="s-next">{rec.title}</h2>
           <p>{rec.why}</p>
-          <div className="hero-actions">
-            <Btn variant="gold" size="lg" icon={PlayCircle} onClick={go2}>{rec.type === "remedial" ? "ابدأ الخطة العلاجية" : rec.type === "exam" ? "ابدأ الامتحان" : "تابع التعلّم"}</Btn>
-            <Btn variant="light" onClick={() => go("progress")}>تقدّمي وخطتي</Btn>
+          <div className="door-meta">
+            {rec.minutes > 0 && <span><Clock3 size={14} aria-hidden="true" /> {rec.minutes} دقيقة تقريبًا</span>}
+            {rec.objective && <span><Target size={14} aria-hidden="true" /> {subjectOf(rec.objective.subjectId)?.name}</span>}
+            {rec.lesson && <span><Target size={14} aria-hidden="true" /> {rec.unit?.title}</span>}
           </div>
-          <div className="hero-next"><Sparkles size={15} /> ما التالي: <b>{rec.title}</b>{rec.minutes > 0 && <span> • {rec.minutes} دقيقة</span>}</div>
         </div>
-        <div className="hero-side">
-          <Ring value={snap.avg} size={150} stroke={12} label="نسبة الإتقان" sub="إتقانك العام" tone="gold" />
-          <div className="streak"><Flame size={22} /><b className="num">{state.streaks[user.id] || 0}</b><span>أيام متواصلة</span></div>
+        <div className="door-actions">
+          <Btn variant="gold" icon={PlayCircle} onClick={go2}>{cta}</Btn>
+          <Btn variant="light" icon={TrendingUp} onClick={() => go("progress")}>تقدّمي وخطتي</Btn>
         </div>
       </section>
 
-      <div className="grid grid-4">
-        <Stat label="نسبة الإتقان" value={snap.avg} unit="%" icon={Target} foot={<span className={snap.avg >= prev ? "up" : "down"}>{snap.avg >= prev ? "▲" : "▼"} {Math.abs(snap.avg - prev)}% عن الأسبوع الماضي</span>} />
-        <Stat label="اختبارات مُنجزة" value={attempts.length} icon={ClipboardCheck} tone="blue" foot={attempts[0] ? `آخرها ${timeAgo(attempts[0].at)}` : "ابدأ أول اختبار"} />
-        <Stat label="سلسلة التعلّم" value={state.streaks[user.id] || 0} unit="أيام" icon={Flame} tone="gold" foot="واصل يوميًّا لتحافظ عليها" />
-        <Stat label="نقاطي" value={(state.points[user.id] || 0).toLocaleString("en-US")} icon={Award} tone="rose" foot={`${snap.gaps.length} فجوة قيد العلاج`} />
+      <FactLine
+        items={[
+          { label: "إتقاني العام", value: snap.entries.length ? `${snap.avg}%` : null, note: `${snap.mastered} أهداف متقَنة`, onClick: () => go("progress") },
+          { label: "سلسلة التعلّم", value: state.streaks[user.id] || 0, note: "أيام متواصلة", onClick: () => go("rewards") },
+          { label: "اختبارات أنجزتها", value: attempts.length, note: attempts[0] ? `آخرها ${timeAgo(attempts[0].at)}` : "ابدأ أول اختبار" },
+          { label: "مهام مفتوحة", value: open.length, note: open.length ? "تحتاج تسليمًا" : "لا شيء مطلوب", tone: open.some((a) => assignmentStatus(a, user.id) === "missing") ? "danger" : open.length ? "warn" : undefined },
+          { label: "نقاطي", value: (state.points[user.id] || 0).toLocaleString("en-US"), onClick: () => go("rewards") },
+        ]}
+      />
+
+      <div className="home-grid" style={{ marginTop: "var(--sp-6)" }}>
+        <div className="span-7 home-col">
+          <Card aria-labelledby="s-today">
+            <SectionHeader
+              id="s-today"
+              title={today ? "يومي الدراسي" : "الأسبوع القادم"}
+              desc={today ? `${today.label} • ${today.classes.length} حصص` : "لا دوام اليوم"}
+              action={<Btn size="sm" variant="ghost" onClick={() => go("schedule")}>الجدول الأسبوعي</Btn>}
+            />
+            {today && today.classes.length ? (
+              <div className="tt-strip">
+                {today.classes.map((c, i) => (
+                  <div className="tt-slot is-mine" key={i}>
+                    <time>{c.time}</time>
+                    <b><SubjectMark name={c.subject} /></b>
+                    <small>{userName(state, c.teacherId)}</small>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Empty compact title="لا حصص اليوم" desc="استغلّ اليوم في مراجعة خطّتك." />
+            )}
+          </Card>
+
+          <Card aria-labelledby="s-tasks">
+            <SectionHeader id="s-tasks" title="مهامي وواجباتي" desc={open.length ? `${open.length} مفتوحة` : "لا مهام مفتوحة"} />
+            {tasks.length === 0 ? (
+              <Empty compact icon={ClipboardCheck} title="لا مهام حاليًّا" />
+            ) : (
+              <ul className="hl">
+                {tasks.map((a) => {
+                  const st = assignmentStatus(a, user.id);
+                  const [tone, label] = STATUS[st];
+                  const sub = a.submissions[user.id];
+                  const due = st === "pending" || st === "missing";
+                  return (
+                    <li key={a.id} className="no-icon">
+                      <div className="hl-main">
+                        <strong>{a.title}</strong>
+                        <span>
+                          <SubjectMark subject={a.subjectId} /> {" • "}
+                          {due ? `التسليم ${relativeDay(a.due)}` : sub ? `سُلِّم ${timeAgo(sub.at)}` : ""}
+                          {sub?.grade != null ? ` • الدرجة ${sub.grade}/${a.points}` : ""}
+                        </span>
+                      </div>
+                      <div className="hl-end">
+                        <Badge tone={tone}>{label}</Badge>
+                        {due && <Btn size="sm" variant="primary" onClick={() => setTask(a)}>تسليم</Btn>}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </Card>
+        </div>
+
+        <div className="span-5 home-col">
+          <Card aria-labelledby="s-mastery">
+            <SectionHeader
+              id="s-mastery"
+              title="إتقاني"
+              desc={MASTERY_KEY}
+              action={<Btn size="sm" variant="ghost" onClick={() => go("progress", "plan")}>خطّتي</Btn>}
+            />
+            {bySubject.length === 0 ? (
+              <Empty compact icon={Target} title="لا أهداف بعد" />
+            ) : (
+              <SubjectMasteryWall rows={bySubject} />
+            )}
+            <div className="vent-legend" aria-label="نشاطي في آخر 10 أيام دراسية">
+              <span style={{ color: "var(--c-text-2)", fontWeight: 600 }}>نشاطي في آخر 10 أيام دراسية</span>
+              <VentRow size={12} items={activity} label={`أيام النشاط: ${activity.filter((a) => a.state === "on").length} من 10`} />
+            </div>
+          </Card>
+
+          <Card aria-labelledby="s-results">
+            <SectionHeader id="s-results" title="آخر نتائجي" desc="المقالي تُعتمد درجته من المعلّم" />
+            {attempts.length === 0 ? (
+              <Empty compact title="لا نتائج بعد" desc="ابدأ أول درس ثم اختبره." />
+            ) : (
+              <ul className="hl">
+                {attempts.slice(0, 5).map((a) => {
+                  const es = essayState(a);
+                  return (
+                    <li key={a.id} className="no-icon">
+                      <div className="hl-main">
+                        <strong>{resultTitle(a)}</strong>
+                        <span>{`${a.kind === "unit" ? "امتحان وحدة" : a.kind === "retest" ? "علاجي" : "اختبار درس"} • ${timeAgo(a.at)}`}</span>
+                      </div>
+                      <div className="hl-end">
+                        {es && <Seal approved={es === "approved"} compact />}
+                        <span className="hl-num" style={{ color: a.score >= GAP_THRESHOLD ? "var(--c-success)" : "var(--c-warn)" }}>{a.score}%</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            {snap.gaps.length === 0 && attempts.length > 0 && (
+              <Notice tone="success" icon={CheckCircle2}>لا فجوات مفتوحة. أحسنت!</Notice>
+            )}
+          </Card>
+        </div>
       </div>
 
-      <Split className="mt">
-        <div className="stack">
-          <Card title="أسبوعي الدراسي" kicker="التقويم" action={<Badge tone="gold">الأحد – الخميس</Badge>}>
-            <div className="week">
-              {week.map((d) => (
-                <div key={d.label} className={cx("week-day", d.today && "today")}>
-                  <strong>{d.label}</strong>
-                  <span className="num">{new Date(d.ts).getDate()}</span>
-                  <small>{d.classes.length} حصص</small>
-                  {d.due.length > 0 && <i className="due-dot" title={d.due.map((x) => x.title).join("، ")}>{d.due.length}</i>}
-                </div>
-              ))}
-            </div>
-            <div className="divider" />
-            <h4 className="mini-title">{today.today ? "جدول اليوم" : `جدول ${today.label}`}</h4>
-            <div className="periods">
-              {today.classes.map((c, i) => (
-                <div className="period" key={i}><span className="num">{c.time}</span><b>{c.subject}</b><small>{userName(state, c.teacherId)}</small></div>
-              ))}
-            </div>
-          </Card>
-
-          <Card title="مهامي وواجباتي" kicker="المطلوب مني" action={<Badge tone={open.length ? "warn" : "success"}>{open.length ? `${open.length} مفتوحة` : "لا مهام مفتوحة"}</Badge>}>
-            {tasks.length === 0 && <Empty title="لا مهام حاليًّا" />}
-            {tasks.map((a) => {
-              const st = assignmentStatus(a, user.id);
-              const [tone, label] = STATUS[st];
-              const sub = a.submissions[user.id];
-              return (
-                <ListRow key={a.id} icon={ClipboardCheck} tone={subjectOf(a.subjectId)?.tone || "emerald"} title={a.title}
-                  meta={`${subjectOf(a.subjectId)?.name} • ${st === "pending" || st === "missing" ? `التسليم ${relativeDay(a.due)}` : sub ? `سُلِّم ${timeAgo(sub.at)}` : ""}${sub?.grade != null ? ` • الدرجة ${sub.grade}/${a.points}` : ""}`}
-                  end={<>
-                    <Badge tone={tone}>{label}</Badge>
-                    {(st === "pending" || st === "missing") && <Btn size="sm" variant="primary" onClick={() => setTask(a)}>تسليم</Btn>}
-                  </>} />
-              );
-            })}
-          </Card>
-        </div>
-
-        <div className="stack">
-          <Card tone="gold" title="ما التالي؟" kicker="توصية مبنية على أدائك">
-            <div className="rec">
-              <span className="rec-icon"><Zap size={20} /></span>
-              <div><strong>{rec.title}</strong><p className="muted small">{rec.why}</p></div>
-            </div>
-            <Btn variant="primary" className="btn-block mt-sm" iconEnd={ChevronLeft} onClick={go2}>انتقل الآن</Btn>
-          </Card>
-          <Card title="فجواتي" kicker="أولويات المعالجة" action={<button className="btn-link small" onClick={() => go("progress", "plan")}>الخطة كاملة</button>}>
-            {snap.gaps.length === 0 && <Notice tone="success" icon={CheckCircle2}>لا فجوات حاليًّا. أحسنت!</Notice>}
-            {snap.gaps.slice(0, 3).map((g) => (
-              <ListRow key={g.id} icon={Target} tone="warn" title={g.title} meta={subjectOf(g.subjectId)?.name} end={<Badge tone={g.mastery < 55 ? "danger" : "warn"}>{g.mastery}%</Badge>} onClick={() => go("progress", "plan")} />
-            ))}
-          </Card>
-          <Card title="آخر نتائجي" kicker="سجلّ التعلّم">
-            {attempts.slice(0, 4).map((a) => (
-              <ListRow key={a.id} icon={ClipboardCheck} tone={a.score >= 70 ? "success" : "warn"}
-                title={a.kind === "lesson" ? lessonOf(state, a.refId)?.title : a.kind === "unit" ? unitOf(state, a.refId)?.title : "إعادة اختبار علاجي"}
-                meta={`${a.kind === "unit" ? "امتحان وحدة" : a.kind === "retest" ? "علاجي" : "اختبار درس"} • ${timeAgo(a.at)}`}
-                end={<b className="num">{a.score}%</b>} />
-            ))}
-            {attempts.length === 0 && <Empty title="لا نتائج بعد" desc="ابدأ أول درس ثم اختبره." />}
-          </Card>
-        </div>
-      </Split>
-
-      <Modal open={!!task} onClose={() => setTask(null)} title={task?.title} kicker={`تسليم واجب • ${task ? subjectOf(task.subjectId)?.name : ""}`}
+      <Modal open={!!task} onClose={() => setTask(null)} title={task?.title} kicker={task ? `تسليم واجب • ${subjectOf(task.subjectId)?.name}` : ""}
         footer={<><Btn variant="ghost" onClick={() => setTask(null)}>إلغاء</Btn><Btn variant="primary" icon={Send} disabled={!text.trim()} onClick={submit}>تسليم الواجب</Btn></>}>
         {task && <div className="stack">
           <Notice tone="info" title="المطلوب">{task.desc}</Notice>
@@ -144,3 +212,4 @@ export default function StudentHome({ go }) {
     </Page>
   );
 }
+

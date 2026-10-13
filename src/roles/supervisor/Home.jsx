@@ -1,13 +1,22 @@
 import { useMemo, useState } from "react";
-import { AlertTriangle, ArrowUpDown, Building2, Eye, GraduationCap, School as SchoolIcon, ShieldCheck } from "lucide-react";
-import { Badge, Btn, Card, Empty, Modal, Page, Progress, Segmented, Select, Stat } from "../../ui/Primitives";
-import { Ring, HBars, Bars } from "../../ui/Charts";
+import { AlertTriangle, ShieldCheck } from "lucide-react";
+import { Badge, Btn, Card, DataTable, Empty, Modal, Page, SectionHeader, Segmented, Select } from "../../ui/Primitives";
+import { HBars } from "../../ui/Charts";
+import { FactLine, VentRow } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
-import { fmtNum, fmtLongDate } from "../../lib/format";
+import { fmtLongDate, fmtNum } from "../../lib/format";
 
 const LIC_TONE = { "نشط": "success", "تجريبي": "info", "ينتهي قريبًا": "warn" };
+const RISK_MASTERY = 72;
 
-// لوحة الإشراف متعددة المدارس (F8.1): يرى المشرف مدارس نطاقه ومؤشراتها في لوحة واحدة
+// مقياس من عشر كوّات: كل كوّة 10%، والكوّة الأخيرة نصفية عند الكسور
+const gauge = (v, low) =>
+  Array.from({ length: 10 }, (_, i) => {
+    const filled = v / 10 - i;
+    return { state: filled >= 1 ? (low ? "alert" : "on") : filled >= 0.5 ? "partial" : "off", title: `${v}%` };
+  });
+
+// لوحة الإشراف متعددة المدارس (F8.1): مدارس النطاق ومؤشراتها في جدول واحد يُرتَّب ويُصفّى، وما يستدعي المتابعة أولًا.
 export default function SupervisorHome({ go }) {
   const { state, user } = useStore();
   const [stage, setStage] = useState("");
@@ -15,36 +24,80 @@ export default function SupervisorHome({ go }) {
   const [open, setOpen] = useState(null);
   const schools = useMemo(() => state.schools.filter((s) => !stage || s.stage.includes(stage)).sort((a, b) => b[sort] - a[sort]), [state.schools, stage, sort]);
   const students = schools.reduce((a, s) => a + s.students, 0);
-  const avg = (k) => (schools.length ? Math.round((schools.reduce((a, s) => a + s[k] * s.students, 0) / students) * 10) / 10 : 0);
-  const atRisk = schools.filter((s) => s.mastery < 72 || s.license === "ينتهي قريبًا");
+  const avg = (k) => (students ? Math.round((schools.reduce((a, s) => a + s[k] * s.students, 0) / students) * 10) / 10 : null);
+  const atRisk = schools.filter((s) => s.mastery < RISK_MASTERY || s.license === "ينتهي قريبًا");
   const sel = state.schools.find((s) => s.id === open);
+  const scope = user.title?.split("—")[1]?.trim() || "نطاق الإشراف";
 
   return (
-    <Page kicker="إدارة تعليم الرياض" title="المدارس ضمن النطاق" desc={`${fmtLongDate()} — عرض موحّد لمدارس نطاق إشرافك ومؤشراتها الرئيسية.`} icon={SchoolIcon}
-      actions={<><Select value={stage} onChange={(e) => setStage(e.target.value)} aria-label="المرحلة"><option value="">كل المراحل</option><option value="ابتدائي">ابتدائي</option><option value="متوسط">متوسط</option><option value="ثانوي">ثانوي</option></Select>
-        <Segmented options={[{ id: "mastery", label: "الإتقان" }, { id: "attendance", label: "الحضور" }, { id: "students", label: "الحجم" }]} value={sort} onChange={setSort} /></>}>
-      <div className="grid grid-4">
-        <Stat label="مدارس ضمن النطاق" value={schools.length} icon={Building2} foot={`${fmtNum(students)} طالبًا`} />
-        <Stat label="متوسط الإتقان (مرجّح)" value={avg("mastery")} unit="%" icon={GraduationCap} tone="gold" foot="المستهدف 80%" />
-        <Stat label="متوسط الحضور" value={avg("attendance")} unit="%" icon={Eye} tone="blue" />
-        <Stat label="مدارس تستدعي متابعة" value={atRisk.length} icon={AlertTriangle} tone="rose" foot="إتقان منخفض أو ترخيص قريب الانتهاء" />
-      </div>
+    <Page title="المدارس ضمن النطاق" desc={`${scope} • ${fmtLongDate()}`}>
+      <FactLine
+        items={[
+          { label: "مدارس", value: schools.length, note: `${fmtNum(students)} طالبًا` },
+          { label: "الإتقان (مرجّح بعدد الطلاب)", value: avg("mastery") != null ? `${avg("mastery")}%` : null, note: "المستهدف 80%", tone: avg("mastery") != null && avg("mastery") < 80 ? "warn" : undefined, onClick: () => go("kpis") },
+          { label: "الحضور", value: avg("attendance") != null ? `${avg("attendance")}%` : null },
+          { label: "تستدعي متابعة", value: atRisk.length, note: `إتقان دون ${RISK_MASTERY}% أو ترخيص ينتهي`, tone: atRisk.length ? "warn" : undefined, onClick: () => go("quality") },
+        ]}
+      />
 
-      <div className="school-grid mt">
-        {schools.length === 0 && <Empty title="لا مدارس مطابقة" />}
-        {schools.map((s, i) => (
-          <button key={s.id} className="school-card" onClick={() => setOpen(s.id)}>
-            <div className="row spread"><div><span className="rank num">{i + 1}</span></div><Badge tone={LIC_TONE[s.license]} dot>{s.license}</Badge></div>
-            <strong>{s.name}</strong>
-            <span className="muted small">{s.district} • {s.stage}</span>
-            <div className="school-metrics">
-              <div><Ring value={s.mastery} size={64} stroke={7} label={`إتقان ${s.name}`} /><small>الإتقان</small></div>
-              <div><b className="num">{s.attendance}%</b><small>الحضور</small></div>
-              <div><b className="num">{s.active}%</b><small>نشاط</small></div>
-              <div><b className="num">{fmtNum(s.students)}</b><small>طالبًا</small></div>
+      <div className="home-grid">
+        {atRisk.length > 0 && (
+          <Card className="span-12" aria-labelledby="sv-risk">
+            <SectionHeader id="sv-risk" title="مدارس تستدعي متابعة" desc="مرتّبة حسب الإتقان" action={<Btn size="sm" variant="ghost" icon={ShieldCheck} onClick={() => go("quality")}>رقابة الجودة</Btn>} />
+            <div className="sv-risk">
+              {[...atRisk].sort((a, b) => a.mastery - b.mastery).map((s) => (
+                <button key={s.id} className="sv-risk-item" onClick={() => setOpen(s.id)}>
+                  <AlertTriangle size={16} aria-hidden="true" />
+                  <span>
+                    <strong>{s.name}</strong>
+                    <small>{s.mastery < RISK_MASTERY ? `إتقان ${s.mastery}%` : ""}{s.mastery < RISK_MASTERY && s.license === "ينتهي قريبًا" ? " • " : ""}{s.license === "ينتهي قريبًا" ? "ترخيص ينتهي قريبًا" : ""}</small>
+                  </span>
+                </button>
+              ))}
             </div>
-          </button>
-        ))}
+          </Card>
+        )}
+
+        <Card flush className="span-12" aria-labelledby="sv-schools">
+          <div className="pad" style={{ paddingBottom: 0 }}>
+            <SectionHeader
+              id="sv-schools"
+              title="المدارس"
+              desc="كل كوّة 10% من الإتقان • الحمراء دون حدّ المتابعة"
+              action={
+                <div className="filter-bar">
+                  <Select value={stage} onChange={(e) => setStage(e.target.value)} aria-label="المرحلة" style={{ width: "auto" }}>
+                    <option value="">كل المراحل</option>
+                    <option value="ابتدائي">ابتدائي</option>
+                    <option value="متوسط">متوسط</option>
+                    <option value="ثانوي">ثانوي</option>
+                  </Select>
+                  <Segmented options={[{ id: "mastery", label: "الإتقان" }, { id: "attendance", label: "الحضور" }, { id: "students", label: "الحجم" }]} value={sort} onChange={setSort} />
+                </div>
+              }
+            />
+          </div>
+          <DataTable
+            caption="مدارس النطاق"
+            rows={schools}
+            onRowClick={(s) => setOpen(s.id)}
+            empty={<Empty compact title="لا مدارس مطابقة" desc="غيّر المرحلة المختارة." />}
+            columns={[
+              { key: "rank", label: "#", width: 44, render: (s) => <span className="num muted">{schools.indexOf(s) + 1}</span> },
+              { key: "name", label: "المدرسة", primary: true, render: (s) => <div className="ov-cls-name"><strong>{s.name}</strong><small>{`${s.district} • ${s.stage}`}</small></div> },
+              { key: "mastery", label: "الإتقان", render: (s) => (
+                <div className="ov-mastery">
+                  <VentRow size={11} items={gauge(s.mastery, s.mastery < RISK_MASTERY)} label={`إتقان ${s.name} ${s.mastery}%`} />
+                  <span className="num">{s.mastery}%</span>
+                </div>
+              ) },
+              { key: "attendance", label: "الحضور", num: true, render: (s) => <span className="num">{s.attendance}%</span> },
+              { key: "active", label: "النشاط", num: true, render: (s) => <span className="num">{s.active}%</span> },
+              { key: "students", label: "الطلاب", num: true, render: (s) => <span className="num">{fmtNum(s.students)}</span> },
+              { key: "license", label: "الترخيص", render: (s) => <Badge tone={LIC_TONE[s.license]} icon={s.license === "ينتهي قريبًا" ? AlertTriangle : undefined}>{s.license}</Badge> },
+            ]}
+          />
+        </Card>
       </div>
 
       <Modal open={!!sel} wide onClose={() => setOpen(null)} title={sel?.name} kicker={sel?.district}
@@ -57,7 +110,9 @@ export default function SupervisorHome({ go }) {
             <div className="stack-sm">
               <div className="term"><strong>الحجم</strong><span>{fmtNum(sel.students)} طالبًا • {sel.teachers} معلّمًا</span></div>
               <div className="term"><strong>الترخيص</strong><span>{sel.license} • {fmtNum(sel.seats)} مقعدًا</span></div>
-              <div className="term"><strong>مقارنة بمتوسط النطاق</strong><span>{sel.mastery - avg("mastery") >= 0 ? "أعلى" : "أقل"} بـ {Math.abs(Math.round((sel.mastery - avg("mastery")) * 10) / 10)} نقطة في الإتقان</span></div>
+              {avg("mastery") != null && (
+                <div className="term"><strong>مقارنة بمتوسط النطاق</strong><span>{sel.mastery - avg("mastery") >= 0 ? "أعلى" : "أقل"} بـ {Math.abs(Math.round((sel.mastery - avg("mastery")) * 10) / 10)} نقطة في الإتقان</span></div>
+              )}
             </div>
           </div>
         )}

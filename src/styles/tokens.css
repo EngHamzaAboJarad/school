@@ -1,65 +1,102 @@
 /* ==========================================================================
-   Taqat School — design tokens (app redesign)
-   Brand kept: navy ink + ochre accent. Green is reserved for success/mastery.
-   New tokens are defined on :root (new names, no collisions). Inside the
-   signed-in app (body.in-app) the legacy variable names are re-pointed to the
-   new values so pages that still use them pick up the system. Landing and auth
-   screens never get .in-app and keep their current look.
-   Text/background pairs below were checked for WCAG AA (≥ 4.5:1).
-   Breakpoints (used literally in media queries): sm 640 · md 768 · lg 1024 · xl 1280
+   Taqat School — design tokens · world: Najdi clay and painted door
+   Indigo door (shell) · lime-wash walls (ground) · clay (structure) ·
+   ochre (brand mark on indigo) · door paints (subjects and states).
+   New tokens live on :root (new names, no collisions). Inside the signed-in
+   app (body.in-app) the legacy variable names (--nv-*, --gold-*, --muted…)
+   are re-pointed to this world so every page inherits it. Landing and auth
+   never get .in-app and keep their own look.
+   Text/background pairs checked for WCAG AA (≥ 4.5:1); clay-500 and the
+   saffron subject paint are marks only, never text.
+   Breakpoints (literal in media queries): 640 · 768 · 1024 · 1280
    ========================================================================== */
 :root {
-  /* Brand */
-  --c-brand-950: #0e1b33;
-  --c-brand-900: #17273f;
-  --c-brand-800: #22364f;
-  --c-brand-700: #38465e;
-  --c-brand-100: #e9edf3;
-  --c-brand-50: #f3f5f8;
-  --c-accent-700: #5f4712;  /* accent text on light (7.3:1 on accent-100) */
-  --c-accent-500: #a9822f;  /* marks, borders, focus — not body text */
-  --c-accent-300: #ddbe84;  /* accent on dark surfaces (8.4:1 on brand-900) */
-  --c-accent-100: #f4ead2;
-  --c-accent-50: #faf5e8;
+  /* Indigo door — shell, primary actions, lead text */
+  --c-door-950: #121b33;
+  --c-door-900: #1b2745;
+  --c-door-800: #26345a;
+  --c-door-700: #34446e;
+  --c-door-200: #c9d0de;
+  --c-door-100: #e6e9f1;
+  --c-door-50: #f1f3f8;
 
-  /* Surfaces & lines */
-  --c-bg: #f6f6f3;
-  --c-surface: #ffffff;
-  --c-surface-2: #f9f9f7;   /* table header, subtle wells */
-  --c-surface-hover: #f2f2ee;
-  --c-border: #e4e3dd;
-  --c-border-strong: #cfcdc4;
-  --c-divider: #eeede8;
+  /* Ochre — the brand mark, used on indigo */
+  --c-ochre-300: #d9b26a;
+  --c-ochre-200: #e8cf9c;
+  --c-ochre-100: #f3e6c8;
 
-  /* Text */
-  --c-text: #0e1b33;
-  --c-text-2: #38465e;      /* 8.8:1 on bg */
-  --c-text-muted: #5b6880;  /* 5.2:1 on bg, 5.6:1 on white */
-  --c-text-faint: #677386;  /* placeholders & disabled only */
-  --c-text-on-dark: #f3f5f8;
-  --c-text-on-dark-muted: #aab4c3; /* 7.2:1 on brand-900 */
+  /* Clay — structure on light grounds, lead data series */
+  --c-clay-700: #7a4520;
+  --c-clay-600: #8e5326;
+  --c-clay-500: #a8652f;
+  --c-clay-300: #d4a77e;
+  --c-clay-100: #f1e1d2;
+  --c-clay-50: #f8efe6;
 
-  /* Status — fg/bg/border triples, fg ≥ 5.3:1 on its bg */
-  --c-success: #17694e;
-  --c-success-bg: #e8f5ee;
-  --c-success-border: #bfe3d0;
-  --c-success-mark: #2aa57a;
+  /* Lime-wash ground and whitewash panels */
+  --c-bg: #f2f1ec;
+  --c-surface: #fbfbf8;
+  --c-surface-2: #f6f5f0;
+  --c-surface-hover: #eeede6;
+  --c-border: #e2ded3;
+  --c-border-strong: #cbc5b6;
+  --c-divider: #ebe8df;
+
+  /* Ink */
+  --c-text: #1a2236;
+  --c-text-2: #3d4659;
+  --c-text-muted: #5e6676;
+  --c-text-faint: #6a7180;
+  --c-text-on-dark: #f1f3f8;
+  --c-text-on-dark-muted: #a9b2c4;
+
+  /* States — door paints. fg ≥ 5.2:1 on its bg */
+  --c-success: #1d6b57;
+  --c-success-bg: #e3f2ec;
+  --c-success-border: #bfddd0;
+  --c-success-mark: #2e8c70;
   --c-warn: #8a5a0b;
-  --c-warn-bg: #fdf3dc;
-  --c-warn-border: #efd9a2;
-  --c-warn-mark: #d49a2a;
-  --c-danger: #a3362a;
-  --c-danger-bg: #fbeae7;
-  --c-danger-border: #f0c8c1;
-  --c-danger-mark: #c4584a;
-  --c-info: #2f5a8a;
-  --c-info-bg: #e8f0f9;
-  --c-info-border: #c9d9ec;
-  --c-info-mark: #4a7fb8;
+  --c-warn-bg: #fbf0d9;
+  --c-warn-border: #eed6a2;
+  --c-warn-mark: #c98d22;
+  --c-danger: #9e3328;
+  --c-danger-bg: #fae7e3;
+  --c-danger-border: #efc5bd;
+  --c-danger-mark: #c0473a;
+  --c-info: #2d4c86;
+  --c-info-bg: #e7edf8;
+  --c-info-border: #c9d6ee;
+  --c-info-mark: #4b6fb0;
 
-  /* Data viz — single-series default is the brand hue */
-  --c-viz-1: #38465e;
-  --c-viz-track: #ecebe6;
+  /* Subjects — one fixed door paint each, in every role */
+  --c-subj-math: #3557a7;
+  --c-subj-sci: #1f7a70;
+  --c-subj-arb: #a23b3b;
+  --c-subj-eng: #b7791f;
+  --c-subj-quran: #5d6b2f;
+  --c-subj-pe: #a8652f;
+  --c-subj-social: #6e4a7e;
+  --c-subj-other: #5e6676;
+
+  /* Vents (signature data glyph) */
+  --c-vent-on: var(--c-door-800);
+  --c-vent-off: #c3bcab;
+  --c-viz-1: var(--c-door-800);
+  --c-viz-2: var(--c-clay-500);
+  --c-viz-track: #e7e3d8;
+
+  /* Compatibility aliases used by the component layer */
+  --c-brand-950: var(--c-door-950);
+  --c-brand-900: var(--c-door-900);
+  --c-brand-800: var(--c-door-800);
+  --c-brand-700: var(--c-door-700);
+  --c-brand-100: var(--c-door-100);
+  --c-brand-50: var(--c-door-50);
+  --c-accent-700: var(--c-clay-700);
+  --c-accent-500: var(--c-clay-500);
+  --c-accent-300: var(--c-ochre-300);
+  --c-accent-100: var(--c-clay-100);
+  --c-accent-50: var(--c-clay-50);
 
   /* Spacing — 4px grid */
   --sp-1: 4px;
@@ -72,43 +109,44 @@
   --sp-10: 40px;
   --sp-12: 48px;
 
-  /* Radii — restrained; pills only for counters */
-  --rad-xs: 4px;
+  /* Shape — soft-square: 6px controls, 10px panels, full only for counters */
+  --rad-xs: 3px;
   --rad-sm: 6px;
-  --rad-md: 8px;
-  --rad-lg: 12px;
+  --rad-md: 6px;
+  --rad-lg: 10px;
   --rad-full: 999px;
 
-  /* Elevation */
-  --el-1: 0 1px 2px rgba(14, 27, 51, 0.05);
-  --el-2: 0 6px 20px -6px rgba(14, 27, 51, 0.16), 0 1px 3px rgba(14, 27, 51, 0.06);
-  --el-3: 0 24px 56px -16px rgba(14, 27, 51, 0.32);
-  --focus: 0 0 0 2px var(--c-surface), 0 0 0 4px var(--c-accent-500);
+  /* Depth — plaster panels sit on the wall; only overlays float */
+  --el-1: 0 1px 0 rgba(122, 69, 32, 0.05);
+  --el-2: 0 8px 24px -8px rgba(27, 39, 69, 0.22), 0 1px 3px rgba(27, 39, 69, 0.08);
+  --el-3: 0 28px 64px -18px rgba(18, 27, 51, 0.38);
+  --focus: 0 0 0 2px var(--c-surface), 0 0 0 4px var(--c-clay-500);
 
-  /* Type — IBM Plex Sans Arabic everywhere in the app; compact headings */
+  /* Type — Kufi for headings, Plex Arabic for work */
   --ff-ui: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
-  --fs-2xs: 0.6875rem;  /* 12.4px @ default 18px root */
-  --fs-xs: 0.75rem;     /* 13.5px — captions, table headers */
-  --fs-sm: 0.8125rem;   /* 14.6px — meta, secondary */
-  --fs-md: 0.875rem;    /* 15.75px — UI default */
-  --fs-lg: 1rem;        /* 18px — card titles */
-  --fs-xl: 1.25rem;     /* 22.5px — page titles */
-  --fs-2xl: 1.5rem;     /* 27px — metric values */
+  --ff-head: "Noto Kufi Arabic", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.875rem;
+  --fs-lg: 1rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.625rem;
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
-  --lh-tight: 1.3;
+  --lh-tight: 1.35;
   --lh-body: 1.6;
 
   /* Layout */
-  --sidebar-w: 256px;
+  --sidebar-w: 248px;
   --sidebar-w-collapsed: 68px;
-  --topbar-h: 60px;
+  --topbar-h: 56px;
   --bottomnav-h: 64px;
   --content-max: 1360px;
-  --control-h: 40px;
-  --control-h-sm: 32px;
+  --control-h: 38px;
+  --control-h-sm: 30px;
   --touch: 44px;
 
   /* Motion — short, functional only */
@@ -124,8 +162,44 @@
   --z-toast: 120;
 }
 
-/* Legacy names re-pointed inside the app so every existing page inherits the system */
+/* Legacy names re-pointed inside the app: every existing page moves into the world */
 body.in-app {
+  /* navy scale → indigo door */
+  --nv-950: var(--c-door-950);
+  --nv-900: var(--c-text);
+  --nv-800: var(--c-door-800);
+  --nv-700: var(--c-door-700);
+  --nv-600: #4a5a85;
+  --nv-500: #6b789a;
+  --nv-400: #9aa4bc;
+  --nv-300: #b9c1d3;
+  --nv-200: var(--c-door-200);
+  --nv-100: var(--c-door-100);
+  --nv-50: var(--c-door-50);
+  /* gold scale → clay on light, ochre on indigo */
+  --gold-700: var(--c-clay-700);
+  --gold-600: var(--c-clay-600);
+  --gold-500: var(--c-clay-500);
+  --gold-400: #bd8350;
+  --gold-300: var(--c-ochre-300);
+  --gold-200: var(--c-ochre-200);
+  --gold-100: var(--c-clay-100);
+  --gold-50: var(--c-clay-50);
+  /* success greens → door teal-green */
+  --ok-700: var(--c-success);
+  --ok-600: var(--c-success-mark);
+  --ok-500: #3a9c7f;
+  --ok-400: #6db8a1;
+  --ok-300: #a9d6c7;
+  --ok-200: #cfe8de;
+  --ok-100: var(--c-success-bg);
+  --ok-50: #f0f8f4;
+  /* subjects */
+  --sub-math: var(--c-subj-math);
+  --sub-sci: var(--c-subj-sci);
+  --sub-arb: var(--c-subj-arb);
+  --sub-eng: var(--c-subj-eng);
+  /* paper and ink */
   --ivory: var(--c-bg);
   --paper: var(--c-surface);
   --sand-100: var(--c-surface-hover);
@@ -152,7 +226,9 @@ body.in-app {
   --shadow-md: var(--el-2);
   --shadow-lg: var(--el-3);
   --ring: var(--focus);
-  --font-display: var(--ff-ui);
+  --font-display: var(--ff-head);
+  --pattern-gold: none;
+  --pattern-soft: none;
   background: var(--c-bg);
   color: var(--c-text);
   font-size: var(--fs-md);
@@ -160,9 +236,26 @@ body.in-app {
 }
 
 html[data-contrast="high"] body.in-app {
-  --c-text-muted: #38465e;
-  --c-text-faint: #4a586e;
-  --c-border: #b9b6aa;
-  --c-border-strong: #8f8b7e;
-  --c-divider: #cfcdc4;
+  --c-text-muted: #3d4659;
+  --c-text-faint: #4a5263;
+  --c-border: #b8b19f;
+  --c-border-strong: #8f8775;
+  --c-divider: #cdc7b8;
+  --c-vent-off: #8f8775;
+}
+
+/* Browser surfaces carry the world too */
+body.in-app ::selection {
+  background: var(--c-ochre-100);
+  color: var(--c-text);
+}
+
+body.in-app {
+  caret-color: var(--c-clay-600);
+  scrollbar-color: var(--c-border-strong) transparent;
+}
+
+body.in-app ::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+  border: 2px solid var(--c-bg);
 }
