@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { ImagePlus, LockKeyhole, Smartphone, Monitor, RotateCcw, Trash2 } from "lucide-react";
 import { Modal, Btn, Toggle, Segmented, Notice, Badge, Avatar } from "../ui/Primitives";
 import { useToast } from "../ui/Brand";
+import { useConfirm } from "../ui/Confirm";
 import { useStore } from "../store/StoreProvider";
 import { avatarOf } from "../store/selectors";
 import { LangSegmented } from "../i18n/LangToggle";
@@ -25,6 +26,7 @@ export function applyPrefs(p) {
 export default function SettingsDialog({ onClose }) {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const fileRef = useRef(null);
   const [prefs, setPrefs] = useState(loadPrefs);
   const [sessions, setSessions] = useState([
@@ -105,7 +107,7 @@ export default function SettingsDialog({ onClose }) {
           <strong>بيانات العرض التجريبي</strong>
           <p className="muted small">تعيد كل شيء (الاختبارات، الاعتمادات، الرسائل) إلى حالته الأولى.</p>
         </div>
-        <Btn variant="danger" icon={RotateCcw} onClick={() => { if (window.confirm("إعادة ضبط كل بيانات العرض؟")) { dispatch({ type: "reset" }); toast("أُعيد ضبط بيانات العرض"); onClose(); } }}>إعادة الضبط</Btn>
+        <Btn variant="danger" icon={RotateCcw} onClick={async () => { if (await confirm({ title: "إعادة ضبط كل بيانات العرض؟", body: "تُمحى كل الاختبارات والاعتمادات والرسائل والتغييرات وتعود البيانات التجريبية إلى حالتها الأولى. لا يمكن التراجع.", confirmLabel: "إعادة الضبط" })) { dispatch({ type: "reset" }); toast("أُعيد ضبط بيانات العرض"); onClose(); } }}>إعادة الضبط</Btn>
       </div>
     </Modal>
   );

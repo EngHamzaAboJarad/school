@@ -13,6 +13,7 @@ import "./styles/pages.css";
 import "./styles/roles.css";
 import "./styles/admin.css";
 import "./styles/homes.css";
+import "./styles/screens.css";
 import "./styles/landing.css";
 import "./styles/motion.css";
 

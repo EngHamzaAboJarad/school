@@ -7,10 +7,12 @@ import { useStore } from "../../store/StoreProvider";
 export default function TeacherRequestsPage() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const pending = state.directory.filter((d) => d.role === "teacher" && d.status === "بانتظار الاعتماد");
   const decided = state.directory.filter((d) => d.role === "teacher" && d.status !== "بانتظار الاعتماد");
 
-  const decide = (d, status) => {
+  const decide = async (d, status) => {
+    if (status !== "نشط" && !(await confirm({ title: `رفض طلب «${d.name}»؟`, body: "لن يُفعَّل حساب المعلّم ولن يتمكّن من الدخول لأي مدرسة. يُسجَّل القرار في سجلّ التدقيق، ويمكن مراجعته لاحقًا.", confirmLabel: "رفض الطلب" }))) return;
     dispatch({ type: "updateUser", id: d.id, patch: { status }, action: status === "نشط" ? "اعتماد حساب معلّم" : "رفض حساب معلّم", target: d.name, actor: user.id });
     toast(status === "نشط" ? `اعتُمد حساب ${d.name}` : `رُفض حساب ${d.name}`, status === "نشط" ? "success" : "warn");
   };

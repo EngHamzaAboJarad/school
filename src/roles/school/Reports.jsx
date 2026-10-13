@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 import { Download, FileBarChart, Printer } from "lucide-react";
-import { Badge, Btn, Card, DataTable, Page, Segmented, Select, Stat } from "../../ui/Primitives";
+import { Badge, Btn, Card, DataTable, Page, Segmented, Select } from "../../ui/Primitives";
 import { HBars, Bars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
+import { FactLine } from "../../ui/World";
 import { allObjectives, classStats, assignmentStatus, attendanceRate, subjectOf } from "../../store/selectors";
 import { subjects } from "../../data/curriculum";
 import { downloadCSV, printPage } from "../../lib/export";
@@ -15,7 +16,6 @@ export default function SchoolReports() {
   const toast = useToast();
   const [by, setBy] = useState("class");
   const [grade, setGrade] = useState("");
-  const school = state.schools.find((s) => s.id === "sch-1");
   const classes = state.classes.filter((c) => !grade || c.grade === grade);
   const classRows = useMemo(() => classes.map((c) => {
     const st = classStats(state, c);
@@ -31,6 +31,14 @@ export default function SchoolReports() {
     return { id: s.id, name: `${s.name} (${s.grade})`, avg: vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : null, n: vals.length };
   }).filter((r) => r.avg !== null);
   const grades = [...new Set(state.classes.map((c) => c.grade))];
+  // مؤشّرات محسوبة من السجلات (لا من أرقام سجلّ المستأجر الثابتة)
+  const rated = classes.flatMap((c) => classStats(state, c).rows.filter((r) => r.assessed));
+  const mastery = rated.length ? Math.round(rated.reduce((x, r) => x + r.avg, 0) / rated.length) : null;
+  const marks = Object.values(state.attendance).flatMap((d) => classes.flatMap((c) => c.studentIds.map((sid) => d[sid]).filter(Boolean)));
+  const attendance = marks.length ? Math.round((marks.filter((m) => m !== "absent").length / marks.length) * 1000) / 10 : null;
+  const decided = state.reviewItems.filter((r) => r.status === "approved" || r.status === "rejected").length;
+  const approvalRate = decided ? Math.round((state.reviewItems.filter((r) => r.status === "approved").length / decided) * 100) : null;
+  const pendingReview = state.reviewItems.filter((r) => r.status === "pending").length;
 
   const exportCsv = () => {
     downloadCSV("تقرير-مؤسسي", by === "class"
@@ -43,13 +51,14 @@ export default function SchoolReports() {
     <Page kicker="تقارير تجميعية" title="التقارير المؤسسية" desc={`أداء المدرسة على مستوى الصف والمادة — ${fmtLongDate()}`} icon={FileBarChart}
       actions={<><Btn variant="ghost" icon={Download} onClick={exportCsv}>تصدير Excel</Btn><Btn variant="primary" icon={Printer} onClick={printPage}>PDF / طباعة</Btn></>}>
       <div className="row spread no-print"><Segmented options={[{ id: "class", label: "حسب الفصل" }, { id: "subject", label: "حسب المادة" }]} value={by} onChange={setBy} />
-        <Select value={grade} onChange={(e) => setGrade(e.target.value)} aria-label="الصف" style={{ minWidth: 200 }}><option value="">كل الصفوف</option>{grades.map((g) => <option key={g} value={g}>{g}</option>)}</Select></div>
-      <div className="grid grid-4 mt">
-        <Stat label="متوسط الإتقان" value={school.mastery} unit="%" icon={FileBarChart} />
-        <Stat label="الحضور" value={school.attendance} unit="%" tone="blue" icon={FileBarChart} />
-        <Stat label="نسبة اعتماد المحتوى" value={school.approval} unit="%" tone="gold" icon={FileBarChart} />
-        <Stat label="المستخدمون النشطون" value={school.active} unit="%" tone="rose" icon={FileBarChart} foot="خلال ٣٠ يومًا" />
-      </div>
+        <Select value={grade} onChange={(e) => setGrade(e.target.value)} aria-label="الصف" style={{ minWidth: 200, width: "auto" }}><option value="">كل الصفوف</option>{grades.map((g) => <option key={g} value={g}>{g}</option>)}</Select></div>
+      <FactLine
+        items={[
+          { label: "متوسط الإتقان", value: mastery != null ? `${mastery}%` : null, note: "الطلاب المُقيَّمون في الفصول المختارة" },
+          { label: "الحضور", value: attendance != null ? `${attendance}%` : null, note: "كل السجلات المسجّلة" },
+          { label: "اعتماد محتوى «النجمة»", value: approvalRate != null ? `${approvalRate}%` : null, note: `${decided} قرارًا • ${pendingReview} بانتظار المعلّمين` },
+        ]}
+      />
       {by === "class" ? (
         <div className="grid grid-2 mt">
           <Card title="إتقان الفصول" kicker="متوسط الأهداف"><HBars data={classRows.map((r) => ({ label: r.name, value: r.avg }))} /></Card>

@@ -281,3 +281,85 @@ button.fact:hover dd .num {
     background: var(--c-surface);
   }
 }
+
+/* Card / dialog subtitle (replaces the eyebrow above titles) */
+:where(.in-app) .card-sub {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+/* Legacy metric rows (<Grid><Stat/>…</Grid>) render as a fact line, not a row of big-number cards */
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) 0;
+  margin-bottom: var(--sp-2);
+}
+
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat {
+  flex: 0 1 auto;
+  padding: 0 var(--sp-5);
+  background: none;
+  border: 0;
+  border-inline-start: 1px solid var(--c-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+:where(.in-app) .stat .stat-icon {
+  display: none;
+}
+
+:where(.in-app) .stat .stat-label {
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .stat .stat-value {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-lg);
+  margin-top: 0;
+  gap: 6px;
+}
+
+:where(.in-app) .stat .stat-value small {
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .stat .stat-foot {
+  margin-top: 0;
+}
+
+:where(.in-app) .stat-rose .stat-value {
+  color: var(--c-danger);
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-2);
+  }
+
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat,
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat:first-child {
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--rad-md);
+    background: var(--c-surface);
+  }
+}
+
+:where(.in-app) .mb {
+  margin-bottom: var(--sp-4);
+}
+
+:where(.in-app) .fact-line + .card,
+:where(.in-app) .fact-line + .tabs {
+  margin-top: var(--sp-4);
+}

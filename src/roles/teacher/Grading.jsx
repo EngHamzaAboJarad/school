@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Bot, Check, Minus, Plus, ShieldAlert, PenLine } from "lucide-react";
-import { Avatar, Badge, Btn, Card, Empty, Notice, Page, Tabs, Textarea, cx } from "../../ui/Primitives";
+import { Check, Minus, Plus, ShieldAlert, PenLine } from "lucide-react";
+import { Avatar, Btn, Card, Empty, Notice, Page, Tabs, Textarea, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { Seal } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
 import { essayQueue, unitOf, lessonOf } from "../../store/selectors";
 import { timeAgo } from "../../lib/format";
@@ -50,7 +51,7 @@ export default function GradingPage() {
                   <div>
                     <div className="row spread"><strong>{e.student?.name}</strong><small className="muted">{timeAgo(e.attempt.at)}</small></div>
                     <span className="mail-preview">{unitOf(state, lessonOf(state, e.question.lessonId)?.unitId)?.title}</span>
-                    <div className="row"><Badge tone={e.essay.final ? "success" : "warn"} dot>{e.essay.final ? `${e.essay.final.score}/${e.essay.ai.max}` : "بانتظارك"}</Badge></div>
+                    <div className="row">{e.essay.final ? <><Seal approved compact /><b className="num small">{e.essay.final.score}/{e.essay.ai.max}</b></> : <><Seal approved={false} compact /><span className="num small muted">{e.essay.ai.score}/{e.essay.ai.max}</span></>}</div>
                   </div>
                 </button>
               );
@@ -63,7 +64,7 @@ export default function GradingPage() {
                 <blockquote className="essay-quote">{cur.essay.text || "لم يُجب الطالب"}</blockquote>
                 <details className="model"><summary>الإجابة النموذجية</summary><p>{cur.question.model}</p></details>
               </Card>
-              <Card title="معايير التقييم (Rubric)" kicker="تقييم الذكاء الاصطناعي المبدئي" action={<Badge tone="gold" icon={Bot}>مبدئي {cur.essay.ai.score}/{cur.essay.ai.max}</Badge>}>
+              <Card title="معايير التقييم (Rubric)" kicker="اقتراح «النجمة» بالمعايير — القرار لك" action={<span className="row" style={{ gap: 6 }}><Seal approved={false} compact /><b className="num small">{cur.essay.ai.score}/{cur.essay.ai.max}</b></span>}>
                 <div className="stack-sm">
                   {cur.essay.ai.byCriterion.map((c, i) => (
                     <div className="crit" key={c.c}>
@@ -76,7 +77,7 @@ export default function GradingPage() {
                     </div>
                   ))}
                 </div>
-                <div className="row spread mt"><strong>الدرجة النهائية</strong><span className="big-num num">{total}<small className="muted" style={{ fontSize: 16 }}> / {cur.essay.ai.max}</small></span></div>
+                <div className="row spread mt"><span className="row" style={{ gap: 8 }}><strong>الدرجة النهائية</strong>{cur.essay.final && <Seal approved compact />}</span><span className="big-num num">{total}<small className="muted" style={{ fontSize: 16 }}> / {cur.essay.ai.max}</small></span></div>
                 {!cur.essay.final && changed && <Notice tone="warn" icon={ShieldAlert} title="تعديل على درجة الذكاء الاصطناعي">سيُوثَّق هذا التعديل باسمك في سجلّ التدقيق ويُبلَّغ الطالب ووليّ أمره.</Notice>}
                 <div className="mt"><span className="field-label">ملاحظات للطالب</span>
                   <Textarea className="mt-sm" value={note} disabled={!!cur.essay.final} onChange={(e) => setNote(e.target.value)} placeholder="اكتب ملاحظة تحسين تظهر للطالب…" /></div>

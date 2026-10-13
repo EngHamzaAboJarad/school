@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { BarChart3, Check, CheckCircle2, ClipboardCheck, FileClock, Lock, Map as MapIcon, PlayCircle, Target, TrendingUp, BookOpen, Dumbbell, RefreshCw } from "lucide-react";
-import { Btn, Badge, Card, Empty, ListRow, Modal, Notice, Page, Progress, Stat, Tabs, Split, cx } from "../../ui/Primitives";
-import { HBars, LineChart, Ring, masteryTone } from "../../ui/Charts";
+import { Btn, Badge, Card, Empty, ListRow, Modal, Notice, Page, Progress, Tabs, Split, cx } from "../../ui/Primitives";
+import { LineChart, Ring, masteryTone } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { snapshot, remedialProgress, recommendation, subjectOf, lessonOf, unitOf, studentOf, allObjectives, objectiveOf, classStats } from "../../store/selectors";
@@ -10,6 +10,8 @@ import { shuffle } from "../../lib/rng";
 import { shuffleOptions, CLOSE_THRESHOLD, GAP_THRESHOLD } from "../../lib/grading";
 import { fmtDate, levelLabel, timeAgo } from "../../lib/format";
 import { QuizRunner, ResultView, buildAttempt } from "./Assess";
+import { FactLine } from "../../ui/World";
+import { MASTERY_KEY, SubjectMasteryWall, subjectMastery } from "../shared/walls";
 
 // تقدّمي وخطتي: F3.1 تشخيص الفجوات • F3.2 الخطط العلاجية • F3.4 تتبّع الإتقان • F4.3 سجلّ الإنجاز
 export default function ProgressPage({ param, go }) {
@@ -36,27 +38,32 @@ function Overview({ snap, go, setTab }) {
   const { state, user } = useStore();
   const rec = recommendation(state, user.id);
   const labels = snap.history.map((_, i) => (i === snap.history.length - 1 ? "الآن" : `-${snap.history.length - 1 - i}`));
-  const subs = subjects.filter((s) => snap.subjectAvg[s.id] !== undefined);
+  const walls = subjectMastery(state, user.id);
+  const run = () => (rec.type === "remedial" ? setTab("plan") : rec.type === "lesson" ? go("learn", `lesson/${rec.lesson.id}`) : rec.type === "exam" ? go("learn", `exam/${rec.unit.id}`) : go("learn"));
   return (
     <div className="stack">
-      <div className="grid grid-3">
-        <Card><div className="row"><Ring value={snap.avg} size={112} stroke={10} label="الإتقان العام" sub="إتقان عام" /><div><strong>{levelLabel(snap.avg)}</strong><p className="muted small">{snap.mastered} أهداف متقنة من {snap.entries.length} مُقيَّمة</p></div></div></Card>
-        <Stat label="فجوات مفتوحة" value={snap.gaps.length} icon={Target} tone="rose" foot="مرتّبة بحسب الأولوية" />
-        <Stat label="أهداف متقنة" value={snap.mastered} icon={CheckCircle2} foot={`الحدّ ${CLOSE_THRESHOLD}% فأكثر`} />
-      </div>
+      <FactLine
+        items={[
+          { label: "إتقاني العام", value: snap.entries.length ? `${snap.avg}%` : null, note: snap.entries.length ? levelLabel(snap.avg) : "لا تقييمات بعد" },
+          { label: "أهداف متقنة", value: snap.mastered, note: `من ${snap.entries.length} مُقيَّمة • الحدّ ${CLOSE_THRESHOLD}%` },
+          { label: "فجوات مفتوحة", value: snap.gaps.length, note: "مرتّبة بحسب الأولوية", tone: snap.gaps.length ? "warn" : undefined, onClick: () => setTab("plan") },
+        ]}
+      />
+      <section className="door" aria-labelledby="p-next">
+        <div>
+          <span className="door-label">خطوتك التالية</span>
+          <h2 id="p-next">{rec.title}</h2>
+          <p>{rec.why}</p>
+        </div>
+        <div className="door-actions"><Btn variant="gold" icon={PlayCircle} onClick={run}>انتقل الآن</Btn></div>
+      </section>
       <Split>
-        <Card title="تقدّمي عبر الأسابيع" kicker="مقارنة بالهدف المرجعي">
+        <Card title="تقدّمي عبر الأسابيع" kicker={`مقارنة بالهدف المرجعي ${CLOSE_THRESHOLD}%`}>
           <LineChart values={snap.history} labels={labels} target={CLOSE_THRESHOLD} min={40} max={100} />
         </Card>
-        <div className="stack">
-          <Card title="الإتقان حسب المادة" kicker="متوسط الأهداف">
-            <HBars data={subs.map((s) => ({ label: s.name, value: snap.subjectAvg[s.id] }))} />
-          </Card>
-          <Card tone="gold" title={rec.title} kicker="ما التالي؟">
-            <p className="muted small">{rec.why}</p>
-            <Btn className="mt-sm" variant="primary" onClick={() => (rec.type === "remedial" ? setTab("plan") : rec.type === "lesson" ? go("learn", `lesson/${rec.lesson.id}`) : go("learn"))}>انتقل الآن</Btn>
-          </Card>
-        </div>
+        <Card title="الإتقان حسب المادة" kicker={MASTERY_KEY}>
+          <SubjectMasteryWall rows={walls} />
+        </Card>
       </Split>
     </div>
   );

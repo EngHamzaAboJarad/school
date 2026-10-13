@@ -9,12 +9,14 @@ import { fmtDate } from "../../lib/format";
 export default function SchoolFinancePage() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const payments = [...state.teacherPayments].sort((a, b) => b.at - a.at);
   const due = payments.filter((p) => p.status === "مستحق");
   const dueTotal = due.reduce((sum, p) => sum + p.amount, 0);
   const paidTotal = payments.filter((p) => p.status === "مدفوع").reduce((sum, p) => sum + p.amount, 0);
 
-  const pay = (p) => {
+  const pay = async (p) => {
+    if (!(await confirm({ title: `دفع ${p.amount.toLocaleString("en-US")} ريال لـ ${userName(state, p.teacherId)}؟`, body: `مستحقّات ${p.period}. تُسجَّل الدفعة في السجلّ المالي وسجلّ التدقيق ويُبلَّغ المعلّم.`, confirmLabel: "تأكيد الدفع", tone: "info" }))) return;
     dispatch({ type: "payTeacherFee", id: p.id, actor: user.id });
     toast(`دُفعت رسوم ${userName(state, p.teacherId)}`, "success");
   };

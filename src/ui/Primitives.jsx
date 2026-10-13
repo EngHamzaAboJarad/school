@@ -16,16 +16,13 @@ export function Btn({ variant = "soft", size, icon: Icon, iconEnd: IconEnd, chil
   );
 }
 
+// kicker/icon مقبولان للتوافق لكنهما لا يُعرضان: مسار التنقّل في الشريط العلوي يحمل القسم، والعنوان يكفي وحده.
+// eslint-disable-next-line no-unused-vars
 export function Page({ kicker, title, desc, actions, children, icon: Icon, className }) {
   return (
     <div className={cx("page", className)}>
       {title && <header className="page-head">
         <div className="page-head-copy">
-          {kicker && (
-            <span className="kicker">
-              {Icon && <Icon size={14} />} {kicker}
-            </span>
-          )}
           <h1>{title}</h1>
           {desc && <p>{desc}</p>}
         </div>
@@ -41,9 +38,9 @@ export function Card({ title, kicker, action, children, className, flush, tone, 
     <section className={cx("card", flush && "flush", tone && `card-${tone}`, className)} {...rest}>
       {(title || kicker || action) && (
         <div className="card-head">
-          <div>
-            {kicker && <span className="kicker small">{kicker}</span>}
-            {title && <h3>{title}</h3>}
+          <div style={{ minWidth: 0 }}>
+            {title ? <h3>{title}</h3> : kicker && <h3>{kicker}</h3>}
+            {title && kicker && <p className="card-sub">{kicker}</p>}
           </div>
           {action}
         </div>
@@ -65,8 +62,7 @@ export function Stat({ label, value, unit, foot, icon: Icon, tone = "emerald", r
         )}
       </div>
       <div className="stat-value num">
-        <CountUp value={value} />
-        {unit && <small>{unit}</small>}
+        {unit === "%" ? <span><CountUp value={value} /><small>%</small></span> : <><CountUp value={value} />{unit && <small>{unit}</small>}</>}
       </div>
       {foot && <div className="stat-foot">{foot}</div>}
       {ring}
@@ -146,8 +142,8 @@ export function Modal({ open, onClose, title, kicker, children, footer, wide, dr
       <div ref={box} tabIndex={-1} className={cx("modal", wide && "wide", drawer && "drawer", size)} role="dialog" aria-modal="true" aria-labelledby={id}>
         <div className="modal-head">
           <div>
-            {kicker && <span className="kicker small">{kicker}</span>}
             <h3 id={id}>{title}</h3>
+            {kicker && <p className="card-sub">{kicker}</p>}
           </div>
           <button className="icon-btn" onClick={onClose} aria-label="إغلاق">
             <X size={18} />
@@ -424,9 +420,24 @@ export function ErrorState({ title = "تعذّر تحميل البيانات", d
 // قائمة منسدلة: زر يفتح قائمة إجراءات؛ تُغلق بـ Esc أو بالنقر خارجها، وتُدار بالأسهم.
 export function Menu({ label, icon: Icon, items, variant = "ghost", size = "sm", align, children }) {
   const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState(null);
   const wrap = useRef(null);
   const listRef = useRef(null);
   const menuId = useId();
+  // موضع ثابت محسوب من الزر كي لا تقصّ القائمةَ الحاوياتُ القابلة للتمرير (مثل الجداول)
+  const toggle = () => {
+    if (!open && wrap.current) {
+      const r = wrap.current.getBoundingClientRect();
+      const rtl = document.documentElement.dir !== "ltr";
+      const up = align === "up" || r.bottom + 240 > window.innerHeight;
+      setPos({
+        position: "fixed",
+        ...(up ? { bottom: window.innerHeight - r.top + 4, top: "auto" } : { top: r.bottom + 4 }),
+        ...(rtl ? { left: Math.max(8, r.left), right: "auto" } : { right: Math.max(8, window.innerWidth - r.right), left: "auto" }),
+      });
+    }
+    setOpen((o) => !o);
+  };
   useEffect(() => {
     if (!open) return;
     const onDoc = (e) => !wrap.current?.contains(e.target) && setOpen(false);
@@ -439,18 +450,26 @@ export function Menu({ label, icon: Icon, items, variant = "ghost", size = "sm",
         list[(i + (e.key === "ArrowDown" ? 1 : -1) + list.length) % list.length]?.focus();
       }
     };
+    const onMove = () => setOpen(false);
     document.addEventListener("mousedown", onDoc);
     document.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onMove, true);
+    window.addEventListener("resize", onMove);
     listRef.current?.querySelector(".menu-item")?.focus();
-    return () => { document.removeEventListener("mousedown", onDoc); document.removeEventListener("keydown", onKey); };
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onMove, true);
+      window.removeEventListener("resize", onMove);
+    };
   }, [open]);
   return (
     <div className="menu-wrap" ref={wrap}>
-      <Btn variant={variant} size={size} icon={Icon} aria-haspopup="menu" aria-expanded={open} aria-controls={menuId} aria-label={children ? undefined : label} onClick={() => setOpen((o) => !o)}>
+      <Btn variant={variant} size={size} icon={Icon} aria-haspopup="menu" aria-expanded={open} aria-controls={menuId} aria-label={children ? undefined : label} onClick={toggle}>
         {children}
       </Btn>
       {open && (
-        <div className={cx("menu", align === "up" && "up")} role="menu" id={menuId} ref={listRef}>
+        <div className="menu" role="menu" id={menuId} ref={listRef} style={pos || undefined}>
           {items.filter(Boolean).map((it, i) => it === "sep" ? <div key={i} className="menu-sep" role="separator" /> : (
             <button key={it.label} role="menuitem" className={cx("menu-item", it.danger && "danger")} disabled={it.disabled} onClick={() => { setOpen(false); it.onClick(); }}>
               {it.icon && <it.icon size={16} aria-hidden="true" />}
