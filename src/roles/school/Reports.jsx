@@ -5,7 +5,7 @@ import { HBars, Bars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { FactLine } from "../../ui/World";
-import { allObjectives, classStats, assignmentStatus, attendanceRate, subjectOf } from "../../store/selectors";
+import { allObjectives, classStats, assignmentStatus, attendanceRate } from "../../store/selectors";
 import { subjects } from "../../data/curriculum";
 import { downloadCSV, printPage } from "../../lib/export";
 import { fmtLongDate } from "../../lib/format";

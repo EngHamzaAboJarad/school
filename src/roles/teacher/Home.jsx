@@ -1,4 +1,4 @@
-import { AlertTriangle, CalendarCheck, CheckCircle2, ChevronLeft, ClipboardCheck, FileCheck2, MessagesSquare, PenLine, Users } from "lucide-react";
+import { AlertTriangle, CalendarCheck, CheckCircle2, ChevronLeft, FileCheck2, MessagesSquare, PenLine, Users } from "lucide-react";
 import { Avatar, Badge, Btn, Card, Empty, Page, SectionHeader } from "../../ui/Primitives";
 import { FactLine, Seal, SubjectMark, VentRow } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
@@ -138,7 +138,7 @@ export default function TeacherHome({ go }) {
                   <li key={q} className="no-icon">
                     <div className="hl-main">
                       <strong>{q}</strong>
-                      <span>درس «{lessonOf(state, v.l)?.title}»</span>
+                      <span>{`درس «${lessonOf(state, v.l)?.title}»`}</span>
                     </div>
                     <div className="hl-end"><Badge tone="info">{`${v.n} ${v.n === 1 ? "مرة" : "مرات"}`}</Badge></div>
                   </li>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Copy, KeyRound, Plug, Plus, Trash2 } from "lucide-react";
 import { Badge, Btn, Card, Field, Input, ListRow, Modal, Notice, Page, Select } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
 import { fmtDate } from "../../lib/format";
 

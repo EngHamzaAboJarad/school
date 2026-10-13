@@ -18,7 +18,7 @@ export default function TenantsPage() {
       <div className="grid grid-3">
         <Stat label="مدارس (B2B)" value={state.tenants.filter((t) => t.type.includes("B2B")).length} icon={Building2} />
         <Stat label="جهات (B2G)" value={state.tenants.filter((t) => t.type.includes("B2G")).length} icon={Building2} tone="gold" />
-        <Stat label="العزل" value="100" unit="%" icon={ShieldCheck} tone="blue" foot="كل المستأجرين معزولون" />
+        <Stat label="العزل" value={state.tenants.length ? Math.round((state.tenants.filter((t) => t.isolation === "معزول").length / state.tenants.length) * 100) : "—"} unit="%" icon={ShieldCheck} tone="blue" foot={`${state.tenants.filter((t) => t.isolation === "معزول").length} من ${state.tenants.length} معزولة`} />
       </div>
       <Card className="mt" flush><div className="pad">
         <DataTable rows={state.tenants} columns={[

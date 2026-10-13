@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Check, ChevronLeft, ClipboardCheck, Clock3, Lock, PlayCircle, ShieldCheck, Shuffle, Trophy, Repeat } from "lucide-react";
+import { Check, ClipboardCheck, Clock3, Lock, PlayCircle, ShieldCheck, Shuffle, Trophy, Repeat } from "lucide-react";
 import { Btn, Badge, Card, Empty, Notice, Page, Progress, Tabs } from "../../ui/Primitives";
 import { HBars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";

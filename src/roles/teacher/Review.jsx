@@ -1,10 +1,10 @@
-import { useMemo, useState } from "react";
-import { Bot, Check, ClipboardCheck, FileCheck2, FileText, Layers, Pencil, Sparkles, Trophy, X, ShieldCheck, Undo2, Wand2, Sliders, XCircle } from "lucide-react";
+import { useState } from "react";
+import { Bot, Check, ClipboardCheck, FileCheck2, Layers, Pencil, Sparkles, Trophy, X, ShieldCheck, Undo2, Wand2, Sliders, XCircle } from "lucide-react";
 import { Seal } from "../../ui/World";
 import { Btn, Badge, Card, Empty, Field, ListRow, Modal, Notice, Page, Select, Tabs, Textarea, Input } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { allObjectives, lessonOf, lessonsInUnit, pendingReviews, unitOf, unitsInSubject, teacherSubjects, allLessons, subjectOf, userName } from "../../store/selectors";
+import { allObjectives, lessonOf, pendingReviews, unitOf, unitsInSubject, teacherSubjects, allLessons, subjectOf, userName } from "../../store/selectors";
 import { DIFFICULTIES } from "../../data/curriculum";
 import { timeAgo } from "../../lib/format";
 import { QuestionView, correctText } from "../student/Assess";

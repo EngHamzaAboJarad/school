@@ -178,3 +178,31 @@ npm run build   # production build into dist/ (dist is committed for deploy; red
 
 ### Next (after approval) — Stage 3/4 for the admin roles
 School: users (pagination, bulk approve, confirmation on suspend / reject / role change), structure, attendance, reports (replace static % with computed values), licenses, finance (confirm payment), messages. Then system (10 routes) and supervisor (4 routes). Then Stage 5 polish and Stage 6 verification for this scope.
+
+---
+
+## Najdi redesign (Session 1, round 2): owner asked for a bolder, expert redesign of ALL roles
+
+Direction chosen by the owner: **Najdi clay and painted door** (contract: `.impeccable/surfaces/src-app-jsx.md`, product brief: `PRODUCT.md`).
+Indigo door shell, lime-wash ground, clay structure, Kufi headings (Noto Kufi Arabic), subject door-paint colours.
+Signature data glyph: **triangular vents** (`src/ui/World.jsx`): attendance, mastery, activity, submissions, gauges.
+Seal: teacher-approved = clay stamp; AI suggestion (النجمة) = dashed "مقترح آليًّا". "النجمة" = the AI assessment engine (feature doc §E2).
+
+Done:
+- New tokens/world: `tokens.css`, `world.css`, `homes.css`, `screens.css`; legacy names re-pointed so every page inherits.
+- All six role homes rebuilt (admin, teacher, student, parent, supervisor, system).
+- Rebuilt: teacher attendance (roster + save bar), review and grading (seals), bank (pagination, seals, menu), assignments (vents);
+  admin users (filters, pagination, confirmations, bulk approve), attendance wall, reports/licences (computed figures);
+  student progress, rewards, schedule; parent child, attendance (week calendar), reports; supervisor home; system home, AI, security.
+- Invented figures removed (system trend/uptime/incidents, licence expiry, 2FA %, backup time, KPI history, tenant isolation).
+- Confirmation dialogs on every destructive/financial action; distraction-free focus mode for lessons/exams.
+- English dictionary `src/i18n/en.redesign.json` (≈510 entries); only lesson/question/message content stays Arabic by design.
+- Checks: `npm run build` ✅ · ESLint (scratchpad, no-undef + jsx-no-undef) 0 errors, 12 warnings (pre-existing unused locals) ·
+  all 46+ routes at 1440 and 375: 0 console errors, 0 horizontal overflow.
+
+Left for next session:
+- Impeccable finish steps not run: `impeccable detect`, finish-reviewer pass, DESIGN.md documenter.
+- Pages that inherit the world but were not structurally rebuilt: teacher classes/curriculum/enrollments/finance, student library/teachers/learn/lesson/exam,
+  parent privacy, supervisor quality/reports, system tenants/billing/rbac/audit/integrations/leads/teacherRequests, school structure/finance/messages.
+- Fresh after-screenshots into docs/redesign/after/ (current ones are from the first round).
+- Mobile visual review of rebuilt screens (only automated overflow checks done).

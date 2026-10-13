@@ -241,3 +241,142 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ───────── Lesson header: the door, flat ───────── */
+:where(.in-app) .lesson-hero {
+  background: var(--c-door-900);
+  border: 1px solid var(--c-door-950);
+  border-radius: var(--rad-lg);
+  box-shadow: none;
+  padding: var(--sp-6);
+  gap: var(--sp-6);
+}
+
+:where(.in-app) .lesson-hero::before,
+:where(.in-app) .lesson-hero::after {
+  display: none;
+}
+
+:where(.in-app) .lesson-hero h1 {
+  font-size: 1.625rem;
+  color: #fff;
+  margin: var(--sp-2) 0 var(--sp-3);
+}
+
+:where(.in-app) .lesson-objectives {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  border-radius: var(--rad-md);
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .lesson-hero {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  :where(.in-app) .lesson-hero h1 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ───────── Question bank filters ───────── */
+:where(.in-app) .bank-filters {
+  padding: var(--sp-4) var(--sp-5) var(--sp-2);
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .bank-filters > .input {
+  flex: 0 1 168px;
+  width: auto;
+  height: var(--control-h);
+}
+
+:where(.in-app) .bank-filters .searchbox {
+  flex: 1 1 220px;
+}
+
+/* ───────── Parent attendance: week calendar of vents ───────── */
+:where(.in-app) .att-cal {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .att-cal-row {
+  display: grid;
+  grid-template-columns: 72px repeat(5, minmax(0, 1fr));
+  gap: var(--sp-2);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--c-divider);
+  align-items: stretch;
+}
+
+:where(.in-app) .att-cal-head {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  padding-top: 0;
+}
+
+:where(.in-app) .att-cal-week {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  align-self: center;
+}
+
+:where(.in-app) .att-cal-day {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--rad-md);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-divider);
+}
+
+:where(.in-app) .att-cal-day b {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .att-cal-day small {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .att-cal-day.is-absent {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .att-cal-day.is-late {
+  background: var(--c-warn-bg);
+  border-color: var(--c-warn-border);
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .att-cal-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  :where(.in-app) .att-cal-week {
+    grid-column: 1 / -1;
+  }
+
+  :where(.in-app) .att-cal-head span:first-child {
+    display: none;
+  }
+
+  :where(.in-app) .att-cal-day {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: var(--sp-2) var(--sp-1);
+    gap: 2px;
+  }
+
+  :where(.in-app) .att-cal-day b {
+    font-size: var(--fs-2xs);
+  }
+}

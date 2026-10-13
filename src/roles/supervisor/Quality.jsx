@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { Check, Eye, Star } from "lucide-react";
-import { Badge, Btn, Card, Empty, Field, ListRow, Modal, Notice, Page, Split, Textarea } from "../../ui/Primitives";
+import { Badge, Btn, Card, Empty, Field, ListRow, Modal, Page, Split, Textarea } from "../../ui/Primitives";
 import { HBars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { allLessons, lessonOf } from "../../store/selectors";
+import { lessonOf } from "../../store/selectors";
 import { QuestionView, correctText } from "../student/Assess";
 import { timeAgo } from "../../lib/format";
 

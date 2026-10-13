@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ClipboardCheck, Plus, Send, CheckCircle2 } from "lucide-react";
-import { Avatar, Badge, Btn, Card, DataTable, Empty, Field, Input, Modal, Notice, Page, Progress, Select, Textarea } from "../../ui/Primitives";
+import { Avatar, Badge, Btn, Card, DataTable, Empty, Field, Input, Modal, Notice, Page, Select, Textarea } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { SubjectMark, VentRow } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
-import { studentOf, subjectOf, teacherSubjects } from "../../store/selectors";
+import { studentOf, subjectOf } from "../../store/selectors";
 import { DAY_MS, relativeDay, timeAgo } from "../../lib/format";
 
 const STATUS = { pending: ["neutral", "لم يُسلِّم"], submitted: ["info", "سُلِّم"], late: ["danger", "متأخر"], graded: ["success", "صُحّح"], missing: ["danger", "غير مُسلَّم"] };
@@ -38,8 +39,14 @@ export default function AssignmentsPage() {
               return (
                 <button key={x.id} className={`assign-item ${a?.id === x.id ? "active" : ""}`} onClick={() => setSel(x.id)}>
                   <strong>{x.title}</strong>
-                  <span>{subjectOf(x.subjectId)?.name} • {c?.name}</span>
-                  <div className="row spread"><Progress value={(n / c.studentIds.length) * 100} tone="gold" size="sm" /><small className="num">{n}/{c.studentIds.length}</small></div>
+                  <span><SubjectMark subject={x.subjectId} /> • {c?.name}</span>
+                  <div className="row spread" style={{ flexWrap: "nowrap" }}>
+                    <VentRow size={11} label={`سلّم ${n} من ${c.studentIds.length}`} items={c.studentIds.map((sid) => {
+                      const st = x.submissions[sid]?.status || (x.due < Date.now() ? "missing" : "pending");
+                      return { state: st === "graded" || st === "submitted" ? "on" : st === "late" ? "partial" : st === "missing" ? "alert" : "off", title: `${studentOf(state, sid)?.name}: ${{ graded: "صُحّح", submitted: "سلّم", late: "سلّم متأخرًا", missing: "لم يسلّم", pending: "لم يسلّم بعد" }[st]}` };
+                    })} />
+                    <small className="num">{n}/{c.studentIds.length}</small>
+                  </div>
                   <small className={x.due < Date.now() ? "late-text" : "muted"}>التسليم {relativeDay(x.due)}</small>
                 </button>
               );

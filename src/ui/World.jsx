@@ -62,7 +62,7 @@ export function VentWall({ rows, columns, size = 13, valueLabel, legend, caption
               {r.sub && <small>{r.sub}</small>}
             </span>
           </span>
-          <VentRow items={r.items} size={size} label={`${r.label}: ${r.items.map((i) => i.title).join(" • ")}`} />
+          <VentRow items={r.items} size={size} label={`${r.label} — ${r.items.map((i) => i.title).join(" • ")}`} />
           <span className="vent-wall-value num">{r.value ?? "—"}</span>
         </div>
       ))}

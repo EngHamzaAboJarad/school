@@ -74,7 +74,7 @@ export default function StudentHome({ go }) {
           <h2 id="s-next">{rec.title}</h2>
           <p>{rec.why}</p>
           <div className="door-meta">
-            {rec.minutes > 0 && <span><Clock3 size={14} aria-hidden="true" /> {rec.minutes} دقيقة تقريبًا</span>}
+            {rec.minutes > 0 && <span><Clock3 size={14} aria-hidden="true" /> {`${rec.minutes} دقيقة تقريبًا`}</span>}
             {rec.objective && <span><Target size={14} aria-hidden="true" /> {subjectOf(rec.objective.subjectId)?.name}</span>}
             {rec.lesson && <span><Target size={14} aria-hidden="true" /> {rec.unit?.title}</span>}
           </div>

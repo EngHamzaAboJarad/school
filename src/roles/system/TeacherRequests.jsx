@@ -1,6 +1,7 @@
 import { UserCheck, UserX } from "lucide-react";
 import { Badge, Btn, Card, Empty, ListRow, Notice, Page } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
 
 // طلبات انضمام المعلّمين: تُدقَّق وتُعتمَد مركزيًّا من مدير النظام قبل تفعيل أي حساب معلّم

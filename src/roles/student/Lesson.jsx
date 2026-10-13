@@ -3,7 +3,7 @@ import { BookOpen, Bot, ClipboardCheck, Download, Layers, Lightbulb, Play, Pause
 import { Btn, Badge, Card, Empty, Notice, Segmented, Tabs, Progress, Input, Textarea, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { lessonOf, unitOf, subjectOf, isApproved, lessonQuizQuestions, lessonsInUnit, unitProgress, objectiveOf, allObjectives } from "../../store/selectors";
+import { lessonOf, unitOf, subjectOf, isApproved, lessonQuizQuestions, lessonsInUnit, unitProgress, allObjectives } from "../../store/selectors";
 import { shuffle } from "../../lib/rng";
 import { shuffleOptions } from "../../lib/grading";
 import { answerFromLesson } from "../../lib/assistant";

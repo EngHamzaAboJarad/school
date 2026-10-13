@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { CalendarRange, FilePlus2, FolderPlus, Layers, School, Users } from "lucide-react";
-import { Avatar, Badge, Btn, Card, Empty, Field, Input, ListRow, Modal, Page, Select, Tabs } from "../../ui/Primitives";
+import { Badge, Btn, Card, Empty, Field, Input, Modal, Page, Select, Tabs } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { allUnits, lessonsInUnit, subjectOf, unitsInSubject, userName } from "../../store/selectors";
+import { lessonsInUnit, subjectOf, unitsInSubject, userName } from "../../store/selectors";
 import { PERIODS, WEEKDAYS } from "../../data/people";
 import { stages, subjects } from "../../data/curriculum";
 

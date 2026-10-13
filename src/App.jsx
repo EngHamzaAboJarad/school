@@ -59,7 +59,7 @@ function Routed() {
   const current = flatNav(user.role).some((i) => i.id === page) ? page : "home";
   const Pages = PAGES[user.role];
   return (
-    <AppShell page={current} go={go}>
+    <AppShell page={current} go={go} focus={user.role === "student" && current === "learn" && /^(lesson|exam)\//.test(param || "")}>
       <Pages page={current} param={param} go={go} />
     </AppShell>
   );

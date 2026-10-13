@@ -1,13 +1,13 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { BarChart3, Check, CheckCircle2, ClipboardCheck, FileClock, Lock, Map as MapIcon, PlayCircle, Target, TrendingUp, BookOpen, Dumbbell, RefreshCw } from "lucide-react";
 import { Btn, Badge, Card, Empty, ListRow, Modal, Notice, Page, Progress, Tabs, Split, cx } from "../../ui/Primitives";
 import { LineChart, Ring, masteryTone } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, remedialProgress, recommendation, subjectOf, lessonOf, unitOf, studentOf, allObjectives, objectiveOf, classStats } from "../../store/selectors";
+import { snapshot, remedialProgress, recommendation, subjectOf, lessonOf, unitOf, studentOf, allObjectives, objectiveOf } from "../../store/selectors";
 import { subjects } from "../../data/curriculum";
 import { shuffle } from "../../lib/rng";
-import { shuffleOptions, CLOSE_THRESHOLD, GAP_THRESHOLD } from "../../lib/grading";
+import { shuffleOptions, CLOSE_THRESHOLD } from "../../lib/grading";
 import { fmtDate, levelLabel, timeAgo } from "../../lib/format";
 import { QuizRunner, ResultView, buildAttempt } from "./Assess";
 import { FactLine } from "../../ui/World";

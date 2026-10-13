@@ -21,7 +21,8 @@ const readRail = () => {
   }
 };
 
-export default function AppShell({ page, go, children }) {
+// focus: وضع الدرس/الاختبار — تُطوى القائمة الجانبية مؤقتًا دون تغيير تفضيل المستخدم
+export default function AppShell({ page, go, children, focus }) {
   const { state, dispatch, user } = useStore();
   const { lang, setLang } = useLang();
   const [drawer, setDrawer] = useState(false);
@@ -101,7 +102,7 @@ export default function AppShell({ page, go, children }) {
   const bottom = items.slice(0, 4);
 
   return (
-    <div className={cx("shell app", collapsed && "collapsed")}>
+    <div className={cx("shell app", (collapsed || focus) && "collapsed", focus && "focus")}>
       <aside className={cx("sb", drawer && "open")} aria-label="القائمة الرئيسية">
         <div className="sb-head">
           <Wordmark light />

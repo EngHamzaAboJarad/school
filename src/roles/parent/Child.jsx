@@ -3,10 +3,11 @@ import { BarChart3, ClipboardCheck, GraduationCap, Mail, MessageCircle, Target, 
 import { Avatar, Badge, Btn, Card, Empty, ListRow, Notice, Page, Progress, Split, Tabs } from "../../ui/Primitives";
 import { HBars, LineChart, Ring } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, allObjectives, userName, studentOf, classStats, teachersOfStudent, enrollmentFor } from "../../store/selectors";
+import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, classStats, teachersOfStudent, enrollmentFor } from "../../store/selectors";
 import { users, SUBJECT_PRICES } from "../../data/people";
-import { fmtDate, levelLabel, timeAgo } from "../../lib/format";
+import { fmtDate, levelLabel } from "../../lib/format";
 import { CLOSE_THRESHOLD, GAP_THRESHOLD } from "../../lib/grading";
 import { ChildSwitcher, useChild } from "./shared";
 import { FactLine } from "../../ui/World";
@@ -21,7 +22,6 @@ export default function ChildPage({ go }) {
   const [tab, setTab] = useState("overview");
   const snap = snapshot(state, child.id);
   const cls = state.classes.find((c) => c.id === child.classId);
-  const objs = allObjectives(state);
   const attempts = state.attempts.filter((a) => a.studentId === child.id).sort((a, b) => b.at - a.at);
   const classAvg = cls ? classStats(state, cls).avg : null;
   const labels = snap.history.map((_, i) => (i === snap.history.length - 1 ? "الآن" : `-${snap.history.length - 1 - i}`));

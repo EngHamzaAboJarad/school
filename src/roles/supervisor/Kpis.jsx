@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Gauge, Download } from "lucide-react";
-import { Badge, Btn, Card, DataTable, Page, Segmented, Select, Stat } from "../../ui/Primitives";
-import { Bars, HBars, LineChart } from "../../ui/Charts";
+import { Badge, Btn, Card, DataTable, Page, Segmented, Select, Stat, Empty } from "../../ui/Primitives";
+import { HBars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { downloadCSV } from "../../lib/export";
@@ -19,7 +19,6 @@ export default function KpisPage() {
   const schools = state.schools.filter((s) => !stage || s.stage.includes(stage));
   const total = schools.reduce((a, s) => a + s.students, 0) || 1;
   const weighted = (k) => Math.round((schools.reduce((a, s) => a + s[k] * s.students, 0) / total) * 10) / 10;
-  const trend = [72, 74, 75, 77, 78, weighted("mastery")];
   const sorted = [...schools].sort((a, b) => b[metric] - a[metric]);
 
   return (
@@ -33,7 +32,7 @@ export default function KpisPage() {
         })}
       </div>
       <div className="grid grid-2 mt">
-        <Card title="اتجاه إتقان المنطقة" kicker="آخر ٦ أشهر (مرجّح)"><LineChart values={trend} labels={["-5", "-4", "-3", "-2", "-1", "الآن"]} target={TARGET.mastery} min={60} max={90} /></Card>
+        <Card title="اتجاه إتقان المنطقة" kicker="آخر 6 أشهر (مرجّح)"><Empty compact title="لا يتوفّر سجلّ شهري بعد" desc={`الإتقان المرجّح الحالي ${weighted("mastery")}% مقابل المستهدف ${TARGET.mastery}%. يظهر الاتجاه عندما يوفّر الخادم لقطات شهرية للمؤشّر.`} /></Card>
         <Card title="مقارنة المدارس" kicker="اختر المؤشر" action={<Segmented options={Object.entries(LABEL).map(([id, label]) => ({ id, label }))} value={metric} onChange={setMetric} />}>
           <HBars data={sorted.map((s) => ({ label: s.name, value: s[metric] }))} />
         </Card>
