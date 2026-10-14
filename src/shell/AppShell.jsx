@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Bell, Check, ChevronDown, ChevronLeft, LogOut, Menu, MoreHorizontal, PanelRightClose, PanelRightOpen, Search, Settings, X } from "lucide-react";
+import { Bell, Check, ChevronDown, ChevronLeft, ChevronRight, LogOut, Menu, MoreHorizontal, PanelRightClose, PanelRightOpen, Search, Settings, X } from "lucide-react";
 import { NAV, flatNav, pageLabel } from "../data/nav";
 import { ROLES } from "../data/people";
 import { Wordmark } from "../ui/Brand";
@@ -30,6 +30,7 @@ export default function AppShell({ page, go, children, focus }) {
   const [pop, setPop] = useState(null); // "notif" | "profile" | null
   const [searchOpen, setSearchOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [tip, setTip] = useState(null); // تلميح اسم الصفحة فوق الأيقونة حين تكون القائمة مطويّة
   const role = user.role;
   const groups = NAV[role];
   const items = flatNav(role);
@@ -92,6 +93,25 @@ export default function AppShell({ page, go, children, focus }) {
     });
   };
 
+  // القائمة المطويّة تعرض الأيقونات فقط؛ اسم الصفحة يظهر فورًا بجانب الأيقونة عند المرور أو التركيز.
+  // التلميح مثبّت (fixed) لأن شريط التنقّل قابل للتمرير ويقصّ ما يخرج عن حدوده.
+  const tipFor = (label) =>
+    collapsed && !focus
+      ? {
+          "aria-label": label,
+          onMouseEnter: (e) => showTip(e, label),
+          onFocus: (e) => showTip(e, label),
+          onMouseLeave: () => setTip(null),
+          onBlur: () => setTip(null),
+        }
+      : {};
+  const showTip = (e, label) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const rtl = document.documentElement.dir === "rtl";
+    setTip({ label, top: r.top + r.height / 2, start: rtl ? window.innerWidth - r.left + 10 : r.right + 10 });
+  };
+  useEffect(() => setTip(null), [collapsed, page]);
+
   const openNotif = (n) => {
     dispatch({ type: "readNotif", id: n.id });
     setPop(null);
@@ -110,6 +130,16 @@ export default function AppShell({ page, go, children, focus }) {
             <X size={18} />
           </button>
         </div>
+        <button
+          type="button"
+          className="sb-edge"
+          onClick={toggleRail}
+          aria-expanded={!collapsed}
+          aria-label={collapsed ? "توسيع القائمة" : "طيّ القائمة"}
+          title={collapsed ? "توسيع القائمة" : "طيّ القائمة"}
+        >
+          <ChevronRight size={15} aria-hidden="true" />
+        </button>
         <div className="sb-org">
           <strong>{org}</strong>
           <small>{ROLES[role].long}</small>
@@ -124,7 +154,7 @@ export default function AppShell({ page, go, children, focus }) {
                   className={cx("sb-item", page === id && "active")}
                   onClick={() => go(id)}
                   aria-current={page === id ? "page" : undefined}
-                  title={collapsed ? label : undefined}
+                  {...tipFor(label)}
                 >
                   <Icon size={18} aria-hidden="true" />
                   <span>{label}</span>
@@ -139,19 +169,24 @@ export default function AppShell({ page, go, children, focus }) {
           ))}
         </nav>
         <div className="sb-foot">
-          <button className="sb-item" onClick={() => setSettingsOpen(true)} title={collapsed ? "الإعدادات" : undefined}>
+          <button className="sb-item" onClick={() => setSettingsOpen(true)} {...tipFor("الإعدادات")}>
             <Settings size={18} aria-hidden="true" />
             <span>الإعدادات</span>
           </button>
-          <button className="sb-item sb-collapse" onClick={toggleRail} aria-expanded={!collapsed} title={collapsed ? "توسيع القائمة" : undefined}>
+          <button className="sb-item sb-collapse" onClick={toggleRail} aria-expanded={!collapsed} {...tipFor("توسيع القائمة")}>
             {collapsed ? <PanelRightOpen size={18} aria-hidden="true" /> : <PanelRightClose size={18} aria-hidden="true" />}
             <span>طيّ القائمة</span>
           </button>
-          <button className="sb-item" onClick={() => dispatch({ type: "logout" })} title={collapsed ? "تسجيل الخروج" : undefined}>
+          <button className="sb-item" onClick={() => dispatch({ type: "logout" })} {...tipFor("تسجيل الخروج")}>
             <LogOut size={18} aria-hidden="true" />
             <span>تسجيل الخروج</span>
           </button>
         </div>
+        {tip && (
+          <span className="sb-tip" role="tooltip" style={{ top: tip.top, insetInlineStart: tip.start }}>
+            {tip.label}
+          </span>
+        )}
       </aside>
       {drawer && <div className="scrim" onClick={() => setDrawer(false)} />}
 

@@ -54,7 +54,7 @@ export default function TryQuiz() {
               <div className="ld-meter" role="progressbar" aria-valuenow={mastery} aria-valuemin={0} aria-valuemax={100}>
                 <i className={ok ? "ok" : "bad"} style={{ width: `${mastery}%` }} />
               </div>
-              <p>{ok ? "ممتاز — الدرس التالي مفتوح أمامك." : "فجوة مُشخَّصة — خطة علاجية جاهزة: شرح ← تمارين ← إعادة اختبار."}</p>
+              <p>{ok ? "ممتاز. الدرس التالي مفتوح أمامك." : "فجوة مُشخَّصة، وخطة علاجية جاهزة: شرح ← تمارين ← إعادة اختبار."}</p>
             </div>
             <button type="button" className="btn-link small" onClick={() => setPicked(null)}>
               <RotateCcw size={13} /> أعد التجربة

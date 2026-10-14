@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useLayoutEffect, useMemo, useSt
 import en from "./en.json";
 import enExtra from "./en.extra.json";
 import enRedesign from "./en.redesign.json";
+import enLanding from "./en.landing.json";
 
 // ──────────────────────────────────────────────────────────────────────────
 // الترجمة العربية ↔ الإنجليزية
@@ -34,7 +35,7 @@ function register(k, v) {
   if (k.includes("{}")) templates.push({ re: new RegExp(`^${k.split("{}").map(escapeRe).join(CAP)}$`), out: v, len: k.length });
   else exact.set(k, v);
 }
-for (const [k, v] of Object.entries({ ...en, ...enExtra, ...enRedesign })) {
+for (const [k, v] of Object.entries({ ...en, ...enExtra, ...enRedesign, ...enLanding })) {
   register(k, v);
   // نسخة بلا الرصاصة «• » لأن التقسيم على « • » يفصلها عن النص
   if (k.startsWith("• ")) register(k.slice(2), v.replace(/^•\s*/, ""));

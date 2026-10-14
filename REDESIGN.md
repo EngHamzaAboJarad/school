@@ -5,6 +5,23 @@ The product was called **Taqat School (طاقات سكول)** until October 2026
 
 ---
 
+## Landing page rebuilt + sidebar collapse handle — October 2026 (latest)
+
+**Landing (`src/marketing/Landing.jsx`, `src/styles/landing.css`, new strings in `src/i18n/en.landing.json`)**
+- Rebuilt around the Mushriq sunrise; same IDs (`#ld-how`, `#ld-features`, `#ld-compare`, `#ld-pricing`, `#ld-about`, `#ld-faq`, `#ld-contact`), same `onEnter` / `onJoin` hooks, `ContactSection` and `TryQuiz` kept.
+- Real product imagery only: 14 screenshots of the running app in `public/landing/` (six role homes + phone, Arabic and English; picked by language). The old div-built "app mock-up" is gone.
+- Sections: split hero (headline built per language so the highlighted word lands right; brand sun rises behind the screenshot on load) → facts on a horizon line → problem statement → lesson journey on a horizon arc that draws in + TryQuiz → **role tabs** (keyboard arrows, real screenshot, three real capabilities, demo e-mail) → bento of six cells using real app parts (seals, rays, attendance wall, levels) → comparison table + cost tiles → security row → about → pricing → FAQ (sticky heading + accordion) → contact → navy "sunrise" closing CTA → footer.
+- Motion: sunrise on load, arc drawing, one-time section reveal; all off under reduced motion / Settings › motion off. No em-dashes in new copy.
+- Nav switches to the menu button at ≤ 1180 px (English labels are wider).
+
+**Sidebar (`src/shell/AppShell.jsx`, `src/styles/shell.css`)**
+- Round handle on the sidebar edge collapses / expands it any time (the footer item stays). Collapsed = icons only; the page name shows instantly beside the icon on hover or keyboard focus (fixed tooltip, translated), and each icon keeps an accessible name.
+- Width animates (180 ms, off with reduced motion); the nav scrollbar appears only on hover.
+
+**Checks:** build ✅ · all 48 routes × 1440/375 ✅ 0 errors, 0 overflow · landing at 1440 / 1200 / 1024 / 375 (AR + EN) ✅ no overflow, no untranslated text (scripted scan incl. every role tab and quiz state).
+
+---
+
 ## Rebrand to Mushriq (مشرق) — October 2026 (latest; supersedes the Najdi world)
 
 The owner supplied a new identity (`docs/brand/mushriq-brand-card.png`): name **مشرق / Mushriq**, a sun rising over a horizon, personality «إلهام، حيوية، تفاؤل». Every surface (landing, auth, all six roles) moved to it.
