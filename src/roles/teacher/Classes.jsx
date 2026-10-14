@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Plus, UserPlus, Users, Send, School } from "lucide-react";
-import { Avatar, Badge, Btn, Card, DataTable, Empty, Field, Input, Modal, Notice, Page, Progress, Select, Textarea } from "../../ui/Primitives";
+import { Avatar, Badge, Btn, Card, DataTable, Field, Input, Modal, Notice, Page, Progress, Select, Textarea } from "../../ui/Primitives";
 import { HBars, Ring } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";

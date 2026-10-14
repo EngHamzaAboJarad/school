@@ -1,31 +1,35 @@
 import { useState } from "react";
-import { BarChart3, ClipboardCheck, GraduationCap, Mail, MessageCircle, Target, TrendingUp, Wallet } from "lucide-react";
-import { Avatar, Badge, Btn, Card, Empty, ListRow, Notice, Page, Progress, Split, Stat, Tabs } from "../../ui/Primitives";
+import { BarChart3, ClipboardCheck, GraduationCap, Mail, MessageCircle, Target, Wallet } from "lucide-react";
+import { Avatar, Badge, Btn, Card, Empty, ListRow, Notice, Page, Progress, Split, Tabs } from "../../ui/Primitives";
 import { HBars, LineChart, Ring } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
-import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, allObjectives, userName, studentOf, classStats, teachersOfStudent, enrollmentFor } from "../../store/selectors";
+import { snapshot, subjectOf, lessonOf, unitOf, remedialProgress, classStats, teachersOfStudent, enrollmentFor } from "../../store/selectors";
 import { users, SUBJECT_PRICES } from "../../data/people";
-import { fmtDate, levelLabel, timeAgo } from "../../lib/format";
+import { fmtDate, levelLabel } from "../../lib/format";
 import { CLOSE_THRESHOLD, GAP_THRESHOLD } from "../../lib/grading";
 import { ChildSwitcher, useChild } from "./shared";
+import { FactLine } from "../../ui/World";
+import { MASTERY_KEY, SubjectMasteryWall, subjectMastery } from "../shared/walls";
 
 // أداء الابن: تشخيص الفجوات (F3.1) وتتبّع الإتقان والتقدّم (F3.4) كما تنعكس في لوحة وليّ الأمر
 export default function ChildPage({ go }) {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const { kids, child, select } = useChild();
   const [tab, setTab] = useState("overview");
   const snap = snapshot(state, child.id);
   const cls = state.classes.find((c) => c.id === child.classId);
-  const objs = allObjectives(state);
   const attempts = state.attempts.filter((a) => a.studentId === child.id).sort((a, b) => b.at - a.at);
   const classAvg = cls ? classStats(state, cls).avg : null;
   const labels = snap.history.map((_, i) => (i === snap.history.length - 1 ? "الآن" : `-${snap.history.length - 1 - i}`));
   const teachers = teachersOfStudent(state, child.id).map((t) => ({ ...t, email: state.directory.find((d) => d.id === t.id)?.email }));
   const pendingPay = state.enrollmentRequests.filter((r) => r.studentId === child.id && r.status === "pending_parent").length;
 
-  const pay = (req) => {
+  const pay = async (req) => {
+    if (!(await confirm({ title: "تأكيد الدفع؟", body: "يُخصم مبلغ الاشتراك الشهري ثم يُرسَل الطلب إلى المعلّم لاعتماده.", confirmLabel: "ادفع الآن", tone: "info" }))) return;
     dispatch({ type: "payEnrollment", id: req.id, actor: user.id });
     toast("تم الدفع، بانتظار اعتماد المعلّم", "success");
   };
@@ -39,14 +43,17 @@ export default function ChildPage({ go }) {
 
       {tab === "overview" && (
         <div className="stack">
-          <div className="grid grid-3">
-            <Card><div className="row"><Ring value={snap.avg} size={112} stroke={10} label="الإتقان العام" sub="إتقان عام" /><div><strong>{levelLabel(snap.avg)}</strong><p className="muted small">{snap.entries.length} أهداف مُقيَّمة</p></div></div></Card>
-            <Stat label="مقارنة بمتوسط الفصل" value={classAvg ? `${snap.avg - classAvg >= 0 ? "+" : ""}${snap.avg - classAvg}` : "—"} unit="نقطة" icon={TrendingUp} tone="blue" foot={classAvg ? `متوسط الفصل ${classAvg}%` : "لا فصل مرتبط"} />
-            <Stat label="أهداف متقنة" value={snap.mastered} icon={Target} foot={`الحدّ ${CLOSE_THRESHOLD}% فأكثر`} />
-          </div>
+          <FactLine
+            items={[
+              { label: "الإتقان العام", value: snap.entries.length ? `${snap.avg}%` : null, note: snap.entries.length ? `${levelLabel(snap.avg)} • ${snap.entries.length} أهداف مُقيَّمة` : "لا تقييمات بعد" },
+              { label: "مقارنة بمتوسط الفصل", value: classAvg ? `${snap.avg - classAvg >= 0 ? "+" : ""}${snap.avg - classAvg}` : null, note: classAvg ? `نقطة • متوسط الفصل ${classAvg}%` : "لا فصل مرتبط" },
+              { label: "أهداف متقنة", value: snap.mastered, note: `الحدّ ${CLOSE_THRESHOLD}% فأكثر` },
+              { label: "فجوات مفتوحة", value: snap.gaps.length, tone: snap.gaps.length ? "warn" : undefined, onClick: () => setTab("gaps") },
+            ]}
+          />
           <Split>
-            <Card title="التقدّم عبر الأسابيع" kicker="مقارنة بالهدف المرجعي"><LineChart values={snap.history} labels={labels} target={CLOSE_THRESHOLD} min={40} max={100} /></Card>
-            <Card title="الإتقان حسب المادة" kicker={child.grade}><HBars data={Object.entries(snap.subjectAvg).map(([id, v]) => ({ label: subjectOf(id)?.name, value: v }))} /></Card>
+            <Card title="التقدّم عبر الأسابيع" kicker={`مقارنة بالهدف المرجعي ${CLOSE_THRESHOLD}%`}><LineChart values={snap.history} labels={labels} target={CLOSE_THRESHOLD} min={40} max={100} /></Card>
+            <Card title="الإتقان حسب المادة" kicker={MASTERY_KEY}><SubjectMasteryWall rows={subjectMastery(state, child.id)} /></Card>
           </Split>
           <Card title="خريطة الأهداف" kicker="كل هدف على حدة">
             <HBars data={snap.entries.map((e) => ({ label: e.title, value: e.mastery, sub: subjectOf(e.subjectId)?.name }))} />

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, Download, FileBarChart, FileSpreadsheet, Printer } from "lucide-react";
+import { Bell, FileBarChart, FileSpreadsheet, Printer } from "lucide-react";
 import { Badge, Btn, Card, ListRow, Notice, Page, Segmented, Split, Toggle } from "../../ui/Primitives";
 import { HBars } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
@@ -36,7 +36,7 @@ export default function ParentReports() {
   return (
     <Page kicker="التقارير والتنبيهات" title="التقارير" desc="تقرير دوري عن أداء ابنك قابل للتصدير، وتحكّم بقنوات التنبيهات الفورية." icon={FileBarChart}
       actions={<><Btn variant="ghost" icon={FileSpreadsheet} onClick={exportCsv}>تصدير Excel</Btn><Btn variant="primary" icon={Printer} onClick={printPage}>تصدير PDF / طباعة</Btn></>}>
-      <div className="row spread no-print"><ChildSwitcher kids={kids} child={child} onSelect={select} /><Segmented options={[{ id: "week", label: "أسبوعي" }, { id: "month", label: "شهري" }]} value={period} onChange={setPeriod} /></div>
+      <div className="row spread no-print"><ChildSwitcher kids={kids} child={child} onSelect={select} compact /><Segmented options={[{ id: "week", label: "أسبوعي" }, { id: "month", label: "شهري" }]} value={period} onChange={setPeriod} /></div>
       <Split className="mt">
         <div className="stack">
           <Card className="report-sheet" title={`تقرير ${period === "week" ? "أسبوعي" : "شهري"} — ${child.name}`} kicker={`${child.grade} • ${fmtLongDate()}`}>

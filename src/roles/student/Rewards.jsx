@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Award, Flame, Gift, Lock, Medal, ScrollText, ShieldCheck, Star, Trophy } from "lucide-react";
-import { Badge, Btn, Card, Empty, ListRow, Page, Progress, Split, Stat, Tabs, cx } from "../../ui/Primitives";
+import { Badge, Btn, Card, Empty, ListRow, Page, Progress, Split, Tabs, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { badgesOf, leaderboard, studentOf, pointsLogOf } from "../../store/selectors";
-import { timeAgo } from "../../lib/format";
+import { fmtDate, timeAgo } from "../../lib/format";
+import { dateKey } from "../../data/seed";
+import { FactLine, VentLegend, VentRow } from "../../ui/World";
+import { schoolDays } from "../shared/walls";
 
 const ICON = { first: Star, ace: Award, streak: Flame, gap: Medal, unit: Trophy, master: Award };
 
@@ -28,7 +31,9 @@ export default function RewardsPage() {
   const badges = badgesOf(state, user.id);
   const board = leaderboard(state, stu.classId);
   const rank = board.findIndex((b) => b.id === user.id) + 1;
-  const days = ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس"];
+  const attempts = state.attempts.filter((a) => a.studentId === user.id);
+  const activeDays = new Set([...attempts.map((a) => dateKey(a.at)), ...Object.values(state.progress[user.id] || {}).filter((p) => p.done && p.at).map((p) => dateKey(p.at))]);
+  const activity = schoolDays(10).map((t) => ({ state: activeDays.has(dateKey(t)) ? "on" : "off", title: `${fmtDate(t, { weekday: "long", day: "numeric", month: "long" })}: ${activeDays.has(dateKey(t)) ? "تعلّمت" : "لا نشاط"}` }));
   const className = state.classes.find((c) => c.id === stu.classId)?.name;
   const log = pointsLogOf(state, user.id);
 
@@ -39,15 +44,22 @@ export default function RewardsPage() {
 
   return (
     <Page kicker="تحفيز" title="إنجازاتي" desc="نقاط وشارات وسلسلة استمرارية تكافئ مواظبتك وتقدّمك." icon={Trophy}>
-      <div className="grid grid-3">
+      <div className="rw-top">
         <Card tone="dark" className="card-dark level-card">
           <span className="kicker small" style={{ color: "var(--gold-300)" }}>المستوى</span>
           <div className="level-num num">{level}</div>
           <Progress value={(into / 500) * 100} tone="gold" size="lg" label="التقدّم للمستوى التالي" />
           <small style={{ color: "rgba(251,248,241,.7)" }}>{500 - into} نقطة للمستوى {level + 1}</small>
         </Card>
-        <Stat label="إجمالي النقاط" value={points.toLocaleString("en-US")} icon={Award} tone="gold" foot="تُمنح تلقائيًّا على كل نشاط" />
-        <Stat label="ترتيبي في الفصل" value={rank || "—"} unit={`من ${board.length}`} icon={Trophy} foot="بحسب النقاط" />
+        <div className="rw-facts">
+          <FactLine
+            items={[
+              { label: "إجمالي النقاط", value: points.toLocaleString("en-US"), note: "تُمنح تلقائيًّا على كل نشاط" },
+              { label: "ترتيبي في الفصل", value: rank || null, note: `من ${board.length} • بحسب النقاط` },
+              { label: "سلسلة التعلّم", value: streak, note: "أيام متواصلة" },
+            ]}
+          />
+        </div>
       </div>
 
       <Tabs value={tab} onChange={setTab} className="mt" tabs={[{ id: "overview", label: "نظرة عامة", icon: Trophy }, { id: "log", label: "سجلّ النقاط", icon: ScrollText }, { id: "store", label: "متجر المكافآت", icon: Gift }]} />
@@ -55,12 +67,9 @@ export default function RewardsPage() {
       {tab === "overview" && (
         <Split className="mt">
           <div className="stack">
-            <Card title="سلسلة التعلّم" kicker={`${streak} أيام متواصلة`}>
-              <div className="streak-row">
-                {days.map((d, i) => (
-                  <div key={d} className={cx("streak-day", i < Math.min(streak, 5) && "on")}><Flame size={20} /><small>{d}</small></div>
-                ))}
-              </div>
+            <Card title="سلسلة التعلّم" kicker={`${streak} أيام متواصلة • آخر 10 أيام دراسية`}>
+              <VentRow size={22} items={activity} label={`أيام النشاط في آخر 10 أيام دراسية: ${activity.filter((a) => a.state === "on").length}`} />
+              <VentLegend items={[{ state: "on", label: "يوم فيه اختبار أو درس منجز" }, { state: "off", label: "لا نشاط" }]} />
               <p className="muted small mt-sm">أنجز نشاطًا واحدًا على الأقل كل يوم دراسي للحفاظ على السلسلة.</p>
             </Card>
             <Card title="شاراتي" kicker={`${badges.filter((b) => b.earned).length} من ${badges.length}`}>

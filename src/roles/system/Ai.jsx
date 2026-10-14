@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Cpu, Lock, Save } from "lucide-react";
-import { Badge, Btn, Card, Field, Notice, Page, Select, Split, Stat, Toggle } from "../../ui/Primitives";
-import { Ring } from "../../ui/Charts";
+import { Badge, Btn, Card, Field, Notice, Page, Progress, Select, Split, Toggle } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
+import { FactLine } from "../../ui/World";
 import { fmtNum } from "../../lib/format";
 
 const MODELS = { claude: ["claude-opus-5", "claude-sonnet-5", "claude-haiku-4-5-20251001"] };
@@ -21,11 +21,16 @@ export default function AiPage() {
   return (
     <Page kicker="الحوكمة" title="محرّك الذكاء الاصطناعي" desc="تحكّم بمزوّد النماذج والحدود والكلفة وسياسات الاستخدام، مع الإنسان في الحلقة فوق كل مخرجات المحرّك." icon={Cpu}
       actions={<Btn variant="gold" icon={Save} disabled={!dirty} onClick={save}>حفظ الإعدادات</Btn>}>
-      <div className="grid grid-3">
-        <Card><div className="row"><Ring value={pct} size={110} stroke={10} tone={pct > 85 ? "low" : "gold"} label="الاستهلاك الشهري" sub="من الحدّ" /><div><strong className="num">{fmtNum(d.used)}</strong><p className="muted small">من {fmtNum(d.monthlyLimit)} رمز</p></div></div></Card>
-        <Stat label="أسئلة معتمدة في البنك" value={reused} icon={Cpu} tone="gold" foot="تُعاد استخدامها بدل توليد جديد" />
-        <Stat label="توفير التخزين المؤقت" value={d.cacheReuse ? "38" : "0"} unit="%" icon={Cpu} tone="blue" foot="من كلفة التوليد" />
-      </div>
+      <FactLine
+        items={[
+          { label: "الاستهلاك هذا الشهر", value: `${pct}%`, note: `${fmtNum(d.used)} من ${fmtNum(d.monthlyLimit)} رمز`, tone: pct > 85 ? "warn" : undefined },
+          { label: "أسئلة معتمدة في البنك", value: reused, note: "تُعاد استخدامها بدل توليد جديد" },
+          { label: "إعادة استخدام المعتمد", value: d.cacheReuse ? "مفعّلة" : "معطّلة" },
+        ]}
+      />
+      <Card className="mb" title="استهلاك الحدّ الشهري" kicker={`${fmtNum(Math.max(0, d.monthlyLimit - d.used))} رمز متبقٍّ هذا الشهر`}>
+        <Progress value={pct} tone={pct > 85 ? "warn" : "brand"} size="lg" label="استهلاك الحدّ الشهري" />
+      </Card>
       <Split className="mt">
         <Card title="النموذج والحدود" kicker="التكامل مع مزوّد النماذج">
           <div className="stack">

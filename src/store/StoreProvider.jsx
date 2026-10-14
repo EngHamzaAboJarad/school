@@ -4,7 +4,7 @@ import { updateMastery, generateFromLesson, GAP_THRESHOLD, CLOSE_THRESHOLD } fro
 import { userName, studentOf, lessonOf, unitOf, objectiveOf, lessonsInUnit } from "./selectors";
 import { users } from "../data/people";
 
-const KEY = `taqat-state-v${STATE_VERSION}`;
+const KEY = `mushriq-state-v${STATE_VERSION}`;
 const uid = (p) => `${p}-${Math.random().toString(36).slice(2, 8)}`;
 
 function load() {

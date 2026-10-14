@@ -1,13 +1,14 @@
 import { useMemo, useState } from "react";
-import { Check, Download, Layers, Pencil, X, Sparkles } from "lucide-react";
-import { Badge, Btn, Card, DataTable, Modal, Page, Select, SearchBox, Stat, Notice } from "../../ui/Primitives";
+import { Check, Download, Eye, Layers, MoreHorizontal, Pencil, X, Sparkles } from "lucide-react";
+import { Badge, Btn, Card, DataTable, Menu, Modal, Page, Select, SearchBox, Stat, Notice } from "../../ui/Primitives";
+import { Seal } from "../../ui/World";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
 import { allLessons, allObjectives, lessonOf, teacherSubjects, unitOf } from "../../store/selectors";
 import { DIFFICULTIES, QUESTION_TYPES } from "../../data/curriculum";
 import { normalizeAr } from "../../lib/rng";
 import { downloadCSV } from "../../lib/export";
-import { QuestionView, correctText } from "../student/Assess";
+import { QuestionView } from "../student/Assess";
 import QuestionEditor from "./QuestionEditor";
 
 const ST = { approved: ["success", "معتمَد"], pending: ["warn", "بانتظار الاعتماد"], rejected: ["danger", "مرفوض"] };
@@ -46,18 +47,21 @@ export default function BankPage() {
           <Select value={f.status} onChange={(e) => setF({ ...f, status: e.target.value })} aria-label="الحالة"><option value="">كل الحالات</option>{Object.entries(ST).map(([k, v]) => <option key={k} value={k}>{v[1]}</option>)}</Select>
         </div>
         <div className="pad">
-          <DataTable dense rows={rows} empty="لا أسئلة مطابقة" columns={[
-            { key: "text", label: "السؤال", render: (q) => <div className="bank-q"><strong>{q.text.length > 70 ? `${q.text.slice(0, 70)}…` : q.text}</strong><small className="muted">{objTitle(q.objective)}</small></div> },
+          <DataTable dense pageSize={12} caption="بنك الأسئلة" rows={rows} empty="لا أسئلة مطابقة" columns={[
+            { key: "text", label: "السؤال", primary: true, render: (q) => <div className="bank-q"><strong>{q.text.length > 70 ? `${q.text.slice(0, 70)}…` : q.text}</strong><small className="muted">{objTitle(q.objective)}</small></div> },
             { key: "type", label: "النوع", render: (q) => <Badge tone="emerald">{QUESTION_TYPES[q.type]}</Badge> },
             { key: "difficulty", label: "الصعوبة", render: (q) => <Badge tone={q.difficulty === "صعب" ? "danger" : q.difficulty === "متوسط" ? "warn" : "success"}>{q.difficulty}</Badge> },
-            { key: "status", label: "الحالة", render: (q) => <Badge tone={ST[q.status][0]} dot>{ST[q.status][1]}</Badge> },
+            { key: "status", label: "الحالة", render: (q) => (q.status === "rejected" ? <Badge tone="danger" icon={X}>مرفوض</Badge> : q.source === "ai" ? <Seal approved={q.status === "approved"} compact /> : <Badge tone={ST[q.status][0]} icon={q.status === "approved" ? Check : undefined}>{ST[q.status][1]}</Badge>) },
             { key: "used", label: "الاستخدام", render: (q) => <span className="num muted">{usedIn(q)} مرات{q.edited ? " • عُدِّل" : ""}</span> },
-            { key: "act", label: "", render: (q) => (
-              <div className="row" onClick={(e) => e.stopPropagation()}>
-                <Btn size="sm" variant="ghost" onClick={() => setView(q)}>عرض</Btn>
-                <Btn size="sm" variant="ghost" icon={Pencil} aria-label="تعديل" onClick={() => setEdit(q)} />
-                {q.status !== "approved" && <Btn size="sm" variant="ghost" icon={Check} aria-label="اعتماد" onClick={() => { dispatch({ type: "setQuestionStatus", qid: q.id, status: "approved", actor: user.id }); toast("اعتُمد السؤال"); }} />}
-                {q.status !== "rejected" && <Btn size="sm" variant="danger" icon={X} aria-label="رفض" onClick={() => { dispatch({ type: "setQuestionStatus", qid: q.id, status: "rejected", actor: user.id }); toast("رُفض السؤال", "warn"); }} />}
+            { key: "act", label: "", srLabel: "إجراءات", align: "end", render: (q) => (
+              <div className="row" style={{ gap: 6, justifyContent: "flex-end", flexWrap: "nowrap" }} onClick={(e) => e.stopPropagation()}>
+                {q.status !== "approved" && <Btn size="sm" variant="primary" icon={Check} onClick={() => { dispatch({ type: "setQuestionStatus", qid: q.id, status: "approved", actor: user.id }); toast("اعتُمد السؤال"); }}>اعتماد</Btn>}
+                <Menu label={`إجراءات السؤال`} icon={MoreHorizontal} items={[
+                  { label: "معاينة", icon: Eye, onClick: () => setView(q) },
+                  { label: "تعديل", icon: Pencil, onClick: () => setEdit(q) },
+                  q.status !== "rejected" && "sep",
+                  q.status !== "rejected" && { label: "رفض السؤال", icon: X, danger: true, onClick: () => { dispatch({ type: "setQuestionStatus", qid: q.id, status: "rejected", actor: user.id }); toast("رُفض السؤال ويمكن إعادته لاحقًا", "warn"); } },
+                ]} />
               </div>) },
           ]} />
         </div>

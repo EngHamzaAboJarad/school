@@ -1,4 +1,4 @@
-import { lessons, lessonsOfUnit, units } from "./curriculum";
+import { lessons, units } from "./curriculum";
 import { seedQuestions, seedBlueprints } from "./questions";
 import { students, seedClasses, seedTimetable, seedSchools, seedDirectory, seedTenants, seedRbac } from "./people";
 import { seeded, clamp } from "../lib/rng";

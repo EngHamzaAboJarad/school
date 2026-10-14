@@ -92,7 +92,7 @@ export default function Landing({ onEnter, onJoin }) {
     <div className="landing" dir={lang === "en" ? "ltr" : "rtl"}>
       <header className="ld-nav">
         <div className="ld-wrap ld-nav-inner">
-          <a href="#/" className="ld-brand" onClick={toTop} aria-label="طاقات سكول">
+          <a href="#/" className="ld-brand" onClick={toTop} aria-label="مشرق">
             <Wordmark size="sm" />
           </a>
           <nav id="ld-menu" className={`ld-nav-links ${menu ? "open" : ""}`} aria-label="التنقّل الرئيسي">
@@ -144,8 +144,8 @@ export default function Landing({ onEnter, onJoin }) {
                 مدرستك الذكية التي <em>تشرح</em> وتُلخّص وتختبر بعد كل درس
               </h1>
               <p className="ld-hero-sub">
-                طاقات سكول تحوّل كل درس إلى رحلة تعلّم كاملة: شرح تفاعلي، تلخيص ذكي، اختبار فوري بعد الدرس، وامتحان لكل وحدة — ثم تشخيص دقيق للفجوات وخطة تفوّق شخصية،
-                وتُدار بالبيانات عبر ستة أدوار من الطالب حتى الإشراف التربوي والوزارة.
+                مشرق يحوّل كل درس إلى رحلة تعلّم كاملة: شرح تفاعلي، تلخيص ذكي، اختبار فوري بعد الدرس، وامتحان لكل وحدة — ثم تشخيص دقيق للفجوات وخطة تفوّق شخصية،
+                ويُدار بالبيانات عبر ستة أدوار من الطالب حتى الإشراف التربوي والوزارة.
               </p>
               <div className="ld-hero-cta">
                 <button type="button" className="btn btn-primary btn-lg" onClick={onEnter}>
@@ -218,7 +218,7 @@ export default function Landing({ onEnter, onJoin }) {
         </section>
 
         {/* Stats */}
-        <section className="ld-stats" aria-label="طاقات سكول بالأرقام">
+        <section className="ld-stats" aria-label="مشرق بالأرقام">
           <div className="ld-wrap ld-stats-grid">
             {STATS.map(([n, label]) => (
               <div key={label}>
@@ -270,7 +270,7 @@ export default function Landing({ onEnter, onJoin }) {
         {/* How it works */}
         <section id="ld-how" className="ld-band ld-alt" data-rv>
           <div className="ld-wrap">
-            <SectionHead kicker="رحلة الدرس" title="من الشرح إلى الإتقان في أربع خطوات" desc="التدفّق التعليمي الذي يميّز طاقات سكول عن أي سوق حصص خصوصية." />
+            <SectionHead kicker="رحلة الدرس" title="من الشرح إلى الإتقان في أربع خطوات" desc="التدفّق التعليمي الذي يميّز مشرق عن أي سوق حصص خصوصية." />
             <div className="ld-how">
               <ol className="ld-steps">
                 {HOW_STEPS.map((s, i) => (
@@ -344,15 +344,15 @@ export default function Landing({ onEnter, onJoin }) {
         {/* Comparison */}
         <section id="ld-compare" className="ld-band" data-rv>
           <div className="ld-wrap">
-            <SectionHead kicker="لماذا طاقات سكول" title="مدرسة رقمية ذكية، لا سوق حصص" desc="مقارنة مباشرة مع نموذج «الحصة الخصوصية» السائد في السوق." />
+            <SectionHead kicker="لماذا مشرق" title="مدرسة رقمية ذكية، لا سوق حصص" desc="مقارنة مباشرة مع نموذج «الحصة الخصوصية» السائد في السوق." />
             <div className="ld-compare-table-wrap">
               <table className="ld-compare-table">
-                <caption className="sr-only">مقارنة بين طاقات سكول ومنصّات الحصص الخصوصية</caption>
+                <caption className="sr-only">مقارنة بين مشرق ومنصّات الحصص الخصوصية</caption>
                 <thead>
                   <tr>
                     <th scope="col">القدرة / الميزة</th>
                     <th scope="col" className="brand">
-                      طاقات سكول
+                      مشرق
                     </th>
                     <th scope="col">منصّات الحصص الخصوصية</th>
                   </tr>
@@ -398,7 +398,7 @@ export default function Landing({ onEnter, onJoin }) {
                   </div>
                 </div>
               ))}
-              <small>تقدير مبدئي لثماني حصص في الشهر بحسب الأسعار المنشورة (٢٠–٥٦ ريالًا للحصة). أسعار طاقات سكول إرشادية وقد تتغيّر عند الإطلاق.</small>
+              <small>تقدير مبدئي لثماني حصص في الشهر بحسب الأسعار المنشورة (٢٠–٥٦ ريالًا للحصة). أسعار مشرق إرشادية وقد تتغيّر عند الإطلاق.</small>
             </div>
           </div>
         </section>
@@ -504,7 +504,7 @@ export default function Landing({ onEnter, onJoin }) {
         {/* Demo accounts */}
         <section className="ld-band ld-alt" data-rv>
           <div className="ld-wrap">
-            <SectionHead kicker="جرّبها الآن" title="ستّة حسابات تجريبية جاهزة" desc="كلمة المرور password ورمز التحقق 123456 — بنطاق taqat.test" />
+            <SectionHead kicker="جرّبها الآن" title="ستّة حسابات تجريبية جاهزة" desc="كلمة المرور password ورمز التحقق 123456 — بنطاق mushriq.test" />
             <div className="ld-demo-grid">
               {DEMO_ACCOUNTS.map((a) => {
                 const Icon = ROLE_ICONS[a.role] || GraduationCap;
@@ -611,7 +611,7 @@ export default function Landing({ onEnter, onJoin }) {
         </div>
         <div className="ld-wrap">
           <div className="ld-footer-base">
-            <span>© ٢٠٢٦ طاقات سكول. جميع الحقوق محفوظة.</span>
+            <span>© ٢٠٢٦ مشرق. جميع الحقوق محفوظة.</span>
             <span>صُنعت بأيدي معلّمين ومهندسين فلسطينيين من غزّة.</span>
           </div>
         </div>
@@ -620,7 +620,7 @@ export default function Landing({ onEnter, onJoin }) {
       {CONTACT.whatsapp && (
         <a
           className="ld-wa"
-          href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent("مرحبًا، أودّ الاستفسار عن طاقات سكول")}`}
+          href={`https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent("مرحبًا، أودّ الاستفسار عن مشرق")}`}
           target="_blank"
           rel="noreferrer"
           aria-label="تواصل عبر واتساب"

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Copy, KeyRound, Plug, Plus, Trash2 } from "lucide-react";
 import { Badge, Btn, Card, Field, Input, ListRow, Modal, Notice, Page, Select } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
 import { fmtDate } from "../../lib/format";
 
@@ -9,6 +10,7 @@ import { fmtDate } from "../../lib/format";
 export default function IntegrationsPage() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const [adding, setAdding] = useState(false);
   const [f, setF] = useState({ name: "", scope: "قراءة التقارير" });
   const [created, setCreated] = useState(null);
@@ -25,7 +27,7 @@ export default function IntegrationsPage() {
           {state.apiKeys.length === 0 && <p className="muted">لا مفاتيح.</p>}
           {state.apiKeys.map((k) => (
             <ListRow key={k.id} icon={KeyRound} tone="blue" title={k.name} meta={`${k.scope} • أُنشئ ${fmtDate(k.created)}`} end={<><code className="key num">{k.prefix}</code>
-              <Btn size="sm" variant="danger" icon={Trash2} aria-label="إلغاء المفتاح" onClick={() => { dispatch({ type: "revokeApiKey", id: k.id, name: k.name, actor: user.id }); toast("أُلغي المفتاح", "warn"); }} /></>} />
+              <Btn size="sm" variant="danger" icon={Trash2} aria-label="إلغاء المفتاح" onClick={async () => { if (!(await confirm({ title: `إلغاء مفتاح «${k.name}»؟`, body: "يتوقّف فورًا كل تكامل يستخدم هذا المفتاح ولا يمكن استعادته؛ ستحتاج لإنشاء مفتاح جديد. يُسجَّل الإجراء في سجلّ التدقيق.", confirmLabel: "إلغاء المفتاح" }))) return; dispatch({ type: "revokeApiKey", id: k.id, name: k.name, actor: user.id }); toast("أُلغي المفتاح", "warn"); }} /></>} />
           ))}
         </Card>
       </div>

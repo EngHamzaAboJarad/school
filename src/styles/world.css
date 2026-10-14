@@ -1,0 +1,367 @@
+/* ==========================================================================
+   World elements — مشرق (sunrise)
+   Rays (the one data glyph, from the logo's sun rays), approval seal,
+   subject colours, fact line.
+   ========================================================================== */
+
+/* ───────── Rays (component names stay Vent*) ───────── */
+.vent {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+.vent .vent-shape {
+  fill: var(--vent-tone, var(--c-ray-on));
+  stroke: var(--vent-tone, var(--c-ray-on));
+  stroke-width: 1.5;
+}
+
+.vent-off .vent-shape {
+  fill: none;
+  stroke: var(--c-ray-off);
+}
+
+.vent-partial .vent-shape {
+  fill: none;
+}
+
+.vent-partial .vent-half {
+  fill: var(--vent-tone, var(--c-ray-on));
+}
+
+.vent-alert .vent-shape {
+  fill: var(--c-danger-mark);
+  stroke: var(--c-danger-mark);
+}
+
+.vent-empty .vent-shape {
+  fill: none;
+  stroke: var(--c-ray-off);
+  stroke-dasharray: 2 2;
+}
+
+.vent-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+/* Wall of rays: label · rays · value */
+.vent-wall {
+  display: flex;
+  flex-direction: column;
+}
+
+.vent-wall-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 56px;
+  align-items: center;
+  column-gap: var(--sp-3);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--c-divider);
+}
+
+.vent-wall-row:last-of-type {
+  border-bottom: 0;
+}
+
+.vent-wall-head {
+  padding-top: 0;
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+.vent-wall-head>span:last-child,
+.vent-wall-value {
+  text-align: end;
+}
+
+.vent-wall-cols {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.vent-wall-cols i {
+  font-style: normal;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.625rem;
+  color: var(--c-text-muted);
+}
+
+.vent-wall-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.vent-wall-label>span {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.vent-wall-label b {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vent-wall-label small {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vent-wall-value {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.vent-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: var(--sp-3);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--c-divider);
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+.vent-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 640px) {
+  .vent-wall-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 6px;
+  }
+
+  .vent-wall-label {
+    grid-column: 1 / -1;
+  }
+
+  .vent-wall-head {
+    display: none;
+  }
+}
+
+/* ───────── Approval seal vs AI suggestion ───────── */
+/* teacher-approved: a solid teal seal (growth, trust) */
+.seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 10px 0 9px;
+  border-radius: var(--rad-full);
+  border: 1.5px solid var(--c-teal-600);
+  box-shadow: inset 0 0 0 2px var(--c-surface), inset 0 0 0 3px var(--c-teal-200);
+  background: var(--c-teal-50);
+  color: var(--c-teal-700);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+/* AI suggestion (النجمة), awaiting a teacher: a dashed warm outline — not yet "risen" */
+.seal-ai {
+  border: 1.5px dashed var(--c-sun-600);
+  box-shadow: none;
+  background: var(--c-sun-50);
+  color: var(--c-sun-800);
+  font-weight: var(--fw-semibold);
+}
+
+.seal-compact {
+  height: 22px;
+  padding: 0 6px;
+}
+
+/* ───────── Subject colours ───────── */
+.subj-swatch {
+  display: inline-block;
+  flex: none;
+  width: 4px;
+  height: 16px;
+  border-radius: 2px;
+}
+
+.subj-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+/* ───────── Fact line (instead of a hero metric row) ───────── */
+.fact-line {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--sp-3) 0 0;
+  row-gap: var(--sp-2);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--sp-5);
+  border-inline-start: 1px solid var(--c-border);
+  text-align: start;
+  min-width: 0;
+}
+
+.fact:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+.fact dt {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+.fact dd {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--c-text);
+}
+
+.fact dd small {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular);
+  color: var(--c-text-muted);
+}
+
+button.fact {
+  border-radius: 0;
+}
+
+button.fact:hover dd .num {
+  text-decoration: underline;
+  text-decoration-color: var(--c-teal-300);
+  text-underline-offset: 4px;
+}
+
+.fact-warn dd .num {
+  color: var(--c-warn);
+}
+
+.fact-danger dd .num {
+  color: var(--c-danger);
+}
+
+@media (max-width: 640px) {
+  .fact-line {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-3);
+  }
+
+  .fact,
+  .fact:first-child {
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--rad-md);
+    background: var(--c-surface);
+  }
+}
+
+/* Card / dialog subtitle (replaces the eyebrow above titles) */
+:where(.in-app) .card-sub {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+/* Legacy metric rows (<Grid><Stat/>…</Grid>) render as a fact line, not a row of big-number cards */
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) 0;
+  margin-bottom: var(--sp-2);
+}
+
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat {
+  flex: 0 1 auto;
+  padding: 0 var(--sp-5);
+  background: none;
+  border: 0;
+  border-inline-start: 1px solid var(--c-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+:where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+:where(.in-app) .stat .stat-icon {
+  display: none;
+}
+
+:where(.in-app) .stat .stat-label {
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .stat .stat-value {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-lg);
+  margin-top: 0;
+  gap: 6px;
+}
+
+:where(.in-app) .stat .stat-value small {
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .stat .stat-foot {
+  margin-top: 0;
+}
+
+:where(.in-app) .stat-rose .stat-value {
+  color: var(--c-danger);
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-2);
+  }
+
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat,
+  :where(.in-app) :is(.grid-2, .grid-3, .grid-4):has(> .stat):not(:has(> .card)) > .stat:first-child {
+    padding: var(--sp-2) var(--sp-3);
+    border: 1px solid var(--c-border);
+    border-radius: var(--rad-md);
+    background: var(--c-surface);
+  }
+}
+
+:where(.in-app) .mb {
+  margin-bottom: var(--sp-4);
+}
+
+:where(.in-app) .fact-line + .card,
+:where(.in-app) .fact-line + .tabs {
+  margin-top: var(--sp-4);
+}

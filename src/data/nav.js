@@ -9,11 +9,11 @@ export const NAV = {
   student: [
     { group: "التعلّم", items: [
       { id: "home", label: "الرئيسية", icon: LayoutDashboard },
-      { id: "learn", label: "مساري الدراسي", icon: BookOpen },
-      { id: "progress", label: "تقدّمي وخطتي", icon: TrendingUp },
+      { id: "learn", label: "مساري الدراسي", short: "مساري", icon: BookOpen },
+      { id: "progress", label: "تقدّمي وخطتي", short: "تقدّمي", icon: TrendingUp },
     ] },
     { group: "أدواتي", items: [
-      { id: "schedule", label: "الجدول الأسبوعي", icon: CalendarDays },
+      { id: "schedule", label: "الجدول الأسبوعي", short: "الجدول", icon: CalendarDays },
       { id: "library", label: "مكتبتي", icon: Library },
       { id: "rewards", label: "إنجازاتي", icon: Award },
       { id: "teachers", label: "معلّمويّ", icon: Users },
@@ -23,9 +23,9 @@ export const NAV = {
   parent: [
     { group: "المتابعة", items: [
       { id: "home", label: "الرئيسية", icon: LayoutDashboard },
-      { id: "child", label: "أداء الأبناء", icon: GraduationCap },
-      { id: "attendance", label: "الحضور والغياب", icon: CalendarCheck },
-      { id: "reports", label: "التقارير", icon: FileBarChart },
+      { id: "child", label: "أداء الأبناء", short: "الأبناء", icon: GraduationCap },
+      { id: "attendance", label: "الحضور والغياب", short: "الحضور", icon: CalendarCheck },
+      { id: "reports", label: "التقارير", short: "التقارير", icon: FileBarChart },
     ] },
     { group: "التواصل والخصوصية", items: [
       { id: "messages", label: "التواصل", icon: MessageCircle },
@@ -35,11 +35,11 @@ export const NAV = {
   teacher: [
     { group: "لوحتي", items: [
       { id: "home", label: "الرئيسية", icon: LayoutDashboard },
-      { id: "classes", label: "فصولي وطلابي", icon: Users },
-      { id: "performance", label: "أداء الفصل", icon: BarChart3 },
+      { id: "classes", label: "فصولي وطلابي", short: "فصولي", icon: Users },
+      { id: "performance", label: "أداء الفصل", short: "الأداء", icon: BarChart3 },
     ] },
     { group: "المحتوى والتقييم", items: [
-      { id: "review", label: "اعتماد المحتوى", icon: FileCheck2 },
+      { id: "review", label: "اعتماد المحتوى", short: "الاعتماد", icon: FileCheck2 },
       { id: "curriculum", label: "المنهج والمحتوى", icon: BookMarked },
       { id: "bank", label: "بنك الأسئلة", icon: Layers },
       { id: "grading", label: "التصحيح اليدوي", icon: PenLine },
@@ -55,9 +55,9 @@ export const NAV = {
   school: [
     { group: "الإدارة", items: [
       { id: "home", label: "الرئيسية", icon: LayoutDashboard },
-      { id: "users", label: "المستخدمون والأدوار", icon: Users },
-      { id: "structure", label: "الصفوف والجداول", icon: CalendarRange },
-      { id: "attendance", label: "الحضور والغياب", icon: CalendarCheck },
+      { id: "users", label: "المستخدمون والأدوار", short: "المستخدمون", icon: Users },
+      { id: "structure", label: "الصفوف والجداول", short: "الصفوف", icon: CalendarRange },
+      { id: "attendance", label: "الحضور والغياب", short: "الحضور", icon: CalendarCheck },
     ] },
     { group: "المؤسسة", items: [
       { id: "reports", label: "التقارير المؤسسية", icon: FileBarChart },
@@ -68,18 +68,18 @@ export const NAV = {
   ],
   supervisor: [
     { group: "الإشراف", items: [
-      { id: "home", label: "المدارس ضمن النطاق", icon: School },
-      { id: "kpis", label: "مؤشّرات الأداء", icon: Gauge },
-      { id: "quality", label: "رقابة الجودة", icon: Eye },
-      { id: "reports", label: "تقارير الإدارة والوزارة", icon: ScrollText },
+      { id: "home", label: "المدارس ضمن النطاق", short: "المدارس", icon: School },
+      { id: "kpis", label: "مؤشّرات الأداء", short: "المؤشّرات", icon: Gauge },
+      { id: "quality", label: "رقابة الجودة", short: "الجودة", icon: Eye },
+      { id: "reports", label: "تقارير الإدارة والوزارة", short: "التقارير", icon: ScrollText },
     ] },
   ],
   system: [
     { group: "المنصّة", items: [
       { id: "home", label: "نظرة عامة", icon: LayoutDashboard },
-      { id: "tenants", label: "المستأجرون", icon: Building2 },
-      { id: "teacherRequests", label: "طلبات المعلّمين", icon: UserCheck },
-      { id: "leads", label: "طلبات التواصل", icon: Inbox },
+      { id: "tenants", label: "المستأجرون", short: "المستأجرون", icon: Building2 },
+      { id: "teacherRequests", label: "طلبات المعلّمين", short: "الطلبات", icon: UserCheck },
+      { id: "leads", label: "طلبات التواصل", short: "التواصل", icon: Inbox },
       { id: "rbac", label: "الصلاحيات (RBAC)", icon: KeyRound },
       { id: "billing", label: "الفوترة والاشتراكات", icon: CreditCard },
     ] },

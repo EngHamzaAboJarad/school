@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { CalendarClock, Download, FileText, Plus, Printer, Trash2 } from "lucide-react";
-import { Badge, Btn, Card, DataTable, Field, ListRow, Notice, Page, Select, Split } from "../../ui/Primitives";
+import { Btn, Card, DataTable, ListRow, Page, Select, Split } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
 import { downloadCSV, printPage } from "../../lib/export";
 import { fmtLongDate, fmtNum } from "../../lib/format";
@@ -17,6 +18,7 @@ const TYPES = {
 export default function SupervisorReports() {
   const { state, dispatch } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const [type, setType] = useState("region");
   const [gen, setGen] = useState(null);
   const [freq, setFreq] = useState("أسبوعيًّا");
@@ -40,7 +42,7 @@ export default function SupervisorReports() {
           )}
         </div>
         <Card title="التقارير المجدولة" kicker="تصلك تلقائيًّا">
-          {state.reportSchedules.map((r) => <ListRow key={r.id} icon={CalendarClock} tone="gold" title={r.title} meta={`${r.frequency} • ${r.channel}`} end={<Btn size="sm" variant="danger" icon={Trash2} aria-label="حذف الجدولة" onClick={() => { dispatch({ type: "removeSchedule", id: r.id }); toast("حُذفت الجدولة", "warn"); }} />} />)}
+          {state.reportSchedules.map((r) => <ListRow key={r.id} icon={CalendarClock} tone="gold" title={r.title} meta={`${r.frequency} • ${r.channel}`} end={<Btn size="sm" variant="danger" icon={Trash2} aria-label="حذف الجدولة" onClick={async () => { if (!(await confirm({ title: `حذف جدولة «${r.title}»؟`, body: "لن يُرسَل هذا التقرير تلقائيًّا بعد الآن. يمكنك إنشاء جدولة جديدة في أي وقت.", confirmLabel: "حذف الجدولة" }))) return; dispatch({ type: "removeSchedule", id: r.id }); toast("حُذفت الجدولة", "warn"); }} />} />)}
           <div className="divider" />
           <div className="row"><Select value={freq} onChange={(e) => setFreq(e.target.value)} aria-label="التكرار"><option value="أسبوعيًّا">أسبوعيًّا</option><option value="شهريًّا">شهريًّا</option><option value="فصليًّا">فصليًّا</option></Select>
             <Btn variant="ghost" icon={Plus} onClick={() => { dispatch({ type: "addSchedule", schedule: { title, frequency: freq, channel: "التطبيق + البريد" } }); toast("أُضيفت الجدولة"); }}>جدولة «{title}»</Btn></div>

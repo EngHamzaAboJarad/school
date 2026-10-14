@@ -1,0 +1,382 @@
+/* ==========================================================================
+   Inner screens — Mushriq world
+   ========================================================================== */
+
+/* ───────── Attendance roster ───────── */
+:where(.in-app) .roster {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--c-divider);
+}
+
+:where(.in-app) .roster-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) auto minmax(0, auto);
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  border-bottom: 1px solid var(--c-divider);
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .roster-row.is-changed {
+  background: var(--c-sun-50);
+}
+
+:where(.in-app) .roster-who {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+:where(.in-app) .roster-who > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+:where(.in-app) .roster-who strong {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .roster-who small {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .att-choices {
+  display: inline-flex;
+  justify-self: end;
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--rad-md);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+
+:where(.in-app) .att-choice {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  padding: 0 var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--c-text-2);
+  border-inline-start: 1px solid var(--c-border);
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .att-choice:first-child {
+  border-inline-start: 0;
+}
+
+:where(.in-app) .att-choice:hover {
+  background: var(--c-surface-hover);
+}
+
+:where(.in-app) .att-choice.on.att-present {
+  background: var(--c-navy-800);
+  color: #fff;
+}
+
+:where(.in-app) .att-choice.on.att-absent {
+  background: var(--c-danger);
+  color: #fff;
+}
+
+:where(.in-app) .att-choice.on.att-late {
+  background: var(--c-warn-bg);
+  color: var(--c-warn);
+  box-shadow: inset 0 0 0 1px var(--c-warn-mark);
+}
+
+:where(.in-app) .att-choice.on.att-excused {
+  background: var(--c-info-bg);
+  color: var(--c-info);
+  box-shadow: inset 0 0 0 1px var(--c-info-mark);
+}
+
+@media (pointer: coarse) {
+  :where(.in-app) .att-choice {
+    height: var(--touch);
+  }
+}
+
+@media (max-width: 900px) {
+  :where(.in-app) .roster-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: var(--sp-3) var(--sp-4);
+  }
+
+  :where(.in-app) .roster-row .att-choices {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  :where(.in-app) .att-choice {
+    justify-content: center;
+    padding: 0 var(--sp-1);
+  }
+}
+
+/* ───────── Unsaved-changes bar ───────── */
+:where(.in-app) .savebar {
+  position: sticky;
+  bottom: var(--sp-4);
+  z-index: var(--z-sticky);
+  margin-top: var(--sp-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--rad-lg);
+  background: var(--c-navy-900);
+  color: var(--c-text-on-dark);
+  box-shadow: var(--el-2);
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .savebar em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline-start: var(--sp-3);
+  font-style: normal;
+  color: var(--c-sun-200);
+  font-size: var(--fs-xs);
+}
+
+@media (max-width: 768px) {
+  :where(.in-app) .savebar {
+    bottom: calc(var(--bottomnav-h) + var(--sp-2) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ───────── Users ───────── */
+:where(.in-app) .users-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+}
+
+:where(.in-app) .users-toolbar .grow {
+  flex: 1 1 240px;
+}
+
+:where(.in-app) .chip .num {
+  font-size: var(--fs-2xs);
+  opacity: 0.8;
+}
+
+:where(.in-app) .perm-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--rad-sm);
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface);
+  display: inline-grid;
+  place-items: center;
+  color: #fff;
+}
+
+:where(.in-app) .perm-dot.on {
+  background: var(--c-navy-800);
+  border-color: var(--c-navy-800);
+}
+
+/* ───────── School attendance walls ───────── */
+:where(.in-app) .sa-walls {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: var(--sp-4) var(--sp-8);
+}
+
+:where(.in-app) .sa-wall h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  padding-bottom: var(--sp-2);
+  margin-bottom: var(--sp-1);
+  border-bottom: 1px solid var(--c-border);
+  font-family: var(--ff-head);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .sa-wall h3 small {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-regular);
+  color: var(--c-text-muted);
+  font-size: var(--fs-xs);
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .sa-walls {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ───────── Rewards ───────── */
+:where(.in-app) .rw-top {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+  gap: var(--sp-4) var(--sp-6);
+  align-items: center;
+}
+
+:where(.in-app) .rw-facts .fact-line {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .rw-top {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ───────── Lesson header: the door, flat ───────── */
+:where(.in-app) .lesson-hero {
+  background: var(--c-navy-900);
+  border: 1px solid var(--c-navy-950);
+  border-radius: var(--rad-lg);
+  box-shadow: none;
+  padding: var(--sp-6);
+  gap: var(--sp-6);
+}
+
+:where(.in-app) .lesson-hero::before,
+:where(.in-app) .lesson-hero::after {
+  display: none;
+}
+
+:where(.in-app) .lesson-hero h1 {
+  font-size: 1.625rem;
+  color: #fff;
+  margin: var(--sp-2) 0 var(--sp-3);
+}
+
+:where(.in-app) .lesson-objectives {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  border-radius: var(--rad-md);
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .lesson-hero {
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  :where(.in-app) .lesson-hero h1 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ───────── Question bank filters ───────── */
+:where(.in-app) .bank-filters {
+  padding: var(--sp-4) var(--sp-5) var(--sp-2);
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .bank-filters > .input {
+  flex: 0 1 168px;
+  width: auto;
+  height: var(--control-h);
+}
+
+:where(.in-app) .bank-filters .searchbox {
+  flex: 1 1 220px;
+}
+
+/* ───────── Parent attendance: week calendar of vents ───────── */
+:where(.in-app) .att-cal {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .att-cal-row {
+  display: grid;
+  grid-template-columns: 72px repeat(5, minmax(0, 1fr));
+  gap: var(--sp-2);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--c-divider);
+  align-items: stretch;
+}
+
+:where(.in-app) .att-cal-head {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  padding-top: 0;
+}
+
+:where(.in-app) .att-cal-week {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  align-self: center;
+}
+
+:where(.in-app) .att-cal-day {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--rad-md);
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-divider);
+}
+
+:where(.in-app) .att-cal-day b {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .att-cal-day small {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .att-cal-day.is-absent {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger-border);
+  color: var(--c-danger);
+}
+
+:where(.in-app) .att-cal-day.is-late {
+  background: var(--c-warn-bg);
+  border-color: var(--c-warn-border);
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .att-cal-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  :where(.in-app) .att-cal-week {
+    grid-column: 1 / -1;
+  }
+
+  :where(.in-app) .att-cal-head span:first-child {
+    display: none;
+  }
+
+  :where(.in-app) .att-cal-day {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: var(--sp-2) var(--sp-1);
+    gap: 2px;
+  }
+
+  :where(.in-app) .att-cal-day b {
+    font-size: var(--fs-2xs);
+  }
+}

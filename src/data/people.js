@@ -10,12 +10,12 @@ export const ROLES = {
 };
 
 export const users = [
-  { id: "stu-sara", role: "student", name: "سارة أحمد", email: "student@taqat.test", grade: "الثالث المتوسط", classId: "c-3a", parentId: "par-noura", school: "sch-1" },
-  { id: "par-noura", role: "parent", name: "نورة أحمد", email: "parent@taqat.test", children: ["stu-sara", "stu-layan"], school: "sch-1" },
-  { id: "tch-khaled", role: "teacher", name: "أ. خالد العتيبي", email: "teacher@taqat.test", title: "معلّم الرياضيات والعلوم", classes: ["c-3a", "c-3b"], school: "sch-1" },
-  { id: "adm-school", role: "school", name: "أ. عبدالله الشمري", email: "admin@taqat.test", title: "مدير مدرسة الأفق الأهلية", school: "sch-1" },
-  { id: "sup-1", role: "supervisor", name: "د. منى الزهراني", email: "supervisor@taqat.test", title: "مشرفة تربوية — إدارة تعليم الرياض" },
-  { id: "sys-1", role: "system", name: "م. طارق العنزي", email: "system@taqat.test", title: "مدير النظام" },
+  { id: "stu-sara", role: "student", name: "سارة أحمد", email: "student@mushriq.test", grade: "الثالث المتوسط", classId: "c-3a", parentId: "par-noura", school: "sch-1" },
+  { id: "par-noura", role: "parent", name: "نورة أحمد", email: "parent@mushriq.test", children: ["stu-sara", "stu-layan"], school: "sch-1" },
+  { id: "tch-khaled", role: "teacher", name: "أ. خالد العتيبي", email: "teacher@mushriq.test", title: "معلّم الرياضيات والعلوم", classes: ["c-3a", "c-3b"], school: "sch-1" },
+  { id: "adm-school", role: "school", name: "أ. عبدالله الشمري", email: "admin@mushriq.test", title: "مدير مدرسة الأفق الأهلية", school: "sch-1" },
+  { id: "sup-1", role: "supervisor", name: "د. منى الزهراني", email: "supervisor@mushriq.test", title: "مشرفة تربوية — إدارة تعليم الرياض" },
+  { id: "sys-1", role: "system", name: "م. طارق العنزي", email: "system@mushriq.test", title: "مدير النظام" },
   // بقية من يظهرون في المراسلات والقوائم
   { id: "tch-noura", role: "teacher", name: "أ. نورة الحربي", title: "معلّمة العلوم", school: "sch-1" },
   { id: "tch-sarah", role: "teacher", name: "أ. سارة منصور", title: "معلّمة لغتي", school: "sch-1" },
@@ -129,10 +129,10 @@ export const seedRbac = {
 };
 
 export const DEMO_ACCOUNTS = [
-  { email: "student@taqat.test", role: "student", userId: "stu-sara" },
-  { email: "parent@taqat.test", role: "parent", userId: "par-noura" },
-  { email: "teacher@taqat.test", role: "teacher", userId: "tch-khaled" },
-  { email: "admin@taqat.test", role: "school", userId: "adm-school" },
-  { email: "supervisor@taqat.test", role: "supervisor", userId: "sup-1" },
-  { email: "system@taqat.test", role: "system", userId: "sys-1" },
+  { email: "student@mushriq.test", role: "student", userId: "stu-sara" },
+  { email: "parent@mushriq.test", role: "parent", userId: "par-noura" },
+  { email: "teacher@mushriq.test", role: "teacher", userId: "tch-khaled" },
+  { email: "admin@mushriq.test", role: "school", userId: "adm-school" },
+  { email: "supervisor@mushriq.test", role: "supervisor", userId: "sup-1" },
+  { email: "system@mushriq.test", role: "system", userId: "sys-1" },
 ];

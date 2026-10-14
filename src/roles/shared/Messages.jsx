@@ -3,7 +3,7 @@ import { Megaphone, MessageCircle, PenSquare, Send, Eye } from "lucide-react";
 import { Avatar, Btn, Badge, Card, Empty, Field, Input, Modal, Page, Segmented, Select, Tabs, Textarea, cx } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { childrenOf, myAnnouncements, myThreads, unreadThreads, userName, studentOf, teachersOfStudent } from "../../store/selectors";
+import { childrenOf, myAnnouncements, myThreads, unreadThreads, userName, teachersOfStudent } from "../../store/selectors";
 import { timeAgo } from "../../lib/format";
 
 // المراسلة والإعلانات (F5.3 / F9.2): رسائل مباشرة بين ولي الأمر والمعلّم/الإدارة، وإعلانات للفصل أو المدرسة مع تتبّع القراءة.

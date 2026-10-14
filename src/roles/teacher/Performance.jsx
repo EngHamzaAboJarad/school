@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { BarChart3, Download, Send, Sparkles, Users } from "lucide-react";
-import { Avatar, Badge, Btn, Card, Empty, ListRow, Notice, Page, Select, Split, Stat } from "../../ui/Primitives";
-import { Bars, Heatmap, Legend, Ring } from "../../ui/Charts";
+import { Badge, Btn, Card, Empty, ListRow, Notice, Page, Select, Split, Stat } from "../../ui/Primitives";
+import { Bars, Heatmap, Legend } from "../../ui/Charts";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { allObjectives, classStats, commonGaps, lessonOf, teacherSubjects, subjectOf } from "../../store/selectors";
+import { allObjectives, classStats, commonGaps, teacherSubjects, subjectOf } from "../../store/selectors";
 import { downloadCSV } from "../../lib/export";
 
 // متابعة أداء الفصل (F6.5): الطلاب المتعثّرون والفجوات الشائعة وخريطة الإتقان

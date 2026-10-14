@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
-import { Bot, Check, ClipboardCheck, FileCheck2, FileText, Layers, Pencil, Sparkles, Trophy, X, ShieldCheck, Undo2, Wand2, Sliders } from "lucide-react";
+import { useState } from "react";
+import { Bot, Check, ClipboardCheck, FileCheck2, Layers, Pencil, Sparkles, Trophy, X, ShieldCheck, Undo2, Wand2, Sliders, XCircle } from "lucide-react";
+import { Seal } from "../../ui/World";
 import { Btn, Badge, Card, Empty, Field, ListRow, Modal, Notice, Page, Select, Tabs, Textarea, Input } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
 import { useStore } from "../../store/StoreProvider";
-import { allObjectives, lessonOf, lessonsInUnit, pendingReviews, unitOf, unitsInSubject, teacherSubjects, allLessons, subjectOf, userName } from "../../store/selectors";
+import { allObjectives, lessonOf, pendingReviews, unitOf, unitsInSubject, teacherSubjects, allLessons, subjectOf, userName } from "../../store/selectors";
 import { DIFFICULTIES } from "../../data/curriculum";
 import { timeAgo } from "../../lib/format";
 import { QuestionView, correctText } from "../student/Assess";
@@ -49,7 +50,7 @@ export default function ReviewPage() {
                 meta={`${label} • ${subjectOf(unit?.subjectId)?.name} • الوحدة ${unit?.no} • ${timeAgo(r.createdAt)}${r.decidedBy ? ` • ${userName(state, r.decidedBy)}` : ""}`}
                 end={<>
                   {r.questionIds && <Badge>{r.questionIds.length} سؤالًا</Badge>}
-                  <Badge tone={r.status === "approved" ? "success" : r.status === "rejected" ? "danger" : "warn"} dot>{r.status === "approved" ? "معتمَد" : r.status === "rejected" ? "مرفوض" : "بانتظارك"}</Badge>
+                  {r.status === "approved" ? <Seal approved compact /> : r.status === "rejected" ? <Badge tone="danger" icon={XCircle}>مرفوض</Badge> : <Seal approved={false} compact />}
                   <Btn size="sm" variant={r.status === "pending" ? "primary" : "ghost"} onClick={() => setOpen(r.id)}>{r.status === "pending" ? "مراجعة" : "عرض"}</Btn>
                 </>} />
             );
@@ -115,7 +116,7 @@ function ReviewModal({ itemId, onClose }) {
               <div className="row">
                 {q.edited && <Badge tone="info">عُدِّل</Badge>}
                 {q.status === "rejected" && <Badge tone="danger">مستبعَد</Badge>}
-                {q.source === "ai" && <Badge tone="gold" icon={Sparkles}>مولَّد</Badge>}
+                {q.source === "ai" && <Seal approved={q.status === "approved"} compact />}
               </div>
             </div>
             <QuestionView q={q} value={q.type === "mcq" ? q.answer : q.type === "tf" ? q.answer : q.type === "fill" ? q.answers[0] : q.type === "match" ? Object.fromEntries(q.pairs.map(([, r], k) => [k, r])) : q.model} result={q.type === "essay" ? undefined : { got: 1, preview: true }} disabled />

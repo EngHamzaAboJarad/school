@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Check, UserPlus, X } from "lucide-react";
 import { Badge, Btn, Card, Empty, ListRow, Notice, Page, Tabs } from "../../ui/Primitives";
 import { useToast } from "../../ui/Brand";
+import { useConfirm } from "../../ui/Confirm";
 import { useStore } from "../../store/StoreProvider";
 import { userName } from "../../store/selectors";
 import { timeAgo } from "../../lib/format";
@@ -13,12 +14,14 @@ const STATUS_TONE = { pending_teacher: "warn", approved: "success", rejected: "d
 export default function EnrollmentsPage() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();
+  const confirm = useConfirm();
   const [tab, setTab] = useState("pending");
   const mine = state.enrollmentRequests.filter((r) => r.teacherId === user.id && r.status !== "pending_parent");
   const by = (s) => mine.filter((r) => r.status === s).sort((a, b) => b.createdAt - a.createdAt);
   const shown = tab === "pending" ? by("pending_teacher") : tab === "approved" ? by("approved") : by("rejected");
 
-  const decide = (r, approve) => {
+  const decide = async (r, approve) => {
+    if (!approve && !(await confirm({ title: "رفض طلب التسجيل؟", body: "يُبلَّغ وليّ الأمر برفض الطلب. إن كان قد دفع رسوم الاشتراك فستُعالَج وفق سياسة الاسترداد.", confirmLabel: "رفض الطلب" }))) return;
     dispatch({ type: "decideEnrollment", id: r.id, approve, actor: user.id });
     toast(approve ? "فُعِّل تسجيل الطالب" : "رُفض طلب التسجيل", approve ? "success" : "warn");
   };

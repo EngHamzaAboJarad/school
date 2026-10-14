@@ -1,6 +1,6 @@
-import { CheckCircle2, DatabaseBackup, LockKeyhole, ShieldCheck, UserCheck } from "lucide-react";
-import { Badge, Card, ListRow, Page, Stat, Toggle } from "../../ui/Primitives";
-import { Ring } from "../../ui/Charts";
+import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { Badge, Card, ListRow, Page, Toggle } from "../../ui/Primitives";
+import { FactLine } from "../../ui/World";
 import { useStore } from "../../store/StoreProvider";
 import { fmtDate } from "../../lib/format";
 
@@ -22,12 +22,14 @@ export default function SecurityPage() {
   const consents = Object.values(state.consents);
   return (
     <Page kicker="الثقة والامتثال" title="الأمان والامتثال" desc="حماية بيانات القُصّر والامتثال لنظام حماية البيانات الشخصية (PDPL) شرط أساسي للثقة والتوسّع المؤسسي." icon={ShieldCheck}>
-      <div className="grid grid-4">
-        <Card><div className="row"><Ring value={Math.round((done / CHECKS.length) * 100)} size={96} stroke={9} label="جاهزية الامتثال" sub="امتثال" /><div><strong>{done} من {CHECKS.length}</strong><p className="muted small">ضوابط مُفعَّلة</p></div></div></Card>
-        <Stat label="حسابات بتحقّق بخطوتين" value="98.6" unit="%" icon={UserCheck} tone="blue" />
-        <Stat label="آخر نسخة احتياطية" value="03:00" icon={DatabaseBackup} tone="gold" foot="اليوم — ناجحة" />
-        <Stat label="موافقات موثَّقة" value={consents.length} icon={LockKeyhole} tone="rose" foot="أولياء أمور" />
-      </div>
+      <FactLine
+        items={[
+          { label: "جاهزية الامتثال", value: `${Math.round((done / CHECKS.length) * 100)}%`, note: `${done} من ${CHECKS.length} ضوابط مُفعَّلة` },
+          { label: "حسابات بتحقّق بخطوتين", value: null, note: "لا يوفّر الخادم سجلّ المصادقة بعد" },
+          { label: "آخر نسخة احتياطية", value: null, note: "لا يتوفّر سجلّ النسخ الاحتياطي" },
+          { label: "موافقات موثَّقة", value: consents.length, note: "أولياء أمور" },
+        ]}
+      />
       <div className="grid grid-2 mt">
         <Card title="ضوابط الامتثال" kicker="قائمة التحقّق">
           {CHECKS.map(([t, ok, ref]) => <ListRow key={t} icon={CheckCircle2} tone={ok ? "success" : "warn"} title={t} end={<><Badge>{ref}</Badge><Badge tone={ok ? "success" : "warn"} dot>{ok ? "مُفعَّل" : "قيد المراجعة"}</Badge></>} />)}

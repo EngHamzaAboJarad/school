@@ -1,6 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import { Badge, Card, Empty, Page, cx } from "../../ui/Primitives";
 import { useStore } from "../../store/StoreProvider";
+import { SubjectMark } from "../../ui/World";
 import { weekPlan, userName } from "../../store/selectors";
 import { PERIODS } from "../../data/people";
 
@@ -33,7 +34,7 @@ export default function SchedulePage() {
                 return (
                   <div key={i} className={cx("period", live && "live")}>
                     <span className="num">{c.time} – {end}</span>
-                    <b>{c.subject}</b>
+                    <b><SubjectMark name={c.subject} /></b>
                     <small>{userName(state, c.teacherId)}</small>
                     {live && <Badge tone="gold" dot>الآن</Badge>}
                   </div>
@@ -58,7 +59,7 @@ export default function SchedulePage() {
                       return (
                         <td key={pi}>
                           <div className={cx("tt-cell", "readonly", !c && "empty")}>
-                            {c ? <><b>{c.subject}</b><small>{userName(state, c.teacherId)}</small></> : <b>—</b>}
+                            {c ? <><b><SubjectMark name={c.subject} /></b><small>{userName(state, c.teacherId)}</small></> : <b>—</b>}
                           </div>
                         </td>
                       );

@@ -1,0 +1,537 @@
+/* ==========================================================================
+   Role homes — one grammar, six compositions
+   ========================================================================== */
+:where(.in-app) .home-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--sp-4);
+  align-items: start;
+}
+
+:where(.in-app) .span-4 { grid-column: span 4; }
+:where(.in-app) .span-5 { grid-column: span 5; }
+:where(.in-app) .span-6 { grid-column: span 6; }
+:where(.in-app) .span-7 { grid-column: span 7; }
+:where(.in-app) .span-8 { grid-column: span 8; }
+:where(.in-app) .span-12 { grid-column: 1 / -1; }
+
+:where(.in-app) .home-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+}
+
+@media (max-width: 1180px) {
+  :where(.in-app) .home-grid > * {
+    grid-column: 1 / -1;
+  }
+}
+
+/* The sunrise panel (class .door): the one deep-navy panel in content — the way
+   into the next step. A sun rises behind its actions and the horizon runs along
+   its foot; both are decoration only (aria-hidden pseudo-elements). */
+:where(.in-app) .door {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--sp-4) var(--sp-6);
+  align-items: center;
+  padding: var(--sp-6) var(--sp-6) calc(var(--sp-6) + 4px);
+  border-radius: var(--rad-lg);
+  background: radial-gradient(120% 140% at 0% 100%, #0b5e9c 0%, transparent 55%), linear-gradient(135deg, var(--c-navy-900) 0%, var(--c-navy-950) 100%);
+  color: var(--c-text-on-dark);
+  border: 0;
+  box-shadow: var(--el-2);
+}
+
+html[dir="ltr"] :where(.in-app) .door {
+  background: radial-gradient(120% 140% at 100% 100%, #0b5e9c 0%, transparent 55%), linear-gradient(225deg, var(--c-navy-900) 0%, var(--c-navy-950) 100%);
+}
+
+:where(.in-app) .door::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  inset-inline-end: clamp(8px, 6%, 64px);
+  width: 260px;
+  height: 134px;
+  background: var(--img-sunrise) no-repeat center bottom / contain;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+:where(.in-app) .door::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--g-horizon);
+}
+
+html[dir="rtl"] :where(.in-app) .door::after {
+  transform: scaleX(-1);
+}
+
+:where(.in-app) .door-label {
+  font-size: var(--fs-xs);
+  color: var(--c-sun-400);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .door h2 {
+  font-family: var(--ff-head);
+  font-size: 1.25rem;
+  font-weight: var(--fw-semibold);
+  color: #fff;
+  margin-top: var(--sp-1);
+  line-height: var(--lh-tight);
+}
+
+:where(.in-app) .door p {
+  margin-top: var(--sp-2);
+  color: var(--c-text-on-dark-muted);
+  font-size: var(--fs-sm);
+  max-width: 62ch;
+}
+
+:where(.in-app) .door-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2) var(--sp-4);
+  margin-top: var(--sp-3);
+  font-size: var(--fs-xs);
+  color: var(--c-text-on-dark-muted);
+}
+
+:where(.in-app) .door-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+:where(.in-app) .door-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  align-items: stretch;
+}
+
+:where(.in-app) .door .btn-gold {
+  height: var(--touch);
+  padding: 0 var(--sp-6);
+  font-size: var(--fs-md);
+}
+
+@media (max-width: 720px) {
+  :where(.in-app) .door {
+    grid-template-columns: 1fr;
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  /* the sun would sit behind the stacked buttons on a phone */
+  :where(.in-app) .door::before {
+    display: none;
+  }
+}
+
+/* Today's timetable: periods in a timetable's column rhythm */
+:where(.in-app) .tt-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-md);
+  overflow: hidden;
+  background: var(--c-surface);
+}
+
+:where(.in-app) .tt-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  border-inline-start: 1px solid var(--c-divider);
+  min-width: 0;
+  position: relative;
+}
+
+:where(.in-app) .tt-slot:first-child {
+  border-inline-start: 0;
+}
+
+:where(.in-app) .tt-slot time {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.in-app) .tt-slot b {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:where(.in-app) .tt-slot small {
+  font-size: var(--fs-2xs);
+  color: var(--c-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:where(.in-app) .tt-slot.is-now {
+  background: var(--c-sun-50);
+  box-shadow: inset 0 -3px 0 var(--c-sun-500);
+}
+
+:where(.in-app) .tt-slot.is-mine b {
+  color: var(--c-text);
+}
+
+:where(.in-app) .tt-slot.is-free b {
+  color: var(--c-text-faint);
+  font-weight: var(--fw-regular);
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .tt-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  :where(.in-app) .tt-slot:nth-child(3n + 1) {
+    border-inline-start: 0;
+  }
+
+  :where(.in-app) .tt-slot:nth-child(n + 4) {
+    border-top: 1px solid var(--c-divider);
+  }
+}
+
+/* Compact list row inside home panels */
+:where(.in-app) .hl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.in-app) .hl > li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-divider);
+  min-width: 0;
+}
+
+:where(.in-app) .hl > li:first-child {
+  padding-top: 0;
+}
+
+:where(.in-app) .hl > li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+:where(.in-app) .hl-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .hl-main strong {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:where(.in-app) .hl-main span {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .hl-end {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex: none;
+}
+
+:where(.in-app) .hl-num {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+  text-align: end;
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .hl > li {
+    flex-wrap: wrap;
+  }
+
+  :where(.in-app) .hl-main {
+    flex-basis: calc(100% - 48px);
+  }
+
+  :where(.in-app) .hl-end {
+    width: 100%;
+    padding-inline-start: 44px;
+    flex-wrap: wrap;
+  }
+
+  :where(.in-app) .hl > li.no-icon .hl-end {
+    padding-inline-start: 0;
+  }
+}
+
+/* Class wall rows on homes */
+:where(.in-app) .class-wall {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .class-wall-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr) auto;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--c-divider);
+}
+
+:where(.in-app) .class-wall-row:last-child {
+  border-bottom: 0;
+}
+
+:where(.in-app) .class-wall-row .vent-row {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+
+@media (max-width: 640px) {
+  :where(.in-app) .class-wall-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  :where(.in-app) .class-wall-row > :first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Child selector (parent): the selected child is a deep-navy card */
+:where(.in-app) .child-switch {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+
+:where(.in-app) .child-switch.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .child-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-height: 64px;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--c-border);
+  border-radius: var(--rad-lg);
+  background: var(--c-surface);
+  color: var(--c-text);
+  text-align: start;
+  box-shadow: none;
+  transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+
+:where(.in-app) .child-switch.compact .child-tab {
+  min-height: 48px;
+  padding: var(--sp-2) var(--sp-3);
+}
+
+:where(.in-app) .child-tab:hover {
+  border-color: var(--c-border-strong);
+}
+
+:where(.in-app) .child-tab.active {
+  background: var(--c-navy-900);
+  border-color: var(--c-navy-950);
+  color: var(--c-text-on-dark);
+  box-shadow: none;
+}
+
+:where(.in-app) .child-tab-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .child-tab strong {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .child-tab small {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .child-tab.active small {
+  color: var(--c-text-on-dark-muted);
+}
+
+:where(.in-app) .child-tab-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+}
+
+:where(.in-app) .child-tab-state b {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .child-tab.active .child-tab-state b {
+  color: var(--c-sun-400);
+}
+
+:where(.in-app) .child-tab-state em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-style: normal;
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .child-tab-state .is-alert {
+  color: var(--c-warn);
+}
+
+:where(.in-app) .child-tab-state .is-ok {
+  color: var(--c-success);
+}
+
+:where(.in-app) .child-tab.active .is-alert {
+  color: var(--c-sun-200);
+}
+
+:where(.in-app) .child-tab.active .is-ok {
+  color: #8fe0d6;
+}
+
+:where(.in-app) .page-head + .child-switch {
+  margin-top: calc(-1 * var(--sp-2));
+}
+
+:where(.in-app) .fact-line + .home-grid,
+:where(.in-app) .fact-line + .ov-grid {
+  margin-top: var(--sp-2);
+}
+
+/* System: AI engine usage */
+:where(.in-app) .sy-usage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+:where(.in-app) .sy-usage-num {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .sy-usage-num b {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-semibold);
+}
+
+:where(.in-app) .sy-usage-num span {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+}
+
+:where(.in-app) .sy-policies {
+  list-style: none;
+  margin: var(--sp-2) 0 0;
+  padding: var(--sp-3) 0 0;
+  border-top: 1px solid var(--c-divider);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .sy-policies li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .sy-policies li.on svg {
+  color: var(--c-success);
+}
+
+:where(.in-app) .sy-policies li.off {
+  color: var(--c-warn);
+}
+
+/* Supervisor: schools needing follow-up */
+:where(.in-app) .sv-risk {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--sp-2);
+}
+
+:where(.in-app) .sv-risk-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border: 1px solid var(--c-warn-border);
+  background: var(--c-warn-bg);
+  border-radius: var(--rad-md);
+  color: var(--c-warn);
+  text-align: start;
+}
+
+:where(.in-app) .sv-risk-item:hover {
+  border-color: var(--c-warn-mark);
+}
+
+:where(.in-app) .sv-risk-item span {
+  display: flex;
+  flex-direction: column;
+}
+
+:where(.in-app) .sv-risk-item strong {
+  color: var(--c-text);
+  font-size: var(--fs-sm);
+}
+
+:where(.in-app) .sv-risk-item small {
+  font-size: var(--fs-xs);
+}
+
+:where(.in-app) .section-head .filter-bar {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
