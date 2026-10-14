@@ -10,14 +10,14 @@ export function useChild() {
   const kids = childrenOf(state, user.id);
   const [id, setId] = useState(() => {
     try {
-      return sessionStorage.getItem("taqat-child") || kids[0]?.id;
+      return sessionStorage.getItem("mushriq-child") || kids[0]?.id;
     } catch {
       return kids[0]?.id;
     }
   });
   const select = (v) => {
     setId(v);
-    try { sessionStorage.setItem("taqat-child", v); } catch { /* ignore */ }
+    try { sessionStorage.setItem("mushriq-child", v); } catch { /* ignore */ }
   };
   const child = kids.find((k) => k.id === id) || kids[0];
   return { kids, child, select };

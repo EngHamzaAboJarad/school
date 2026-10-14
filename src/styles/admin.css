@@ -100,7 +100,7 @@
 
 /* Attendance chart */
 :where(.in-app) .bar-brand-soft {
-  background: #9aa4bc;
+  background: #7fa3c3;
 }
 
 :where(.in-app) .ov-chart-note {
@@ -262,7 +262,7 @@
   }
 }
 
-/* Najdi world: fact line sits in the header block; subject paints and mastery vents in the classes table */
+/* Fact line sits in the header block; subject colours and mastery rays in the classes table */
 :where(.in-app) .page-head + .fact-line {
   margin-top: calc(-1 * var(--sp-2));
   margin-bottom: var(--sp-6);

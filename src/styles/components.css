@@ -152,19 +152,21 @@
 }
 
 :where(.in-app) .btn-primary:hover:not(:disabled) {
-  background: var(--c-brand-950);
-  border-color: var(--c-brand-950);
+  background: var(--c-brand-900);
+  border-color: var(--c-brand-900);
 }
 
+/* the sun: the brand's warm call to action — navy text on gold (9:1) */
 :where(.in-app) .btn-gold {
-  background: var(--c-accent-300);
-  border-color: #c9a564;
-  color: var(--c-brand-950);
+  background: var(--g-sun);
+  border-color: var(--c-sun-500);
+  color: var(--c-navy-950);
   filter: none;
 }
 
 :where(.in-app) .btn-gold:hover:not(:disabled) {
-  background: #d5b373;
+  background: var(--c-sun-400);
+  border-color: var(--c-sun-600);
   filter: none;
 }
 
@@ -197,7 +199,7 @@
 }
 
 :where(.in-app) .btn-danger:hover:not(:disabled) {
-  background: #f6dad5;
+  background: #fbd9d5;
 }
 
 :where(.in-app) .btn-danger-solid {
@@ -207,7 +209,7 @@
 }
 
 :where(.in-app) .btn-danger-solid:hover:not(:disabled) {
-  background: #872a20;
+  background: #8f1d14;
 }
 
 :where(.in-app) .btn-link {
@@ -609,7 +611,7 @@
 :where(.in-app) .tab.active {
   color: var(--c-text);
   font-weight: var(--fw-semibold);
-  border-bottom-color: var(--c-clay-500);
+  border-bottom-color: var(--c-sun-500);
 }
 
 :where(.in-app) .tab-count {
@@ -700,7 +702,7 @@
   display: grid;
   place-items: center;
   padding: var(--sp-4);
-  background: rgba(14, 27, 51, 0.5);
+  background: rgba(0, 58, 102, 0.5);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   overflow-y: auto;
@@ -915,7 +917,7 @@
   width: 100%;
   height: var(--control-h);
   padding: 0 var(--sp-3);
-  border: 1px solid #b9b6aa;
+  border: 1px solid #b9c8d5;
   border-radius: var(--rad-md);
   background: var(--c-surface);
   color: var(--c-text);
@@ -934,7 +936,7 @@
 :where(.in-app) .input:focus {
   outline: none;
   border-color: var(--c-brand-800);
-  box-shadow: 0 0 0 3px rgba(56, 70, 94, 0.18);
+  box-shadow: 0 0 0 3px rgba(15, 43, 70, 0.18);
 }
 
 :where(.in-app) .input[aria-invalid="true"] {
@@ -989,7 +991,7 @@ html[dir="ltr"] :where(.in-app) .select {
 }
 
 :where(.in-app) .toggle i {
-  background: #c7c4b9;
+  background: #c3d1dd;
 }
 
 :where(.in-app) .toggle input:checked+i {
@@ -1026,7 +1028,7 @@ html[dir="ltr"] :where(.in-app) .select {
 }
 
 :where(.in-app) .fill-good {
-  background: #5cc29c;
+  background: #40d1cd;
 }
 
 :where(.in-app) .fill-gold,
@@ -1469,7 +1471,7 @@ html[dir="ltr"] :where(.in-app) .select {
 }
 
 :where(.in-app) .bar-good {
-  background: #5cc29c;
+  background: #40d1cd;
 }
 
 :where(.in-app) .bar-mid,
@@ -1554,19 +1556,19 @@ body.in-app .toast::after {
 }
 
 body.in-app .toast svg {
-  color: #7fd3b2;
+  color: #8fe0d6;
 }
 
 body.in-app .toast-warn svg {
-  color: #f0c36a;
+  color: #fec443;
 }
 
 body.in-app .toast-info svg {
-  color: #9cc0e8;
+  color: #8fb6d6;
 }
 
 body.in-app .toast-danger svg {
-  color: #f2a297;
+  color: #f2a49b;
 }
 
 /* ───────── Responsive ───────── */

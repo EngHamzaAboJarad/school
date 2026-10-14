@@ -41,7 +41,7 @@ export default function SchoolHome({ go }) {
     const latestRate = latest ? dayRate(latest) : null;
     const deltaRate = latest && prev ? Math.round((dayRate(latest) - dayRate(prev)) * 10) / 10 : null;
 
-    // جدار الحضور: كوّة لكل يوم في كل فصل
+    // جدار الحضور: شعاع لكل يوم في كل فصل
     const wall = state.classes.map((c) => {
       const items = last10.map((k) => {
         const marks = c.studentIds.map((sid) => state.attendance[k]?.[sid]).filter(Boolean);
@@ -220,7 +220,7 @@ export default function SchoolHome({ go }) {
           <SectionHeader
             id="ov-att-h"
             title="جدار الحضور"
-            desc={d.last10.length ? `كل كوّة يوم دراسي • آخر ${d.last10.length} أيام مسجّلة` : undefined}
+            desc={d.last10.length ? `كل شعاع يوم دراسي • آخر ${d.last10.length} أيام مسجّلة` : undefined}
             action={<Btn size="sm" variant="ghost" onClick={() => go("attendance")}>التفاصيل</Btn>}
           />
           {d.last10.length === 0 ? (
@@ -256,7 +256,7 @@ export default function SchoolHome({ go }) {
             <SectionHeader
               id="ov-cls-h"
               title="الفصول"
-              desc={`كل كوّة طالب: ممتلئة متقِن (${GAP_THRESHOLD}% فأكثر) • حمراء دون ذلك • منقّطة لم يُقيَّم`}
+              desc={`كل شعاع طالب: ممتلئ متقِن (${GAP_THRESHOLD}% فأكثر) • أحمر دون ذلك • منقّط لم يُقيَّم`}
               action={<Btn size="sm" variant="ghost" onClick={() => go("structure")}>إدارة الفصول</Btn>}
             />
           </div>

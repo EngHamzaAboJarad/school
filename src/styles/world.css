@@ -1,9 +1,10 @@
 /* ==========================================================================
-   World elements — Najdi clay and painted door
-   Vents (the one data glyph), approval seal, subject paints, fact line.
+   World elements — مشرق (sunrise)
+   Rays (the one data glyph, from the logo's sun rays), approval seal,
+   subject colours, fact line.
    ========================================================================== */
 
-/* ───────── Vents ───────── */
+/* ───────── Rays (component names stay Vent*) ───────── */
 .vent {
   display: block;
   flex: none;
@@ -11,15 +12,14 @@
 }
 
 .vent .vent-shape {
-  fill: var(--vent-tone, var(--c-vent-on));
-  stroke: var(--vent-tone, var(--c-vent-on));
-  stroke-width: 1.25;
-  stroke-linejoin: round;
+  fill: var(--vent-tone, var(--c-ray-on));
+  stroke: var(--vent-tone, var(--c-ray-on));
+  stroke-width: 1.5;
 }
 
 .vent-off .vent-shape {
   fill: none;
-  stroke: var(--c-vent-off);
+  stroke: var(--c-ray-off);
 }
 
 .vent-partial .vent-shape {
@@ -27,7 +27,7 @@
 }
 
 .vent-partial .vent-half {
-  fill: var(--vent-tone, var(--c-vent-on));
+  fill: var(--vent-tone, var(--c-ray-on));
 }
 
 .vent-alert .vent-shape {
@@ -37,18 +37,18 @@
 
 .vent-empty .vent-shape {
   fill: none;
-  stroke: var(--c-vent-off);
+  stroke: var(--c-ray-off);
   stroke-dasharray: 2 2;
 }
 
 .vent-row {
   display: inline-flex;
-  align-items: flex-end;
-  gap: 3px;
+  align-items: center;
+  gap: 4px;
   flex-wrap: nowrap;
 }
 
-/* Wall of vents: label · vents · value */
+/* Wall of rays: label · rays · value */
 .vent-wall {
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@
 
 .vent-wall-cols {
   display: inline-flex;
-  gap: 3px;
+  gap: 4px;
 }
 
 .vent-wall-cols i {
@@ -158,27 +158,29 @@
 }
 
 /* ───────── Approval seal vs AI suggestion ───────── */
+/* teacher-approved: a solid teal seal (growth, trust) */
 .seal {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   height: 24px;
-  padding: 0 8px 0 9px;
-  border-radius: var(--rad-xs);
-  border: 1.5px solid var(--c-clay-600);
-  box-shadow: inset 0 0 0 2px var(--c-surface), inset 0 0 0 3px var(--c-clay-300);
-  background: var(--c-clay-50);
-  color: var(--c-clay-700);
+  padding: 0 10px 0 9px;
+  border-radius: var(--rad-full);
+  border: 1.5px solid var(--c-teal-600);
+  box-shadow: inset 0 0 0 2px var(--c-surface), inset 0 0 0 3px var(--c-teal-200);
+  background: var(--c-teal-50);
+  color: var(--c-teal-700);
   font-size: var(--fs-2xs);
   font-weight: var(--fw-bold);
   white-space: nowrap;
 }
 
+/* AI suggestion (النجمة), awaiting a teacher: a dashed warm outline — not yet "risen" */
 .seal-ai {
-  border: 1.5px dashed var(--c-info-mark);
+  border: 1.5px dashed var(--c-sun-600);
   box-shadow: none;
-  background: transparent;
-  color: var(--c-info);
+  background: var(--c-sun-50);
+  color: var(--c-sun-800);
   font-weight: var(--fw-semibold);
 }
 
@@ -187,7 +189,7 @@
   padding: 0 6px;
 }
 
-/* ───────── Subject paints ───────── */
+/* ───────── Subject colours ───────── */
 .subj-swatch {
   display: inline-block;
   flex: none;
@@ -254,7 +256,7 @@ button.fact {
 
 button.fact:hover dd .num {
   text-decoration: underline;
-  text-decoration-color: var(--c-clay-300);
+  text-decoration-color: var(--c-teal-300);
   text-underline-offset: 4px;
 }
 

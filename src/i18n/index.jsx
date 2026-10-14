@@ -10,7 +10,7 @@ import enRedesign from "./en.redesign.json";
 // لأنه منهج عربي. منطق التطبيق لا يتأثر لأن الترجمة تقع على النص المعروض فقط.
 // ──────────────────────────────────────────────────────────────────────────
 
-export const LANG_KEY = "taqat-lang";
+export const LANG_KEY = "mushriq-lang";
 const AR = /[؀-ۿ]/;
 
 const readLang = () => {

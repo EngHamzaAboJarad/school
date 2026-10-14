@@ -1,6 +1,49 @@
-# Taqat School — UI/UX Redesign Log
+# Mushriq (مشرق) — UI/UX Redesign Log
 
 Branch: `redesign` · Read this file at the start of every session.
+The product was called **Taqat School (طاقات سكول)** until October 2026; older sections below use that name.
+
+---
+
+## Rebrand to Mushriq (مشرق) — October 2026 (latest; supersedes the Najdi world)
+
+The owner supplied a new identity (`docs/brand/mushriq-brand-card.png`): name **مشرق / Mushriq**, a sun rising over a horizon, personality «إلهام، حيوية، تفاؤل». Every surface (landing, auth, all six roles) moved to it.
+
+**Brand**
+- `src/ui/Brand.jsx`: `LogoMark` is a vector rebuild of the card's mark (half sun, 7 dawn rays orange → gold → teal, navy → teal horizon); below 28 px it switches to a 4-ray version. `Wordmark`: «مشرق» over «Mushriq» (reversed in English), Rubik 700, navy `#004F87`; `light` = white text on navy.
+- Favicon `public/favicon.svg` (copy in `docs/brand/`); `index.html` title, description, Open Graph, `theme-color #004f87`, fonts (Rubik + IBM Plex Sans Arabic; Amiri and Noto Kufi dropped).
+- Name replaced in UI copy and the English dictionaries; Arabic verbs re-agreed (مشرق is masculine: «مشرق يحوّل… ويُدار…», «هل يحلّ مشرق…»).
+- Demo accounts are now `*@mushriq.test` (password `password`, OTP `123456`).
+- Storage keys `taqat-*` → `mushriq-*`; `src/lib/migrateStorage.js` (first import in `main.jsx`) moves existing values once, so language, preferences, sidebar state and demo data survive. Verified in Chrome.
+
+**Visual system** (`tokens.css`, `theme.css`)
+- Palette sampled from the card: navy `#004F87` (scale 950–50), sun `#FEC443/#FDB430`, dawn `#FF982A`, teal `#0AC5BA` (scale 800–50), sky `#0A9CC4`; morning ground `#F3F7FA`, white panels; navy-tinted ink. All text pairs ≥ 4.5:1 (checked); sun/teal/sky marks are never text on white.
+- Gradients `--g-sunrise`, `--g-horizon`, `--g-sun` and `--img-sunrise` (rising-sun decoration) for brand moments only.
+- Radii 10 px controls / 16 px panels; soft navy-tinted shadows. Headings Rubik, UI IBM Plex Sans Arabic.
+- Old world tokens renamed: `--c-door-*` → `--c-navy-*`, `--c-ochre-*` → `--c-sun-*`, `--c-clay-*` → `--c-teal-*`, `--c-vent-*` → `--c-ray-*` (legacy names `--nv-*`, `--gold-*`, `--ok-*` still re-pointed, now to navy/sun/teal). Hard-coded legacy colours in landing/auth/ui/pages/roles/motion mapped to brand values.
+
+**World elements**
+- Shell: white sidebar with the colour logo; school card with a horizon line; active item = navy pill + sun-gradient edge; sun counts; mobile bottom-nav active mark = sun.
+- Data glyph: triangular vents → **rays** (rounded capsules from the logo's rays), same states and same component API (`Vent`, `VentRow`, `VentWall`; `rayWidth()` aligns day labels). UI copy «كوّة» → «شعاع» with gender agreement, English "vent" → "ray".
+- Next-step panel (`.door`) → sunrise panel: deep navy, faint rising sun behind the actions (hidden ≤ 720 px), horizon line at the foot. Same treatment on the login brand panel.
+- Seals: teacher-approved = solid teal pill; AI suggestion (النجمة) = dashed warm outline. "Now" timetable slot, active tab underline and unsaved roster rows use the sun.
+- Buttons: primary navy; `btn-gold` = sun gradient with navy text.
+
+**Checks**
+| Check | Result |
+|---|---|
+| `vite build` (to a scratch dir; `dist/` untouched as before) | ✅ pass; CSS 177 kB, JS 948 kB (pre-existing chunk-size warning) |
+| All 48 nav routes × 6 roles at 1440 and 375 (RTL) | ✅ 0 console errors, 0 page errors, 0 horizontal overflow |
+| English (LTR): admin home, landing, login | ✅ translated, layout mirrored |
+| Storage migration from `taqat-*` keys | ✅ lang/sidebar/prefs/state/child moved |
+
+Screenshots: `docs/redesign/after/mushriq/` (landing, login, every role home at 1440, admin EN, phones at 375).
+
+**Not done / open**
+- The logo is rebuilt from a raster card; replace `LogoMark` with the designer's master SVG when available (the Arabic wordmark is set in Rubik, not the logo's custom lettering).
+- `dist/` not rebuilt (deploy step left to the owner, as in earlier rounds).
+- Fonts still come from Google Fonts; no screen-reader or Safari pass.
+- Older screenshots in `docs/redesign/before|after/checkpoint` show the previous identities.
 
 | Session | Scope | Status |
 |---|---|---|

@@ -152,7 +152,7 @@ export default function TeacherHome({ go }) {
           <SectionHeader
             id="t-wall"
             title="إتقان فصولي"
-            desc={`كوّة لكل طالب: ممتلئة متقِن • حمراء دون ${GAP_THRESHOLD}% • منقّطة لم يُقيَّم`}
+            desc={`شعاع لكل طالب: ممتلئ متقِن • أحمر دون ${GAP_THRESHOLD}% • منقّط لم يُقيَّم`}
             action={<Btn size="sm" variant="ghost" onClick={() => go("classes")}>فصولي وطلابي</Btn>}
           />
           {stats.length === 0 ? (

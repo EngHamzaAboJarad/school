@@ -95,7 +95,7 @@ export default function ContactSection({ onJoin }) {
               <Check size={28} />
             </span>
             <h3>وصلنا طلبك</h3>
-            <p>شكرًا لتواصلك. سيردّ عليك فريق طاقات عبر البريد أو الجوال الذي أدخلته.</p>
+            <p>شكرًا لتواصلك. سيردّ عليك فريق مشرق عبر البريد أو الجوال الذي أدخلته.</p>
             <Btn variant="ghost" onClick={() => setSent(false)}>
               إرسال طلب آخر
             </Btn>

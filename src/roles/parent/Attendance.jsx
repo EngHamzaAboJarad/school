@@ -9,7 +9,7 @@ import { WEEKDAYS } from "../../data/people";
 import { fmtDate } from "../../lib/format";
 import { ChildSwitcher, useChild } from "./shared";
 
-// الحضور والغياب (F7.3): يرى وليّ الأمر سجلّ ابنه أسبوعًا بأسبوع (كوّة لكل يوم)، ويُنبَّه فورًا عند الغياب، ويرسل تبريرًا للإدارة.
+// الحضور والغياب (F7.3): يرى وليّ الأمر سجلّ ابنه أسبوعًا بأسبوع (شعاع لكل يوم)، ويُنبَّه فورًا عند الغياب، ويرسل تبريرًا للإدارة.
 export default function ParentAttendance() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();

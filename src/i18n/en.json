@@ -1686,7 +1686,7 @@
   "القائمة الرئيسية": "Main menu",
   "إغلاق القائمة": "Close menu",
   "الصف {}": "Grade {}",
-  "منصّة طاقات": "Taqat platform",
+  "منصّة مشرق": "Mushriq platform",
   "متصل • آخر مزامنة الآن": "Connected • last sync just now",
   "الإعدادات": "Settings",
   "فتح القائمة": "Open menu",
@@ -1705,7 +1705,7 @@
   "لا نتائج مطابقة لـ «": "No results matching «",
   "هذا الجهاز — Chrome على Windows": "This device — Chrome on Windows",
   "الرياض": "Riyadh",
-  "iPhone 15 — تطبيق طاقات": "iPhone 15 — Taqat app",
+  "iPhone 15 — تطبيق مشرق": "iPhone 15 — Mushriq app",
   "الحساب والأمان": "Account & security",
   "الإتاحة وسهولة القراءة": "Accessibility & readability",
   "حجم الخط": "Font size",
@@ -1828,8 +1828,8 @@
   "إنشاء مفتاح API": "API key creation",
   "إلغاء مفتاح API": "API key revocation",
   "تجديد ترخيص": "License renewal",
-  "شعار طاقات": "Taqat logo",
-  "طاقات": "Taqat",
+  "شعار مشرق": "Mushriq logo",
+  "مشرق": "Mushriq",
   "النسبة": "The percentage",
   "رسم أعمدة": "Bar chart",
   "مخطّط التقدّم عبر الزمن": "Progress-over-time chart",
@@ -1872,14 +1872,13 @@
   "عرض تجريبي": "Demo view",
   "الأهداف": "Objectives",
   "مسجّل": "Recorded",
-  "طاقات سكول": "Taqat School",
   "الوحدة {}": "Unit {}",
   "الدرجة {}/{}": "Grade {}/{}",
   "سحب {} من {}": "Revoke {} from {}",
   "منح {} إلى {}": "Grant {} to {}",
   "{} دقيقة": "{} min",
   "{} يومًا": "{} days",
-  "طاقات سكول | Taqat School": "Taqat School",
+  "مشرق | Mushriq": "Mushriq",
 
   "كيف تعمل": "How it works",
   "الأدوار": "Roles",
@@ -1888,7 +1887,7 @@
   "الأسعار": "Pricing",
 
   "منصّة تعليمية عربية مبنيّة على الذكاء الاصطناعي — للسوق السعودي والخليجي": "An Arabic AI-powered learning platform — for the Saudi and Gulf market",
-  "طاقات سكول تحوّل كل درس إلى رحلة تعلّم كاملة: شرح تفاعلي، تلخيص ذكي، اختبار فوري بعد الدرس، وامتحان لكل وحدة — ثم تشخيص دقيق للفجوات وخطة تفوّق شخصية، وتُدار بالبيانات عبر ستة أدوار من الطالب حتى الإشراف التربوي والوزارة.": "Taqat School turns every lesson into a complete learning journey: interactive explanation, smart summary, an instant quiz after the lesson, and an exam for every unit — then a precise gap diagnosis and a personal success plan, all run on data across six roles from the student to educational supervision and the ministry.",
+  "مشرق يحوّل كل درس إلى رحلة تعلّم كاملة: شرح تفاعلي، تلخيص ذكي، اختبار فوري بعد الدرس، وامتحان لكل وحدة — ثم تشخيص دقيق للفجوات وخطة تفوّق شخصية، ويُدار بالبيانات عبر ستة أدوار من الطالب حتى الإشراف التربوي والوزارة.": "Mushriq turns every lesson into a complete learning journey: interactive explanation, smart summary, an instant quiz after the lesson, and an exam for every unit — then a precise gap diagnosis and a personal success plan, all run on data across six roles from the student to educational supervision and the ministry.",
   "جرّب الحسابات التجريبية": "Try the demo accounts",
   "شاهد كيف تعمل المنصّة": "See how the platform works",
   "٦ أدوار متكاملة بلوحات مستقلة": "6 integrated roles with independent dashboards",
@@ -1906,7 +1905,7 @@
 
   "رحلة الدرس": "The Lesson Journey",
   "من الشرح إلى الإتقان في أربع خطوات": "From explanation to mastery in four steps",
-  "التدفّق التعليمي الذي يميّز طاقات سكول عن أي سوق حصص خصوصية.": "The learning flow that sets Taqat School apart from any private-tutoring marketplace.",
+  "التدفّق التعليمي الذي يميّز مشرق عن أي سوق حصص خصوصية.": "The learning flow that sets Mushriq apart from any private-tutoring marketplace.",
   "شرح تفاعلي بالذكاء الاصطناعي": "AI-powered interactive explanation",
   "شرح مبسّط لمحتوى الدرس بثلاثة مستويات، مع أمثلة إضافية عند الطلب.": "A simplified explanation of the lesson content at three levels, with extra examples on request.",
   "تلخيص ذكي": "Smart summary",
@@ -1968,7 +1967,7 @@
   "واجهات API وتصدير CSV/PDF": "API interfaces and CSV/PDF export",
   "بوّابات دفع محلية (مدى / Apple Pay / STC Pay)": "Local payment gateways (mada / Apple Pay / STC Pay)",
 
-  "لماذا طاقات سكول": "Why Taqat School",
+  "لماذا مشرق": "Why Mushriq",
   "مدرسة رقمية ذكية، لا سوق حصص": "A smart digital school, not a tutoring marketplace",
   "مقارنة مباشرة مع نموذج «الحصة الخصوصية» السائد في السوق.": "A direct comparison with the “private lesson” model dominant in the market.",
   "القدرة / الميزة": "Capability / Feature",
@@ -2035,10 +2034,10 @@
 
   "جرّبها الآن": "Try It Now",
   "ستّة حسابات تجريبية جاهزة": "Six ready-made demo accounts",
-  "كلمة المرور password ورمز التحقق 123456 — بنطاق taqat.test": "Password: password, and verification code: 123456 — under the taqat.test domain",
+  "كلمة المرور password ورمز التحقق 123456 — بنطاق mushriq.test": "Password: password, and verification code: 123456 — under the mushriq.test domain",
   "تسجيل الدخول بحساب تجريبي": "Sign in with a demo account",
 
   "مدرستك الذكية التي تشرح، وتلخّص، وتختبر بعد كل درس": "Your smart school that explains, summarizes, and tests after every lesson",
 
-  "طاقات سكول — منصّة تعليمية ذكية عربية. الإصدار 1.0 • أغسطس 2026. إعداد فريق طاقات.": "Taqat School — a smart Arabic learning platform. Version 1.0 • August 2026. Prepared by the Taqat team."
+  "مشرق — منصّة تعليمية ذكية عربية. الإصدار 1.0 • أغسطس 2026. إعداد فريق مشرق.": "Mushriq — a smart Arabic learning platform. Version 1.0 • August 2026. Prepared by the Mushriq team."
 }

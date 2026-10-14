@@ -1,77 +1,89 @@
 ﻿/* ==========================================================================
-   طاقات سكول — الهوية البصرية: أزرق ردفي هادئ ونحاسي دافئ (الأخضر محجوز للنجاح فقط)
+   مشرق Mushriq — brand palette for the public surfaces (landing, auth) and the
+   base layer. Navy wordmark, golden sun, dawn rays, navy→teal horizon.
+   The legacy scale names (--nv-*, --gold-*, --ok-*) are kept so existing rules
+   keep working: nv = brand navy, gold = the sun, ok = growth teal.
+   Inside the app tokens.css re-points the same names (body.in-app).
    ========================================================================== */
 :root {
-  /* Brand - quiet slate blue (calm, unhurried, evokes focus and trust) */
-  --nv-950: #0e1b33;
-  --nv-900: #17273f;
-  --nv-800: #22364f;
-  --nv-700: #38465e;
-  --nv-600: #4a586e;
-  --nv-500: #63728a;
-  --nv-400: #8996a9;
-  --nv-300: #b0bac7;
-  --nv-200: #d3d9e0;
-  --nv-100: #ebeef2;
-  --nv-50: #f7f8fa;
-  /* Accent - warm ochre inspired by the reference palette (dark chocolate to pale tan) */
-  --gold-700: #5f4712;
-  --gold-600: #7c5b1a;
-  --gold-500: #a9822f;
-  --gold-400: #c29c47;
-  --gold-300: #ddbe84;
-  --gold-200: #ead8b3;
-  --gold-100: #f4ead2;
-  --gold-50: #faf5e8;
-  /* Success / mastery green (kept separate from the brand colour) */
-  --ok-700: #17694e;
-  --ok-600: #1f8a64;
-  --ok-500: #2aa57a;
-  --ok-400: #5cc29c;
-  --ok-300: #a5dcc3;
-  --ok-200: #c9ebdb;
-  --ok-100: #e4f4ec;
-  --ok-50: #f1faf6;
-  /* Neutrals (paper & ink) */
-  --ivory: #faf9f6;
+  /* Brand navy (the wordmark) */
+  --nv-950: #062a4a;
+  --nv-900: #0f2b46;
+  --nv-800: #004f87;
+  --nv-700: #0b5e9c;
+  --nv-600: #1a6faf;
+  --nv-500: #4f7ea6;
+  --nv-400: #7fa3c3;
+  --nv-300: #8fb6d6;
+  --nv-200: #c4daea;
+  --nv-100: #e3eef7;
+  --nv-50: #f0f6fb;
+  /* The sun — warm highlights and the brand call to action (navy text on it) */
+  --gold-700: #8a5300;
+  --gold-600: #a86600;
+  --gold-500: #e8901c;
+  --gold-400: #fdb430;
+  --gold-300: #fec443;
+  --gold-200: #ffe3a1;
+  --gold-100: #fff1cc;
+  --gold-50: #fff8e6;
+  /* Growth teal — success and mastery */
+  --ok-700: #0a6e62;
+  --ok-600: #08897d;
+  --ok-500: #0aa596;
+  --ok-400: #40d1cd;
+  --ok-300: #8fe0d6;
+  --ok-200: #b2e8db;
+  --ok-100: #e0f5f1;
+  --ok-50: #effaf8;
+  /* Morning paper and navy ink */
+  --ivory: #f7fafc;
   --paper: #ffffff;
-  --sand-100: #f1efe9;
-  --sand-200: #e5e2d8;
-  --line: #e4e1d6;
-  --line-soft: #eeece4;
-  --ink: #0e1b33;
-  --ink-2: #38465e;
-  --muted: #64738a;
-  --faint: #97a2b3;
-  /* Semantic */
-  --success: #1f8a64;
-  --success-bg: #e3f4ec;
-  --warn: #b27a14;
-  --warn-bg: #fbf0d6;
-  --danger: #b4483b;
-  --danger-bg: #f9e5e1;
-  --info: #3f6fa3;
-  --info-bg: #e4edf7;
+  --sand-100: #edf3f8;
+  --sand-200: #dde6ee;
+  --line: #dde6ee;
+  --line-soft: #e8eef3;
+  --ink: #0f2b46;
+  --ink-2: #334b63;
+  --muted: #56687c;
+  --faint: #5f7185;
+  /* Semantic (fg ≥ 5.4:1 on its bg) */
+  --success: #0a6e62;
+  --success-bg: #e0f5f1;
+  --warn: #8a5300;
+  --warn-bg: #fff2d4;
+  --danger: #b42318;
+  --danger-bg: #fdecea;
+  --info: #0b5e9c;
+  --info-bg: #e6f1fa;
   /* Subject tones */
-  --sub-math: #3d5e9e;
-  --sub-sci: #1c8068;
-  --sub-arb: #8e3b4d;
-  --sub-eng: #b57a1e;
-  /* Shape & depth */
+  --sub-math: #1f5fa8;
+  --sub-sci: #0a7d72;
+  --sub-arb: #c0392b;
+  --sub-eng: #e08a1e;
+  /* Brand gradients — brand moments only, never behind body text */
+  --g-sunrise: linear-gradient(90deg, #ff982a 0%, #fec443 38%, #9ccb5e 62%, #1ec2a8 82%, #0ac5ba 100%);
+  --g-horizon: linear-gradient(90deg, #004f87 0%, #0a9cc4 52%, #40d1cd 100%);
+  --g-sun: linear-gradient(180deg, #ffcb4f 0%, #fdb430 100%);
+  /* Shape & depth — round and soft like the brand card */
   --r-sm: 10px;
   --r-md: 14px;
   --r-lg: 20px;
   --r-xl: 28px;
-  --shadow-sm: 0 1px 2px rgba(14, 27, 51, 0.05), 0 1px 1px rgba(14, 27, 51, 0.03);
-  --shadow-md: 0 10px 28px -12px rgba(14, 27, 51, 0.16);
-  --shadow-lg: 0 30px 70px -24px rgba(10, 24, 48, 0.42);
-  --ring: 0 0 0 3px rgba(169, 130, 47, 0.35);
-  /* Type */
+  --shadow-sm: 0 1px 2px rgba(15, 43, 70, 0.05), 0 1px 1px rgba(15, 43, 70, 0.03);
+  --shadow-md: 0 14px 34px -14px rgba(0, 79, 135, 0.24);
+  --shadow-lg: 0 30px 70px -24px rgba(0, 58, 102, 0.38);
+  --ring: 0 0 0 3px rgba(26, 111, 175, 0.4);
+  /* Type — Rubik for display (rounded, close to the wordmark), Plex Arabic for reading */
   --font-ui: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
-  --font-display: "Amiri", "IBM Plex Sans Arabic", "Times New Roman", serif;
-  /* Signature ornament: eight-pointed star lattice */
-  --pattern-gold: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23ddbe84' stroke-opacity='.2' stroke-width='1'%3E%3Crect x='21' y='21' width='42' height='42'/%3E%3Crect x='21' y='21' width='42' height='42' transform='rotate(45 42 42)'/%3E%3Ccircle cx='42' cy='42' r='6'/%3E%3C/g%3E%3C/svg%3E");
-  --pattern-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84' viewBox='0 0 84 84'%3E%3Cg fill='none' stroke='%23a9822f' stroke-opacity='.13' stroke-width='1'%3E%3Crect x='21' y='21' width='42' height='42'/%3E%3Crect x='21' y='21' width='42' height='42' transform='rotate(45 42 42)'/%3E%3C/g%3E%3C/svg%3E");
+  --font-display: "Rubik", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  /* The rising sun (half disc + dawn rays) — decoration behind brand panels */
+  --img-sunrise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 124'%3E%3Cg stroke-width='13' stroke-linecap='round' fill='none'%3E%3Cline x1='62.9' y1='109.9' x2='29.4' y2='104.0' stroke='%23ff982a'/%3E%3Cline x1='72.5' y1='86.7' x2='34.8' y2='60.3' stroke='%23ff982a'/%3E%3Cline x1='91.0' y1='69.8' x2='66.0' y2='26.5' stroke='%23fec443'/%3E%3Cline x1='114.9' y1='62.2' x2='110.4' y2='10.4' stroke='%23fec443'/%3E%3Cline x1='139.8' y1='65.5' x2='156.9' y2='18.5' stroke='%239ccb5e'/%3E%3Cline x1='161.0' y1='79.0' x2='193.5' y2='46.5' stroke='%231ec2a8'/%3E%3Cline x1='174.5' y1='100.2' x2='206.5' y2='88.5' stroke='%230ac5ba'/%3E%3C/g%3E%3Cpath d='M74 124A46 46 0 0 1 166 124Z' fill='%23fec443'/%3E%3C/svg%3E");
+  /* Brand corners — the sun arc (top) and the teal arcs (bottom) from the brand card.
+     --pattern-soft is for light grounds, --pattern-gold for navy ones. */
+  /* on navy: sky and teal arcs (a warm arc over navy turns muddy) */
+  --pattern-gold: radial-gradient(circle at 0 0, rgba(10, 156, 196, 0.28) 0 220px, transparent 221px), radial-gradient(circle at 100% 100%, rgba(64, 209, 205, 0.16) 0 260px, rgba(64, 209, 205, 0.08) 261px 340px, transparent 341px);
+  --pattern-soft: radial-gradient(circle at 0 0, rgba(254, 196, 67, 0.28) 0 260px, transparent 261px), radial-gradient(circle at 100% 100%, rgba(64, 209, 205, 0.22) 0 300px, rgba(178, 232, 219, 0.3) 301px 400px, transparent 401px);
 }
 
 *,

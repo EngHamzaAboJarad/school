@@ -13,28 +13,36 @@
   display: flex;
   background:
     radial-gradient(90% 70% at 90% 0%, var(--nv-600) 0%, transparent 60%),
-    radial-gradient(70% 60% at 0% 100%, rgba(221, 190, 132, 0.18) 0%, transparent 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(254, 196, 67, 0.16) 0%, transparent 60%),
     linear-gradient(160deg, var(--nv-800), var(--nv-950));
 }
 
+/* the sun rising from the foot of the brand panel (decoration only) */
 .auth-art::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: var(--pattern-gold);
-  background-size: 150px 150px;
-  opacity: 0.6;
-  mask-image: radial-gradient(85% 70% at 100% 0%, #000 0%, transparent 68%);
-  -webkit-mask-image: radial-gradient(85% 70% at 100% 0%, #000 0%, transparent 68%);
+  inset-inline-start: 50%;
+  bottom: 4px;
+  width: min(560px, 80%);
+  height: 290px;
+  transform: translateX(-50%);
+  background: var(--img-sunrise) no-repeat center bottom / contain;
+  opacity: 0.16;
+  pointer-events: none;
 }
 
+html[dir="rtl"] .auth-art::before {
+  transform: translateX(50%);
+}
+
+/* the horizon along the foot of the panel */
 .auth-art::after {
   content: "";
   position: absolute;
-  inset-block: 0;
-  inset-inline-end: 0;
-  width: 1px;
-  background: linear-gradient(180deg, transparent, var(--gold-400), transparent);
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--g-horizon);
 }
 
 .auth-art-inner {
@@ -62,8 +70,8 @@
   align-items: center;
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(221, 190, 132, 0.5);
-  background: rgba(221, 190, 132, 0.1);
+  border: 1px solid rgba(254, 196, 67, 0.5);
+  background: rgba(254, 196, 67, 0.1);
   color: var(--gold-200);
   font-size: 0.8125rem;
   font-weight: 500;
@@ -81,7 +89,7 @@
 }
 
 .auth-copy>p {
-  color: rgba(251, 248, 241, 0.78);
+  color: rgba(247, 250, 252, 0.78);
   font-size: 1.0625rem;
   max-width: 46ch;
 }
@@ -118,7 +126,7 @@
 }
 
 .auth-points span {
-  color: rgba(251, 248, 241, 0.68);
+  color: rgba(247, 250, 252, 0.68);
   font-size: 0.875rem;
 }
 
@@ -374,13 +382,13 @@
 .status-success {
   background: linear-gradient(160deg, var(--nv-600), var(--nv-800));
   color: var(--gold-200);
-  box-shadow: 0 16px 36px -14px rgba(8, 47, 40, 0.7);
+  box-shadow: 0 16px 36px -14px rgba(7, 90, 81, 0.7);
 }
 
 .status-pending {
   background: linear-gradient(160deg, var(--gold-300), var(--gold-500));
   color: var(--nv-950);
-  box-shadow: 0 16px 36px -14px rgba(169, 130, 47, 0.8);
+  box-shadow: 0 16px 36px -14px rgba(232, 144, 28, 0.8);
 }
 
 .type-list {

@@ -12,7 +12,7 @@ import SettingsDialog from "./SettingsDialog";
 import { LangToggle } from "../i18n/LangToggle";
 import { useLang } from "../i18n";
 
-const RAIL_KEY = "taqat-sidebar";
+const RAIL_KEY = "mushriq-sidebar";
 const readRail = () => {
   try {
     return localStorage.getItem(RAIL_KEY) === "collapsed";
@@ -34,7 +34,7 @@ export default function AppShell({ page, go, children, focus }) {
   const groups = NAV[role];
   const items = flatNav(role);
   const group = groups.find((g) => g.items.some((i) => i.id === page));
-  const org = state.schools.find((s) => s.id === user.school)?.name || "منصّة طاقات";
+  const org = state.schools.find((s) => s.id === user.school)?.name || "منصّة مشرق";
 
   // أنماط نظام التصميم الجديد تُطبَّق داخل التطبيق فقط (والنوافذ المرسومة على <body>)
   useLayoutEffect(() => {
@@ -105,7 +105,7 @@ export default function AppShell({ page, go, children, focus }) {
     <div className={cx("shell app", (collapsed || focus) && "collapsed", focus && "focus")}>
       <aside className={cx("sb", drawer && "open")} aria-label="القائمة الرئيسية">
         <div className="sb-head">
-          <Wordmark light />
+          <Wordmark size="sm" />
           <button className="icon-btn sb-close" onClick={() => setDrawer(false)} aria-label="إغلاق القائمة">
             <X size={18} />
           </button>

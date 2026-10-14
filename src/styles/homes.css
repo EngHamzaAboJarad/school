@@ -28,23 +28,58 @@
   }
 }
 
-/* The door: the one indigo panel in content — the way into the next step */
+/* The sunrise panel (class .door): the one deep-navy panel in content — the way
+   into the next step. A sun rises behind its actions and the horizon runs along
+   its foot; both are decoration only (aria-hidden pseudo-elements). */
 :where(.in-app) .door {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: var(--sp-4) var(--sp-6);
   align-items: center;
-  padding: var(--sp-6);
+  padding: var(--sp-6) var(--sp-6) calc(var(--sp-6) + 4px);
   border-radius: var(--rad-lg);
-  background: var(--c-door-900);
+  background: radial-gradient(120% 140% at 0% 100%, #0b5e9c 0%, transparent 55%), linear-gradient(135deg, var(--c-navy-900) 0%, var(--c-navy-950) 100%);
   color: var(--c-text-on-dark);
-  border: 1px solid var(--c-door-950);
+  border: 0;
+  box-shadow: var(--el-2);
+}
+
+html[dir="ltr"] :where(.in-app) .door {
+  background: radial-gradient(120% 140% at 100% 100%, #0b5e9c 0%, transparent 55%), linear-gradient(225deg, var(--c-navy-900) 0%, var(--c-navy-950) 100%);
+}
+
+:where(.in-app) .door::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  inset-inline-end: clamp(8px, 6%, 64px);
+  width: 260px;
+  height: 134px;
+  background: var(--img-sunrise) no-repeat center bottom / contain;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+:where(.in-app) .door::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--g-horizon);
+}
+
+html[dir="rtl"] :where(.in-app) .door::after {
+  transform: scaleX(-1);
 }
 
 :where(.in-app) .door-label {
   font-size: var(--fs-xs);
-  color: var(--c-ochre-300);
+  color: var(--c-sun-400);
   font-weight: var(--fw-semibold);
 }
 
@@ -96,6 +131,11 @@
   :where(.in-app) .door {
     grid-template-columns: 1fr;
     padding: var(--sp-5) var(--sp-4);
+  }
+
+  /* the sun would sit behind the stacked buttons on a phone */
+  :where(.in-app) .door::before {
+    display: none;
   }
 }
 
@@ -149,8 +189,8 @@
 }
 
 :where(.in-app) .tt-slot.is-now {
-  background: var(--c-clay-50);
-  box-shadow: inset 0 -3px 0 var(--c-clay-500);
+  background: var(--c-sun-50);
+  box-shadow: inset 0 -3px 0 var(--c-sun-500);
 }
 
 :where(.in-app) .tt-slot.is-mine b {
@@ -289,7 +329,7 @@
   }
 }
 
-/* Child selector (parent): each child is a door; the open one is painted indigo */
+/* Child selector (parent): the selected child is a deep-navy card */
 :where(.in-app) .child-switch {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -328,8 +368,8 @@
 }
 
 :where(.in-app) .child-tab.active {
-  background: var(--c-door-900);
-  border-color: var(--c-door-950);
+  background: var(--c-navy-900);
+  border-color: var(--c-navy-950);
   color: var(--c-text-on-dark);
   box-shadow: none;
 }
@@ -369,7 +409,7 @@
 }
 
 :where(.in-app) .child-tab.active .child-tab-state b {
-  color: var(--c-ochre-300);
+  color: var(--c-sun-400);
 }
 
 :where(.in-app) .child-tab-state em {
@@ -390,11 +430,11 @@
 }
 
 :where(.in-app) .child-tab.active .is-alert {
-  color: var(--c-ochre-200);
+  color: var(--c-sun-200);
 }
 
 :where(.in-app) .child-tab.active .is-ok {
-  color: #9fd8c4;
+  color: #8fe0d6;
 }
 
 :where(.in-app) .page-head + .child-switch {

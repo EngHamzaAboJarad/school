@@ -7,7 +7,7 @@ import { useStore } from "../store/StoreProvider";
 import { avatarOf } from "../store/selectors";
 import { LangSegmented } from "../i18n/LangToggle";
 
-const PREFS_KEY = "taqat-prefs";
+const PREFS_KEY = "mushriq-prefs";
 export const loadPrefs = () => {
   try {
     return { textSize: "md", contrast: false, motion: true, ...JSON.parse(localStorage.getItem(PREFS_KEY) || "{}") };
@@ -31,7 +31,7 @@ export default function SettingsDialog({ onClose }) {
   const [prefs, setPrefs] = useState(loadPrefs);
   const [sessions, setSessions] = useState([
     { id: 1, device: "هذا الجهاز — Chrome على Windows", place: "الرياض", current: true },
-    { id: 2, device: "iPhone 15 — تطبيق طاقات", place: "الرياض", current: false },
+    { id: 2, device: "iPhone 15 — تطبيق مشرق", place: "الرياض", current: false },
   ]);
   const [twofa, setTwofa] = useState(true);
   const avatar = avatarOf(state, user.id);

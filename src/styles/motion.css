@@ -1,5 +1,5 @@
 /* ==========================================================================
-   طاقات سكول — طبقة الحركة والتفاعل (تُحمَّل أخيرًا وتعمل فوق الأنماط الحالية)
+   مشرق — طبقة الحركة والتفاعل (تُحمَّل أخيرًا وتعمل فوق الأنماط الحالية)
    تحترم إعداد «الحركات والانتقالات» وتفضيل النظام لتقليل الحركة.
    ========================================================================== */
 
@@ -87,23 +87,23 @@ html[dir="ltr"] {
 
 @keyframes m-live {
   0% {
-    box-shadow: 0 0 0 0 rgba(95, 211, 162, 0.55);
+    box-shadow: 0 0 0 0 rgba(10, 197, 186, 0.55);
   }
 
   70%,
   100% {
-    box-shadow: 0 0 0 9px rgba(95, 211, 162, 0);
+    box-shadow: 0 0 0 9px rgba(10, 197, 186, 0);
   }
 }
 
 @keyframes m-badge {
   0% {
-    box-shadow: 0 0 0 0 rgba(221, 190, 132, 0.6);
+    box-shadow: 0 0 0 0 rgba(254, 196, 67, 0.6);
   }
 
   70%,
   100% {
-    box-shadow: 0 0 0 8px rgba(221, 190, 132, 0);
+    box-shadow: 0 0 0 8px rgba(254, 196, 67, 0);
   }
 }
 
@@ -415,7 +415,7 @@ html[dir="rtl"] .hbar-track i {
 
   .stat:hover,
   .card:not(.card-dark):not(.card-gold):hover {
-    background-image: radial-gradient(380px circle at var(--mx) var(--my), rgba(221, 190, 132, 0.17), transparent 62%);
+    background-image: radial-gradient(380px circle at var(--mx) var(--my), rgba(254, 196, 67, 0.17), transparent 62%);
   }
 
   .stat:hover .stat-icon {
@@ -550,7 +550,7 @@ html[dir="rtl"] .hbar-track i {
 }
 
 .topbar.scrolled {
-  box-shadow: 0 10px 28px -16px rgba(14, 27, 51, 0.28);
+  box-shadow: 0 10px 28px -16px rgba(0, 58, 102, 0.28);
 }
 
 .topbar::after {

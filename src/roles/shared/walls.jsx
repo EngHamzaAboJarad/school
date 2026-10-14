@@ -30,7 +30,7 @@ export function attendanceVents(state, sid, days) {
   });
 }
 
-// إتقان طالب حسب المادة: كوّة لكل هدف تعلّم في مواد صفّه
+// إتقان طالب حسب المادة: شعاع لكل هدف تعلّم في مواد صفّه
 export function subjectMastery(state, sid) {
   const stu = studentOf(state, sid);
   const cls = state.classes.find((c) => c.id === stu?.classId);
@@ -56,7 +56,7 @@ export function subjectMastery(state, sid) {
   });
 }
 
-export const MASTERY_KEY = "كوّة لكل هدف: ممتلئة متقَن • نصفها قريب • حمراء فجوة • منقّطة لم يُقيَّم";
+export const MASTERY_KEY = "شعاع لكل هدف: ممتلئ متقَن • نصفه قريب • أحمر فجوة • منقّط لم يُقيَّم";
 
 export function SubjectMasteryWall({ rows }) {
   return (

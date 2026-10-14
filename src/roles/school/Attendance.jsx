@@ -100,7 +100,7 @@ export default function SchoolAttendance() {
           <SectionHeader
             id="sa-wall"
             title="جدار الحضور"
-            desc={days.length ? `كوّة لكل يوم دراسي • من ${fmtDate(new Date(days[0]), { day: "numeric", month: "long" })} إلى ${fmtDate(new Date(days[days.length - 1]), { day: "numeric", month: "long" })}` : undefined}
+            desc={days.length ? `شعاع لكل يوم دراسي • من ${fmtDate(new Date(days[0]), { day: "numeric", month: "long" })} إلى ${fmtDate(new Date(days[days.length - 1]), { day: "numeric", month: "long" })}` : undefined}
             action={state.classes.length > 1 && <Segmented options={[{ id: "all", label: "كل الفصول" }, ...state.classes.map((c) => ({ id: c.id, label: c.name }))]} value={clsId} onChange={setClsId} />}
           />
           {days.length === 0 ? (

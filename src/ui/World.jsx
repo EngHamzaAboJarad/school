@@ -3,30 +3,38 @@ import { cx } from "./Primitives";
 import { subjects } from "../data/curriculum";
 
 // ───────────────────────────────────────────────────────────────────────────
-// عناصر عالم «الطين والباب النجدي»
-// الكوّة المثلّثة هي رمز البيانات الوحيد في المنصّة: ممتلئة = حاضر/منجز/متقَن،
-// مجوّفة = غائب/غير منجز، نصف ممتلئة = متأخّر/جزئي، حمراء = غياب أو تعثّر، منقّطة = لا بيانات.
-// لا تُستخدم أبدًا كزخرفة: كل كوّة تمثّل قيمة حقيقية ولها وصف نصّي (title + aria).
+// عناصر عالم «مشرق»
+// «الشعاع» — قضيب مستدير الطرفين مأخوذ من أشعّة شمس الشعار — هو رمز البيانات الوحيد في المنصّة:
+// ممتلئ = حاضر/منجز/متقَن، مجوّف = غائب/غير منجز، نصفه السفلي ممتلئ = متأخّر/جزئي،
+// أحمر = غياب أو تعثّر، منقّط = لا بيانات.
+// لا يُستخدم أبدًا كزخرفة: كل شعاع يمثّل قيمة حقيقية وله وصف نصّي (title + aria).
+// (أسماء المكوّنات Vent* باقية كما هي حتى لا تتغيّر واجهات الصفحات.)
 // ───────────────────────────────────────────────────────────────────────────
 
 const VENT_STATES = ["on", "off", "partial", "alert", "empty"];
 
+// عرض الشعاع بحسب الحجم — يستخدمه رأس الجدار لمحاذاة عناوين الأيام فوق الأشعّة
+export const rayWidth = (size) => Math.max(9, Math.round(size * 0.92));
+
 export function Vent({ state = "on", tone, size = 12, title }) {
   const s = VENT_STATES.includes(state) ? state : "empty";
-  const h = size;
-  const w = Math.round(size * 1.08);
-  const pts = `0.75,${h - 0.75} ${w / 2},0.9 ${w - 0.75},${h - 0.75}`;
+  const w = rayWidth(size);
+  const h = Math.round(size * 1.4);
+  const sw = 1.5;
+  const r = (w - sw) / 2;
   const color = tone ? `var(--c-subj-${tone}, ${tone})` : undefined;
   return (
     <svg className={cx("vent", `vent-${s}`)} width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={color ? { "--vent-tone": color } : undefined} aria-hidden="true">
       {title && <title>{title}</title>}
-      {s === "partial" && <polygon className="vent-half" points={`${w * 0.25},${h / 2} ${w * 0.75},${h / 2} ${w - 0.75},${h - 0.75} 0.75,${h - 0.75}`} />}
-      <polygon className="vent-shape" points={pts} />
+      {s === "partial" && (
+        <path className="vent-half" d={`M${sw / 2} ${h / 2} H${w - sw / 2} V${h - sw / 2 - r} A${r} ${r} 0 0 1 ${sw / 2} ${h - sw / 2 - r} Z`} />
+      )}
+      <rect className="vent-shape" x={sw / 2} y={sw / 2} width={w - sw} height={h - sw} rx={r} />
     </svg>
   );
 }
 
-// صفّ كوّات: items = [{ state, title, tone }]. label يصف الصف لقارئ الشاشة.
+// صفّ أشعّة: items = [{ state, title, tone }]. label يصف الصف لقارئ الشاشة.
 export function VentRow({ items, size = 12, label, className }) {
   return (
     <span className={cx("vent-row", className)} role="img" aria-label={label || items.map((i) => i.title).filter(Boolean).join(" • ")}>
@@ -37,7 +45,7 @@ export function VentRow({ items, size = 12, label, className }) {
   );
 }
 
-// جدار كوّات: صفوف بعنوان وقيمة. columns = عناوين الأعمدة (مثلًا الأيام).
+// جدار الأشعّة: صفوف بعنوان وقيمة. columns = عناوين الأعمدة (مثلًا الأيام).
 export function VentWall({ rows, columns, size = 13, valueLabel, legend, caption }) {
   return (
     <div className="vent-wall">
@@ -47,7 +55,7 @@ export function VentWall({ rows, columns, size = 13, valueLabel, legend, caption
           <span />
           <span className="vent-wall-cols">
             {columns.map((c, i) => (
-              <i key={i} style={{ width: Math.round(size * 1.08) }}>{c}</i>
+              <i key={i} style={{ width: rayWidth(size) }}>{c}</i>
             ))}
           </span>
           <span>{valueLabel}</span>
@@ -84,7 +92,7 @@ export function VentLegend({ items }) {
   );
 }
 
-// حالة الحضور → كوّة
+// حالة الحضور → شعاع
 export const ATTENDANCE_VENT = {
   present: { state: "on", label: "حاضر" },
   late: { state: "partial", label: "متأخّر" },
@@ -109,7 +117,7 @@ export function Seal({ approved, by, compact }) {
   );
 }
 
-// ───── ألوان المواد: لكل مادة لون باب ثابت في كل الأدوار ─────
+// ───── ألوان المواد: لكل مادة لون ثابت في كل الأدوار ─────
 const BY_NAME = [
   ["رياض", "math"],
   ["علوم", "sci"],

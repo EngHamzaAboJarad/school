@@ -37,7 +37,7 @@ function Routed() {
   useEffect(() => {
     if (!user) return;
     const label = pageLabel(user.role, page);
-    document.title = `${label ? `${label} — ` : ""}${ROLES[user.role].long} | طاقات سكول`;
+    document.title = `${label ? `${label} — ` : ""}${ROLES[user.role].long} | مشرق`;
   }, [user, page]);
 
   if (UiKit && page === "ui-kit") return <Suspense fallback={null}><UiKit /></Suspense>;

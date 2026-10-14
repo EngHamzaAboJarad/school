@@ -9,7 +9,7 @@ import { fmtLongDate, fmtNum } from "../../lib/format";
 const LIC_TONE = { "نشط": "success", "تجريبي": "info", "ينتهي قريبًا": "warn" };
 const RISK_MASTERY = 72;
 
-// مقياس من عشر كوّات: كل كوّة 10%، والكوّة الأخيرة نصفية عند الكسور
+// مقياس من عشرة أشعّة: كل شعاع 10%، والشعاع الأخير نصفي عند الكسور
 const gauge = (v, low) =>
   Array.from({ length: 10 }, (_, i) => {
     const filled = v / 10 - i;
@@ -63,7 +63,7 @@ export default function SupervisorHome({ go }) {
             <SectionHeader
               id="sv-schools"
               title="المدارس"
-              desc="كل كوّة 10% من الإتقان • الحمراء دون حدّ المتابعة"
+              desc="كل شعاع 10% من الإتقان • الأحمر دون حدّ المتابعة"
               action={
                 <div className="filter-bar">
                   <Select value={stage} onChange={(e) => setStage(e.target.value)} aria-label="المرحلة" style={{ width: "auto" }}>

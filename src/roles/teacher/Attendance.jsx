@@ -14,7 +14,7 @@ import { attendanceVents } from "../shared/walls";
 export const ATT = { present: ["حاضر", "success"], absent: ["غائب", "danger"], late: ["متأخر", "warn"], excused: ["بعذر", "info"] };
 const ATT_ICON = { present: Check, absent: X, late: Clock3, excused: ShieldCheck };
 
-// تسجيل الحضور والغياب (F7.3): قائمة الفصل لليوم، وتاريخ كل طالب في آخر عشرة أيام بالكوّات، ويُنبَّه وليّ الأمر فور حفظ الغياب.
+// تسجيل الحضور والغياب (F7.3): قائمة الفصل لليوم، وتاريخ كل طالب في آخر عشرة أيام بالأشعّة، ويُنبَّه وليّ الأمر فور حفظ الغياب.
 export default function AttendancePage() {
   const { state, dispatch, user } = useStore();
   const toast = useToast();

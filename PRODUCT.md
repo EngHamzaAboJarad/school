@@ -21,7 +21,7 @@ Six roles share one product, each with its own dashboard (doc §5):
 An Arabic AI school: explains the curriculum, summarises every lesson, tests after every lesson and every unit, diagnoses each student's gaps and builds a remedial plan, while every role turns the same data into decisions. Success: a student always knows the next step, and a teacher or administrator can act on what the data shows within a minute.
 
 ## Positioning
-Competitors in Saudi Arabia (معلمي، تدريس أون لاين) sell hours of a human tutor. Taqat is "a digital school that teaches, assesses and is run by data": explanation + summary + automatic assessment + an institutional role system in one Arabic product. The AI assessment engine is called **النجمة**.
+Competitors in Saudi Arabia (معلمي، تدريس أون لاين) sell hours of a human tutor. Mushriq is "a digital school that teaches, assesses and is run by data": explanation + summary + automatic assessment + an institutional role system in one Arabic product. The AI assessment engine is called **النجمة**.
 
 ## Operating Context
 - Saudi and Gulf market, Saudi school calendar (Sunday–Thursday school week), Vision 2030 digitisation context.
@@ -35,12 +35,13 @@ Competitors in Saudi Arabia (معلمي، تدريس أون لاين) sell hours
 - No large new dependencies.
 
 ## Brand Commitments
-- Name: طاقات سكول / Taqat School. Logo: the geometric «ط» with a spark (`src/ui/Brand.jsx`, favicon in `index.html`). Must be kept.
-- Identity colours found in code: navy (`#0e1b33`–`#22364f`) and ochre/gold (`#ddbe84`, `#a9822f`); green is reserved for success/mastery.
+- Name: **مشرق / Mushriq** (renamed from طاقات سكول / Taqat School in October 2026 by the owner). Personality on the brand card: إلهام، حيوية، تفاؤل (inspiration, vitality, optimism).
+- Logo: a half sun rising over a horizon arc, seven dawn rays (orange → gold → teal), navy wordmark «مشرق» with «Mushriq» under it. Master: `docs/brand/mushriq-brand-card.png`; vector rebuild in `src/ui/Brand.jsx` (`LogoMark`, `Wordmark`), favicon `public/favicon.svg`. Must be kept.
+- Identity colours (sampled from the brand card): navy `#004F87`, sun `#FEC443`/`#FDB430`, dawn orange `#FF982A`, teal `#0AC5BA`, sky `#0A9CC4`, light teal `#40D1CD`, mint `#B2E8DB`. Teal carries success/mastery.
 - Team: Palestinian teachers and engineers from Gaza (doc cover).
 
 ## Evidence on Hand
-- Demo data seeded by the app (`src/data/seed.js`): 3 classes, 17 students, lessons, questions, attempts, attendance, audit log. Demo accounts `*@taqat.test`, password `password`, OTP `123456`.
+- Demo data seeded by the app (`src/data/seed.js`): 3 classes, 17 students, lessons, questions, attempts, attendance, audit log. Demo accounts `*@mushriq.test`, password `password`, OTP `123456`.
 - No real customers, testimonials, usage numbers or market figures; the doc explicitly leaves market numbers unverified. Do not invent any.
 
 ## Product Principles

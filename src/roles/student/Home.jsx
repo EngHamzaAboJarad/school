@@ -33,7 +33,7 @@ export default function StudentHome({ go }) {
 
   const bySubject = subjectMastery(state, user.id);
 
-  // نشاطي: يوم فيه اختبار أو درس منجز = كوّة ممتلئة
+  // نشاطي: يوم فيه اختبار أو درس منجز = شعاع ممتلئ
   const activeDays = new Set([
     ...attempts.map((a) => dateKey(a.at)),
     ...Object.values(state.progress[user.id] || {}).filter((p) => p.done && p.at).map((p) => dateKey(p.at)),

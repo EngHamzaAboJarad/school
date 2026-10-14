@@ -42,7 +42,7 @@ export default function UiKit() {
       <header className="page-head">
         <div className="page-head-copy">
           <span className="kicker">نظام التصميم</span>
-          <h1>مكوّنات طاقات سكول</h1>
+          <h1>مكوّنات مشرق</h1>
           <p>معرض للمطوّرين (وضع التطوير فقط). كل الألوان والمسافات من tokens.css.</p>
         </div>
         <div className="page-actions">

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Inner screens — Najdi world
+   Inner screens — Mushriq world
    ========================================================================== */
 
 /* ───────── Attendance roster ───────── */
@@ -21,7 +21,7 @@
 }
 
 :where(.in-app) .roster-row.is-changed {
-  background: var(--c-clay-50);
+  background: var(--c-sun-50);
 }
 
 :where(.in-app) .roster-who {
@@ -78,7 +78,7 @@
 }
 
 :where(.in-app) .att-choice.on.att-present {
-  background: var(--c-door-800);
+  background: var(--c-navy-800);
   color: #fff;
 }
 
@@ -137,7 +137,7 @@
   flex-wrap: wrap;
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--rad-lg);
-  background: var(--c-door-900);
+  background: var(--c-navy-900);
   color: var(--c-text-on-dark);
   box-shadow: var(--el-2);
   font-size: var(--fs-sm);
@@ -149,7 +149,7 @@
   gap: 4px;
   margin-inline-start: var(--sp-3);
   font-style: normal;
-  color: var(--c-ochre-200);
+  color: var(--c-sun-200);
   font-size: var(--fs-xs);
 }
 
@@ -188,8 +188,8 @@
 }
 
 :where(.in-app) .perm-dot.on {
-  background: var(--c-door-800);
-  border-color: var(--c-door-800);
+  background: var(--c-navy-800);
+  border-color: var(--c-navy-800);
 }
 
 /* ───────── School attendance walls ───────── */
@@ -244,8 +244,8 @@
 
 /* ───────── Lesson header: the door, flat ───────── */
 :where(.in-app) .lesson-hero {
-  background: var(--c-door-900);
-  border: 1px solid var(--c-door-950);
+  background: var(--c-navy-900);
+  border: 1px solid var(--c-navy-950);
   border-radius: var(--rad-lg);
   box-shadow: none;
   padding: var(--sp-6);

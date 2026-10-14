@@ -33,7 +33,7 @@ export default function SystemHome({ go }) {
   return (
     <Page
       title="لوحة النظام"
-      desc={`منصّة طاقات • ${fmtLongDate()}`}
+      desc={`منصّة مشرق • ${fmtLongDate()}`}
       actions={
         <>
           <Btn variant="ghost" icon={ShieldCheck} onClick={() => go("audit")}>سجلّ التدقيق</Btn>

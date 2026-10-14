@@ -1,3 +1,5 @@
+// أوّلًا: نقل مفاتيح التخزين القديمة قبل أن تقرأها أي وحدة
+import "./lib/migrateStorage";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
