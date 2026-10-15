@@ -267,10 +267,10 @@ export default function Landing({ onEnter, onJoin }) {
                     <tr key={label}>
                       <th scope="row">{label}</th>
                       <td className="brand">
-                        <Mark v={ours} />
+                        <Mark v={ours} who="مشرق" />
                       </td>
                       <td>
-                        <Mark v={theirs} />
+                        <Mark v={theirs} who="منصّات الحصص" />
                       </td>
                     </tr>
                   ))}
@@ -758,11 +758,17 @@ function SectionHead({ kicker, title, desc }) {
   );
 }
 
-function Mark({ v }) {
+// علامة المقارنة. على الحاسوب أيقونة داخل خليّة الجدول؛ على الجوال تصير شارة تحمل اسم الطرف
+// («مشرق» / «منصّات الحصص») لأن رؤوس الأعمدة تختفي حين يتحوّل كل صفّ إلى بطاقة.
+function Mark({ v, who }) {
   const [Icon, label] = MARKS[v];
   return (
     <span className={`ld-mark ${v}`} title={label}>
-      <Icon size={15} />
+      <Icon size={15} aria-hidden="true" />
+      <span className="ld-mark-who" aria-hidden="true">
+        {who}
+        {v === "part" && " (جزئيًّا)"}
+      </span>
       <span className="sr-only">{label}</span>
     </span>
   );

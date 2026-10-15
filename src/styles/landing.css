@@ -1159,6 +1159,10 @@ html[data-textsize]:has(.landing) {
   border-radius: 50%;
 }
 
+.ld-mark-who {
+  display: none;
+}
+
 .ld-mark.yes {
   background: #dcf5f0;
   color: #0a6e62;
@@ -1801,10 +1805,76 @@ html[data-textsize]:has(.landing) {
     white-space: nowrap;
   }
 
-  .ld-compare-table th,
-  .ld-compare-table td {
-    padding: 12px 10px;
-    font-size: 0.875rem;
+  /* الجدول على الجوال: كل صفّ بطاقة صغيرة، اسم القدرة فوق وشارتا الطرفين تحته */
+  .ld-compare-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .ld-compare-table,
+  .ld-compare-table tbody {
+    display: block;
+  }
+
+  .ld-compare-table tbody tr {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    padding: 16px;
+  }
+
+  .ld-compare-table tbody th,
+  .ld-compare-table tbody td {
+    padding: 0;
+    font-size: 0.9375rem;
+    text-align: start;
+    border: 0;
+  }
+
+  .ld-compare-table tbody tr + tr > * {
+    border-top: 0;
+  }
+
+  .ld-compare-table tbody tr + tr {
+    border-top: 1px solid #e8eef3;
+  }
+
+  .ld-compare-table tbody th {
+    flex-basis: 100%;
+    font-weight: 600;
+    color: var(--ld-ink);
+  }
+
+  .ld-compare-table td.brand {
+    background: none;
+  }
+
+  .ld-mark {
+    width: auto;
+    height: 30px;
+    padding: 0 12px 0 10px;
+    gap: 6px;
+    display: inline-flex;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .ld-mark-who {
+    display: inline;
+  }
+
+  .ld-mark.no {
+    color: #56687c;
+  }
+
+  .ld-mark.no .ld-mark-who {
+    text-decoration: line-through;
+    text-decoration-color: rgba(86, 104, 124, 0.5);
   }
 
   .ld-security ul,

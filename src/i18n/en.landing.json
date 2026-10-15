@@ -128,5 +128,11 @@
   "لم يُرسَل طلبك إلى فريق مشرق، فالنماذج في هذه النسخة لا تتّصل بخادم بعد. يظهر طلبك في لوحة مدير النظام التجريبية ضمن «الطلبات الواردة».": "Your request was not sent to the Mushriq team: forms in this version are not connected to a server yet. It appears in the demo system-admin dashboard under Leads.",
   "تعذّر إرسال طلبك الآن. تحقّق من اتصالك وحاول مرّة أخرى.": "We couldn't send your request. Check your connection and try again.",
   "جارٍ الإرسال…": "Sending…",
-  "جارٍ التحميل": "Loading"
+  "جارٍ التحميل": "Loading",
+  "شرح الدروس وتلخيصها بالذكاء الاصطناعي": "AI explanations and lesson summaries",
+  "اختبار بعد كل درس وتصحيح فوري": "A quiz after every lesson, graded instantly",
+  "تشخيص الفجوات وخطة علاجية": "Gap diagnosis and a remedial plan",
+  "لوحات لوليّ الأمر والمعلّم والمدرسة": "Dashboards for parents, teachers and schools",
+  "متاح ٢٤/٧ دون حجز حصّة": "Available 24/7 without booking",
+  "(جزئيًّا)": "(partly)"
 }
