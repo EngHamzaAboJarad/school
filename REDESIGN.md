@@ -1,6 +1,7 @@
 # Mushriq (مشرق) — UI/UX Redesign Log
 
 Branch: `redesign` · Read this file at the start of every session.
+Arabic summary of all the work, decisions and open items: [`docs/WORKLOG.md`](docs/WORKLOG.md).
 The product was called **Taqat School (طاقات سكول)** until October 2026; older sections below use that name.
 
 ---
