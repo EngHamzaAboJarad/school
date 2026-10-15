@@ -5,6 +5,38 @@ The product was called **Taqat School (طاقات سكول)** until October 2026
 
 ---
 
+## Response to the landing-page review «كشف درجات» (review dated 11 Oct 2026, on the pre-rebrand site) — 15 Oct 2026 (latest)
+
+The review scored the old Taqat landing 4.5/10. Item-by-item status after this round:
+
+| Review item | Status |
+|---|---|
+| Contact form says «وصلنا طلبك» but sends nothing | **Fixed.** `src/lib/leads.js`: with `VITE_LEADS_ENDPOINT` set, it POSTs and shows a real error on failure; without it, the form says plainly it is a demo and nothing reached the team (a notice before submit and an honest result). Demo requests still reach the system-admin "Leads" page via a local inbox merged by the store. Reference Worker + KV endpoint with validation, same-origin check and rate limit: `docs/deploy/leads-worker.js` (unit-tested: 8 cases). |
+| No contact channels | **Needs owner input.** `CONTACT` in `content.js` stays empty; nothing invented. |
+| `workers.dev` domain | **Needs owner action.** Build reads `SITE_URL` (default = current workers.dev URL). |
+| No privacy policy / terms; `/privacy` returned the home page | **Fixed.** Real pages at `/privacy/` and `/terms/` (AR + EN, prerendered), linked from the footer and the consent checkbox. Content uses only commitments the product already makes. `LEGAL` (entity, city, hosting, email) is empty, so both pages show an «مسودة أوّلية» notice instead of invented facts. |
+| Demo password and OTP printed on the page | **Fixed.** Role tabs have «ادخل كـ…» buttons → `#/demo/<role>` signs straight into the demo account; badge «بيئة عرض ببيانات وهمية». |
+| No product images / social proof | Images **fixed** last round (real screenshots). Testimonials and school logos: **none exist yet**, nothing invented. |
+| Investor language (RBAC, marginal cost, business model) | **Fixed.** "RBAC" → «صلاحيات لكل دور»; pricing/heading copy already customer-facing. |
+| Five CTA wordings, «تجريبي» meaning two things | **Fixed.** One label per intent: «جرّب المنصّة» (try), «اطلب عرضًا لمدرستك» (contact), «أنشئ حسابك» (sign up). |
+| "Free plan" ribbon on a paid card | **Fixed** (ribbon removed; the card text says a limited free plan exists). Launch prices / seat price: **owner decision**. |
+| One-sided comparison, unsourced tutoring prices | **Fixed.** Two rows where tutors win (live session, free choice of teacher/time); copy says Mushriq complements tutors. Prices corrected from the product doc (≈20–76 SAR per session → 160–608 for 8 sessions; the page had 448) with the source described and dated. |
+| Page too long | **Shorter.** Separate problem section folded into the comparison heading; 10.3k px at 1440 (review measured 13.3k at 1024). |
+| Gaza story without local presence | **Needs owner input** (entity, hosting location) → `LEGAL`. |
+| White page until 868 KB of JS runs (FCP 3.3 s) | **Fixed.** Landing + legal pages are prerendered to HTML at build (`src/entry-server.jsx`, `scripts/prerender.mjs`) and hydrated. Local production check: FCP 0.12–0.9 s; content readable without JS. |
+| Whole app in the landing bundle | **Fixed.** `src/Root.jsx` renders landing/legal alone; the app loads on demand; each role is its own chunk; app CSS moved into the app chunk; English dictionaries (≈200 KB) load only for English. Landing JS: 948 KB → 336 KB raw (277 → 104 KB gzip). |
+| Hashed assets not cached; no security headers | **Fixed.** Build writes `dist/_headers`: `/assets/*` immutable for a year, `/landing/*` a week; nosniff, Referrer-Policy, Permissions-Policy, X-Frame-Options, and a CSP without `unsafe-eval` (inline boot script allowed by hash). Verified in Chrome: no violations. |
+| 387 KB of fonts from another origin | **Fixed.** Self-hosted (`@fontsource`, Arabic + Latin subsets only, `src/styles/fonts.css`); Amiri gone; weight 500 no longer loads on the landing page. |
+| Infinite animations, hidden sections, scroll-progress layout | Infinite loops were already off on the landing; sections now hide for reveal **only when JS runs** (`html.js`); dead `--scroll` progress CSS removed. |
+| SEO / link previews | **Fixed.** Per-page title/description, canonical, Open Graph + Twitter card with a 1200×630 `og-image.png`, Organization + FAQPage JSON-LD, `robots.txt`, `sitemap.xml` (all generated with `SITE_URL`). |
+| Small items | Form errors now wired with `aria-describedby` / `aria-invalid` / `role=alert` in the shared `Field` (every form in the app). Apple touch icon, 192/512 icons and a web manifest added. «سنعود إليك قريبًا» replaced by a statement without an invented response time. |
+
+**Checks:** client + SSR build ✅ · production build served with its `_headers`: no console errors, no hydration mismatch, no CSP violations; FCP home 0.9 s (cold) / legal 0.12 s; no-JS view shows all content · English scan (incl. role tabs, quiz, form states): 0 untranslated strings · all 48 routes × 1440/375 via the new demo route: 0 errors, 0 overflow · dev and prod app pages render (student home 0.9 s after demo sign-in on prod).
+
+**Deploy:** see `docs/deploy/README.md`. `npm run build` now runs three steps (client, SSR, prerender). `dist/` was not rebuilt in this commit, as in earlier rounds.
+
+---
+
 ## Landing page rebuilt + sidebar collapse handle — October 2026 (latest)
 
 **Landing (`src/marketing/Landing.jsx`, `src/styles/landing.css`, new strings in `src/i18n/en.landing.json`)**

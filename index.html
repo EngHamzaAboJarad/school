@@ -16,19 +16,25 @@
       content="شرح تفاعلي وتلخيص ذكي واختبار بعد كل درس، ثم تشخيص للفجوات وخطة تفوّق لكل طالب — مدرسة رقمية عربية تعمل ٢٤/٧."
     />
     <meta property="og:locale" content="ar_SA" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Rubik:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <script>
-      try {
-        var en = (localStorage.getItem("mushriq-lang") || localStorage.getItem("taqat-lang")) === "en";
-        document.documentElement.lang = en ? "en" : "ar";
-        document.documentElement.dir = en ? "ltr" : "rtl";
-      } catch (e) {}
+      (function () {
+        var root = document.documentElement;
+        root.className += " js";
+        try {
+          var en = (localStorage.getItem("mushriq-lang") || localStorage.getItem("taqat-lang")) === "en";
+          root.lang = en ? "en" : "ar";
+          root.dir = en ? "ltr" : "rtl";
+          if (en) {
+            root.className += " i18n-pending";
+            setTimeout(function () {
+              root.classList.remove("i18n-pending");
+            }, 3000);
+          }
+        } catch (e) {}
+      })();
     </script>
     <title>مشرق | Mushriq</title>
   </head>

@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { cloneElement, isValidElement, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Inbox, AlertOctagon, ChevronLeft, ChevronRight, Search, ArrowUp, ArrowDown, Minus, CheckCircle2, AlertTriangle, Info, Clock3 } from "lucide-react";
 import { initials } from "../lib/format";
@@ -157,13 +157,31 @@ export function Modal({ open, onClose, title, kicker, children, footer, wide, dr
   );
 }
 
+// حقل بعنوان وتلميح وخطأ. التلميح والخطأ يُربطان بعنصر الإدخال عبر aria-describedby،
+// والخطأ يضبط aria-invalid، فيقرؤهما قارئ الشاشة عند الوصول إلى الحقل.
 export function Field({ label, hint, error, children, className }) {
+  const id = useId();
+  const note = error ? `${id}-err` : hint ? `${id}-hint` : undefined;
+  const control = isValidElement(children)
+    ? cloneElement(children, {
+        "aria-describedby": [children.props["aria-describedby"], note].filter(Boolean).join(" ") || undefined,
+        "aria-invalid": error ? true : children.props["aria-invalid"],
+      })
+    : children;
   return (
     <label className={cx("field", className)}>
       {label && <span className="field-label">{label}</span>}
-      {children}
-      {hint && !error && <span className="field-hint">{hint}</span>}
-      {error && <span className="field-error">{error}</span>}
+      {control}
+      {hint && !error && (
+        <span className="field-hint" id={`${id}-hint`}>
+          {hint}
+        </span>
+      )}
+      {error && (
+        <span className="field-error" id={`${id}-err`} role="alert">
+          {error}
+        </span>
+      )}
     </label>
   );
 }

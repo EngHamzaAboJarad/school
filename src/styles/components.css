@@ -1866,3 +1866,8 @@ body.in-app .overlay {
     flex: 1 1 100%;
   }
 }
+
+/* حيّز صفحة الدور أثناء تحميل حزمتها (تظهر لحظة واحدة عند أوّل فتح) */
+:where(.in-app) .page-loading {
+  min-height: 60vh;
+}

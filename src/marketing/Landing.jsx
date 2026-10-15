@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ClipboardCheck,
   Cpu,
+  FlaskConical,
   GraduationCap,
   Landmark,
   Layers,
@@ -21,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { Wordmark } from "../ui/Brand";
-import { Seal, VentRow, VentWall, ATTENDANCE_VENT } from "../ui/World";
+import { Seal, VentRow, VentWall, ATTENDANCE_VENT } from "../ui/rays";
 import { LangToggle } from "../i18n/LangToggle";
 import { useLang } from "../i18n";
 import { ROLES, DEMO_ACCOUNTS } from "../data/people";
@@ -36,7 +37,6 @@ import {
   HERO_FACTS,
   HOW_STEPS,
   NAV_LINKS,
-  PAIN_POINTS,
   PRICING,
   ROLE_ORDER,
   ROLE_SHOWCASE,
@@ -109,7 +109,7 @@ export default function Landing({ onEnter, onJoin }) {
                 تسجيل الدخول
               </button>
               <a href="#ld-contact" className="btn btn-gold btn-block" onClick={closeMenu}>
-                احجز عرضًا تجريبيًّا
+                اطلب عرضًا لمدرستك
               </a>
             </div>
           </nav>
@@ -119,7 +119,7 @@ export default function Landing({ onEnter, onJoin }) {
               تسجيل الدخول
             </button>
             <a href="#ld-contact" className="btn btn-gold ld-nav-cta">
-              احجز عرضًا تجريبيًّا
+              اطلب عرضًا لمدرستك
             </a>
             <button
               type="button"
@@ -153,12 +153,12 @@ export default function Landing({ onEnter, onJoin }) {
               )}
               <p className="ld-hero-sub">يشرح مشرق كل درس ويلخّصه ويختبره، ثم يبني لكل طالب خطة حتى الإتقان، والمعلّم يعتمد كل خطوة.</p>
               <div className="ld-hero-cta">
-                <button type="button" className="btn btn-primary btn-lg" onClick={onEnter}>
-                  جرّب الحسابات التجريبية
+                <a href="#ld-roles" className="btn btn-primary btn-lg">
+                  جرّب المنصّة
                   <ChevronLeft size={18} className="ld-dir" />
-                </button>
+                </a>
                 <a href="#ld-contact" className="btn btn-ghost btn-lg">
-                  احجز عرضًا تجريبيًّا
+                  اطلب عرضًا لمدرستك
                 </a>
               </div>
             </div>
@@ -191,26 +191,6 @@ export default function Landing({ onEnter, onJoin }) {
           </div>
         </section>
 
-        {/* ───── المشكلة: بيان قصير ثم ثلاث نقاط بلا بطاقات ───── */}
-        <section className="ld-section ld-problem" data-rv>
-          <div className="ld-wrap">
-            <h2 className="ld-statement">
-              الحصّة الخصوصية تنتهي بانتهاء الساعة.
-              <br />
-              <span>التعلّم الحقيقي يبدأ بعدها.</span>
-            </h2>
-            <div className="ld-pains">
-              {PAIN_POINTS.map((p) => (
-                <div className="ld-pain" key={p.title}>
-                  <p.icon size={22} aria-hidden="true" />
-                  <h3>{p.title}</h3>
-                  <p>{p.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ───── رحلة الدرس على قوس الأفق + جرّب بنفسك ───── */}
         <section id="ld-how" className="ld-section ld-tint" data-rv>
           <div className="ld-wrap">
@@ -238,7 +218,7 @@ export default function Landing({ onEnter, onJoin }) {
         </section>
 
         {/* ───── الأدوار: تبويبات بلقطات حقيقية ───── */}
-        <RolesShowcase lang={lang} onEnter={onEnter} />
+        <RolesShowcase lang={lang} />
 
         {/* ───── المميزات: شبكة بنتو بعناصر المنصّة الحقيقية ───── */}
         <section id="ld-features" className="ld-section ld-tint" data-rv>
@@ -252,8 +232,10 @@ export default function Landing({ onEnter, onJoin }) {
         <section id="ld-compare" className="ld-section" data-rv>
           <div className="ld-wrap ld-compare">
             <div className="ld-compare-copy">
-              <h2>مدرسة رقمية ذكية، لا سوق حصص</h2>
-              <p>منصّات الحصص تبيع ساعات معلّم مجدولة. مشرق يرافق الطالب في كل درس، ويضع البيانات أمام المعلّم ووليّ الأمر والمدرسة.</p>
+              <h2 className="ld-statement">
+                الحصّة الخصوصية تنتهي بانتهاء الساعة. <span>مشرق يرافق الطالب بعدها.</span>
+              </h2>
+              <p>المدرّس الخصوصي يتفوّق في الحصّة المباشرة واختيار الموعد. مشرق لا ينافسه فيها، بل يكمّله: يشرح ويختبر ويتابع كل درس، ويضع البيانات أمام المعلّم ووليّ الأمر والمدرسة.</p>
               <div className="ld-cost">
                 <h3>كم يكلّف الطالب شهريًّا؟</h3>
                 <div className="ld-cost-tiles">
@@ -265,7 +247,7 @@ export default function Landing({ onEnter, onJoin }) {
                     </div>
                   ))}
                 </div>
-                <small className="ld-note">تقدير مبدئي لثماني حصص في الشهر بحسب الأسعار المنشورة (٢٠ إلى ٥٦ ريالًا للحصة). أسعار مشرق إرشادية وقد تتغيّر عند الإطلاق.</small>
+                <small className="ld-note">تقدير لثماني حصص في الشهر بحسب الأسعار المنشورة لأبرز منصّات الحصص الخصوصية في السعودية وقت إعداد الصفحة (أكتوبر ٢٠٢٦): من نحو ٢٠ إلى ٧٦ ريالًا للحصة. أسعار مشرق إرشادية حتى الإطلاق.</small>
               </div>
             </div>
             <div className="ld-compare-table-wrap">
@@ -355,7 +337,6 @@ export default function Landing({ onEnter, onJoin }) {
             <div className="ld-pricing-grid">
               {PRICING.map((p) => (
                 <div className={`ld-price-card ${p.featured ? "featured" : ""}`} key={p.title}>
-                  {p.featured && <span className="ld-ribbon">خطة مجانية متاحة</span>}
                   <span className="ld-icon">
                     <p.icon size={22} aria-hidden="true" />
                   </span>
@@ -416,14 +397,14 @@ export default function Landing({ onEnter, onJoin }) {
           <Sunrise className="ld-final-sun" />
           <div className="ld-wrap ld-final-inner" data-rv>
             <h2>ابدأ يومك الدراسي الأول مع مشرق</h2>
-            <p>أنشئ حسابك مجانًا، أو اطلب عرضًا تجريبيًّا لمدرستك.</p>
+            <p>أنشئ حسابك مجانًا، أو اطلب عرضًا لمدرستك.</p>
             <div className="ld-hero-cta">
               <button type="button" className="btn btn-gold btn-lg" onClick={() => onJoin("signup")}>
                 أنشئ حسابك
                 <ChevronLeft size={18} className="ld-dir" />
               </button>
               <a href="#ld-contact" className="btn btn-light btn-lg">
-                احجز عرضًا تجريبيًّا
+                اطلب عرضًا لمدرستك
               </a>
             </div>
           </div>
@@ -460,6 +441,11 @@ export default function Landing({ onEnter, onJoin }) {
             <button type="button" onClick={onEnter}>
               تسجيل الدخول
             </button>
+          </div>
+          <div>
+            <h5>قانوني</h5>
+            <a href="/privacy/">سياسة الخصوصية</a>
+            <a href="/terms/">شروط الاستخدام</a>
           </div>
         </div>
         <div className="ld-wrap">
@@ -562,7 +548,7 @@ function Journey() {
 }
 
 // ───── الأدوار الستّة: تبويبات يمكن التنقّل بينها بالأسهم ─────
-function RolesShowcase({ lang, onEnter }) {
+function RolesShowcase({ lang }) {
   const [active, setActive] = useState("student");
   const tabs = useRef({});
   const role = ROLES[active];
@@ -629,19 +615,16 @@ function RolesShowcase({ lang, onEnter }) {
                 </li>
               ))}
             </ul>
+            {/* دخول مباشر إلى بيئة العرض: لا كلمة مرور منشورة في الصفحة */}
             {account && (
-              <div className="ld-role-demo">
-                <span>الحساب التجريبي</span>
-                <code dir="ltr" data-notr>
-                  {account.email}
-                </code>
-                <small>كلمة المرور password ورمز التحقق 123456</small>
-              </div>
+              <a href={`#/demo/${active}`} className="btn btn-primary">
+                {`ادخل كـ${role.label}`}
+                <ChevronLeft size={17} className="ld-dir" />
+              </a>
             )}
-            <button type="button" className="btn btn-primary" onClick={onEnter}>
-              ادخل بحساب تجريبي
-              <ChevronLeft size={17} className="ld-dir" />
-            </button>
+            <span className="ld-demo-badge">
+              <FlaskConical size={15} aria-hidden="true" /> بيئة عرض ببيانات وهمية
+            </span>
           </div>
         </div>
       </div>

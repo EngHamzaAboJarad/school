@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { Check, ChevronLeft, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
+import { AlertTriangle, Check, ChevronLeft, Info, Mail, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
 import { Btn, Field, Input, Notice, Select, Textarea } from "../ui/Primitives";
-import { useStore } from "../store/StoreProvider";
+import { leadsAreLive, submitLead } from "../lib/leads";
 import { CONTACT, JOIN_CARDS, LEAD_KINDS } from "./content";
 
 const ARABIC_DIGITS = "٠١٢٣٤٥٦٧٨٩";
@@ -12,11 +12,12 @@ const phoneOk = (v) => /^(?:\+?966|0)?5\d{8}$/.test(latinDigits(v).replace(/[\s-
 const EMPTY = { name: "", contact: "", org: "", kind: LEAD_KINDS[0], message: "" };
 
 export default function ContactSection({ onJoin }) {
-  const { dispatch } = useStore();
   const [vals, setVals] = useState(EMPTY);
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState({});
-  const [sent, setSent] = useState(false);
+  // null | "sending" | "delivered" | "demo" | "failed"
+  const [status, setStatus] = useState(null);
+  const sent = status === "delivered" || status === "demo";
   const nameRef = useRef(null);
   const set = (k, v) => setVals((x) => ({ ...x, [k]: v }));
 
@@ -29,14 +30,15 @@ export default function ContactSection({ onJoin }) {
   const pick = (card) => {
     if (card.action === "school") {
       set("kind", LEAD_KINDS[0]);
-      setSent(false);
+      setStatus(null);
       nameRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
       window.setTimeout(() => nameRef.current?.focus({ preventScroll: true }), 350);
     } else onJoin(card.action);
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
+    if (status === "sending") return;
     const err = {};
     const contact = vals.contact.trim();
     if (!vals.name.trim()) err.name = "هذا الحقل مطلوب";
@@ -45,13 +47,15 @@ export default function ContactSection({ onJoin }) {
     if (!consent) err.consent = "الموافقة مطلوبة للمتابعة.";
     setErrors(err);
     if (Object.keys(err).length) return;
-    dispatch({
-      type: "addLead",
-      lead: { name: vals.name.trim(), contact, org: vals.org.trim(), kind: vals.kind, message: vals.message.trim() },
-    });
-    setSent(true);
-    setVals(EMPTY);
-    setConsent(false);
+    setStatus("sending");
+    try {
+      const { delivered } = await submitLead({ name: vals.name.trim(), contact, org: vals.org.trim(), kind: vals.kind, message: vals.message.trim() });
+      setStatus(delivered ? "delivered" : "demo");
+      setVals(EMPTY);
+      setConsent(false);
+    } catch {
+      setStatus("failed");
+    }
   };
 
   return (
@@ -90,20 +94,27 @@ export default function ContactSection({ onJoin }) {
 
       <div className="ld-form-card">
         {sent ? (
-          <div className="ld-sent" role="status">
-            <span className="ld-sent-icon">
-              <Check size={28} />
-            </span>
-            <h3>وصلنا طلبك</h3>
-            <p>شكرًا لتواصلك. سيردّ عليك فريق مشرق عبر البريد أو الجوال الذي أدخلته.</p>
-            <Btn variant="ghost" onClick={() => setSent(false)}>
+          <div className={`ld-sent ${status === "demo" ? "is-demo" : ""}`} role="status">
+            <span className="ld-sent-icon">{status === "demo" ? <Info size={28} /> : <Check size={28} />}</span>
+            {status === "delivered" ? (
+              <>
+                <h3>وصلنا طلبك</h3>
+                <p>شكرًا لتواصلك. سيردّ عليك فريق مشرق عبر البريد أو الجوال الذي أدخلته.</p>
+              </>
+            ) : (
+              <>
+                <h3>هذه نسخة عرض للمنصّة</h3>
+                <p>لم يُرسَل طلبك إلى فريق مشرق، فالنماذج في هذه النسخة لا تتّصل بخادم بعد. يظهر طلبك في لوحة مدير النظام التجريبية ضمن «الطلبات الواردة».</p>
+              </>
+            )}
+            <Btn variant="ghost" onClick={() => setStatus(null)}>
               إرسال طلب آخر
             </Btn>
           </div>
         ) : (
           <form onSubmit={submit} noValidate>
             <h3>أرسل لنا رسالة</h3>
-            <p className="muted small">املأ النموذج وسنعود إليك قريبًا.</p>
+            <p className="muted small">املأ النموذج وسنردّ عليك عبر البريد أو الجوال.</p>
             <div className="form-grid mt-sm">
               <Field label="نوع الطلب" className="span-2">
                 <Select name="kind" value={vals.kind} onChange={(e) => set("kind", e.target.value)}>
@@ -129,11 +140,27 @@ export default function ContactSection({ onJoin }) {
             </div>
             <label className="check consent ld-consent">
               <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />{" "}
-              <span>أوافق على التواصل معي بخصوص طلبي وعلى معالجة بياناتي وفق سياسة الخصوصية.</span>
+              <span>
+                أوافق على التواصل معي بخصوص طلبي وعلى معالجة بياناتي وفق <a href="/privacy/">سياسة الخصوصية</a>.
+              </span>
             </label>
-            {errors.consent && <span className="field-error">{errors.consent}</span>}
-            <Btn type="submit" variant="primary" className="btn-block btn-lg" icon={Send}>
-              إرسال الرسالة
+            {errors.consent && (
+              <span className="field-error" role="alert">
+                {errors.consent}
+              </span>
+            )}
+            {status === "failed" && (
+              <Notice tone="danger" icon={AlertTriangle}>
+                تعذّر إرسال طلبك الآن. تحقّق من اتصالك وحاول مرّة أخرى.
+              </Notice>
+            )}
+            {!leadsAreLive && (
+              <Notice tone="info" icon={Info}>
+                نسخة عرض: هذا النموذج لا يرسل إلى فريق مشرق بعد.
+              </Notice>
+            )}
+            <Btn type="submit" variant="primary" className="btn-block btn-lg" icon={Send} disabled={status === "sending"}>
+              {status === "sending" ? "جارٍ الإرسال…" : "إرسال الرسالة"}
             </Btn>
             <Notice tone="gold" icon={ShieldCheck}>
               نستخدم بياناتك للرد على طلبك فقط.
