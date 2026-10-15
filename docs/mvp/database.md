@@ -24,51 +24,9 @@
 
 ## ٢. مخطّط الكيانات
 
-```mermaid
-erDiagram
-  organizations ||--o{ users : "تملك"
-  users ||--o{ parent_student_links : "وليّ أمر"
-  users ||--o{ parent_student_links : "ابن"
-  users ||--o{ consents : "موافقات الطالب"
+المخطّط الكامل (نظرة عامة + ستة مخطّطات تفصيلية بكل الأعمدة والمفاتيح) في [`erd.md`](erd.md)، مولَّد تلقائيًّا من `schema.sql`.
 
-  stages ||--o{ grades : ""
-  grades ||--o{ subjects : ""
-  subjects ||--o{ units : ""
-  units ||--o{ lessons : ""
-  units ||--o{ objectives : ""
-  lessons ||--o{ objectives : ""
-  lessons ||--o{ lesson_content_versions : "نسخ المحتوى"
-  lessons |o--o| lesson_content_versions : "النسخة المنشورة"
-  ai_jobs ||--o{ lesson_content_versions : "ولّدت"
-  ai_jobs ||--o{ questions : "ولّدت"
-
-  lessons ||--o{ questions : ""
-  objectives ||--o{ questions : "يقيس"
-  lessons ||--o{ assessments : "اختبار الدرس"
-  assessments ||--o{ assessment_questions : ""
-  questions ||--o{ assessment_questions : ""
-  assessments ||--o{ attempts : ""
-  users ||--o{ attempts : "الطالب"
-  attempts ||--o{ attempt_answers : ""
-
-  users ||--o{ lesson_progress : ""
-  users ||--o{ objective_mastery : ""
-  objectives ||--o{ objective_mastery : ""
-  users ||--o{ mastery_events : ""
-  users ||--o{ remedial_plans : ""
-  objectives ||--o{ remedial_plans : ""
-
-  organizations ||--o{ classes : ""
-  classes ||--o{ class_teachers : ""
-  classes ||--o{ class_students : ""
-  review_tasks }o--o| lesson_content_versions : ""
-  review_tasks }o--o| assessments : ""
-  review_tasks }o--o| questions : ""
-
-  users ||--o{ notifications : ""
-  users ||--o{ push_subscriptions : ""
-  users ||--o{ audit_log : "الفاعل"
-```
+![نظرة عامة على الجداول والعلاقات](erd/overview.png)
 
 ## ٣. الجداول حسب المجال
 
