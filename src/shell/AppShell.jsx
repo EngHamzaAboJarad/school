@@ -191,7 +191,7 @@ export default function AppShell({ page, go, children, focus }) {
       {drawer && <div className="scrim" onClick={() => setDrawer(false)} />}
 
       <div className="shell-main">
-        <header className="tb">
+        <header className={cx("tb", pop && "has-pop")}>
           <button className="icon-btn tb-menu" onClick={() => setDrawer(true)} aria-label="فتح القائمة" aria-expanded={drawer}>
             <Menu size={20} />
           </button>

@@ -894,6 +894,13 @@ html[dir="ltr"] .sb-collapse svg {
   margin: var(--sp-1) 0;
 }
 
+/* The top bar is sticky with its own z-index, so its popovers live in its stacking context.
+   While one is open the bar rises above the scrim; otherwise the scrim would cover the popover
+   and swallow every click on its items. */
+.tb.has-pop {
+  z-index: var(--z-popover);
+}
+
 .pop-scrim {
   position: fixed;
   inset: 0;
