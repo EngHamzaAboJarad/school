@@ -1,6 +1,6 @@
 # مخطّط الكيانات والعلاقات (ERD) — قاعدة بيانات الـMVP
 
-> مولَّد تلقائيًّا من [`schema.sql`](schema.sql) بعد تحميله في PostgreSQL فعلي، فكل جدول وعمود ومفتاح وعلاقة هنا هو ما في المخطّط حرفيًّا: **33 جدولًا و65 علاقة**. الشرح والقرارات في [`database.md`](database.md).
+> مولَّد تلقائيًّا من [`schema.sql`](schema.sql) بعد تحميله في PostgreSQL فعلي، فكل جدول وعمود ومفتاح وعلاقة هنا هو ما في المخطّط حرفيًّا: **33 جدولًا و67 علاقة**. الشرح والقرارات في [`database.md`](database.md).
 >
 > **الملف الكامل في SVG واحد:** [`erd/mushriq-erd.svg`](erd/mushriq-erd.svg) (النظرة العامة + المخطّطات الستة، قابل للتكبير). ونسخة كل مخطّط على حدة (SVG وPNG) في [`erd/`](erd/)، و[`erd/full.svg`](erd/full.svg) فيه كل الجداول والعلاقات في رسمة واحدة غير مقسّمة.
 
@@ -81,11 +81,13 @@ flowchart LR
   end
   organizations --> users
   users --> parent_student_links
-  users --> consents
+  parent_student_links --> consents
   users --> auth_sessions
   stages --> grades
   grades --> subjects
+  organizations -.-> units
   subjects --> units
+  organizations -.-> lessons
   lesson_content_versions -.-> lessons
   units --> lessons
   lessons -.-> objectives
@@ -169,6 +171,7 @@ erDiagram
     text status
     text locale
     timestamptz last_login_at "nullable"
+    timestamptz deleted_at "nullable"
     timestamptz created_at
     timestamptz updated_at
   }
@@ -180,12 +183,12 @@ erDiagram
     text relation
     timestamptz created_at
     timestamptz verified_at "nullable"
+    timestamptz ended_at "nullable"
   }
   consents {
     uuid id PK
-    uuid student_id FK
+    uuid student_id
     uuid parent_id FK
-    text parent_role
     text kind
     boolean granted
     text policy_version
@@ -214,8 +217,7 @@ erDiagram
   organizations ||--o{ users : "org_id"
   users ||--o{ parent_student_links : "parent_id"
   users ||--o{ parent_student_links : "student_id"
-  users ||--o{ consents : "parent_id"
-  users ||--o{ consents : "student_id"
+  parent_student_links ||--o{ consents : "parent_id"
   users ||--o{ auth_sessions : "user_id"
 ```
 
@@ -223,7 +225,7 @@ erDiagram
 
 ## المنهج والمحتوى والذكاء الاصطناعي
 
-الجداول: `stages`، `grades`، `subjects`، `units`، `lessons`، `objectives`، `lesson_content_versions`، `ai_jobs`. من مجالات أخرى: `users`.
+الجداول: `stages`، `grades`، `subjects`، `units`، `lessons`، `objectives`، `lesson_content_versions`، `ai_jobs`. من مجالات أخرى: `organizations`، `users`.
 
 ```mermaid
 erDiagram
@@ -250,12 +252,14 @@ erDiagram
   units {
     uuid id PK
     uuid subject_id FK
+    uuid org_id FK "nullable"
     smallint no
     text title
   }
   lessons {
     uuid id PK
     uuid unit_id FK
+    uuid org_id FK "nullable"
     smallint no
     text title
     smallint duration_min
@@ -304,12 +308,17 @@ erDiagram
     timestamptz started_at "nullable"
     timestamptz finished_at "nullable"
   }
+  organizations {
+    uuid id PK
+  }
   users {
     uuid id PK
   }
   stages ||--o{ grades : "stage_id"
   grades ||--o{ subjects : "grade_id"
+  organizations |o--o{ units : "org_id"
   subjects ||--o{ units : "subject_id"
+  organizations |o--o{ lessons : "org_id"
   lesson_content_versions |o--o{ lessons : "published_content_id"
   units ||--o{ lessons : "unit_id"
   lessons |o--o{ objectives : "lesson_id"
@@ -342,7 +351,7 @@ erDiagram
     text source
     uuid ai_job_id FK "nullable"
     text status
-    integer version
+    uuid replaces_id FK "nullable"
     uuid created_by FK "nullable"
     uuid decided_by FK "nullable"
     timestamptz decided_at "nullable"
@@ -385,7 +394,6 @@ erDiagram
   attempt_answers {
     uuid attempt_id PK, FK
     uuid question_id PK, FK
-    integer question_version
     jsonb answer "nullable"
     boolean is_correct "nullable"
     numeric points
@@ -410,6 +418,7 @@ erDiagram
   users |o--o{ questions : "decided_by"
   lessons ||--o{ questions : "lesson_id"
   objectives ||--o{ questions : "objective_id"
+  questions |o--o{ questions : "replaces_id"
   users |o--o{ assessments : "decided_by"
   lessons |o--o{ assessments : "lesson_id"
   units |o--o{ assessments : "unit_id"
