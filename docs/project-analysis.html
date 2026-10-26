@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مشرق: تحليل المشروع</title>
+<meta name="description" content="أين وصل مشروع مشرق مقارنةً برؤية المنصّة في وثيقة المنتج، وما الخطوة التالية.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#004F87; --sun:#FEC443; --dawn:#FF982A; --teal:#0AC5BA; --sky:#0A9CC4;
+  --bg:#F7F9FB; --surface:#FFFFFF; --surface-2:#EEF3F7; --ink:#0F2233; --muted:#55687A;
+  --line:#DCE4EB; --ok:#0A8F87; --ok-bg:#E3F6F4; --warn:#B4610A; --warn-bg:#FFF2E0;
+  --risk:#B3261E; --risk-bg:#FCE9E7; --info-bg:#E6F1F9;
+  --bar-ui:#0A9CC4; --bar-db:#0AC5BA; --bar-real:#FF982A; --track:#E3EAF0;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1724; --surface:#112233; --surface-2:#172B3F; --ink:#E8EFF5; --muted:#9AB0C3;
+    --line:#22384D; --ok:#3FD6CC; --ok-bg:#0F3330; --warn:#FFB45C; --warn-bg:#3A2A14;
+    --risk:#FF8A80; --risk-bg:#3D1C1A; --info-bg:#132E45; --track:#1E3346;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1724; --surface:#112233; --surface-2:#172B3F; --ink:#E8EFF5; --muted:#9AB0C3;
+  --line:#22384D; --ok:#3FD6CC; --ok-bg:#0F3330; --warn:#FFB45C; --warn-bg:#3A2A14;
+  --risk:#FF8A80; --risk-bg:#3D1C1A; --info-bg:#132E45; --track:#1E3346;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif}
+h1,h2,h3{font-family:Rubik,"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.35;margin:0}
+h2{font-size:1.45rem;margin-bottom:.35rem}
+h3{font-size:1.05rem}
+p{margin:.4rem 0}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.85em;background:var(--surface-2);padding:.05em .35em;border-radius:5px;direction:ltr;unicode-bidi:isolate}
+a{color:var(--sky)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+
+/* hero */
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:44px 0 36px}
+.hero::before{content:"";position:absolute;inset:auto -10% -260px auto;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(254,196,67,.55) 0 30%,rgba(255,152,42,.25) 46%,rgba(10,197,186,.12) 62%,transparent 72%);pointer-events:none}
+.hero .eyebrow{color:var(--sun);font-weight:600;font-size:.9rem}
+.hero h1{font-size:clamp(1.7rem,4.5vw,2.5rem);margin:.3rem 0 .6rem}
+.hero p{color:#D6E6F2;max-width:46rem;position:relative}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative}
+.meta span{background:rgba(255,255,255,.12);border-radius:999px;padding:3px 12px;font-size:.85rem}
+.theme-btn{position:absolute;top:16px;inset-inline-end:16px;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:999px;padding:6px 14px;font:inherit;font-size:.85rem;cursor:pointer}
+
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:10px 10px;font-size:.9rem;border-bottom:2px solid transparent}
+nav.toc a:hover{color:var(--ink);border-color:var(--sun)}
+
+section{padding:36px 0 8px}
+.lead{color:var(--muted);margin-bottom:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+
+/* verdict */
+.verdict{border-inline-start:5px solid var(--sun);background:var(--surface);border-radius:var(--radius);padding:20px 22px;margin-top:-18px;position:relative;box-shadow:0 6px 24px rgba(0,40,70,.08)}
+.verdict h2{font-size:1.15rem;color:var(--navy)}
+:root[data-theme="dark"] .verdict h2{color:var(--sun)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .verdict h2{color:var(--sun)}}
+.verdict ul{margin:.5rem 0 0;padding-inline-start:1.2rem}
+.verdict li{margin:.3rem 0}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.stat b{display:block;font-family:Rubik,sans-serif;font-size:1.9rem;line-height:1.2}
+.stat span{color:var(--muted);font-size:.88rem}
+.stat.zero b{color:var(--dawn)}
+
+/* vision grid */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.quote{font-size:1.08rem;font-weight:600}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;border-radius:999px;padding:1px 10px;white-space:nowrap}
+.p-ok{background:var(--ok-bg);color:var(--ok)}
+.p-warn{background:var(--warn-bg);color:var(--warn)}
+.p-risk{background:var(--risk-bg);color:var(--risk)}
+.p-info{background:var(--info-bg);color:var(--sky)}
+.vals{list-style:none;padding:0;margin:.4rem 0 0}
+.vals li{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.vals li:first-child{border-top:0}
+.vals small{display:block;color:var(--muted);font-size:.85rem}
+
+/* roadmap bars */
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px}
+.phase-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;align-items:baseline}
+.phase-head small{color:var(--muted)}
+.phase.current{border-color:var(--sun);box-shadow:0 0 0 2px rgba(254,196,67,.35)}
+.bars{margin-top:10px;display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:150px 1fr 64px;gap:10px;align-items:center;font-size:.88rem}
+.bar .track{height:10px;background:var(--track);border-radius:999px;overflow:hidden}
+.bar .fill{height:100%;border-radius:999px}
+.bar .n{text-align:start;font-variant-numeric:tabular-nums;color:var(--muted)}
+.f-ui{background:var(--bar-ui)} .f-db{background:var(--bar-db)} .f-real{background:var(--bar-real)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px}
+.note{font-size:.88rem;color:var(--muted);margin-top:8px}
+@media (max-width:560px){.bar{grid-template-columns:1fr 54px}.bar .lbl{grid-column:1/-1;margin-bottom:-4px}}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0;position:relative}
+.tl::before{content:"";position:absolute;top:6px;bottom:6px;inset-inline-start:7px;width:2px;background:var(--line)}
+.tl li{position:relative;padding-inline-start:30px;margin-bottom:18px}
+.tl li::before{content:"";position:absolute;inset-inline-start:0;top:7px;width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid var(--teal)}
+.tl li.big::before{border-color:var(--dawn)}
+.tl .when{font-size:.82rem;color:var(--muted)}
+.tl h3{margin:.1rem 0 .2rem}
+.tl p{color:var(--muted);font-size:.93rem}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.93rem}
+.tbl th,.tbl td{text-align:start;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+.tbl thead th{background:var(--surface-2);border-top:0;font-weight:600}
+.tbl td small{color:var(--muted)}
+@media (max-width:640px){
+  .tbl thead{display:none}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}
+  .tbl tr{border-top:1px solid var(--line);padding:8px 0}
+  .tbl td{border:0;padding:4px 14px}
+  .tbl td[data-l]::before{content:attr(data-l);display:block;font-size:.78rem;color:var(--muted)}
+}
+
+/* analysis columns */
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.col h3{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.col ul{margin:0;padding-inline-start:1.1rem}
+.col li{margin:.45rem 0;font-size:.95rem}
+.col li b{display:block}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+.risk{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:14px 0;border-top:1px solid var(--line)}
+.risk:first-of-type{border-top:0}
+.risk .lvl{grid-row:span 2}
+.risk p{margin:0;color:var(--muted);font-size:.93rem}
+
+/* steps */
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px 14px 18px;margin-bottom:10px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px}
+.steps li::before{content:counter(s,arabic-indic);grid-row:span 3;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Rubik,sans-serif;font-weight:700}
+.steps li.done{opacity:.55}
+.steps li.done h3{text-decoration:line-through}
+.steps h3{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.steps p{margin:0;color:var(--muted);font-size:.93rem}
+.steps label{font-size:.85rem;color:var(--muted);cursor:pointer;display:inline-flex;gap:6px;align-items:center;margin-top:4px}
+
+.decisions{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.decisions .card h3{font-size:.98rem;margin-bottom:4px}
+.decisions .card p{font-size:.9rem;color:var(--muted)}
+
+footer{color:var(--muted);font-size:.85rem;padding:30px 0 40px;border-top:1px solid var(--line);margin-top:30px}
+@media print{nav.toc,.theme-btn,.steps label{display:none}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <button class="theme-btn" type="button" id="themeBtn">الوضع الداكن</button>
+  <div class="wrap">
+    <div class="eyebrow">مشرق · Mushriq</div>
+    <h1>تحليل المشروع: وين وصلنا من رؤية المنصّة</h1>
+    <p>مقارنة بين ما وعدت به وثيقة المنتج (الإصدار ١٫٠، أغسطس ٢٠٢٦) وما هو موجود فعلًا في المستودع، مع الفجوات والمخاطر والخطوة التالية. كل رقم هنا مأخوذ من الكود أو الوثائق أو سجلّ git، ولا شيء مخترع.</p>
+    <div class="meta">
+      <span>١٩ أكتوبر ٢٠٢٦</span>
+      <span>الفرع <code style="background:transparent;color:inherit">redesign</code></span>
+      <span>آخر commit <code style="background:transparent;color:inherit">55efd8c</code></span>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="أقسام الصفحة">
+  <div class="wrap">
+    <a href="#summary">الخلاصة</a>
+    <a href="#vision">الرؤية</a>
+    <a href="#roadmap">خارطة الطريق</a>
+    <a href="#timeline">ما أنجزناه</a>
+    <a href="#deviations">قرارات خالفت الوثيقة</a>
+    <a href="#analysis">التحليل</a>
+    <a href="#risks">المخاطر</a>
+    <a href="#decisions">قرارات معلّقة</a>
+    <a href="#next">الخطوات التالية</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <div class="verdict" id="summary">
+    <h2>الخلاصة بسطرين</h2>
+    <p><b>الواجهة سبقت الرؤية بمرحلتين، والمحرّك لسّا ما بلّش.</b> عندنا نسخة عرض كاملة لستّة أدوار تغطّي تقريبًا كل ميزات الوثيقة (حتى ميزات المرحلة ٣)، وتصميم قاعدة بيانات للـMVP مجرَّب على PostgreSQL. بالمقابل: صفر سطر خادم، و«النجمة» (محرّك الذكاء) محاكاة ثابتة، وما في محتوى منهج حقيقي.</p>
+    <ul>
+      <li><b>المنجز الأقوى:</b> مبادئ الرؤية (الإنسان في الحلقة، خصوصية القُصّر) صارت قواعد تفرضها قاعدة البيانات نفسها، مش بس شعارات بالواجهة.</li>
+      <li><b>الخطر الأكبر:</b> الميزة اللي بتميّزنا عن المنافسين (شرح وتلخيص وأسئلة عربية دقيقة ومطابقة للمنهج) لسّا ما انجرّبت ولا مرّة على نموذج لغوي حقيقي.</li>
+      <li><b>الخطوة التالية:</b> تجربة «النجمة» على درس حقيقي بالتوازي مع بدء خادم Node.js لأدوار الـMVP الأربعة، بعد حسم أربع قرارات معلّقة.</li>
+    </ul>
+  </div>
+
+  <section aria-labelledby="nums">
+    <h2 id="nums">بالأرقام</h2>
+    <p class="lead">حالة المستودع اليوم.</p>
+    <div class="stats">
+      <div class="stat"><b>٦</b><span>أدوار، لكل دور لوحته</span></div>
+      <div class="stat"><b>٤٨</b><span>صفحة ومسار في الواجهة</span></div>
+      <div class="stat"><b>١٢٫٧ ألف</b><span>سطر React في <code>src/</code></span></div>
+      <div class="stat"><b>٣٣</b><span>جدول PostgreSQL للـMVP</span></div>
+      <div class="stat"><b>٦٣ / ٦٣</b><span>فحص قيود نجح (<code>test:db</code>)</span></div>
+      <div class="stat zero"><b>٠</b><span>سطر خادم، ومستخدمون حقيقيون</span></div>
+    </div>
+  </section>
+
+  <section id="vision" aria-labelledby="vision-h">
+    <h2 id="vision-h">الرؤية: شو وعدنا وشو وضع كل وعد</h2>
+    <p class="lead">من القسم ٢ في وثيقة المنتج، وجنب كل قيمة حالتها الفعلية.</p>
+    <div class="grid2">
+      <div class="card">
+        <p class="pill p-info">الرؤية</p>
+        <p class="quote">أن تصبح المنصّة التعليمية الذكية الأولى عربيًّا، تجعل تعليمًا شخصيًّا عالي الجودة في متناول كل طالب، وتمكّن المعلّم والمدرسة والجهة التعليمية من قرار مبنيّ على البيانات.</p>
+        <p style="color:var(--muted);font-size:.93rem;margin-top:10px">الجملة التنافسية: <b style="color:var(--ink)">المنافس يبيع ساعات معلّم؛ نحن نبني مدرسة رقمية ذكية تعلّم وتقيّم وتُدار بالبيانات.</b></p>
+        <hr style="border:0;border-top:1px solid var(--line);margin:14px 0">
+        <p class="pill p-info">الأهداف على ٣ سنوات</p>
+        <ul class="vals">
+          <li><div>السنة ١: نسخة أفراد (B2C) بمواد مختارة، وإثبات ملاءمة المنتج للسوق<small>ما في مستخدمين حقيقيين ولا خادم بعد</small></div><span class="pill p-warn">قيد التحضير</span></li>
+          <li><div>السنة ٢: الباقة المدرسية (B2B)<small>واجهاتها جاهزة كعرض، والقاعدة جاهزة لها عبر <code>org_id</code></small></div><span class="pill p-info">واجهة فقط</span></li>
+          <li><div>السنة ٣: الإشراف التربوي (B2G) والتوسّع الخليجي<small>لوحة الإشراف موجودة كعرض</small></div><span class="pill p-info">واجهة فقط</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="pill p-info">القيم الأربع</p>
+        <ul class="vals">
+          <li><div><b>الإنسان في الحلقة</b><small>لا محتوى ولا اختبار يصل الطالب قبل اعتماد معلّم. مفروض في الواجهة، ومفروض في القاعدة (نسخ محتوى مجمّدة بعد القرار، ونشر درس بلا نسخة معتمدة مرفوض)</small></div><span class="pill p-ok">مُطبَّق في التصميم</span></li>
+          <li><div><b>خصوصية القُصّر</b><small>موافقات مربوطة بوليّ الأمر الفعلي، سجلّ تدقيق لا يُعدَّل، و<code>anonymize_user()</code> لحق الحذف. سُحبت من المرحلة ٣ إلى الـMVP</small></div><span class="pill p-ok">مُطبَّق في التصميم</span></li>
+          <li><div><b>جودة المحتوى ومطابقة المنهج</b><small>كل المحتوى الحالي بيانات تجريبية، و«النجمة» محاكاة. ما في دليل بعد على الجودة</small></div><span class="pill p-risk">غير مُختبَر</span></li>
+          <li><div><b>الإتاحة والعدالة</b><small>الإتاحة التقنية جيدة (تباين AA، حجم خط، تقليل حركة). أما «أرخص من الدروس الخصوصية» فمعلّق على التسعير اللي ما انحسم</small></div><span class="pill p-warn">نصفه</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap" aria-labelledby="roadmap-h">
+    <h2 id="roadmap-h">وين نحن على خارطة الطريق</h2>
+    <p class="lead">الوثيقة تقسم ٥٩ ميزة على مراحل (الملحق ١١). لكل مرحلة ثلاث طبقات: هل الميزة <b>ظاهرة في الواجهة</b>؟ هل <b>مصمَّمة في قاعدة البيانات</b>؟ هل <b>تعمل فعلًا</b> بخادم وذكاء حقيقي؟</p>
+    <div class="legend">
+      <span><i class="f-ui"></i>ظاهرة في الواجهة (عرض)</span>
+      <span><i class="f-db"></i>مصمَّمة في القاعدة</span>
+      <span><i class="f-real"></i>تعمل فعلًا</span>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>المرحلة ٠: التأسيس</h3><small>الصلاحيات، المصادقة، العربية RTL، البنية</small></div>
+      <p class="note" style="margin-top:6px">الهوية والـRTL والواجهة جاهزة. المصادقة والصلاحيات تعمل داخل المتصفح فقط (رمز التحقق ثابت <code>123456</code>). البنية الخلفية غير موجودة. <b>المرحلة ٠ مش مكتملة فعليًّا</b> رغم إن المظهر يوحي بالعكس.</p>
+    </div>
+
+    <div class="phase current">
+      <div class="phase-head"><h3>المرحلة ١: الـMVP <span class="pill p-warn">نحن هنا</span></h3><small>١٦ ميزة · منتج أفراد قابل للإطلاق</small></div>
+      <div class="bars">
+        <div class="bar"><span class="lbl">في الواجهة</span><div class="track"><div class="fill f-ui" style="width:100%"></div></div><span class="n">١٦ / ١٦</span></div>
+        <div class="bar"><span class="lbl">في القاعدة</span><div class="track"><div class="fill f-db" style="width:100%"></div></div><span class="n">١٦ / ١٦</span></div>
+        <div class="bar"><span class="lbl">تعمل فعلًا</span><div class="track"><div class="fill f-real" style="width:0%"></div></div><span class="n">٠ / ١٦</span></div>
+      </div>
+      <p class="note">الشرح والتلخيص والاختبار بعد الدرس، ولوحات الطالب ووليّ الأمر والمعلّم، والاعتماد. إضافةً لأربع ميزات سحبناها لهون: الموافقات، خصوصية القُصّر، سجلّ التدقيق، الإتقان مع خطة علاجية مبسّطة.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>المرحلة ٢: الباقة المدرسية</h3><small>٢١ ميزة · امتحان الوحدة، التحليلات، الإدارة المدرسية</small></div>
+      <div class="bars">
+        <div class="bar"><span class="lbl">في الواجهة</span><div class="track"><div class="fill f-ui" style="width:98%"></div></div><span class="n">٢٠٫٥ / ٢١</span></div>
+        <div class="bar"><span class="lbl">في القاعدة</span><div class="track"><div class="fill f-db" style="width:24%"></div></div><span class="n">~٥ / ٢١</span></div>
+        <div class="bar"><span class="lbl">تعمل فعلًا</span><div class="track"><div class="fill f-real" style="width:0%"></div></div><span class="n">٠ / ٢١</span></div>
+      </div>
+      <p class="note">الواجهة كاملة عدا تطبيق PWA (ما في Service Worker). القاعدة تغطّي جزئيًّا: الإتقان، الخطط العلاجية، الإشعارات، امتحان الوحدة (نفس جدول الاختبارات)، والحضور اختياريًّا.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>المرحلة ٣: الإشراف والتوسّع</h3><small>٢٢ ميزة · الإشراف التربوي، تعدّد المستأجرين، الدفع، التكاملات</small></div>
+      <div class="bars">
+        <div class="bar"><span class="lbl">في الواجهة</span><div class="track"><div class="fill f-ui" style="width:95%"></div></div><span class="n">٢١ / ٢٢</span></div>
+        <div class="bar"><span class="lbl">في القاعدة</span><div class="track"><div class="fill f-db" style="width:14%"></div></div><span class="n">٣ / ٢٢</span></div>
+        <div class="bar"><span class="lbl">تعمل فعلًا</span><div class="track"><div class="fill f-real" style="width:0%"></div></div><span class="n">٠ / ٢٢</span></div>
+      </div>
+      <p class="note">٨ منها عرض حالة فقط (الدفع، التشفير، تعدّد المستأجرين، تكامل نور…)، والاختبارات التكيّفية غير موجودة. الثلاثة في القاعدة هي اللي سحبناها للـMVP.</p>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head"><h3>المرحلة ٤: النضج والتوسّع الإقليمي</h3><small>جوّال متقدّم، ذكاء أعمق، الخليج</small></div>
+      <p class="note" style="margin-top:6px">ما في ميزات مسمّاة لها بالوثيقة. التلعيب (نقاط وشارات ولوحة صدارة) اللي الوثيقة حطّته بالمرحلة ٤ موجود بالواجهة من الآن.</p>
+    </div>
+
+    <p class="note"><b>القراءة:</b> الفرق بين الشريط الأزرق والبرتقالي هو حجم العمل الحقيقي الباقي. نسخة العرض ممتازة للتسويق وللعروض على المدارس، بس ممكن تعطي إحساس إننا أقرب للإطلاق مما نحن فعلًا.</p>
+  </section>
+
+  <section id="timeline" aria-labelledby="tl-h">
+    <h2 id="tl-h">شو اشتغلنا، بالترتيب</h2>
+    <p class="lead">من سجلّ git و<code>docs/WORKLOG.md</code>. الفرع <code>redesign</code> متقدّم ١٥ commit على <code>master</code>.</p>
+    <ol class="tl">
+      <li><span class="when">أغسطس ٢٠٢٦</span><h3>وثيقة المنتج ١٫٠ (طاقات سكول)</h3><p>الرؤية، تحليل المنافسين (معلمي، تدريس أون لاين)، ٥٩ ميزة في ١٣ ملحمة و٤ مراحل، نموذج التسعير والمخاطر.</p></li>
+      <li><span class="when">قبل أكتوبر</span><h3>النموذج الأوّل للواجهة</h3><p>React + Vite بلا خادم، مخزن واحد في المتصفح. أُضيفت صفحات المالية والجدول وطلبات المعلّمين، وأُعيد تصميم الصفحة الرئيسية (PR #1 و#2). صُحّح خطأ جوهري: النموذج كان «سوق حصص» مثل المنافسين، فصار مسار شرح ← ملخّص ← اختبار.</p></li>
+      <li><span class="when">١٣ أكتوبر</span><h3>إعادة التصميم: المرحلة ١ و٢ و«العالم النجدي»</h3><p>تدقيق شامل، رموز تصميم ومكوّنات مشتركة، غلاف تطبيق جديد، وإعادة تصميم رئيسيات الأدوار الستّة وكل الشاشات الداخلية، وقاموس إنجليزي كامل.</p></li>
+      <li class="big"><span class="when">١٤ أكتوبر · <code>a9b6326</code></span><h3>الهوية الجديدة «مشرق»</h3><p>شعار الشمس المشرقة بملف متّجهي، ألوان من بطاقة الهوية بتباين AA، خطّا Rubik وIBM Plex Sans Arabic، والاسم في كل النصوص. ثم صفحة رئيسية جديدة بلقطات حقيقية من المنصّة.</p></li>
+      <li><span class="when">١٥ أكتوبر · <code>072c406</code></span><h3>تنفيذ نقد الصفحة الرئيسية (كان ٤٫٥ / ١٠)</h3><p>نموذج تواصل صادق، صفحتا الخصوصية والشروط، توليد HTML مسبق (أوّل ظهور من ٣٫٣ ث إلى أقل من ثانية)، تقسيم التحميل (١٠٤ ك.ب بدل ٢٧٧)، ترويسات أمان وCSP، SEO.</p></li>
+      <li class="big"><span class="when">١٥ أكتوبر · <code>5293b50</code> → <code>55efd8c</code></span><h3>التخطيط للنسخة الحقيقية</h3><p>قرار PWA وNode.js وPostgreSQL. تصميم ٣٣ جدولًا مستخرجة من بيانات الواجهة، مخطّط ERD مولَّد تلقائيًّا، ثم مراجعة بمحاولة كسر كل قاعدة: ٨ مشاكل، عولجت ٧ (وظهرت تاسعة وعولجت). ٦٣ فحصًا ناجحًا.</p></li>
+      <li><span class="when">١٥ → ١٩ أكتوبر</span><h3>توقّف</h3><p>ما في commits جديدة. الخطوة المخطّطة (الخادم) تنتظر قرارات المالك.</p></li>
+    </ol>
+  </section>
+
+  <section id="deviations" aria-labelledby="dev-h">
+    <h2 id="dev-h">قرارات خالفنا فيها الوثيقة، وليش</h2>
+    <p class="lead">كلها مقصودة. الوثيقة نفسها بتقول إن المكدّس التقني «مقترح مبدئي قابل للمراجعة».</p>
+    <table class="tbl">
+      <thead><tr><th>البند</th><th>الوثيقة</th><th>القرار</th><th>السبب</th></tr></thead>
+      <tbody>
+        <tr><td data-l="البند">الخادم</td><td data-l="الوثيقة">Laravel</td><td data-l="القرار"><b>Node.js + TypeScript</b></td><td data-l="السبب">لغة واحدة للواجهة والخادم، وفريق أصغر</td></tr>
+        <tr><td data-l="البند">الواجهة</td><td data-l="الوثيقة">Next.js</td><td data-l="القرار"><b>React + Vite (الحالية)</b></td><td data-l="السبب">٤٨ شاشة جاهزة، والتوليد المسبق حلّ مشكلة سرعة الصفحة الرئيسية</td></tr>
+        <tr><td data-l="البند">الجوّال</td><td data-l="الوثيقة">Flutter أو PWA</td><td data-l="القرار"><b>PWA</b></td><td data-l="السبب">أسرع بنحو النصف. الثمن: حدود على آيفون (الإشعارات، الظهور بالمتجر)</td></tr>
+        <tr><td data-l="البند">الموافقات والخصوصية والتدقيق</td><td data-l="الوثيقة">المرحلة ٣</td><td data-l="القرار"><b>داخل الـMVP</b></td><td data-l="السبب">ما بيصحّ نطلق منتج بيجمع بيانات أطفال بدونها (نظام حماية البيانات الشخصية)</td></tr>
+        <tr><td data-l="البند">الإتقان والخطة العلاجية</td><td data-l="الوثيقة">المرحلة ٢</td><td data-l="القرار"><b>نسخة مبسّطة في الـMVP</b></td><td data-l="السبب">بدونها ما في «خطوة تالية» للطالب، وهي جوهر الرؤية</td></tr>
+        <tr><td data-l="البند">السؤال المقالي</td><td data-l="الوثيقة">ضمن أنواع المرحلة ١</td><td data-l="القرار"><b>المرحلة ٢</b></td><td data-l="السبب">أربعة أنواع تُصحَّح آليًّا بدقة أوّلًا؛ المقالي يحتاج تقييمًا بالذكاء ومراجعة</td></tr>
+        <tr><td data-l="البند">أدوار الـMVP</td><td data-l="الوثيقة">طالب، وليّ أمر، معلّم</td><td data-l="القرار"><b>+ مدير</b></td><td data-l="السبب">حدّ أدنى لإدارة الحسابات والفصول</td></tr>
+        <tr><td data-l="البند">الاسم</td><td data-l="الوثيقة">طاقات سكول</td><td data-l="القرار"><b>مشرق / Mushriq</b></td><td data-l="السبب">قرار المالك، ١٤ أكتوبر</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="analysis" aria-labelledby="an-h">
+    <h2 id="an-h">التحليل</h2>
+    <p class="lead">رأيي كمهندس على المشروع، بصراحة.</p>
+    <div class="cols3">
+      <div class="card col">
+        <h3><span class="dot" style="background:var(--ok)"></span>نقاط القوة</h3>
+        <ul>
+          <li><b>القيم مفروضة بالقاعدة</b>اعتماد المعلّم، تجميد المحتوى المعتمد، الموافقات، وسجلّ تدقيق لا يُعدَّل. هذا ما بيتكسّر لو انكتب كود خادم فيه خطأ.</li>
+          <li><b>عقد الـAPI شبه معروف</b>القاعدة مستخرجة من بيانات الواجهة نفسها، مع خريطة من كل جزء بالمخزن لجدوله. ربط الشاشات بالخادم أسهل بكثير من مشروع بيبلّش من الصفر.</li>
+          <li><b>مبدأ «البيانات فقط»</b>ما في أرقام أو شهادات أو أسعار مخترعة بالصفحة ولا بالمنصّة. هذا بيحمي الثقة مع الأهالي والمدارس.</li>
+          <li><b>صفحة رئيسية جاهزة تقنيًّا</b>سريعة، آمنة، مفهرسة، بلغتين.</li>
+        </ul>
+      </div>
+      <div class="card col">
+        <h3><span class="dot" style="background:var(--dawn)"></span>الفجوات بين الرؤية والواقع</h3>
+        <ul>
+          <li><b>«النجمة» محاكاة</b>التوليد بيبني أسئلة من بطاقات الدرس، والمساعد بيسترجع من نصّ الدرس. ما في نموذج لغوي، ولا RAG، ولا طبقة تحقّق آلي.</li>
+          <li><b>ما في محتوى منهج حقيقي</b>المنهج السعودي، مين بيكتبه أو بيرخّصه؟ الوثيقة بتحكي عن «شراكات محتوى» وما في خطوة عليها بعد.</li>
+          <li><b>الواجهة أوسع من الـMVP</b>الـMVP بيحتاج تقريبًا ربع الشاشات. الباقي عرض لازم يضل شغّال بدون ما يعطّل ربط الخادم.</li>
+          <li><b>ما في تحقّق من السوق</b>هدف السنة الأولى هو إثبات ملاءمة المنتج للسوق، وما في أي مستخدم حقيقي أو قائمة انتظار أو قناة تواصل منشورة.</li>
+        </ul>
+      </div>
+      <div class="card col">
+        <h3><span class="dot" style="background:var(--sky)"></span>نظافة تشغيلية</h3>
+        <ul>
+          <li><b>٥ commits ما انرفعت</b>تصميم القاعدة والمخطّطات موجودة بس على هالجهاز.</li>
+          <li><b><code>redesign</code> ما اندمج</b>متقدّم ١٥ commit على <code>master</code>.</li>
+          <li><b>الموقع المنشور قديم</b><code>dist/</code> ما انبنى من بعد الهوية الجديدة، يعني اللي بيزور الرابط بيشوف «طاقات».</li>
+          <li><b>ملف <code>mushriq-erd.rar</code> غير متتبَّع</b>نسخة مضغوطة من ملفات موجودة؛ يا بينحذف يا بيتضاف لـ<code>.gitignore</code>.</li>
+          <li><b>ما في اختبارات للواجهة</b>الاختبارات الوحيدة للقاعدة (٦٣ فحص).</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="risks" aria-labelledby="risk-h">
+    <h2 id="risk-h">المخاطر، مرتّبة حسب الأثر</h2>
+    <p class="lead">أوّل خطرين من جدول مخاطر الوثيقة نفسها (القسم ١٠)، والباقي من وضع المشروع اليوم.</p>
+    <div class="card">
+      <div class="risk"><span class="pill p-risk lvl">عالٍ</span><h3>جودة المحتوى العربي المولَّد ما انجرّبت</h3><p>إذا طلعت الأسئلة أو الشروحات غلط بنسبة عالية، بيصير اعتماد المعلّم إعادة كتابة، وبتسقط فكرة «كلفة حدّية منخفضة». هذا بيضرب قلب الرؤية، فلازم يتجرّب قبل ما نستثمر كتير بالخادم.</p></div>
+      <div class="risk"><span class="pill p-risk lvl">عالٍ</span><h3>الاعتماد البشري ممكن يكون عنق الزجاجة</h3><p>كل درس بيحتاج اعتماد شرح وملخّص واختبار. بمسار الأفراد، المعتمِد هو فريق مشرق نفسه. لازم نقيس وقت المراجعة لكل درس قبل ما نحدّد كم مادة وصفّ نطلق فيها.</p></div>
+      <div class="risk"><span class="pill p-warn lvl">متوسّط</span><h3>«فخّ العرض»</h3><p>نسخة العرض كاملة وجميلة، فبيسهل نضل نحسّن فيها بدل ما نبني المحرّك. كل أسبوع على الواجهة الآن هو أسبوع مش على الشي اللي بيميّزنا.</p></div>
+      <div class="risk"><span class="pill p-warn lvl">متوسّط</span><h3>قرارات معلّقة بتوقّف الخادم</h3><p>مكان استضافة البيانات (داخل السعودية أو لا) بيأثّر على اختيار المزوّد من أوّل يوم. ومزوّد رموز الجوال بيأثّر على أوّل شاشة بالمنصّة.</p></div>
+      <div class="risk"><span class="pill p-info lvl">منخفض</span><h3>حدود PWA على آيفون</h3><p>إشعارات الويب على آيفون بتشتغل بس بعد إضافة التطبيق للشاشة الرئيسية. مهم لتنبيهات وليّ الأمر؛ بنعوّضه بالبريد أو واتساب لاحقًا.</p></div>
+    </div>
+  </section>
+
+  <section id="decisions" aria-labelledby="dec-h">
+    <h2 id="dec-h">قرارات ومعلومات بتنتظرك</h2>
+    <p class="lead">الأربعة الأولى بتوقّف بناء الخادم. الباقي بيوقّف إطلاق الصفحة الرئيسية بشكل رسمي.</p>
+    <div class="decisions">
+      <div class="card"><span class="pill p-risk">يوقّف الخادم</span><h3>أفراد أوّلًا أم مدرسة تجريبية؟</h3><p>الوثيقة بتقول أفراد. المدرسة التجريبية بتعطي معلّمين يعتمدوا المحتوى وطلاب جاهزين، والقاعدة بتدعم الاثنين.</p></div>
+      <div class="card"><span class="pill p-risk">يوقّف الخادم</span><h3>رموز التحقق بالجوال</h3><p>مزوّد خارجي أو داخلي؟ بيحدّد الكلفة وشاشة الدخول.</p></div>
+      <div class="card"><span class="pill p-risk">يوقّف الخادم</span><h3>البيانات داخل السعودية؟</h3><p>بيحدّد مزوّد الاستضافة وقاعدة البيانات والنموذج اللغوي.</p></div>
+      <div class="card"><span class="pill p-risk">يوقّف الخادم</span><h3>مجاني أم مدفوع من أوّل يوم؟</h3><p>المدفوع بيدخّل بوّابة دفع (ميزة مرحلة ٣) للـMVP.</p></div>
+      <div class="card"><span class="pill p-warn">يوقّف الإطلاق</span><h3>بريد وواتساب حقيقيان</h3><p><code>CONTACT</code> في <code>src/marketing/content.js</code></p></div>
+      <div class="card"><span class="pill p-warn">يوقّف الإطلاق</span><h3>الكيان القانوني والاستضافة</h3><p><code>LEGAL</code> في <code>src/marketing/legal.js</code>؛ الخصوصية والشروط مسودّة لحدّ ما يتعبّى.</p></div>
+      <div class="card"><span class="pill p-warn">يوقّف الإطلاق</span><h3>نطاق خاص وأسعار الإطلاق</h3><p>بدل <code>workers.dev</code>، وسعر المقعد للمدارس.</p></div>
+    </div>
+  </section>
+
+  <section id="next" aria-labelledby="next-h">
+    <h2 id="next-h">الخطوات التالية المقترحة</h2>
+    <p class="lead">بالترتيب. علّم على الخطوة لما تخلص؛ العلامة بتنحفظ بهالمتصفح بس.</p>
+    <ol class="steps" id="steps">
+      <li data-k="hygiene"><h3>ترتيب المستودع <span class="pill p-info">ساعة</span></h3><p>رفع الـ٥ commits، حذف ملف الـ<code>.rar</code> أو تجاهله، ثم <code>npm run build</code> وإعادة النشر حتى الموقع يعرض «مشرق».</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="decide"><h3>حسم القرارات الأربع <span class="pill p-risk">قرارك</span></h3><p>بدونها كل سطر بالخادم ممكن ينعاد.</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="spike"><h3>تجربة «النجمة» على درس حقيقي <span class="pill p-warn">أهمّ خطوة</span></h3><p>درس أو درسين من المنهج السعودي ← شرح وملخّص وأسئلة بنموذج Claude ← معلّم من الفريق يراجع. نقيس ثلاث أشياء: نسبة الأسئلة الصحيحة من أوّل مرّة، دقائق المراجعة لكل درس، وكلفة الدرس. هذي الأرقام بتحدّد التسعير وعدد المواد. ممكن تمشي بالتوازي مع الخطوة ٤.</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="api"><h3>عقد الـAPI لأدوار الـMVP الأربعة</h3><p>مبني على <code>schema.sql</code> وعمليات المخزن الحالي، حتى الواجهة ما تتغيّر.</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="server"><h3>خادم Node.js على ثلاث دفعات</h3><p>(١) الدخول والصلاحيات وسجلّ التدقيق، (٢) المنهج والمحتوى والاعتماد، (٣) الاختبارات والإتقان والإشعارات وتقارير وليّ الأمر.</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="wire"><h3>ربط شاشات الـMVP فقط</h3><p>نسخة العرض تضل على رابط منفصل للتسويق، والشاشات خارج الـMVP ما تنربط هلّق.</p><label><input type="checkbox"> خلصت</label></li>
+      <li data-k="pilot"><h3>تجربة مع طلاب حقيقيين</h3><p>مجموعة صغيرة بمادة واحدة. مؤشّرات النجاح من الرؤية نفسها: هل الطالب بيعرف خطوته التالية؟ كم درس بيكمّل بالأسبوع؟ هل وليّ الأمر بيرجع يفتح التقارير؟</p><label><input type="checkbox"> خلصت</label></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    المصادر: <code>Taqat-School-Competitive-Feature-Doc (1).docx</code> · <code>PRODUCT.md</code> · <code>FEATURE-COVERAGE.md</code> · <code>REDESIGN.md</code> · <code>docs/WORKLOG.md</code> · <code>docs/mvp/database.md</code> · سجلّ git حتى <code>55efd8c</code>.
+    ملاحظة: الوثيقة بتقول «٦٠ ميزة» بس جدولها فيه ٥٩، واعتمدنا الجدول.
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeBtn');
+  function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+  function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches}
+  function label(){btn.textContent=isDark()?'الوضع الفاتح':'الوضع الداكن'}
+  var saved=get('mushriq-analysis-theme'); if(saved) root.setAttribute('data-theme',saved);
+  label();
+  btn.addEventListener('click',function(){var t=isDark()?'light':'dark';root.setAttribute('data-theme',t);set('mushriq-analysis-theme',t);label()});
+
+  var steps=document.querySelectorAll('#steps li'), state={};
+  try{state=JSON.parse(get('mushriq-analysis-steps')||'{}')||{}}catch(e){state={}}
+  steps.forEach(function(li){
+    var k=li.getAttribute('data-k'), cb=li.querySelector('input');
+    cb.checked=!!state[k]; li.classList.toggle('done',cb.checked);
+    cb.addEventListener('change',function(){state[k]=cb.checked;li.classList.toggle('done',cb.checked);set('mushriq-analysis-steps',JSON.stringify(state))});
+  });
+})();
+</script>
+</body>
+</html>
