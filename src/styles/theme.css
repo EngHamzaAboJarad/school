@@ -86,6 +86,11 @@
   --pattern-soft: radial-gradient(circle at 0 0, rgba(254, 196, 67, 0.28) 0 260px, transparent 261px), radial-gradient(circle at 100% 100%, rgba(64, 209, 205, 0.22) 0 300px, rgba(178, 232, 219, 0.3) 301px 400px, transparent 401px);
 }
 
+/* English: the page stays hidden until the dictionary has loaded and translated it (max 3 s, see index.html) */
+html.i18n-pending body {
+  visibility: hidden;
+}
+
 *,
 *::before,
 *::after {

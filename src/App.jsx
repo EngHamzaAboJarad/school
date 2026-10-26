@@ -4,29 +4,34 @@ import { ToastProvider } from "./ui/Brand";
 import { ConfirmProvider } from "./ui/Confirm";
 import AuthScreen from "./auth/AuthScreen";
 import Landing from "./marketing/Landing";
+import LegalPage from "./marketing/LegalPage";
 import AppShell from "./shell/AppShell";
 import { applyPrefs, loadPrefs } from "./shell/SettingsDialog";
 import { useRoute } from "./lib/router";
 import { initMotion } from "./ui/motion";
 import { flatNav, pageLabel } from "./data/nav";
-import { ROLES } from "./data/people";
-import StudentPages from "./roles/student";
-import ParentPages from "./roles/parent";
-import TeacherPages from "./roles/teacher";
-import SchoolPages from "./roles/school";
-import SupervisorPages from "./roles/supervisor";
-import SystemPages from "./roles/system";
+import { ROLES, DEMO_ACCOUNTS } from "./data/people";
+// أنماط التطبيق الداخلي: تُحمَّل مع هذه الحزمة فقط، لا مع الصفحة الرئيسية
+import "./styles/components.css";
+import "./styles/auth.css";
+import "./styles/pages.css";
+import "./styles/roles.css";
+import "./styles/admin.css";
+import "./styles/homes.css";
+import "./styles/screens.css";
+import "./styles/motion.css";
 
 // معرض المكوّنات: وضع التطوير فقط (يُحذف من نسخة الإنتاج)
 const UiKit = import.meta.env.DEV ? lazy(() => import("./dev/UiKit")) : null;
 
+// صفحات كل دور في حزمة مستقلّة: الطالب لا ينزّل شاشات الإدارة، والعكس
 const PAGES = {
-  student: StudentPages,
-  parent: ParentPages,
-  teacher: TeacherPages,
-  school: SchoolPages,
-  supervisor: SupervisorPages,
-  system: SystemPages,
+  student: lazy(() => import("./roles/student")),
+  parent: lazy(() => import("./roles/parent")),
+  teacher: lazy(() => import("./roles/teacher")),
+  school: lazy(() => import("./roles/school")),
+  supervisor: lazy(() => import("./roles/supervisor")),
+  system: lazy(() => import("./roles/system")),
 };
 
 function Routed() {
@@ -39,6 +44,17 @@ function Routed() {
     const label = pageLabel(user.role, page);
     document.title = `${label ? `${label} — ` : ""}${ROLES[user.role].long} | مشرق`;
   }, [user, page]);
+
+  // #/demo/<role>: دخول مباشر إلى بيئة العرض من الصفحة الرئيسية (بيانات وهمية، بلا كلمة مرور منشورة)
+  useEffect(() => {
+    if (page !== "demo") return;
+    const acc = DEMO_ACCOUNTS.find((a) => a.role === param);
+    if (acc) dispatch({ type: "login", userId: acc.userId, role: acc.role });
+    window.location.replace(acc ? "#/home" : "#/");
+  }, [page, param, dispatch]);
+  if (page === "demo") return null;
+
+  if (page === "privacy" || page === "terms") return <LegalPage kind={page} />;
 
   if (UiKit && page === "ui-kit") return <Suspense fallback={null}><UiKit /></Suspense>;
 
@@ -60,7 +76,9 @@ function Routed() {
   const Pages = PAGES[user.role];
   return (
     <AppShell page={current} go={go} focus={user.role === "student" && current === "learn" && /^(lesson|exam)\//.test(param || "")}>
-      <Pages page={current} param={param} go={go} />
+      <Suspense fallback={<div className="page-loading" role="status" aria-label="جارٍ التحميل" />}>
+        <Pages page={current} param={param} go={go} />
+      </Suspense>
     </AppShell>
   );
 }

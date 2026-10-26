@@ -41,7 +41,7 @@ Competitors in Saudi Arabia (معلمي، تدريس أون لاين) sell hours
 - Team: Palestinian teachers and engineers from Gaza (doc cover).
 
 ## Evidence on Hand
-- Demo data seeded by the app (`src/data/seed.js`): 3 classes, 17 students, lessons, questions, attempts, attendance, audit log. Demo accounts `*@mushriq.test`, password `password`, OTP `123456`.
+- Demo data seeded by the app (`src/data/seed.js`): 3 classes, 17 students, lessons, questions, attempts, attendance, audit log. Demo accounts `*@mushriq.test`, password `password`, OTP `123456`; `#/demo/<role>` signs straight into a demo account (used by the landing page).
 - No real customers, testimonials, usage numbers or market figures; the doc explicitly leaves market numbers unverified. Do not invent any.
 
 ## Product Principles

@@ -3,6 +3,7 @@ import { createSeed, STATE_VERSION } from "../data/seed";
 import { updateMastery, generateFromLesson, GAP_THRESHOLD, CLOSE_THRESHOLD } from "../lib/grading";
 import { userName, studentOf, lessonOf, unitOf, objectiveOf, lessonsInUnit } from "./selectors";
 import { users } from "../data/people";
+import { drainLeadInbox } from "../lib/leads";
 
 const KEY = `mushriq-state-v${STATE_VERSION}`;
 const uid = (p) => `${p}-${Math.random().toString(36).slice(2, 8)}`;
@@ -18,6 +19,14 @@ function load() {
     /* تجاهل: نبدأ من البيانات الأولية */
   }
   return createSeed();
+}
+
+// الحالة الأولى + طلبات التواصل التي أُرسلت من الصفحة الرئيسية في نسخة العرض (بلا خادم)
+function init() {
+  let s = load();
+  const known = new Set((s.leads || []).map((l) => l.id));
+  for (const lead of drainLeadInbox()) if (!known.has(lead.id)) s = reducer(s, { type: "addLead", lead });
+  return s;
 }
 
 const note = (s, to, title, body, link, tone = "info") => [
@@ -392,7 +401,7 @@ function reducer(s, a) {
 const Ctx = createContext(null);
 
 export function StoreProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, undefined, load);
+  const [state, dispatch] = useReducer(reducer, undefined, init);
   useEffect(() => {
     try {
       localStorage.setItem(KEY, JSON.stringify(state));

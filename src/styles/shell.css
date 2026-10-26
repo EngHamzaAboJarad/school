@@ -215,6 +215,13 @@ html[data-motion="off"] * {
   grid-template-columns: var(--sidebar-w-collapsed) minmax(0, 1fr);
 }
 
+/* طيّ القائمة وفتحها بانتقال قصير في العرض (يتوقّف مع تقليل الحركة) */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-motion="off"]) .shell:not(.focus) {
+    transition: grid-template-columns var(--dur-2) var(--ease);
+  }
+}
+
 .shell-main {
   min-width: 0;
   display: flex;
@@ -313,7 +320,75 @@ html[dir="rtl"] .sb-org::after {
   overflow-y: auto;
   padding: var(--sp-2) var(--sp-3) var(--sp-4);
   scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* شريط التمرير يظهر فقط عند المرور فوق القائمة */
+.sb-nav:hover,
+.sb-nav:focus-within {
   scrollbar-color: var(--c-border-strong) transparent;
+}
+
+/* مقبض الطيّ على حافة القائمة: متاح دائمًا دون النزول إلى أسفلها */
+.sb-edge {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--topbar-h) - 13px);
+  inset-inline-end: -13px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border-strong);
+  color: var(--c-text-muted);
+  box-shadow: var(--el-1);
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+
+.sb-edge:hover {
+  background: var(--c-navy-800);
+  border-color: var(--c-navy-800);
+  color: #fff;
+}
+
+.sb-edge:focus-visible {
+  box-shadow: var(--focus);
+}
+
+/* RTL: القائمة على اليمين، فالسهم يشير لليمين للطيّ ولليسار للفتح؛ وفي LTR بالعكس */
+.sb-edge svg {
+  transition: transform var(--dur-2) var(--ease);
+}
+
+.shell.collapsed .sb-edge svg,
+html[dir="ltr"] .sb-edge svg {
+  transform: scaleX(-1);
+}
+
+html[dir="ltr"] .shell.collapsed .sb-edge svg {
+  transform: none;
+}
+
+.shell.focus .sb-edge {
+  display: none;
+}
+
+/* اسم الصفحة بجانب الأيقونة في القائمة المطويّة */
+.sb-tip {
+  position: fixed;
+  z-index: var(--z-popover);
+  transform: translateY(-50%);
+  padding: 6px 10px;
+  border-radius: var(--rad-sm);
+  background: var(--c-navy-950);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  box-shadow: var(--el-2);
+  pointer-events: none;
 }
 
 .sb-group+.sb-group {
@@ -819,6 +894,13 @@ html[dir="ltr"] .sb-collapse svg {
   margin: var(--sp-1) 0;
 }
 
+/* The top bar is sticky with its own z-index, so its popovers live in its stacking context.
+   While one is open the bar rises above the scrim; otherwise the scrim would cover the popover
+   and swallow every click on its items. */
+.tb.has-pop {
+  z-index: var(--z-popover);
+}
+
 .pop-scrim {
   position: fixed;
   inset: 0;
@@ -915,7 +997,9 @@ html[dir="ltr"] .sb-collapse svg {
     display: grid;
   }
 
-  .sb-collapse {
+  .sb-collapse,
+  .sb-edge,
+  .sb-tip {
     display: none !important;
   }
 

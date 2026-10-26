@@ -1,7 +1,4 @@
 import { createContext, useCallback, useContext, useLayoutEffect, useMemo, useState, Fragment } from "react";
-import en from "./en.json";
-import enExtra from "./en.extra.json";
-import enRedesign from "./en.redesign.json";
 
 // ──────────────────────────────────────────────────────────────────────────
 // الترجمة العربية ↔ الإنجليزية
@@ -34,12 +31,20 @@ function register(k, v) {
   if (k.includes("{}")) templates.push({ re: new RegExp(`^${k.split("{}").map(escapeRe).join(CAP)}$`), out: v, len: k.length });
   else exact.set(k, v);
 }
-for (const [k, v] of Object.entries({ ...en, ...enExtra, ...enRedesign })) {
-  register(k, v);
-  // نسخة بلا الرصاصة «• » لأن التقسيم على « • » يفصلها عن النص
-  if (k.startsWith("• ")) register(k.slice(2), v.replace(/^•\s*/, ""));
+// القاموس يُحمَّل عند الحاجة (dictionaries.js) ثم يُسجَّل مرّة واحدة
+let dictLoad = null;
+export function loadDictionary() {
+  dictLoad ||= import("./dictionaries").then(({ default: dict }) => {
+    for (const [k, v] of Object.entries(dict)) {
+      register(k, v);
+      // نسخة بلا الرصاصة «• » لأن التقسيم على « • » يفصلها عن النص
+      if (k.startsWith("• ")) register(k.slice(2), v.replace(/^•\s*/, ""));
+    }
+    templates.sort((a, b) => b.len - a.len);
+    cache.clear();
+  });
+  return dictLoad;
 }
-templates.sort((a, b) => b.len - a.len);
 
 const SPLITS = [
   [" • ", " • "],
@@ -183,9 +188,25 @@ export function LangProvider({ children }) {
   }, []);
 
   useLayoutEffect(() => {
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
-    if (lang === "en") return startTranslator();
+    const root = document.documentElement;
+    root.lang = lang;
+    root.dir = lang === "en" ? "ltr" : "rtl";
+    if (lang !== "en") {
+      root.classList.remove("i18n-pending");
+      return undefined;
+    }
+    // الإنجليزية: الصفحة مخفيّة (i18n-pending من index.html) حتى يصل القاموس ويُترجَم ما رُسم
+    let stop = null;
+    let live = true;
+    loadDictionary()
+      .then(() => {
+        if (live) stop = startTranslator();
+      })
+      .finally(() => root.classList.remove("i18n-pending"));
+    return () => {
+      live = false;
+      stop?.();
+    };
   }, [lang]);
 
   const value = useMemo(() => ({ lang, setLang }), [lang, setLang]);

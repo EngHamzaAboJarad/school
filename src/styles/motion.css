@@ -545,26 +545,6 @@ html[dir="rtl"] .hbar-track i {
   animation: m-live 2.2s ease-out infinite;
 }
 
-.topbar {
-  transition: box-shadow 0.3s;
-}
-
-.topbar.scrolled {
-  box-shadow: 0 10px 28px -16px rgba(0, 58, 102, 0.28);
-}
-
-.topbar::after {
-  content: "";
-  position: absolute;
-  bottom: -1px;
-  inset-inline-start: 0;
-  height: 2px;
-  width: calc(var(--scroll, 0) * 100%);
-  background: linear-gradient(90deg, var(--gold-500), var(--gold-300));
-  border-radius: 0 2px 2px 0;
-  transition: width 0.12s linear;
-}
-
 .icon-btn .dot {
   animation: m-bounce 0.5s backwards;
 }
