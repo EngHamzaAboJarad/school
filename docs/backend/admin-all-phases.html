@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>خطة لوحتَي الإدارة</title>
+<meta name="description" content="جرد كل وظائف لوحتَي الإدارة في مشرق وتقسيمها على سبرينتات بمخطّط زمني وملخّص لكل سبرينت.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#004F87;--sun:#FEC443;--dawn:#FF982A;--teal:#0AC5BA;--sky:#0A9CC4;
+--bg:#F7F9FB;--surface:#FFFFFF;--surface-2:#EEF3F7;--ink:#0F2233;--muted:#55687A;--line:#DCE4EB;
+--ok:#0A8F87;--ok-bg:#E3F6F4;--warn:#B4610A;--warn-bg:#FFF2E0;--risk:#B3261E;--risk-bg:#FCE9E7;--info:#0A7DA0;--info-bg:#E6F1F9;--track:#E9EFF4;--ram:rgba(254,196,67,.22);--radius:14px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1724;--surface:#112233;--surface-2:#172B3F;--ink:#E8EFF5;--muted:#9AB0C3;--line:#22384D;--ok:#3FD6CC;--ok-bg:#0F3330;--warn:#FFB45C;--warn-bg:#3A2A14;--risk:#FF8A80;--risk-bg:#3D1C1A;--info:#5CC8EA;--info-bg:#132E45;--track:#162A3C;--ram:rgba(254,196,67,.12)}}
+:root[data-theme="dark"]{--bg:#0B1724;--surface:#112233;--surface-2:#172B3F;--ink:#E8EFF5;--muted:#9AB0C3;--line:#22384D;--ok:#3FD6CC;--ok-bg:#0F3330;--warn:#FFB45C;--warn-bg:#3A2A14;--risk:#FF8A80;--risk-bg:#3D1C1A;--info:#5CC8EA;--info-bg:#132E45;--track:#162A3C;--ram:rgba(254,196,67,.12)}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif}
+h1,h2,h3,h4{font-family:Rubik,"IBM Plex Sans Arabic",system-ui,sans-serif;line-height:1.35;margin:0}
+h2{font-size:1.45rem;margin-bottom:.35rem}h3{font-size:1.1rem}h4{font-size:.9rem;color:var(--muted);margin:12px 0 4px}
+p{margin:.4rem 0}a{color:var(--sky)}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.82em;background:var(--surface-2);padding:.05em .35em;border-radius:5px;direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.hero{background:var(--navy);color:#fff;position:relative;overflow:hidden;padding:44px 0 40px}
+.hero::before{content:"";position:absolute;inset:auto -10% -260px auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(254,196,67,.55) 0 30%,rgba(255,152,42,.25) 46%,rgba(10,197,186,.12) 62%,transparent 72%);pointer-events:none}
+.hero .eyebrow{color:var(--sun);font-weight:600;font-size:.9rem}.hero h1{font-size:clamp(1.7rem,4.5vw,2.5rem);margin:.3rem 0 .6rem}
+.hero p{color:#D6E6F2;max-width:48rem;position:relative}.hero code{background:rgba(255,255,255,.14);color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;position:relative}.meta span{background:rgba(255,255,255,.12);border-radius:999px;padding:3px 12px;font-size:.85rem}
+.theme-btn{position:absolute;top:16px;inset-inline-end:16px;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:999px;padding:6px 14px;font:inherit;font-size:.85rem;cursor:pointer;z-index:2}
+nav.toc{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:10px;font-size:.9rem;border-bottom:2px solid transparent}nav.toc a:hover{color:var(--ink);border-color:var(--sun)}
+section{padding:34px 0 6px}.lead{color:var(--muted);margin-bottom:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.verdict{border-inline-start:5px solid var(--sun);background:var(--surface);border-radius:var(--radius);padding:20px 22px;margin-top:-18px;position:relative;box-shadow:0 6px 24px rgba(0,40,70,.08)}
+.v-h{font-size:1.15rem;color:var(--navy)}:root[data-theme="dark"] .v-h{color:var(--sun)}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .v-h{color:var(--sun)}}.verdict ul{margin:.5rem 0 0;padding-inline-start:1.2rem}.verdict li{margin:.3rem 0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.stat b{display:block;font-family:Rubik,sans-serif;font-size:1.9rem;line-height:1.2}.stat span{color:var(--muted);font-size:.88rem}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;border-radius:999px;padding:1px 10px;white-space:nowrap}
+.p-ok{background:var(--ok-bg);color:var(--ok)}.p-warn{background:var(--warn-bg);color:var(--warn)}.p-risk{background:var(--risk-bg);color:var(--risk)}.p-info{background:var(--info-bg);color:var(--info)}.p-mute{color:var(--muted)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.card ul{margin:.3rem 0 0;padding-inline-start:1.1rem}.card li{margin:.3rem 0}
+/* gantt */
+.gantt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;overflow-x:auto}
+.g-head,.g-row{display:grid;grid-template-columns:230px minmax(560px,1fr);gap:12px;align-items:center}
+.g-months,.g-track{display:grid;grid-template-columns:repeat(var(--weeks),1fr);position:relative}
+.g-months span{font-size:.78rem;color:var(--muted);border-inline-start:1px solid var(--line);padding-inline-start:4px;white-space:nowrap}
+.g-row{padding:5px 0;border-top:1px solid var(--line)}
+.g-label{font-size:.88rem;text-decoration:none;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-track{height:26px;background:repeating-linear-gradient(to left,transparent 0 calc(100%/var(--weeks) - 1px),var(--line) calc(100%/var(--weeks) - 1px) calc(100%/var(--weeks)))}
+.g-ram{grid-row:1;background:var(--ram);height:100%}
+.g-bar{grid-row:1;height:22px;align-self:center;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.78rem;font-weight:700;z-index:1}
+.b-sch{background:var(--navy)}.b-sys{background:var(--teal);color:#06302D}
+:root[data-theme="dark"] .b-sch{background:#2F86C9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .b-sch{background:#2F86C9}}
+.g-ms .g-track{height:46px;background:none}
+.g-diamond{grid-row:1;position:relative;display:flex;flex-direction:column;align-items:center}
+.g-diamond i{width:12px;height:12px;background:var(--dawn);transform:rotate(45deg);border-radius:2px}
+.g-diamond small{font-size:.7rem;color:var(--muted);white-space:nowrap;margin-top:4px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.84rem;color:var(--muted);margin:10px 0 0}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px}.legend i.ram{background:var(--sun);opacity:.5}
+/* sprints */
+.sprint{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;scroll-margin-top:56px}
+.sprint header{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+.s-num{width:46px;height:46px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-family:Rubik,sans-serif;font-weight:700}
+.s-dates{color:var(--muted);font-size:.88rem}
+.s-count{text-align:center}.s-count b{display:block;font-family:Rubik,sans-serif;font-size:1.5rem;line-height:1.1}.s-count small{color:var(--muted);font-size:.78rem}
+.s-goal{background:var(--surface-2);border-radius:10px;padding:10px 14px;margin-top:12px}
+.s-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px}
+.s-grid ul{margin:0;padding-inline-start:1.1rem}.s-grid li{margin:.25rem 0;font-size:.93rem}
+.fns{list-style:none;padding:0!important}.fns li{padding:5px 0;border-bottom:1px dashed var(--line)}.fns li:last-child{border-bottom:0}
+.s-grid p{font-size:.93rem;margin:0}.risk-t{color:var(--warn)}
+@media (max-width:760px){.s-grid{grid-template-columns:1fr;gap:4px}.sprint header{grid-template-columns:auto 1fr}.s-count{grid-column:1/-1;text-align:start}}
+/* tables */
+.tbl{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.92rem;margin-bottom:18px}
+.tbl th,.tbl td{text-align:start;padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+.tbl thead th{background:var(--surface-2);border-top:0;font-weight:600}
+@media (max-width:700px){.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl tr{border-top:1px solid var(--line);padding:8px 0}.tbl td{border:0;padding:3px 14px}.tbl td[data-l]::before{content:attr(data-l);display:block;font-size:.75rem;color:var(--muted)}}
+details.inv{margin-bottom:10px}details.inv summary{cursor:pointer;font-family:Rubik,sans-serif;font-weight:700;font-size:1.05rem;padding:10px 0}
+.tpl{white-space:pre-wrap;font-family:inherit;background:var(--surface-2);border-radius:10px;padding:14px 16px;margin:0;font-size:.93rem}
+footer{color:var(--muted);font-size:.85rem;padding:30px 0 40px;border-top:1px solid var(--line);margin-top:30px}
+@media print{nav.toc,.theme-btn{display:none}.hero{print-color-adjust:exact;-webkit-print-color-adjust:exact}.sprint{break-inside:avoid}details.inv{display:block}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <button class="theme-btn" type="button" id="themeBtn">الوضع الداكن</button>
+  <div class="wrap">
+    <div class="eyebrow">مشرق · الباك اند · الخطة المعتمدة</div>
+    <h1>خطة باك اند لوحتَي الإدارة كاملة</h1>
+    <p>جرد كل وظيفة في لوحة <b>إدارة المدرسة</b> ولوحة <b>مدير النظام (المنصّة)</b>، والأساس المشترك اللي بيحتاجوه، مقسّمة على سبرينتات من أسبوعين، مع مخطّط زمني وملخّص لكل سبرينت. الجرد مأخوذ من كود الواجهة نفسه (<code>src/roles/school</code> و<code>src/roles/system</code>) ومقارن مع <code>docs/mvp/schema.sql</code>.</p>
+    <div class="meta"><span>٧٣ وظيفة كاملة</span><span>٢٦ أكتوبر ٢٠٢٦</span><span>١ نوفمبر ٢٠٢٦ – ١٨ مارس ٢٠٢٧</span><span>Node.js + TypeScript + PostgreSQL</span></div>
+  </div>
+</header>
+<nav class="toc" aria-label="أقسام الصفحة"><div class="wrap">
+  <a href="#summary">الخلاصة</a><a href="#timeline">المخطّط الزمني</a><a href="#sprints">السبرينتات</a><a href="#inventory">جرد الوظائف</a><a href="#schema">تعديلات القاعدة</a><a href="#risks">المخاطر</a><a href="#review">ملخّص نهاية السبرينت</a>
+</div></nav>
+<main class="wrap"><div class="card" style="margin:20px 0 26px;border-inline-start:5px solid var(--teal)"><b>قرار مدير الفريق (٢٦ أكتوبر ٢٠٢٦):</b> تُبنى كل لوحة كاملة، يعني الـ٧٣ وظيفة كلها، بالترتيب والسبرينتات اللي تحت.</div>
+  <div class="verdict" id="summary">
+    <h2 class="v-h">الخلاصة</h2>
+    <p><b>٧٣ وظيفة باك اند</b> في ١٠ سبرينتات (٢٠ أسبوعًا)، من ١ نوفمبر ٢٠٢٦ إلى ١٨ مارس ٢٠٢٧.</p>
+    <ul>
+      <li><b>الترتيب:</b> الأساس أولًا (الصلاحيات، العزل، التدقيق، الدخول)، ثم لوحة المدرسة لأنها ضمن الـMVP، ثم لوحة مدير النظام.</li>
+      <li><b>القاعدة:</b> ٣٦ وظيفة جداولها موجودة أصلًا في schema.sql، و٨ تحتاج أعمدة إضافية، و٢٣ تحتاج جداول جديدة (القسم ٦).</li>
+      <li><b>الافتراض:</b> مطوّرا باك اند اثنان، وسبرينت من الأحد إلى خميس الأسبوع التالي. فريق أصغر = مدّة أطول بنفس الترتيب.</li>
+      <li><b>تنبيه:</b> اللوحتان وحدهما لا تُطلقان منتجًا. أرقام الإتقان في التقارير تأتي من باك اند الطالب والمعلّم، وهذا يحتاج خطة مماثلة.</li>
+    </ul>
+  </div>
+
+  <section aria-labelledby="nums"><h2 id="nums">بالأرقام</h2>
+    <div class="stats">
+      <div class="stat"><b>٧٣</b><span>وظيفة إجمالًا</span></div>
+      <div class="stat"><b>١١</b><span>أساس مشترك (دخول، صلاحيات، تدقيق…)</span></div>
+      <div class="stat"><b>٣٤</b><span>لوحة إدارة المدرسة · ٨ صفحات</span></div>
+      <div class="stat"><b>٢٨</b><span>لوحة مدير النظام · ١٠ صفحات</span></div>
+      <div class="stat"><b>١٠</b><span>سبرينتات × أسبوعين</span></div>
+      <div class="stat"><b>١٥</b><span>تعديلًا على القاعدة</span></div>
+    </div>
+  </section>
+
+  <section id="timeline" aria-labelledby="tl-h"><h2 id="tl-h">المخطّط الزمني</h2>
+    <p class="lead">كل عمود أسبوع. اضغط على اسم السبرينت لملخّصه.</p>
+    
+<div class="gantt" style="--weeks:20">
+  <div class="g-head"><span></span><div class="g-months"><span style="grid-column:1 / span 1">نوفمبر</span><span style="grid-column:6 / span 1">ديسمبر</span><span style="grid-column:10 / span 1">يناير</span><span style="grid-column:15 / span 1">فبراير</span><span style="grid-column:19 / span 1">مارس</span></div></div>
+  <div class="g-row"><a class="g-label" href="#s0">س٠ · التأسيس</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:1 / span 2"><span>٣</span></div></div></div><div class="g-row"><a class="g-label" href="#s1">س١ · الدخول والحسابات</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:3 / span 2"><span>٦</span></div></div></div><div class="g-row"><a class="g-label" href="#s2">س٢ · المستخدمون والصلاحيات</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:5 / span 2"><span>١١</span></div></div></div><div class="g-row"><a class="g-label" href="#s3">س٣ · البنية الأكاديمية والبحث والتواصل</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:7 / span 2"><span>١٠</span></div></div></div><div class="g-row"><a class="g-label" href="#s4">س٤ · الحضور والتواصل والإشعارات</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:9 / span 2"><span>٨</span></div></div></div><div class="g-row"><a class="g-label" href="#s5">س٥ · لوحة المدرسة والتقارير</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sch" style="grid-column:11 / span 2"><span>٨</span></div></div></div><div class="g-row"><a class="g-label" href="#s6">س٦ · المستأجرون والتراخيص</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sys" style="grid-column:13 / span 2"><span>٧</span></div></div></div><div class="g-row"><a class="g-label" href="#s7">س٧ · الفوترة والمالية</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sys" style="grid-column:15 / span 2"><span>٦</span></div></div></div><div class="g-row"><a class="g-label" href="#s8">س٨ · الذكاء والتدقيق والامتثال</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sys" style="grid-column:17 / span 2"><span>٨</span></div></div></div><div class="g-row"><a class="g-label" href="#s9">س٩ · التكاملات ولوحة النظام والتسليم</a><div class="g-track">
+    <div class="g-ram" style="grid-column:15 / 20" aria-hidden="true"></div>
+    <div class="g-bar b-sys" style="grid-column:19 / span 2"><span>٦</span></div></div></div>
+  <div class="g-row g-ms"><span class="g-label">المعالم</span><div class="g-track"><div class="g-diamond" style="grid-column:4 / span 1" title="الدخول الحقيقي يعمل"><i></i><small>الدخول الحقيقي يعمل</small></div><div class="g-diamond" style="grid-column:12 / span 1" title="لوحة المدرسة الأساسية جاهزة لتجربة"><i></i><small>لوحة المدرسة الأساسية جاهزة لتجربة</small></div><div class="g-diamond" style="grid-column:16 / span 1" title="لوحة المدرسة كاملة"><i></i><small>لوحة المدرسة كاملة</small></div><div class="g-diamond" style="grid-column:20 / span 1" title="لوحة مدير النظام كاملة"><i></i><small>لوحة مدير النظام كاملة</small></div></div></div>
+</div>
+<div class="legend"><span><i class="b-sch"></i>تركيز على أساس المنصّة ولوحة المدرسة</span><span><i class="b-sys"></i>تركيز على المستأجرين ولوحة النظام</span><span><i class="ram"></i>رمضان (تقديري)</span><span>الرقم داخل الشريط = عدد الوظائف</span></div>
+  </section>
+
+  <section id="sprints" aria-labelledby="sp-h"><h2 id="sp-h">السبرينتات وملخّص كل واحد</h2>
+    <p class="lead">لكل سبرينت: الهدف، الوظائف بأرقامها، شغل البنية والقاعدة، وشو بنعرض بآخره، وعلى شو بيعتمد.</p>
+    
+<article class="sprint" id="s0">
+  <header>
+    <div class="s-num">س٠</div>
+    <div class="s-title"><h3>التأسيس</h3><span class="s-dates">١ نوفمبر – ١٢ نوفمبر ٢٠٢٦</span></div>
+    <div class="s-count"><b>٣</b><small>٣ أساس</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> خادم جاهز يُبنى عليه كل شيء: كل طلب يمرّ بالصلاحيات والعزل والتدقيق.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>FND-07</code> فرض الصلاحيات على كل طلب (RBAC middleware)</li><li><code>FND-08</code> كتابة سجلّ التدقيق تلقائيًّا لكل إجراء حسّاس</li><li><code>FND-09</code> عزل البيانات حسب الجهة (org scoping)</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>مشروع Node.js + TypeScript (Fastify + Kysely بأنواع مولّدة من القاعدة)</li><li>ترحيلات SQL تبدأ من schema.sql + امتدادات اللوحتين (القسم ٦)</li><li>بيئتا dev وstaging، وCI يشغّل test:db واختبارات الـAPI</li><li>بذر بيانات العرض الحالية في القاعدة، وتوثيق OpenAPI</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>طلب بلا صلاحية يرجع 403، والطلب المسموح يُكتب في التدقيق، ولا يرى مستخدم بيانات جهة أخرى.</p>
+      <h4>يعتمد على</h4><p>قرار الاستضافة (داخل السعودية أم لا)</p>
+      <h4>انتبه</h4><p class="risk-t">إن تأخّر قرار الاستضافة نبدأ على Docker محليًّا؛ النقل لاحقًا لا يغيّر الكود.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s1">
+  <header>
+    <div class="s-num">س١</div>
+    <div class="s-title"><h3>الدخول والحسابات</h3><span class="s-dates">١٥ نوفمبر – ٢٦ نوفمبر ٢٠٢٦</span></div>
+    <div class="s-count"><b>٦</b><small>٦ أساس</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> دخول حقيقي بدل الرمز الثابت ١٢٣٤٥٦، وتسجيل يُنشئ طلبات انضمام فعلية.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>FND-01</code> تسجيل الدخول (جوال أو بريد أو اسم مستخدم + كلمة مرور)</li><li><code>FND-02</code> التحقق بخطوتين برمز OTP: إرسال، تحقّق، حدّ ٥ محاولات</li><li><code>FND-03</code> نسيت كلمة المرور وإعادة تعيينها</li><li><code>FND-04</code> الجلسات: تجديد، خروج، انتهاء بعد ٣٠ دقيقة خمول، قفل بعد ٥ محاولات فاشلة</li><li><code>FND-05</code> الملف الشخصي والتفضيلات (اللغة، قنوات الإشعار)</li><li><code>FND-06</code> إنشاء حساب وطلب انضمام (طالب، وليّ أمر، معلّم)</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>واجهة موحّدة لمزوّد الرسائل (SMS) قابلة للتبديل</li><li>تجزئة كلمات المرور والرموز، وحدّ المحاولات</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>شاشات الدخول والتحقق والتسجيل ونسيت كلمة المرور تعمل على الخادم. الحسابات التجريبية تبقى في نسخة العرض فقط.</p>
+      <h4>يعتمد على</h4><p>مزوّد رموز التحقق (القرار ٢)</p>
+      <h4>انتبه</h4><p class="risk-t">إن تأخّر المزوّد: مزوّد تطوير يطبع الرمز في السجلّ، ممنوع في الإنتاج.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s2">
+  <header>
+    <div class="s-num">س٢</div>
+    <div class="s-title"><h3>المستخدمون والصلاحيات</h3><span class="s-dates">٢٩ نوفمبر – ١٠ ديسمبر ٢٠٢٦</span></div>
+    <div class="s-count"><b>١١</b><small>٧ مدرسة · ٤ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> الإدارة ومدير النظام يتحكّمون فعلًا بالحسابات والأدوار والصلاحيات.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SCH-07</code> قائمة المستخدمين: بحث، فلترة بالدور والحالة، ترقيم</li><li><code>SCH-08</code> إضافة مستخدم (الاسم، التواصل، الدور، الحالة)</li><li><code>SCH-09</code> اعتماد حساب معلّق أو رفضه</li><li><code>SCH-10</code> اعتماد كل الحسابات المعلّقة دفعة واحدة</li><li><code>SCH-11</code> تغيير دور مستخدم (بتأكيد)</li><li><code>SCH-12</code> إيقاف حساب وإعادة تفعيله</li><li><code>SCH-13</code> عرض مصفوفة الصلاحيات (قراءة فقط)</li><li><code>SYS-06</code> طلبات انضمام المعلّمين من كل المدارس (معلّقة وسابقة)</li><li><code>SYS-07</code> اعتماد معلّم أو رفضه + إشعاره</li><li><code>SYS-11</code> مصفوفة الصلاحيات (١٤ صلاحية × ٦ أدوار)</li><li><code>SYS-12</code> منح صلاحية أو سحبها فورًا + تدقيق</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جدول role_permissions يغذّي طبقة الصلاحيات مع تخزين مؤقت يُبطَل عند التعديل</li><li>دور platform_admin لمدير النظام</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>صفحات «المستخدمون والأدوار» و«طلبات المعلّمين» و«الصلاحيات» على الخادم؛ سحب صلاحية يمنع الوظيفة فورًا.</p>
+      <h4>يعتمد على</h4><p>السبرينت ١</p>
+      <h4>انتبه</h4><p class="risk-t">قاعدة «دور واحد لكل مستخدم»: تغيير دور وليّ أمر مربوط بأبناء يجب أن يُرفض أو يُنهي الروابط صراحةً.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s3">
+  <header>
+    <div class="s-num">س٣</div>
+    <div class="s-title"><h3>البنية الأكاديمية والبحث والتواصل</h3><span class="s-dates">١٣ ديسمبر – ٢٤ ديسمبر ٢٠٢٦</span></div>
+    <div class="s-count"><b>١٠</b><small>١ أساس · ٦ مدرسة · ٣ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> هيكل المدرسة والمنهج حقيقي، ونموذج «تواصل معنا» يصل فعلًا.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>FND-10</code> البحث العام (مستخدمون، فصول، صفحات)</li><li><code>SCH-14</code> المراحل والصفوف والفصول</li><li><code>SCH-15</code> ربط معلّم بفصل</li><li><code>SCH-16</code> الجدول الأسبوعي للفصل (٥ أيام × ٦ حصص)</li><li><code>SCH-17</code> تعديل حصة (المادة، المعلّم)</li><li><code>SCH-18</code> بنية المنهج: إضافة وحدة</li><li><code>SCH-19</code> إضافة درس مع هدف تعلّم</li><li><code>SYS-08</code> استقبال طلب تواصل من الصفحة الرئيسية (عام، حدّ معدّل، تحقّق) بدل خادم Cloudflare</li><li><code>SYS-09</code> قائمة طلبات التواصل (جديد / تمت المتابعة)</li><li><code>SYS-10</code> تغيير حالة طلب (تمت المتابعة / إعادة فتح)</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جدول timetable_slots</li><li>فهارس بحث (pg_trgm) للأسماء العربية</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>صفحة «الصفوف والجداول» بتبويباتها الثلاثة، والبحث العام، وطلبات الصفحة الرئيسية تُكتب في القاعدة بدل خادم Cloudflare.</p>
+      <h4>يعتمد على</h4><p>السبرينت ٢</p>
+      <h4>انتبه</h4><p class="risk-t">البحث العربي يحتاج تطبيعًا (الهمزات، التاء المربوطة، التشكيل) حتى يجد «أحمد» و«احمد».</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s4">
+  <header>
+    <div class="s-num">س٤</div>
+    <div class="s-title"><h3>الحضور والتواصل والإشعارات</h3><span class="s-dates">٢٧ ديسمبر – ٧ يناير ٢٠٢٧</span></div>
+    <div class="s-count"><b>٨</b><small>١ أساس · ٧ مدرسة</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> الإدارة ترى الحضور لحظيًّا وتتواصل مع المعلّمين والأهالي.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>FND-11</code> الإشعارات: القائمة، غير المقروء، تعليم كمقروء أو الكل</li><li><code>SCH-06</code> تذكير معلّم بتسجيل الحضور (رسالة مباشرة)</li><li><code>SCH-20</code> حضور اليوم حسب الفصل (مسجّل / غير مسجّل)</li><li><code>SCH-21</code> الغيابات المتكرّرة (يومان فأكثر خلال ١٤ يومًا)</li><li><code>SCH-22</code> جدار الحضور وتصديره CSV</li><li><code>SCH-32</code> المحادثات: القائمة، غير المقروء، القراءة</li><li><code>SCH-33</code> بدء محادثة والردّ عليها</li><li><code>SCH-34</code> نشر إعلان لفئة محدّدة مع تتبّع القراءة</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جداول المحادثات والرسائل والإعلانات وقراءاتها</li><li>نقطة تسجيل الحضور من جهة المعلّم (حدّ أدنى) لأن الإدارة تقرأ ما يسجّله المعلّم</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>صفحتا «الحضور» و«الإعلانات والرسائل» وجرس الإشعارات على الخادم؛ تذكير المعلّم يصله كرسالة وإشعار.</p>
+      <h4>يعتمد على</h4><p>السبرينت ٣</p>
+      <h4>انتبه</h4><p class="risk-t">حساب اليوم بتوقيت الرياض لا UTC (موثّق في القاعدة). إشعارات الجوال (Web Push) تأتي مع الـPWA لاحقًا.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s5">
+  <header>
+    <div class="s-num">س٥</div>
+    <div class="s-title"><h3>لوحة المدرسة والتقارير</h3><span class="s-dates">١٠ يناير – ٢١ يناير ٢٠٢٧</span></div>
+    <div class="s-count"><b>٨</b><small>٨ مدرسة</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> الصفحة الرئيسية للإدارة والتقارير المؤسسية من أرقام حقيقية.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SCH-01</code> ملخّص المدرسة: طلاب، معلّمون، حضور آخر يوم وتغيّره، متوسط الإتقان، المقاعد</li><li><code>SCH-02</code> «قرارات اليوم»: ٨ أنواع تنبيه (حسابات معلّقة، حضور غير مسجّل، مقاعد، غياب متكرّر، رسوم، رسائل، طلبات معلّمين، محتوى بانتظار المراجعة)</li><li><code>SCH-03</code> جدار الحضور لآخر ١٠ أيام دراسية (أحد–خميس)</li><li><code>SCH-04</code> جدول الفصول: الحضور، الإتقان، المتعثّرون</li><li><code>SCH-05</code> آخر العمليات من سجلّ التدقيق لحسابات المدرسة</li><li><code>SCH-23</code> تقرير الفصول مع فلتر الصف</li><li><code>SCH-24</code> الإتقان حسب المادة</li><li><code>SCH-25</code> تصدير التقارير CSV وطباعتها PDF</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>عروض (views) تجميعية للحضور والإتقان، وتخزين مؤقت قصير للوحة</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>«لوحة الإدارة» بقرارات اليوم وجدار الحضور وجدول الفصول، والتقارير مع التصدير.</p>
+      <h4>يعتمد على</h4><p>السبرينت ٤</p>
+      <h4>انتبه</h4><p class="risk-t">الإتقان يأتي من محاولات الطلاب. قبل بناء باك اند الطالب تعرض اللوحة البيانات المبذورة فقط.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s6">
+  <header>
+    <div class="s-num">س٦</div>
+    <div class="s-title"><h3>المستأجرون والتراخيص</h3><span class="s-dates">٢٤ يناير – ٤ فبراير ٢٠٢٧</span></div>
+    <div class="s-count"><b>٧</b><small>٤ مدرسة · ٣ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> إضافة مدرسة جديدة كمستأجر معزول، بترخيص ومقاعد.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SCH-26</code> حالة الترخيص واستهلاك المقاعد</li><li><code>SCH-27</code> تجديد الترخيص (فاتورة جديدة + تدقيق)</li><li><code>SCH-28</code> طلب زيادة المقاعد</li><li><code>SCH-29</code> فواتير المدرسة وتنزيلها</li><li><code>SYS-03</code> قائمة المستأجرين وإحصاءاتهم (B2B، B2G، المقاعد، العزل)</li><li><code>SYS-04</code> إنشاء مستأجر (الاسم، النوع، الباقة)</li><li><code>SYS-05</code> فحص عزل بيانات مستأجر</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>أعمدة على organizations: النوع (B2B/B2G)، الباقة، المقاعد، حالة الترخيص وتاريخ انتهائه</li><li>جدول invoices</li><li>سياسات عزل على مستوى الصفوف (Row-Level Security) يستخدمها فحص العزل</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>مدير النظام ينشئ مدرسة، فتظهر معزولة، ومديرها يرى ترخيصه ومقاعده ويطلب التجديد.</p>
+      <h4>يعتمد على</h4><p>السبرينت ٢</p>
+      <h4>انتبه</h4><p class="risk-t">فحص العزل يجب أن يكون اختبارًا آليًّا حقيقيًّا، لا رسالة «معزول» ثابتة كما في نسخة العرض.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s7">
+  <header>
+    <div class="s-num">س٧</div>
+    <div class="s-title"><h3>الفوترة والمالية</h3><span class="s-dates">٧ فبراير – ١٨ فبراير ٢٠٢٧</span></div>
+    <div class="s-count"><b>٦</b><small>٢ مدرسة · ٤ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> الفواتير والاشتراكات ورسوم المعلّمين بأرقام حقيقية.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SCH-30</code> سجلّ مستحقّات المعلّمين</li><li><code>SCH-31</code> تسجيل دفع رسوم معلّم (بتأكيد + تدقيق)</li><li><code>SYS-13</code> مؤشّرات الإيراد: محصّل، مستحق، اشتراكات نشطة، بوّابات متصلة</li><li><code>SYS-14</code> خطط الاشتراك</li><li><code>SYS-15</code> الفواتير وتصديرها CSV</li><li><code>SYS-16</code> تفعيل بوّابة دفع أو تعطيلها (مدى، Apple Pay، STC Pay)</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جداول subscription_plans وpayment_gateways وteacher_fees</li><li>تكامل بوّابة دفع على بيئة الاختبار (sandbox)</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>صفحتا «الفوترة» و«رسوم المعلّمين» على الخادم؛ دفعة تجريبية عبر البوّابة تحدّث الفاتورة.</p>
+      <h4>يعتمد على</h4><p>القرار ٤ (مجاني أم مدفوع) + عقد بوّابة دفع</p>
+      <h4>انتبه</h4><p class="risk-t">بلا قرار الدفع نبني الفواتير اليدوية فقط ونؤجّل البوّابة. رمضان يبدأ تقريبًا ٨ فبراير.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s8">
+  <header>
+    <div class="s-num">س٨</div>
+    <div class="s-title"><h3>الذكاء والتدقيق والامتثال</h3><span class="s-dates">٢١ فبراير – ٤ مارس ٢٠٢٧</span></div>
+    <div class="s-count"><b>٨</b><small>٨ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> إعدادات «النجمة» تُطبَّق فعلًا، والتدقيق قابل للبحث والمساءلة.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SYS-17</code> إعدادات المحرّك والاستهلاك الحالي</li><li><code>SYS-18</code> حفظ الإعدادات: المزوّد، النموذج، الحدّ الشهري، حدّ كل مدرسة، السياسات + تدقيق</li><li><code>SYS-19</code> عدّ الاستهلاك الفعلي وفرض الحدود على كل طلب توليد</li><li><code>SYS-20</code> سجلّ التدقيق: بحث، فلترة بالخطورة والفاعل، ترقيم</li><li><code>SYS-21</code> تصدير سجلّ التدقيق CSV</li><li><code>SYS-22</code> ضوابط الامتثال وحالتها (PDPL)</li><li><code>SYS-23</code> سياسات المصادقة (ثابتة: خطوتان، انتهاء الجلسة، القفل)</li><li><code>SYS-24</code> سجلّ نسخ السياسة والموافقات</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جدول ai_settings، وعمود الخطورة على audit_log</li><li>فرض الحدود في كل طلب توليد عبر ai_jobs</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>تجاوز الحدّ الشهري يوقف التوليد برسالة واضحة؛ سجلّ التدقيق بالبحث والفلاتر والتصدير.</p>
+      <h4>يعتمد على</h4><p>حساب Claude API</p>
+      <h4>انتبه</h4><p class="risk-t">سياسة «عدم التدريب على بيانات الطلاب» تُثبَّت في العقد مع المزوّد، لا في الإعدادات فقط. رمضان.</p>
+    </div>
+  </div>
+</article>
+<article class="sprint" id="s9">
+  <header>
+    <div class="s-num">س٩</div>
+    <div class="s-title"><h3>التكاملات ولوحة النظام والتسليم</h3><span class="s-dates">٧ مارس – ١٨ مارس ٢٠٢٧</span></div>
+    <div class="s-count"><b>٦</b><small>٦ نظام</small></div>
+  </header>
+  <p class="s-goal"><b>الملخّص:</b> لوحة مدير النظام كاملة، واللوحتان جاهزتان على staging.</p>
+  <div class="s-grid">
+    <div><h4>الوظائف</h4><ul class="fns"><li><code>SYS-01</code> ملخّص المنصّة: المستأجرون حسب النوع، استهلاك «النجمة»، الفواتير، الطلبات</li><li><code>SYS-02</code> «قرارات اليوم»: ٥ أنواع (طلبات معلّمين، تواصل جديد، فواتير غير مدفوعة، تراخيص تنتهي، استهلاك ≥ ٨٥٪)</li><li><code>SYS-25</code> حالة التكاملات (نور، مدرستي: استكشافي)</li><li><code>SYS-26</code> إنشاء مفتاح API (يظهر مرّة واحدة، يُخزَّن مجزّأ، بنطاق)</li><li><code>SYS-27</code> إلغاء مفتاح API فورًا</li><li><code>SYS-28</code> واجهة API عامة للتصدير محميّة بالمفتاح والنطاق</li></ul></div>
+    <div>
+      <h4>عمل البنية والقاعدة</h4><ul><li>جدول api_keys (مجزّأ، بنطاق، قابل للإلغاء)</li><li>اختبار حمل، مراجعة أمنية، نسخ احتياطي واستعادة مجرّبة، توثيق التشغيل</li></ul>
+      <h4>العرض في نهاية السبرينت</h4><p>الصفحة الرئيسية لمدير النظام بقرارات اليوم، ومفتاح API يصدّر تقريرًا ثم يُلغى فيتوقّف فورًا.</p>
+      <h4>يعتمد على</h4><p>كل ما سبق</p>
+      <h4>انتبه</h4><p class="risk-t">عيد الفطر تقريبًا ١٠ مارس؛ قد يمتدّ السبرينت أسبوعًا (حتى ٢٥ مارس).</p>
+    </div>
+  </div>
+</article>
+  </section>
+
+  <section id="inventory" aria-labelledby="inv-h"><h2 id="inv-h">جرد الوظائف الكامل</h2>
+    <p class="lead">«القاعدة»: <span class="pill p-ok">موجود</span> الجداول في schema.sql · <span class="pill p-warn">امتداد</span> أعمدة إضافية · <span class="pill p-info">جدول جديد</span>. «اعتماد خارجي» = مزوّد أو جهة خارج الفريق.</p>
+    <details class="inv" open><summary>الأساس المشترك · ١١</summary><table class="tbl"><thead><tr><th>الرمز</th><th>الوظيفة</th><th>الصفحة</th><th>السبرينت</th><th>القاعدة</th><th>اعتماد خارجي</th></tr></thead><tbody><tr><td data-l="الرمز"><code>FND-01</code></td><td data-l="الوظيفة">تسجيل الدخول (جوال أو بريد أو اسم مستخدم + كلمة مرور)</td><td data-l="الصفحة">شاشة الدخول</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-02</code></td><td data-l="الوظيفة">التحقق بخطوتين برمز OTP: إرسال، تحقّق، حدّ ٥ محاولات</td><td data-l="الصفحة">شاشة الدخول</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي"><span class="pill p-risk">مزوّد SMS</span></td></tr><tr><td data-l="الرمز"><code>FND-03</code></td><td data-l="الوظيفة">نسيت كلمة المرور وإعادة تعيينها</td><td data-l="الصفحة">شاشة الدخول</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي"><span class="pill p-risk">مزوّد SMS / بريد</span></td></tr><tr><td data-l="الرمز"><code>FND-04</code></td><td data-l="الوظيفة">الجلسات: تجديد، خروج، انتهاء بعد ٣٠ دقيقة خمول، قفل بعد ٥ محاولات فاشلة</td><td data-l="الصفحة">كل اللوحات</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-05</code></td><td data-l="الوظيفة">الملف الشخصي والتفضيلات (اللغة، قنوات الإشعار)</td><td data-l="الصفحة">الإعدادات</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-06</code></td><td data-l="الوظيفة">إنشاء حساب وطلب انضمام (طالب، وليّ أمر، معلّم)</td><td data-l="الصفحة">شاشة التسجيل</td><td data-l="السبرينت"><a href="#s1">س١</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-07</code></td><td data-l="الوظيفة">فرض الصلاحيات على كل طلب (RBAC middleware)</td><td data-l="الصفحة">كل اللوحات</td><td data-l="السبرينت"><a href="#s0">س٠</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-08</code></td><td data-l="الوظيفة">كتابة سجلّ التدقيق تلقائيًّا لكل إجراء حسّاس</td><td data-l="الصفحة">كل اللوحات</td><td data-l="السبرينت"><a href="#s0">س٠</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-09</code></td><td data-l="الوظيفة">عزل البيانات حسب الجهة (org scoping)</td><td data-l="الصفحة">كل اللوحات</td><td data-l="السبرينت"><a href="#s0">س٠</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-10</code></td><td data-l="الوظيفة">البحث العام (مستخدمون، فصول، صفحات)</td><td data-l="الصفحة">الشريط العلوي</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>FND-11</code></td><td data-l="الوظيفة">الإشعارات: القائمة، غير المقروء، تعليم كمقروء أو الكل</td><td data-l="الصفحة">جرس الإشعارات</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr></tbody></table></details>
+    <details class="inv" open><summary>لوحة إدارة المدرسة · ٣٤</summary><table class="tbl"><thead><tr><th>الرمز</th><th>الوظيفة</th><th>الصفحة</th><th>السبرينت</th><th>القاعدة</th><th>اعتماد خارجي</th></tr></thead><tbody><tr><td data-l="الرمز"><code>SCH-01</code></td><td data-l="الوظيفة">ملخّص المدرسة: طلاب، معلّمون، حضور آخر يوم وتغيّره، متوسط الإتقان، المقاعد</td><td data-l="الصفحة">الرئيسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-02</code></td><td data-l="الوظيفة">«قرارات اليوم»: ٨ أنواع تنبيه (حسابات معلّقة، حضور غير مسجّل، مقاعد، غياب متكرّر، رسوم، رسائل، طلبات معلّمين، محتوى بانتظار المراجعة)</td><td data-l="الصفحة">الرئيسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-03</code></td><td data-l="الوظيفة">جدار الحضور لآخر ١٠ أيام دراسية (أحد–خميس)</td><td data-l="الصفحة">الرئيسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-04</code></td><td data-l="الوظيفة">جدول الفصول: الحضور، الإتقان، المتعثّرون</td><td data-l="الصفحة">الرئيسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-05</code></td><td data-l="الوظيفة">آخر العمليات من سجلّ التدقيق لحسابات المدرسة</td><td data-l="الصفحة">الرئيسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-06</code></td><td data-l="الوظيفة">تذكير معلّم بتسجيل الحضور (رسالة مباشرة)</td><td data-l="الصفحة">الرئيسية + الحضور</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-07</code></td><td data-l="الوظيفة">قائمة المستخدمين: بحث، فلترة بالدور والحالة، ترقيم</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-08</code></td><td data-l="الوظيفة">إضافة مستخدم (الاسم، التواصل، الدور، الحالة)</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-09</code></td><td data-l="الوظيفة">اعتماد حساب معلّق أو رفضه</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-10</code></td><td data-l="الوظيفة">اعتماد كل الحسابات المعلّقة دفعة واحدة</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-11</code></td><td data-l="الوظيفة">تغيير دور مستخدم (بتأكيد)</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-12</code></td><td data-l="الوظيفة">إيقاف حساب وإعادة تفعيله</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-13</code></td><td data-l="الوظيفة">عرض مصفوفة الصلاحيات (قراءة فقط)</td><td data-l="الصفحة">المستخدمون والأدوار</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-14</code></td><td data-l="الوظيفة">المراحل والصفوف والفصول</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-15</code></td><td data-l="الوظيفة">ربط معلّم بفصل</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-16</code></td><td data-l="الوظيفة">الجدول الأسبوعي للفصل (٥ أيام × ٦ حصص)</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-17</code></td><td data-l="الوظيفة">تعديل حصة (المادة، المعلّم)</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-18</code></td><td data-l="الوظيفة">بنية المنهج: إضافة وحدة</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-19</code></td><td data-l="الوظيفة">إضافة درس مع هدف تعلّم</td><td data-l="الصفحة">الصفوف والجداول</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-20</code></td><td data-l="الوظيفة">حضور اليوم حسب الفصل (مسجّل / غير مسجّل)</td><td data-l="الصفحة">الحضور والغياب</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-21</code></td><td data-l="الوظيفة">الغيابات المتكرّرة (يومان فأكثر خلال ١٤ يومًا)</td><td data-l="الصفحة">الحضور والغياب</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-22</code></td><td data-l="الوظيفة">جدار الحضور وتصديره CSV</td><td data-l="الصفحة">الحضور والغياب</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-23</code></td><td data-l="الوظيفة">تقرير الفصول مع فلتر الصف</td><td data-l="الصفحة">التقارير المؤسسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-24</code></td><td data-l="الوظيفة">الإتقان حسب المادة</td><td data-l="الصفحة">التقارير المؤسسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-25</code></td><td data-l="الوظيفة">تصدير التقارير CSV وطباعتها PDF</td><td data-l="الصفحة">التقارير المؤسسية</td><td data-l="السبرينت"><a href="#s5">س٥</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-26</code></td><td data-l="الوظيفة">حالة الترخيص واستهلاك المقاعد</td><td data-l="الصفحة">الاشتراك والتراخيص</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-27</code></td><td data-l="الوظيفة">تجديد الترخيص (فاتورة جديدة + تدقيق)</td><td data-l="الصفحة">الاشتراك والتراخيص</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-28</code></td><td data-l="الوظيفة">طلب زيادة المقاعد</td><td data-l="الصفحة">الاشتراك والتراخيص</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-29</code></td><td data-l="الوظيفة">فواتير المدرسة وتنزيلها</td><td data-l="الصفحة">الاشتراك والتراخيص</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-30</code></td><td data-l="الوظيفة">سجلّ مستحقّات المعلّمين</td><td data-l="الصفحة">رسوم المعلّمين</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-31</code></td><td data-l="الوظيفة">تسجيل دفع رسوم معلّم (بتأكيد + تدقيق)</td><td data-l="الصفحة">رسوم المعلّمين</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-32</code></td><td data-l="الوظيفة">المحادثات: القائمة، غير المقروء، القراءة</td><td data-l="الصفحة">الإعلانات والرسائل</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-33</code></td><td data-l="الوظيفة">بدء محادثة والردّ عليها</td><td data-l="الصفحة">الإعلانات والرسائل</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SCH-34</code></td><td data-l="الوظيفة">نشر إعلان لفئة محدّدة مع تتبّع القراءة</td><td data-l="الصفحة">الإعلانات والرسائل</td><td data-l="السبرينت"><a href="#s4">س٤</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr></tbody></table></details>
+    <details class="inv" open><summary>لوحة مدير النظام · ٢٨</summary><table class="tbl"><thead><tr><th>الرمز</th><th>الوظيفة</th><th>الصفحة</th><th>السبرينت</th><th>القاعدة</th><th>اعتماد خارجي</th></tr></thead><tbody><tr><td data-l="الرمز"><code>SYS-01</code></td><td data-l="الوظيفة">ملخّص المنصّة: المستأجرون حسب النوع، استهلاك «النجمة»، الفواتير، الطلبات</td><td data-l="الصفحة">نظرة عامة</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-02</code></td><td data-l="الوظيفة">«قرارات اليوم»: ٥ أنواع (طلبات معلّمين، تواصل جديد، فواتير غير مدفوعة، تراخيص تنتهي، استهلاك ≥ ٨٥٪)</td><td data-l="الصفحة">نظرة عامة</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-03</code></td><td data-l="الوظيفة">قائمة المستأجرين وإحصاءاتهم (B2B، B2G، المقاعد، العزل)</td><td data-l="الصفحة">المستأجرون</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-04</code></td><td data-l="الوظيفة">إنشاء مستأجر (الاسم، النوع، الباقة)</td><td data-l="الصفحة">المستأجرون</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-05</code></td><td data-l="الوظيفة">فحص عزل بيانات مستأجر</td><td data-l="الصفحة">المستأجرون</td><td data-l="السبرينت"><a href="#s6">س٦</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-06</code></td><td data-l="الوظيفة">طلبات انضمام المعلّمين من كل المدارس (معلّقة وسابقة)</td><td data-l="الصفحة">طلبات المعلّمين</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-07</code></td><td data-l="الوظيفة">اعتماد معلّم أو رفضه + إشعاره</td><td data-l="الصفحة">طلبات المعلّمين</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-08</code></td><td data-l="الوظيفة">استقبال طلب تواصل من الصفحة الرئيسية (عام، حدّ معدّل، تحقّق) بدل خادم Cloudflare</td><td data-l="الصفحة">طلبات التواصل</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-09</code></td><td data-l="الوظيفة">قائمة طلبات التواصل (جديد / تمت المتابعة)</td><td data-l="الصفحة">طلبات التواصل</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-10</code></td><td data-l="الوظيفة">تغيير حالة طلب (تمت المتابعة / إعادة فتح)</td><td data-l="الصفحة">طلبات التواصل</td><td data-l="السبرينت"><a href="#s3">س٣</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-11</code></td><td data-l="الوظيفة">مصفوفة الصلاحيات (١٤ صلاحية × ٦ أدوار)</td><td data-l="الصفحة">الصلاحيات</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-12</code></td><td data-l="الوظيفة">منح صلاحية أو سحبها فورًا + تدقيق</td><td data-l="الصفحة">الصلاحيات</td><td data-l="السبرينت"><a href="#s2">س٢</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-13</code></td><td data-l="الوظيفة">مؤشّرات الإيراد: محصّل، مستحق، اشتراكات نشطة، بوّابات متصلة</td><td data-l="الصفحة">الفوترة والاشتراكات</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-14</code></td><td data-l="الوظيفة">خطط الاشتراك</td><td data-l="الصفحة">الفوترة والاشتراكات</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-15</code></td><td data-l="الوظيفة">الفواتير وتصديرها CSV</td><td data-l="الصفحة">الفوترة والاشتراكات</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-16</code></td><td data-l="الوظيفة">تفعيل بوّابة دفع أو تعطيلها (مدى، Apple Pay، STC Pay)</td><td data-l="الصفحة">الفوترة والاشتراكات</td><td data-l="السبرينت"><a href="#s7">س٧</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي"><span class="pill p-risk">بوّابة دفع</span></td></tr><tr><td data-l="الرمز"><code>SYS-17</code></td><td data-l="الوظيفة">إعدادات المحرّك والاستهلاك الحالي</td><td data-l="الصفحة">محرّك الذكاء</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-18</code></td><td data-l="الوظيفة">حفظ الإعدادات: المزوّد، النموذج، الحدّ الشهري، حدّ كل مدرسة، السياسات + تدقيق</td><td data-l="الصفحة">محرّك الذكاء</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-19</code></td><td data-l="الوظيفة">عدّ الاستهلاك الفعلي وفرض الحدود على كل طلب توليد</td><td data-l="الصفحة">محرّك الذكاء</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي"><span class="pill p-risk">Claude API</span></td></tr><tr><td data-l="الرمز"><code>SYS-20</code></td><td data-l="الوظيفة">سجلّ التدقيق: بحث، فلترة بالخطورة والفاعل، ترقيم</td><td data-l="الصفحة">سجلّ التدقيق</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-warn">امتداد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-21</code></td><td data-l="الوظيفة">تصدير سجلّ التدقيق CSV</td><td data-l="الصفحة">سجلّ التدقيق</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-22</code></td><td data-l="الوظيفة">ضوابط الامتثال وحالتها (PDPL)</td><td data-l="الصفحة">الأمان والامتثال</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-23</code></td><td data-l="الوظيفة">سياسات المصادقة (ثابتة: خطوتان، انتهاء الجلسة، القفل)</td><td data-l="الصفحة">الأمان والامتثال</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-24</code></td><td data-l="الوظيفة">سجلّ نسخ السياسة والموافقات</td><td data-l="الصفحة">الأمان والامتثال</td><td data-l="السبرينت"><a href="#s8">س٨</a></td><td data-l="القاعدة"><span class="pill p-ok">موجود</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-25</code></td><td data-l="الوظيفة">حالة التكاملات (نور، مدرستي: استكشافي)</td><td data-l="الصفحة">التكاملات وAPI</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي"><span class="pill p-risk">نور (رسمي)</span></td></tr><tr><td data-l="الرمز"><code>SYS-26</code></td><td data-l="الوظيفة">إنشاء مفتاح API (يظهر مرّة واحدة، يُخزَّن مجزّأ، بنطاق)</td><td data-l="الصفحة">التكاملات وAPI</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-27</code></td><td data-l="الوظيفة">إلغاء مفتاح API فورًا</td><td data-l="الصفحة">التكاملات وAPI</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-info">جدول جديد</span></td><td data-l="خارجي">—</td></tr><tr><td data-l="الرمز"><code>SYS-28</code></td><td data-l="الوظيفة">واجهة API عامة للتصدير محميّة بالمفتاح والنطاق</td><td data-l="الصفحة">التكاملات وAPI</td><td data-l="السبرينت"><a href="#s9">س٩</a></td><td data-l="القاعدة"><span class="pill p-mute">—</span></td><td data-l="خارجي">—</td></tr></tbody></table></details>
+  </section>
+
+  <section id="schema" aria-labelledby="db-h"><h2 id="db-h">تعديلات قاعدة البيانات</h2>
+    <p class="lead">schema.sql صُمّم لأدوار الـMVP الأربعة، وما فيه دور لمدير النظام ولا فوترة ولا رسائل. هاي التعديلات بتنضاف كترحيلات SQL، وكل وحدة بسبرينتها، ومع فحص بـ <code>test:db</code>.</p>
+    <table class="tbl"><thead><tr><th>الجدول</th><th>الغرض</th><th>النوع</th><th>السبرينت</th></tr></thead><tbody>
+    <tr><td data-l="الجدول"><code>users.role</code></td><td data-l="الغرض">إضافة platform_admin لمدير النظام</td><td data-l="النوع"><span class="pill p-warn">امتداد</span></td><td data-l="السبرينت"><a href="#s0">س٠</a></td></tr><tr><td data-l="الجدول"><code>users</code></td><td data-l="الغرض">عدّاد المحاولات الفاشلة ووقت فكّ القفل</td><td data-l="النوع"><span class="pill p-warn">امتداد</span></td><td data-l="السبرينت"><a href="#s1">س١</a></td></tr><tr><td data-l="الجدول"><code>password_resets</code></td><td data-l="الغرض">رموز إعادة تعيين كلمة المرور (مجزّأة، قصيرة العمر)</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s1">س١</a></td></tr><tr><td data-l="الجدول"><code>notification_prefs</code></td><td data-l="الغرض">قنوات الإشعار لكل مستخدم</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s1">س١</a></td></tr><tr><td data-l="الجدول"><code>role_permissions</code></td><td data-l="الغرض">مصفوفة الصلاحيات القابلة للتعديل</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s0">س٠</a></td></tr><tr><td data-l="الجدول"><code>timetable_slots</code></td><td data-l="الغرض">الجدول الأسبوعي (فصل، يوم، حصة، مادة، معلّم)</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s3">س٣</a></td></tr><tr><td data-l="الجدول"><code>message_threads + messages + thread_reads</code></td><td data-l="الغرض">المحادثات وحالة القراءة</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s4">س٤</a></td></tr><tr><td data-l="الجدول"><code>announcements + announcement_reads</code></td><td data-l="الغرض">الإعلانات وتتبّع القراءة</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s4">س٤</a></td></tr><tr><td data-l="الجدول"><code>organizations</code></td><td data-l="الغرض">النوع B2G، الباقة، المقاعد، حالة الترخيص وتاريخ انتهائه</td><td data-l="النوع"><span class="pill p-warn">امتداد</span></td><td data-l="السبرينت"><a href="#s6">س٦</a></td></tr><tr><td data-l="الجدول"><code>invoices</code></td><td data-l="الغرض">الفواتير وحالتها</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s6">س٦</a></td></tr><tr><td data-l="الجدول"><code>subscription_plans + payment_gateways</code></td><td data-l="الغرض">الخطط وبوّابات الدفع</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s7">س٧</a></td></tr><tr><td data-l="الجدول"><code>teacher_fees</code></td><td data-l="الغرض">مستحقّات المعلّمين ودفعاتها</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s7">س٧</a></td></tr><tr><td data-l="الجدول"><code>ai_settings</code></td><td data-l="الغرض">المزوّد والنموذج والحدود والسياسات</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s8">س٨</a></td></tr><tr><td data-l="الجدول"><code>audit_log</code></td><td data-l="الغرض">عمود الخطورة (معلومة / حسّاس)</td><td data-l="النوع"><span class="pill p-warn">امتداد</span></td><td data-l="السبرينت"><a href="#s8">س٨</a></td></tr><tr><td data-l="الجدول"><code>api_keys</code></td><td data-l="الغرض">المفاتيح مجزّأة بنطاق وتاريخ إلغاء</td><td data-l="النوع"><span class="pill p-info">جديد</span></td><td data-l="السبرينت"><a href="#s9">س٩</a></td></tr>
+    </tbody></table>
+  </section>
+
+  <section id="risks" aria-labelledby="rk-h"><h2 id="rk-h">المخاطر والاعتمادات</h2>
+    <div class="grid2">
+      <div class="card"><h3>قرارات منك بتأثّر على الجدول</h3><ul>
+        <li><b>الاستضافة داخل السعودية؟</b> لازم قبل نهاية س٠.</li>
+        <li><b>مزوّد رموز التحقق:</b> لازم قبل س١.</li>
+        <li><b>مجاني أم مدفوع + بوّابة الدفع:</b> لازم قبل س٧، وإلا بنبني الفواتير اليدوية بس.</li>
+        <li><b>حساب Claude API:</b> لازم قبل س٨.</li>
+      </ul></div>
+      <div class="card"><h3>مخاطر الجدول</h3><ul>
+        <li><b>رمضان (تقديري ٨ فبراير – ٩ مارس ٢٠٢٧)</b> بيغطّي س٧ وس٨ ومعظم س٩، وعيد الفطر تقريبًا ١٠ مارس. احتياط أسبوع على النهاية.</li>
+        <li><b>أرقام اللوحة والتقارير</b> بتضل من البيانات المبذورة لحدّ ما ينبني باك اند الطالب والمعلّم.</li>
+        <li><b>ما في واجهة لمعالجة طلبات البيانات (PDPL)</b> عند الإدارة، مع إنه جدولها موجود. مقترح نضيفها لس٨.</li>
+        <li><b>تغيير الدور</b> بيصطدم بقاعدة «دور واحد لكل مستخدم»، ولازم قاعدة واضحة بس٢.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="review" aria-labelledby="rv-h"><h2 id="rv-h">ملخّص نهاية السبرينت</h2>
+    <p class="lead">بآخر كل سبرينت بنكتب ملخّص قصير بهالشكل، وبينحفظ بـ <code>docs/backend/sprints/</code>.</p>
+<pre class="tpl">سبرينت N — الاسم · من … إلى …
+الهدف: (من هالصفحة)
+ما أُنجز: الوظائف اللي خلصت برموزها (SCH-07 …) + رابط الـ PR
+ما تأجّل وليش:
+العرض: شو انعرض بآخر السبرينت، ومين شافه
+الاختبارات: عدد الاختبارات اللي نجحت، والتغطية
+تعديلات القاعدة: الترحيلات اللي انضافت
+قرارات انتظرناها:
+المخاطر للسبرينت الجاي:</pre>
+  </section>
+</main>
+<footer><div class="wrap">المصادر: <code>src/roles/school/*</code> · <code>src/roles/system/*</code> · <code>src/roles/shared/Messages.jsx</code> · <code>src/auth/AuthScreen.jsx</code> · <code>src/shell/AppShell.jsx</code> · <code>src/store/StoreProvider.jsx</code> · <code>docs/mvp/schema.sql</code>. التواريخ تقديرية وبتنراجع بنهاية كل سبرينت.</div></footer>
+<script>
+(function(){var r=document.documentElement,b=document.getElementById('themeBtn');
+function g(k){try{return localStorage.getItem(k)}catch(e){return null}}function s(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function d(){var t=r.getAttribute('data-theme');return t?t==='dark':window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches}
+function l(){b.textContent=d()?'الوضع الفاتح':'الوضع الداكن'}
+var v=g('mushriq-plan-theme');if(v)r.setAttribute('data-theme',v);l();
+b.addEventListener('click',function(){var t=d()?'light':'dark';r.setAttribute('data-theme',t);s('mushriq-plan-theme',t);l()});})();
+</script>
+</body>
+</html>

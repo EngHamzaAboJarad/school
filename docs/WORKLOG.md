@@ -157,7 +157,7 @@ npm run build        # بناء الإنتاج في dist/ (ثلاث خطوات،
 | `docs/mvp/schema.test.mjs` | اختبارات القاعدة (`npm run test:db`) |
 | `docs/mvp/erd/mushriq-erd.svg` | مخطّط ERD الكامل في ملف واحد |
 | `REDESIGN.md` | السجلّ التقني التفصيلي لكل جولة تصميم |
-| `docs/redesign/` | لقطات قبل وبعد من جولات التصميم (تاريخية، يُقترح حذفها) |
+| `docs/backend/` | خطط الباك اند: لوحتا الإدارة كاملة (`admin-all-phases.html`) وV1 (`v1/v1-plan.html`) |
 
 ---
 

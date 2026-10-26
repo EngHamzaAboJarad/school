@@ -25,7 +25,7 @@ STORY: Every role reads, top to bottom: what needs me today (from real data), th
 
 FIRST VIEWPORT: Admin at 1440. White rail on the right, 252px: colour logo, school card with a horizon line, grouped navigation. Morning ground; 60px top bar with breadcrumb, search, language, bell and profile. Rubik title لوحة الإدارة with school and date and one fact line. Below, «قرارات اليوم» and «جدار الحضور» (one ray row per class for the last ten school days), then the classes table and the activity log.
 
-FINISH: brand master in docs/brand/; screenshots in docs/redesign/after/mushriq/.
+FINISH: brand master in docs/brand/; redesign screenshots were removed on 2026-10-26 (see git history before that date).
 
 ## Unresolved
 - Subject colours are authored, not taken from an official source.
